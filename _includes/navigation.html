@@ -1,0 +1,36 @@
+<h3>🌍 Reiseziele</h3>
+<ul>
+    <li><a href="{{ site.baseurl }}/">🏠 Startseite</a></li>
+    <li>
+        <a href="{{ site.baseurl }}/japan/"><span class="country-flag">🇯🇵</span>Japan</a>
+        <ul style="margin-left: 1rem; font-size: 0.9rem;">
+            <li><a href="{{ site.baseurl }}/japan/tokio/">Tokio</a></li>
+            <li><a href="{{ site.baseurl }}/japan/kyoto/">Kyoto</a></li>
+            <li><a href="{{ site.baseurl }}/japan/osaka/">Osaka</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="{{ site.baseurl }}/australien/"><span class="country-flag">🇦🇺</span>Australien</a>
+        <ul style="margin-left: 1rem; font-size: 0.9rem;">
+            <li><a href="{{ site.baseurl }}/australien/melbourne/">Melbourne</a></li>
+            <li><a href="{{ site.baseurl }}/australien/sydney/">Sydney</a></li>
+            <li><a href="{{ site.baseurl }}/australien/perth/">Perth</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="{{ site.baseurl }}/skandinavien/"><span class="country-flag">🇳🇴</span>Skandinavien</a>
+        <ul style="margin-left: 1rem; font-size: 0.9rem;">
+            <li><a href="{{ site.baseurl }}/skandinavien/kopenhagen/">Kopenhagen</a></li>
+            <li><a href="{{ site.baseurl }}/skandinavien/oslo/">Oslo</a></li>
+            <li><a href="{{ site.baseurl }}/skandinavien/bergen/">Bergen</a></li>
+            <li><a href="{{ site.baseurl }}/skandinavien/trondheim/">Trondheim</a></li>
+        </ul>
+    </li>
+</ul>
+
+<h3>📝 Neueste Einträge</h3>
+<ul>
+{% for post in site.posts limit:3 %}
+    <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+{% endfor %}
+</ul>

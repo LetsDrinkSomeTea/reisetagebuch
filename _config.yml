@@ -1,0 +1,50 @@
+title: Reisetagebuch
+description: Unser Reisetagebuch durch Japan, Australien und Skandinavien
+baseurl: "/reisetagebuch"
+url: "https://letsdrinksometea.github.io"
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+
+# Navigation
+header_pages:
+  - japan/index.md
+  - australien/index.md
+  - skandinavien/index.md
+
+# Collections for better organization
+collections:
+  japan:
+    output: true
+    permalink: /:collection/:name/
+  australien:
+    output: true
+    permalink: /:collection/:name/
+  skandinavien:
+    output: true
+    permalink: /:collection/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "japan"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "australien"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "skandinavien"
+    values:
+      layout: "post"
