@@ -4,48 +4,103 @@
     {% assign country_key = country[0] %}
     {% assign country_data = country[1] %}
     
-    <div class="country-section">
-      <!-- Country Link -->
-      {% assign country_page = site.pages | where: "country", country_key | where: "layout", "country" | first %}
-      <a href="{% if country_page %}{{ country_page.url | relative_url }}{% else %}{{ '/' | append: country_key | append: '/' | relative_url }}{% endif %}" 
-         class="country-link{% if page.country == country_key %} active{% endif %}">
-        {{ country_data.flag }} {{ country_data.name }}
-      </a>
+    <!-- First, check if this country has any cities with day entries -->
+    {% assign country_has_content = false %}
+    {% assign cities_with_content = "" %}
+    
+    {% for city in country_data.cities %}
+      {% assign city_key = city[0] %}
+      {% assign city_data = city[1] %}
       
-      <!-- Cities List -->
-      <ul class="cities-list">
-        {% for city in country_data.cities %}
-          {% assign city_key = city[0] %}
-          {% assign city_data = city[1] %}
-          
-          <li class="city-section">
-            <!-- City Link -->
-            {% assign city_page = site.pages | where: "country", country_key | where: "city", city_key | where: "layout", "city" | first %}
-            <a href="{% if city_page %}{{ city_page.url | relative_url }}{% else %}{{ '/' | append: country_key | append: '/' | append: city_key | append: '/' | relative_url }}{% endif %}" 
-               class="city-link{% if page.country == country_key and page.city == city_key %} active{% endif %}">
-              {{ city_data.emoji }} {{ city_data.name }}
-            </a>
+      <!-- Check if this city has any day entries (tag-n.md files) -->
+      {% assign country_pages = site.pages | where: "country", country_key | where: "city", city_key %}
+      {% assign day_pages = country_pages | where: "layout", "day" %}
+      
+      {% if day_pages.size > 0 %}
+        {% assign country_has_content = true %}
+        {% assign cities_with_content = cities_with_content | append: city_key | append: "," %}
+      {% endif %}
+    {% endfor %}
+    
+    <!-- Only show country if it has content -->
+    {% if country_has_content %}
+      <!-- Check if this country has any active children -->
+      {% assign has_active_child = false %}
+      {% assign country_active = false %}
+      {% if page.country == country_key %}
+        {% assign country_active = true %}
+        {% assign has_active_child = true %}
+      {% endif %}
+      
+      <div class="country-section{% if country_active %} active{% elsif has_active_child %} has-active-child{% endif %}" 
+           data-country="{{ country_key }}">
+        
+        <!-- Country Header (clickable) -->
+        <div class="country-header" onclick="toggleCountry('{{ country_key }}')">
+          {% assign country_page = site.pages | where: "country", country_key | where: "layout", "country" | first %}
+          <a href="{% if country_page %}{{ country_page.url | relative_url }}{% else %}{{ '/' | append: country_key | append: '/' | relative_url }}{% endif %}" 
+             class="country-link{% if country_active %} active{% endif %}"
+             onclick="event.stopPropagation()">
+            {{ country_data.flag }} {{ country_data.name }}
+          </a>
+          <span class="toggle-icon{% if has_active_child %} expanded{% endif %}">▶</span>
+        </div>
+        
+        <!-- Cities List -->
+        <ul class="cities-list{% if has_active_child %} expanded{% endif %}">
+          {% for city in country_data.cities %}
+            {% assign city_key = city[0] %}
+            {% assign city_data = city[1] %}
             
-            <!-- Days List -->
+            <!-- Check if this city has any day entries (tag-n.md files) -->
             {% assign country_pages = site.pages | where: "country", country_key | where: "city", city_key %}
             {% assign day_pages = country_pages | where: "layout", "day" | sort: "day" %}
             
+            <!-- Only show city if it has day entries -->
             {% if day_pages.size > 0 %}
-              <ul class="days-list">
-                {% for day_page in day_pages %}
-                  <li>
-                    <a href="{{ day_page.url | relative_url }}" 
-                       class="day-link{% if page.url == day_page.url %} active{% endif %}">
-                      Tag {{ day_page.day }}
-                    </a>
-                  </li>
-                {% endfor %}
-              </ul>
+              <!-- Check if this city has any active day entries -->
+              {% assign has_active_day = false %}
+              {% assign city_active = false %}
+              {% if page.country == country_key and page.city == city_key %}
+                {% assign city_active = true %}
+                {% if page.layout == "day" %}
+                  {% assign has_active_day = true %}
+                {% endif %}
+              {% endif %}
+              
+              <li class="city-section{% if has_active_day %} has-active-day{% endif %}" 
+                  data-city="{{ city_key }}">
+                
+                <!-- City Header (clickable) -->
+                <div class="city-header" onclick="toggleCity('{{ country_key }}', '{{ city_key }}')">
+                  {% assign city_page = site.pages | where: "country", country_key | where: "city", city_key | where: "layout", "city" | first %}
+                  <a href="{% if city_page %}{{ city_page.url | relative_url }}{% else %}{{ '/' | append: country_key | append: '/' | append: city_key | append: '/' | relative_url }}{% endif %}" 
+                     class="city-link{% if city_active %} active{% endif %}"
+                     onclick="event.stopPropagation()">
+                    {{ city_data.emoji }} {{ city_data.name }}
+                  </a>
+                  
+                  <!-- Toggle icon only if there are day entries -->
+                  <span class="toggle-icon{% if has_active_day %} expanded{% endif %}">▶</span>
+                </div>
+                
+                <!-- Days List -->
+                <ul class="days-list{% if has_active_day %} expanded{% endif %}">
+                  {% for day_page in day_pages %}
+                    <li>
+                      <a href="{{ day_page.url | relative_url }}" 
+                         class="day-link{% if page.url == day_page.url %} active{% endif %}">
+                        Tag {{ day_page.day }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
             {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
   {% endfor %}
   
   <!-- Latest Entries Section -->
@@ -79,8 +134,39 @@
 </nav>
 
 <script>
+// Toggle country section
+function toggleCountry(countryKey) {
+  const countrySection = document.querySelector(`[data-country="${countryKey}"]`);
+  const citiesList = countrySection.querySelector('.cities-list');
+  const toggleIcon = countrySection.querySelector('.country-header .toggle-icon');
+  
+  if (citiesList.classList.contains('expanded')) {
+    citiesList.classList.remove('expanded');
+    toggleIcon.classList.remove('expanded');
+  } else {
+    citiesList.classList.add('expanded');
+    toggleIcon.classList.add('expanded');
+  }
+}
+
+// Toggle city section
+function toggleCity(countryKey, cityKey) {
+  const countrySection = document.querySelector(`[data-country="${countryKey}"]`);
+  const citySection = countrySection.querySelector(`[data-city="${cityKey}"]`);
+  const daysList = citySection.querySelector('.days-list');
+  const toggleIcon = citySection.querySelector('.city-header .toggle-icon');
+  
+  if (daysList && daysList.classList.contains('expanded')) {
+    daysList.classList.remove('expanded');
+    if (toggleIcon) toggleIcon.classList.remove('expanded');
+  } else if (daysList) {
+    daysList.classList.add('expanded');
+    if (toggleIcon) toggleIcon.classList.add('expanded');
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-  // Highlight active navigation items
+  // Initialize navigation state based on current page
   const currentPath = window.location.pathname;
   const navLinks = document.querySelectorAll('.navigation a');
   
@@ -88,12 +174,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const linkPath = link.getAttribute('href');
     if (linkPath && currentPath.includes(linkPath) && linkPath !== '/') {
       link.classList.add('active');
-      
-      // Also expand parent sections
-      let parent = link.closest('.country-section');
-      if (parent) {
-        parent.classList.add('expanded');
-      }
     }
   });
   
