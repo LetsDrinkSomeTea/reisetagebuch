@@ -1,11 +1,9 @@
 ---
 layout: city
-title: "Hannover"
+title: "Das deutsche Tor zum Norden"
 country: skandinavien
 city: hannover
 ---
-
-# 🇩🇪 Hannover - Das deutsche Tor zum Norden
 
 Hannover dient als unser Ausgangspunkt für die skandinavische Reise. Die niedersächsische Hauptstadt mit ihren wunderschönen Herrenhäuser Gärten, dem lebendigen Stadtzentrum und der guten Verkehrsanbindung in den Norden ist der perfekte Start für unser nordisches Abenteuer.
 

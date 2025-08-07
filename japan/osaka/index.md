@@ -1,11 +1,9 @@
 ---
 layout: city
-title: "Osaka"
+title: "Die Küche Japans"
 country: japan
 city: osaka
 ---
-
-# 🍜 Osaka - Die Küche Japans
 
 Osaka, bekannt als "Tenka no Daidokoro" (die Küche des Landes), ist das kulinarische Herz Japans. Diese lebendige Metropole ist berühmt für ihre Streetfood-Kultur, herzlichen Menschen und das berühmte Osaka Castle.
 

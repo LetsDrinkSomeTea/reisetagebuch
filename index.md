@@ -56,7 +56,7 @@ title: "Unser Reisetagebuch"
 
   </div>
 
-  <h2>📖 Neueste Tagebucheinträge</h2>
+  <h3>📖 Neueste Tagebucheinträge</h3>
 
   <div class="recent-entries-grid">
     {% assign recent_entries = all_day_pages | sort: "date" | reverse | limit: 6 %}
@@ -90,7 +90,7 @@ title: "Unser Reisetagebuch"
 
 {% endif %}
 
-<h2>ℹ️ Über dieses Tagebuch</h2>
+<h3>ℹ️ Über dieses Tagebuch</h3>
 <p><strong>Navigation:</strong> Nutzt die Seitenleiste, um zwischen den Ländern, Städten und einzelnen Tagen zu navigieren. Die Seite wird automatisch aktualisiert, sobald neue Einträge hinzugefügt werden.</p>
 
 ---

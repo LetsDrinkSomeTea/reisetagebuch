@@ -1,11 +1,9 @@
 ---
 layout: city
-title: "Trondheim"
+title: "Die historische Krönungsstadt"
 country: skandinavien
 city: trondheim
 ---
-
-# ⛪ Trondheim - Die historische Krönungsstadt
 
 Trondheim, die ehemalige Hauptstadt Norwegens, ist reich an Geschichte und Kultur. Die Stadt am Trondheimsfjord mit dem beeindruckenden Nidarosdom und den bunten Holzhäusern entlang des Nidelva-Flusses strahlt eine besondere mittelalterliche Atmosphäre aus.
 

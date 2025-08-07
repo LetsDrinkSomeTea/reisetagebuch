@@ -1,11 +1,9 @@
 ---
 layout: city
-title: "Kyoto"
+title: "Die alte Kaiserstadt"
 country: japan
 city: kyoto
 ---
-
-# ⛩️ Kyoto - Die alte Kaiserstadt
 
 Kyoto, das kulturelle Herz Japans und ehemalige Hauptstadt, erwartet uns mit über 2.000 Tempeln und Schreinen. Diese Stadt ist ein lebendiges Museum japanischer Tradition, wo Geishas durch historische Gassen wandeln und jahrhundertealte Zeremonien noch heute praktiziert werden.
 

@@ -1,11 +1,9 @@
 ---
 layout: city
-title: "Östersund"
+title: "Das Herz von Jämtland"
 country: skandinavien
 city: oestersund
 ---
-
-# 🏔️ Östersund - Das Herz von Jämtland
 
 Östersund, am malerischen Storsjön-See gelegen, ist das Tor zu den schwedischen Bergen und bekannt für seine mythischen Geschichten um das Seeungeheuer "Storsjöodjuret". Diese charmante Stadt ist der perfekte Ort, um die schwedische Bergwelt zu erkunden.
 

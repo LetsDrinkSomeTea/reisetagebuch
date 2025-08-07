@@ -1,11 +1,9 @@
 ---
 layout: city
-title: "Sydney"
+title: "Die Harbour City"
 country: australien
 city: sydney
 ---
-
-# 🏗️ Sydney - Die Harbour City
 
 Sydney, mit seinem ikonischen Opera House und der majestätischen Harbour Bridge, ist Australiens bekannteste Stadt. Der natürliche Hafen, die wunderschönen Strände und das entspannte Lebensgefühl machen Sydney zu einem unvergesslichen Erlebnis.
 

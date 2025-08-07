@@ -1,12 +1,9 @@
 ---
 layout: city
-title: "Stockholm"
+title: "Venedig des Nordens"
 country: skandinavien
 city: stockholm
 ---
-
-# 🇸🇪 Stockholm - Venedig des Nordens
-
 Stockholm, auf 14 Inseln erbaut, ist eine der schönsten Hauptstädte Europas. Die schwedische Hauptstadt verbindet königliche Pracht mit modernem Design, mittelalterliche Altstadt mit innovativer Technologie, und bietet dabei eine einzigartige Mischung aus Kultur, Geschichte und Natur.
 
 ## 🏨 Unterkunft

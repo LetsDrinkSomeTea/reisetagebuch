@@ -1,11 +1,9 @@
 ---
 layout: city
-title: "Oslo"
+title: "Die grüne Hauptstadt"
 country: skandinavien
 city: oslo
 ---
-
-# 🇳🇴 Oslo - Die grüne Hauptstadt
 
 Oslo, die norwegische Hauptstadt, ist eine perfekte Mischung aus moderner Architektur, reicher Wikinger-Geschichte und spektakulärer Natur. Die Stadt am Oslofjord ist umgeben von Wäldern und bietet sowohl urbane Kultur als auch Naturerlebnisse.
 

@@ -1,11 +1,9 @@
 ---
 layout: city
-title: "Perth"
+title: "Die isolierte Perle"
 country: australien
 city: perth
 ---
-
-# 🏖️ Perth - Die isolierte Perle
 
 Perth, eine der isoliertesten Großstädte der Welt, überrascht mit wunderschönen Stränden, einem entspannten Lebensstil und einer blühenden Food- und Weinszene. Die Stadt am Swan River bietet sowohl urbane Erlebnisse als auch Zugang zur unberührten Natur Westaustraliens.
 

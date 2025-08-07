@@ -1,11 +1,9 @@
 ---
 layout: city
-title: "Bergen"
+title: "Das Tor zu den Fjorden"
 country: skandinavien
 city: bergen
 ---
-
-# 🐟 Bergen - Das Tor zu den Fjorden
 
 Bergen, die "Hauptstadt der Fjorde", ist der perfekte Ausgangspunkt für die spektakulären norwegischen Fjorde. Die historische Hansestadt mit ihren bunten Holzhäusern am Hafen und der entspannten Atmosphäre ist ein UNESCO-Welterbe.
 

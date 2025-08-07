@@ -637,3 +637,21 @@ h2 {
   background-color: var(--text-light);
   color: white;
 }
+
+.no-entries {
+  text-align: center;
+  padding: 2rem;
+  border: 1px dashed var(--border-color);
+  border-radius: 8px;
+  color: var(--text-light);
+  font-size: 1.1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+  p {
+    margin: 0;
+  }
+}
+
+
+

@@ -1,11 +1,9 @@
 ---
 layout: city
-title: "Copenhagen"
+title: "Die Fahrradhauptstadt"
 country: skandinavien
 city: copenhagen
 ---
-
-# 🇩🇰 Copenhagen - Die Fahrradhauptstadt
 
 Kopenhagen, die dänische Hauptstadt, bezaubert mit ihrer entspannten Atmosphäre, der berühmten Fahrradkultur und dem Konzept der Hygge. Die Stadt am Öresund verbindet königliche Geschichte mit modernem, nachhaltigem Stadtleben.
 

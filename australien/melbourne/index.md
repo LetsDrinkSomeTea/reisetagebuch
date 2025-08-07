@@ -1,11 +1,9 @@
 ---
 layout: city
-title: "Melbourne"
+title: "Die Kulturhauptstadt"
 country: australien
 city: melbourne
 ---
-
-# ☕ Melbourne - Die Kulturhauptstadt
 
 Melbourne, oft als die kulturelle Hauptstadt Australiens bezeichnet, bezaubert mit ihrer legendären Kaffeekultur, Street Art und viktorianischen Architektur. Die Stadt ist berühmt für ihre versteckten Laneways, fantastische Restaurants und das ganzjährig wechselhafte Wetter.
 
