@@ -5,7 +5,7 @@ title: "Unser Reisetagebuch"
 
 # 🌍 Willkommen zu unserem Reisetagebuch
 
-Weil sich es einige gewünscht haben, hier ein kleiner Blog über "Unsere große Reise".
+Weil sich es einige (damit meine ich 2 Personen) gewünscht haben, hier ein kleiner Blog über "Unsere große Reise™".
 
 <!-- Check if any countries have content before showing the section -->
 
