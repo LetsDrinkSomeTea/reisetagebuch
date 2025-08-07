@@ -1,8 +1,8 @@
 ---
 layout: city
-title: "[City Name]"
-country: [country_key] # japan, australien, skandinavien
-city: [city_key]
+title: "City Name"
+country: country_key # japan, australien, skandinavien
+city: city_key
 ---
 
 # [City Emoji] [City Name - City Title]

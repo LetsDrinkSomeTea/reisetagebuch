@@ -1,11 +1,11 @@
 ---
 layout: day
-title: "Tag X in [City] - [Title]"
+title: "Tag 0 in [City] - [Title]"
 date: YYYY-MM-DD
-country: [country_key] # japan, australien, skandinavien
-city: [city_key] # tokyo, melbourne, oslo, etc.
-day: X
-weather: "[Weather description]"
+country: country_key # japan, australien, skandinavien
+city: city_key # tokyo, melbourne, oslo, etc.
+day: 0
+weather: "Weather description"
 ---
 
 ## [Morning Activity Icon] Vormittag

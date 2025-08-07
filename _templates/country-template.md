@@ -1,7 +1,7 @@
 ---
 layout: country
-title: "[Country Name]"
-country: [country_key] # japan, australien, skandinavien
+title: "Country Name"
+country: country_key # japan, australien, skandinavien
 ---
 
 # [Country Emoji] [Country Name - Country Title]
