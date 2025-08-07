@@ -8,10 +8,10 @@ layout: default
       {% assign country_data = site.data.countries[page.country] %}
       {% assign city_data = country_data.cities[page.city] %}
       
-      <a href="{{ '/' | relative_url }}">🏠 Home</a>
+      <a href="{{ '/' | relative_url }}">🏠</a>
       <span class="separator">›</span>
       <a href="{{ '/' | append: page.country | append: '/' | relative_url }}">
-        {{ country_data.flag }} {{ country_data.name }}
+        {{ country_data.flag }}
       </a>
       <span class="separator">›</span>
       <a href="{{ '/' | append: page.country | append: '/' | append: page.city | append: '/' | relative_url }}">
@@ -24,12 +24,14 @@ layout: default
     <h1>{{ page.title }}</h1>
     
     <div class="entry-meta">
-      <time datetime="{{ page.date | date: '%Y-%m-%d' }}">
-        {{ page.date | date: '%d. %B %Y' }}
-      </time>
-      {% if page.weather %}
-        <span class="weather">{{ page.weather }}</span>
-      {% endif %}
+      <div class="badge-container">
+        <span class="badge date-badge">{{ page.date | date: '%d. %B %Y' }}</span>
+        <span class="badge day-badge">Tag {{ page.day }}</span>
+        <span class="badge city-badge">{{ city_data.name }}</span>
+        {% if page.weather %}
+          <span class="badge weather-badge">{{ page.weather }}</span>
+        {% endif %}
+      </div>
     </div>
   </header>
 

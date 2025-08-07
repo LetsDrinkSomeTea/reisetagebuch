@@ -1,7 +1,7 @@
 ---
 layout: day
-title: "Tag 0 in [City] - [Title]"
-date: YYYY-MM-DD
+title: "Title"
+date: 2025-08-01
 country: country_key # japan, australien, skandinavien
 city: city_key # tokyo, melbourne, oslo, etc.
 day: 0

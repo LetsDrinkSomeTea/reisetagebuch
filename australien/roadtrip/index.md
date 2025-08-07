@@ -1,11 +1,9 @@
 ---
 layout: city
-title: "Roadtrip nach Sydney"
+title: "Auf dem Weg nach Sydney"
 country: australien # japan, australien, skandinavien
 city: roadtrip
 ---
-
-# 🚌 Roadtrip - Auf dem Weg nach Sydney]
 
 Die folgenden Tage sind wir mit dem Camper auf dem Weg nach Sydney.
 Um nicht unnötig viele Seiten für Städte zu erstellen in denen wir nur einen Tag sind, werden sie alle zu einem Roadtrip zusammen gefasst

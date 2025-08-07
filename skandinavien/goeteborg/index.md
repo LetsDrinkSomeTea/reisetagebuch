@@ -1,11 +1,9 @@
 ---
 layout: city
-title: "Göteborg"
+title: "Die Westküstenperle"
 country: skandinavien
 city: goeteborg
 ---
-
-# ⚓ Göteborg - Die Westküstenperle
 
 Göteborg, Schwedens zweitgrößte Stadt, ist das Tor zur wunderschönen Westküste. Die maritime Atmosphäre, exzellente Meeresfrüchte und die entspannte Lebensart machen diese Hafenstadt zu einem besonderen Erlebnis.
 
@@ -24,3 +22,4 @@ Platzhalter
 ---
 
 > Göteborg - wo schwedische Gemütlichkeit auf maritime Tradition und frische Meeresluft trifft.
+
