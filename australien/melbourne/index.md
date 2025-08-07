@@ -9,6 +9,7 @@ Die Kaffeehauptstadt Australiens - Kultur, Street Art und das berühmt wechselha
 
 ## Unsere Erlebnisse in Melbourne
 
-- [Tag 1 - Kaffeekultur pur](tag-1-kaffeekultur/)
+- [Tag 1](tag-1)
 
-*Weitere Einträge folgen...*
+_Weitere Einträge folgen..._
+

@@ -9,6 +9,6 @@ Die pulsierende Hauptstadt Japans - eine faszinierende Mischung aus Tradition un
 
 ## Unsere Erlebnisse in Tokio
 
-- [Tag 1 - Ankunft im Chaos](tag-1-ankunft/)
+- [Tag 1](tag-1)
 
-*Weitere Einträge folgen...*
+_Weitere Einträge folgen..._
