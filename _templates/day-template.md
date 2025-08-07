@@ -43,4 +43,4 @@ weather: "[Weather description]"
 
 ---
 
-_"[Quote of the day or memorable phrase from a local/experience]"_
+> "Quote of the day"

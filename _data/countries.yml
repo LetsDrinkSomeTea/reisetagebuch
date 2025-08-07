@@ -21,6 +21,9 @@ australien:
     melbourne:
       name: "Melbourne"
       emoji: "☕"
+    roadtrip:
+      name: "Roadtrip"
+      emoji: "🚌"
     sydney:
       name: "Sydney"
       emoji: "🏗️"

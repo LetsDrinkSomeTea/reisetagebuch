@@ -23,4 +23,4 @@ city: [city_key]
 
 ---
 
-_[Your initial expectations or excitement about visiting this city]_
+> Quote for the city

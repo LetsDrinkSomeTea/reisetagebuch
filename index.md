@@ -7,6 +7,32 @@ title: "Unser Reisetagebuch"
 
 Weil sich es einige gewünscht haben, hier ein kleiner Blog über "Unsere große Reise".
 
+<!-- Check if any countries have content before showing the section -->
+
+{% assign any_countries_with_content = false %}
+{% for country in site.data.countries %}
+{% assign country_key = country[0] %}
+{% assign country_data = country[1] %}
+
+{% for city in country_data.cities %}
+{% assign city_key = city[0] %}
+{% assign country_pages = site.pages | where: "country", country_key | where: "city", city_key %}
+{% assign day_pages = country_pages | where: "layout", "day" %}
+
+    {% if day_pages.size > 0 %}
+      {% assign any_countries_with_content = true %}
+      {% break %}
+    {% endif %}
+
+{% endfor %}
+
+{% if any_countries_with_content %}
+{% break %}
+{% endif %}
+{% endfor %}
+
+{% if any_countries_with_content %}
+
 ## 🗺️ Unsere Reiseroute
 
 <div class="countries-overview">
@@ -14,41 +40,84 @@ Weil sich es einige gewünscht haben, hier ein kleiner Blog über "Unsere große
     {% assign country_key = country[0] %}
     {% assign country_data = country[1] %}
     
-    <div class="country-overview">
-      <h3>
-        <a href="{{ '/' | append: country_key | append: '/' | relative_url }}">
-          {{ country_data.flag }} {{ country_data.name }} {{ country_data.emoji }}
-        </a>
-      </h3>
+    <!-- Check if this country has any cities with day entries -->
+    {% assign country_has_content = false %}
+    {% assign cities_with_content = "" %}
+    
+    {% for city in country_data.cities %}
+      {% assign city_key = city[0] %}
+      {% assign city_data = city[1] %}
       
-      <!-- Count total days for this country -->
-      {% assign country_pages = site.pages | where: "country", country_key %}
-      {% assign country_day_pages = country_pages | where: "layout", "day" %}
+      <!-- Check if this city has any day entries (tag-n.md files) -->
+      {% assign country_pages = site.pages | where: "country", country_key | where: "city", city_key %}
+      {% assign day_pages = country_pages | where: "layout", "day" %}
       
-      <div class="country-stats">
-        <span class="cities-count">
-          {{ country_data.cities.size }} {% if country_data.cities.size == 1 %}Stadt{% else %}Städte{% endif %}
-        </span>
-        {% if country_day_pages.size > 0 %}
-          <span class="days-count">
-            {{ country_day_pages.size }} {% if country_day_pages.size == 1 %}Tag{% else %}Tage{% endif %}
-          </span>
-        {% endif %}
-      </div>
-      
-      <div class="cities-preview">
-        {% for city in country_data.cities limit: 4 %}
+      {% if day_pages.size > 0 %}
+        {% assign country_has_content = true %}
+        {% assign cities_with_content = cities_with_content | append: city_key | append: "," %}
+      {% endif %}
+    {% endfor %}
+    
+    <!-- Only show country if it has content -->
+    {% if country_has_content %}
+      <div class="country-overview">
+        <h3>
+          <a href="{{ '/' | append: country_key | append: '/' | relative_url }}">
+            {{ country_data.flag }} {{ country_data.name }} {{ country_data.emoji }}
+          </a>
+        </h3>
+        
+        <!-- Count total days and cities with content for this country -->
+        {% assign country_pages = site.pages | where: "country", country_key %}
+        {% assign country_day_pages = country_pages | where: "layout", "day" %}
+        
+        <!-- Count cities with actual content -->
+        {% assign cities_with_day_pages = 0 %}
+        {% for city in country_data.cities %}
           {% assign city_key = city[0] %}
-          {% assign city_data = city[1] %}
-          <span class="city-tag">{{ city_data.emoji }} {{ city_data.name }}</span>
+          {% assign city_country_pages = site.pages | where: "country", country_key | where: "city", city_key %}
+          {% assign city_day_pages = city_country_pages | where: "layout", "day" %}
+          {% if city_day_pages.size > 0 %}
+            {% assign cities_with_day_pages = cities_with_day_pages | plus: 1 %}
+          {% endif %}
         {% endfor %}
-        {% if country_data.cities.size > 4 %}
-          <span class="more-cities">und {{ country_data.cities.size | minus: 4 }} weitere...</span>
-        {% endif %}
+        
+        <div class="country-stats">
+          <span class="cities-count">
+            {{ cities_with_day_pages }} {% if cities_with_day_pages == 1 %}Stadt{% else %}Städte{% endif %}
+          </span>
+          {% if country_day_pages.size > 0 %}
+            <span class="days-count">
+              {{ country_day_pages.size }} {% if country_day_pages.size == 1 %}Tag{% else %}Tage{% endif %}
+            </span>
+          {% endif %}
+        </div>
+        
+        <div class="cities-preview">
+          {% assign cities_shown = 0 %}
+          {% for city in country_data.cities %}
+            {% assign city_key = city[0] %}
+            {% assign city_data = city[1] %}
+            
+            <!-- Only show cities that have day entries -->
+            {% assign city_country_pages = site.pages | where: "country", country_key | where: "city", city_key %}
+            {% assign city_day_pages = city_country_pages | where: "layout", "day" %}
+            
+            {% if city_day_pages.size > 0 and cities_shown < 4 %}
+              <span class="city-tag">{{ city_data.emoji }} {{ city_data.name }}</span>
+              {% assign cities_shown = cities_shown | plus: 1 %}
+            {% endif %}
+          {% endfor %}
+          
+          {% if cities_with_day_pages > 4 %}
+            <span class="more-cities">und {{ cities_with_day_pages | minus: 4 }} weitere...</span>
+          {% endif %}
+        </div>
       </div>
-    </div>
+    {% endif %}
   {% endfor %}
 </div>
+{% endif %}
 
 ## 📖 Neueste Tagebucheinträge
 
@@ -102,7 +171,7 @@ Weil sich es einige gewünscht haben, hier ein kleiner Blog über "Unsere große
 
 ## ℹ️ Über dieses Tagebuch
 
-**Navigation:** Nutzt die Seitenleiste, um zwischen den Ländern, Städten und einzelnen Tagen zu navigieren. Die Navigation wird automatisch aktualisiert, sobald neue Einträge hinzugefügt werden.
+**Navigation:** Nutzt die Seitenleiste, um zwischen den Ländern, Städten und einzelnen Tagen zu navigieren. Die Seite wird automatisch aktualisiert, sobald neue Einträge hinzugefügt werden.
 
 ---
 
@@ -248,7 +317,7 @@ _Zuletzt aktualisiert: {{ "now" | date: "%d. %B %Y" }}_
     }
     
     .weather-badge {
-      background-color: var(--accent-color);
+      background-color: var(--secondary-color);
       color: white;
     }
   }

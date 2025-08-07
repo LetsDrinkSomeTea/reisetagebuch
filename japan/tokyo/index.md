@@ -11,7 +11,7 @@ Tokyo, eine Stadt der Kontraste und Superlative. Mit über 37 Millionen Einwohne
 
 ## 🏨 Unterkunft
 
-Wir haben uns für eine zentrale Lage in Shinjuku entschieden, um sowohl das Nachtleben als auch die Anbindung zu anderen Stadtteilen optimal nutzen zu können.
+Platzhalter
 
 ## 🚇 Transport
 
@@ -19,5 +19,9 @@ Tokyo hat das komplexeste aber effizienteste Bahnsystem der Welt. Mit der JR Pas
 
 ## 📅 Aufenthaltsdauer
 
-`14.08 - 23.08`
+Platzhalter
+
+---
+
+> Tokyo - wo Tradition und Zukunft in perfekter Harmonie verschmelzen und jeder Tag ein neues Abenteuer bereithält.
 
