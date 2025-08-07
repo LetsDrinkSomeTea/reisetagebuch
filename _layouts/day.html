@@ -1,0 +1,69 @@
+---
+layout: default
+---
+
+<article class="day-entry">
+  <header class="entry-header">
+    <div class="breadcrumb">
+      {% assign country_data = site.data.countries[page.country] %}
+      {% assign city_data = country_data.cities[page.city] %}
+      
+      <a href="{{ '/' | relative_url }}">🏠 Home</a>
+      <span class="separator">›</span>
+      <a href="{{ '/' | append: page.country | append: '/' | relative_url }}">
+        {{ country_data.flag }} {{ country_data.name }}
+      </a>
+      <span class="separator">›</span>
+      <a href="{{ '/' | append: page.country | append: '/' | append: page.city | append: '/' | relative_url }}">
+        {{ city_data.emoji }} {{ city_data.name }}
+      </a>
+      <span class="separator">›</span>
+      <span class="current">Tag {{ page.day }}</span>
+    </div>
+    
+    <h1>{{ page.title }}</h1>
+    
+    <div class="entry-meta">
+      <time datetime="{{ page.date | date: '%Y-%m-%d' }}">
+        {{ page.date | date: '%d. %B %Y' }}
+      </time>
+      {% if page.weather %}
+        <span class="weather">{{ page.weather }}</span>
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="entry-content">
+    {{ content }}
+  </div>
+
+  <footer class="entry-footer">
+    <nav class="day-navigation">
+      {% assign country_pages = site.pages | where: "country", page.country | where: "city", page.city %}
+      {% assign day_pages = country_pages | where: "layout", "day" | sort: "day" %}
+      
+      {% for day_page in day_pages %}
+        {% if day_page.day == page.day %}
+          {% assign current_index = forloop.index0 %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+      
+      {% if current_index > 0 %}
+        {% assign prev_index = current_index | minus: 1 %}
+        {% assign prev_page = day_pages[prev_index] %}
+        <a href="{{ prev_page.url | relative_url }}" class="nav-prev">
+          ← Tag {{ prev_page.day }}
+        </a>
+      {% endif %}
+      
+      {% assign next_index = current_index | plus: 1 %}
+      {% if day_pages[next_index] %}
+        {% assign next_page = day_pages[next_index] %}
+        <a href="{{ next_page.url | relative_url }}" class="nav-next">
+          Tag {{ next_page.day }} →
+        </a>
+      {% endif %}
+    </nav>
+  </footer>
+</article>

@@ -1,0 +1,61 @@
+# Site settings
+title: Reisetagebuch
+description: von Anna & Julian
+baseurl: "/reisetagebuch"
+url: "https://pages.faigle.dev"
+
+# Author
+author: Anna & Julian
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# GitHub Pages settings
+repository: letsdrinksometea/reisetagebuch
+github_username: letsdrinksometea
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+  - PLAN.md
+
+# Default values
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: "*/index.md"
+    values:
+      layout: "city"
+  - scope:
+      path: "*/tag-*.md"
+    values:
+      layout: "day"
+
+# Sass
+sass:
+  style: compressed
+
+# Timezone
+timezone: Europe/Berlin
+
+# Language
+lang: de

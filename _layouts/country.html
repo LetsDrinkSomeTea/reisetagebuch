@@ -1,0 +1,85 @@
+---
+layout: default
+---
+
+<article class="country-page">
+  <header class="page-header">
+    <div class="breadcrumb">
+      {% assign country_data = site.data.countries[page.country] %}
+      
+      <a href="{{ '/' | relative_url }}">🏠 Home</a>
+      <span class="separator">›</span>
+      <span class="current">{{ country_data.flag }} {{ country_data.name }}</span>
+    </div>
+  </header>
+
+  <div class="page-content">
+    {{ content }}
+  </div>
+
+  <section class="cities-overview">
+    <h2>Städte</h2>
+    
+    <div class="cities-grid">
+      {% for city in country_data.cities %}
+        {% assign city_key = city[0] %}
+        {% assign city_data = city[1] %}
+        
+        <!-- Find city index page -->
+        {% assign city_page = site.pages | where: "country", page.country | where: "city", city_key | where: "layout", "city" | first %}
+        
+        <!-- Count day entries for this city -->
+        {% assign country_pages = site.pages | where: "country", page.country | where: "city", city_key %}
+        {% assign day_pages = country_pages | where: "layout", "day" %}
+        
+        <article class="city-card">
+          <header class="city-card-header">
+            <h3>
+              {% if city_page %}
+                <a href="{{ city_page.url | relative_url }}">
+                  {{ city_data.emoji }} {{ city_data.name }}
+                </a>
+              {% else %}
+                {{ city_data.emoji }} {{ city_data.name }}
+              {% endif %}
+            </h3>
+            
+            {% if day_pages.size > 0 %}
+              <span class="day-count">{{ day_pages.size }} {% if day_pages.size == 1 %}Tag{% else %}Tage{% endif %}</span>
+            {% endif %}
+          </header>
+          
+          <div class="city-card-content">
+            {% if city_page and city_page.excerpt %}
+              <p>{{ city_page.excerpt | strip_html | truncate: 100 }}</p>
+            {% endif %}
+            
+            {% if day_pages.size > 0 %}
+              <div class="latest-entries">
+                <h4>Neueste Einträge:</h4>
+                <ul>
+                  {% assign recent_days = day_pages | sort: "date" | reverse | limit: 3 %}
+                  {% for day_page in recent_days %}
+                    <li>
+                      <a href="{{ day_page.url | relative_url }}">
+                        Tag {{ day_page.day }} - {{ day_page.date | date: '%d.%m.' }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+          </div>
+          
+          <footer class="city-card-footer">
+            {% if city_page %}
+              <a href="{{ city_page.url | relative_url }}" class="view-city">Stadt ansehen →</a>
+            {% else %}
+              <span class="coming-soon">Bald verfügbar</span>
+            {% endif %}
+          </footer>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+</article>

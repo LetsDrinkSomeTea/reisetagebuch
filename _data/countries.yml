@@ -1,0 +1,59 @@
+japan:
+  name: "Japan"
+  flag: "🇯🇵"
+  emoji: "🏯"
+  cities:
+    tokyo:
+      name: "Tokyo"
+      emoji: "🗼"
+    kyoto:
+      name: "Kyoto"
+      emoji: "⛩️"
+    osaka:
+      name: "Osaka"
+      emoji: "🍜"
+
+australien:
+  name: "Australien"
+  flag: "🇦🇺"
+  emoji: "🦘"
+  cities:
+    melbourne:
+      name: "Melbourne"
+      emoji: "☕"
+    sydney:
+      name: "Sydney"
+      emoji: "🏗️"
+    perth:
+      name: "Perth"
+      emoji: "🏖️"
+
+skandinavien:
+  name: "Skandinavien"
+  flag: "🌍"
+  emoji: "🏔️"
+  cities:
+    copenhagen:
+      name: "Copenhagen"
+      emoji: "🇩🇰"
+    goeteborg:
+      name: "Göteborg"
+      emoji: "⚓"
+    oslo:
+      name: "Oslo"
+      emoji: "🇳🇴"
+    bergen:
+      name: "Bergen"
+      emoji: "🐟"
+    trondheim:
+      name: "Trondheim"
+      emoji: "⛪"
+    oestersund:
+      name: "Östersund"
+      emoji: "🏔️"
+    stockholm:
+      name: "Stockholm"
+      emoji: "🇸🇪"
+    hannover:
+      name: "Hannover"
+      emoji: "🇩🇪"
