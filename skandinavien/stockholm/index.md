@@ -8,7 +8,7 @@ Stockholm, auf 14 Inseln erbaut, ist eine der schönsten Hauptstädte Europas. D
 
 ## 🏨 Unterkunft
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ## 🚗 Transport
 
@@ -16,7 +16,7 @@ Stockholms U-Bahn (Tunnelbana) ist ein Kunstwerk für sich und bringt uns übera
 
 ## 📅 Aufenthaltsdauer
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ---
 

@@ -13,7 +13,7 @@ Beides ist in diesem Fall das gleiche. Wir sind mit Ollis Camper unterwegs und �
 
 ## 📅 Aufenthaltsdauer
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ---
 

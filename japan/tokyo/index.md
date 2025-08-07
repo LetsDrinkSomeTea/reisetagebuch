@@ -9,7 +9,7 @@ Tokyo, eine Stadt der Kontraste und Superlative. Mit über 37 Millionen Einwohne
 
 ## 🏨 Unterkunft
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ## 🚇 Transport
 
@@ -17,7 +17,7 @@ Tokyo hat das komplexeste aber effizienteste Bahnsystem der Welt. Mit der JR Pas
 
 ## 📅 Aufenthaltsdauer
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ---
 

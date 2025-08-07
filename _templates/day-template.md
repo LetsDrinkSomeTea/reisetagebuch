@@ -1,11 +1,11 @@
 ---
 layout: day
-title: "Title"
+title: "Subtitle"
 date: 2025-08-01
 country: country_key # japan, australien, skandinavien
 city: city_key # tokyo, melbourne, oslo, etc.
 day: 0
-weather: "Weather description"
+weather: "Weather, 00°C"
 ---
 
 ## [Morning Activity Icon] Vormittag
@@ -43,4 +43,4 @@ weather: "Weather description"
 
 ---
 
-> "Quote of the day"
+> Quote of the day

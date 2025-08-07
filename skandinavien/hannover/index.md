@@ -9,7 +9,7 @@ Hannover dient als unser Ausgangspunkt für die skandinavische Reise. Die nieder
 
 ## 🏨 Unterkunft
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ## 🚗 Transport
 
@@ -17,7 +17,7 @@ Hannover ist ein wichtiger Verkehrsknotenpunkt mit excellenter Bahn- und Flugver
 
 ## 📅 Aufenthaltsdauer
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ---
 

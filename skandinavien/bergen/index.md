@@ -9,7 +9,7 @@ Bergen, die "Hauptstadt der Fjorde", ist der perfekte Ausgangspunkt für die spe
 
 ## 🏨 Unterkunft
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ## 🚗 Transport
 
@@ -17,7 +17,7 @@ Bergen ist sehr walkable, und die Fløibahn bringt uns zum Aussichtspunkt Mount 
 
 ## 📅 Aufenthaltsdauer
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ---
 

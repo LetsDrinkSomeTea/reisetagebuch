@@ -9,7 +9,7 @@ Osaka, bekannt als "Tenka no Daidokoro" (die Küche des Landes), ist das kulinar
 
 ## 🏨 Unterkunft
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ## 🚗 Transport
 
@@ -17,7 +17,7 @@ Das Osaka Metro-System bringt uns schnell zu allen wichtigen Sehenswürdigkeiten
 
 ## 📅 Aufenthaltsdauer
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ---
 

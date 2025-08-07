@@ -9,7 +9,7 @@ Melbourne, oft als die kulturelle Hauptstadt Australiens bezeichnet, bezaubert m
 
 ## 🏨 Unterkunft
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ## 🚗 Transport
 
@@ -17,7 +17,7 @@ Melbournes Tram-System ist ikonisch und bringt uns überall hin. Die kostenlose 
 
 ## 📅 Aufenthaltsdauer
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ---
 

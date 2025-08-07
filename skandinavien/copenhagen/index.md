@@ -9,7 +9,7 @@ Kopenhagen, die dänische Hauptstadt, bezaubert mit ihrer entspannten Atmosphär
 
 ## 🏨 Unterkunft
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ## 🚗 Transport
 
@@ -17,7 +17,7 @@ Kopenhagen ist die Fahrradhauptstadt der Welt. Wir planen, die Stadt hauptsächl
 
 ## 📅 Aufenthaltsdauer
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ---
 

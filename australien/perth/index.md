@@ -9,7 +9,7 @@ Perth, eine der isoliertesten Großstädte der Welt, überrascht mit wunderschö
 
 ## 🏨 Unterkunft
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ## 🚗 Transport
 
@@ -17,7 +17,7 @@ Perth ist autoorientiert, aber das öffentliche Verkehrssystem verbindet die Sta
 
 ## 📅 Aufenthaltsdauer
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ---
 

@@ -1,11 +1,9 @@
 ---
 layout: city
-title: "City Name"
+title: "Subtitle"
 country: country_key # japan, australien, skandinavien
 city: city_key
 ---
-
-# [City Emoji] [City Name - City Title]
 
 [Brief description of the city - its character, what it's known for, why you're excited to visit]
 

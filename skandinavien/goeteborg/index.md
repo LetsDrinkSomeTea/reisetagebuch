@@ -9,7 +9,7 @@ Göteborg, Schwedens zweitgrößte Stadt, ist das Tor zur wunderschönen Westkü
 
 ## 🏨 Unterkunft
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ## 🚗 Transport
 
@@ -17,7 +17,7 @@ Göteborgs Straßenbahnsystem ist ausgezeichnet und bringt uns zu allen wichtige
 
 ## 📅 Aufenthaltsdauer
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ---
 

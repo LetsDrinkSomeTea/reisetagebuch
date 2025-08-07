@@ -9,7 +9,7 @@ Sydney, mit seinem ikonischen Opera House und der majestätischen Harbour Bridge
 
 ## 🏨 Unterkunft
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ## 🚗 Transport
 
@@ -17,8 +17,9 @@ Sydneys öffentliches Verkehrssystem aus Zügen, Bussen und Fähren ist ausgezei
 
 ## 📅 Aufenthaltsdauer
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ---
 
 > Sydney - wo urbanes Leben und Natur in perfekter Harmonie am schönsten Hafen der Welt verschmelzen.
+

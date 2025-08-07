@@ -9,7 +9,7 @@ Trondheim, die ehemalige Hauptstadt Norwegens, ist reich an Geschichte und Kultu
 
 ## 🏨 Unterkunft
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ## 🚗 Transport
 
@@ -17,7 +17,7 @@ Trondheim lässt sich hervorragend zu Fuß erkunden. Die Stadt ist kompakt und d
 
 ## 📅 Aufenthaltsdauer
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ---
 

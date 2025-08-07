@@ -9,7 +9,7 @@ Oslo, die norwegische Hauptstadt, ist eine perfekte Mischung aus moderner Archit
 
 ## 🏨 Unterkunft
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ## 🚗 Transport
 
@@ -17,7 +17,7 @@ Oslos öffentliches Verkehrssystem ist ausgezeichnet. Mit dem T-bane (U-Bahn) er
 
 ## 📅 Aufenthaltsdauer
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ---
 

@@ -9,7 +9,7 @@ Kyoto, das kulturelle Herz Japans und ehemalige Hauptstadt, erwartet uns mit üb
 
 ## 🏨 Unterkunft
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ## 🚗 Transport
 
@@ -17,7 +17,7 @@ Kyoto lässt sich hervorragend zu Fuß, mit dem Fahrrad oder dem effizienten Bus
 
 ## 📅 Aufenthaltsdauer
 
-Platzhalter
+_Wird noch ergänzt..._
 
 ---
 
