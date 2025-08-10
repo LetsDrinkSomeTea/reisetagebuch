@@ -37,9 +37,13 @@ weather: "Weather, 00°C"
 
 [Reflect on the day - emotions, thoughts, surprises, challenges, etc.]
 
-## 📱 Besonderheiten
+## ✨ Besonderheiten
 
 [Any special observations, cultural insights, funny moments, or unexpected discoveries]
+
+## 📸 Bild des Tages
+
+![Bild](Link_zum_Bild)
 
 ---
 
