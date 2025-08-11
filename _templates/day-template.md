@@ -12,34 +12,39 @@ weather: "Weather, 00°C"
 
 ![Morning Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/morning.jpg)
 
-[Describe morning activities, experiences, and observations]
-
-## 🍽️ Essen & Trinken
-
-### Frühstück
-![Breakfast]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/breakfast.jpg)
-- **Frühstück:** [Description]
-
-### Mittagessen
-![Lunch]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/lunch.jpg)
-- **Mittagessen:** [Description]
-
-### Abendessen
-![Dinner]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/dinner.jpg)
-- **Abendessen:** [Description]
-- **Besonderheiten:** [Special foods, drinks, or culinary experiences]
+Beschreibung
 
 ## 🌆 Nachmittag
 
 ![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon.jpg)
 
-[Describe afternoon activities, meals, and encounters]
+Beschreibung
 
 ## 🌙 Abend
 
 ![Evening Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/evening.jpg)
 
-[Describe evening activities, dining, and nightlife]
+Beschreibung
+
+## 🍽️ Essen & Trinken
+
+### Frühstück
+
+![Breakfast]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/breakfast.jpg)
+
+Beschreibung
+
+### Mittagessen
+
+![Lunch]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/lunch.jpg)
+
+Beschreibung
+
+### Abendessen
+
+![Dinner]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/dinner.jpg)
+
+Beschreibung
 
 ## 🎯 Highlight des Tages
 
@@ -58,7 +63,5 @@ weather: "Weather, 00°C"
 ## 📸 Bild des Tages
 
 ![Picture of the Day]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/main.jpg)
-
----
 
 > Quote of the day

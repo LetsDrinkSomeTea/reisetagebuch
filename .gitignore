@@ -1,8 +1,14 @@
 _site
 .github
 Gemfile.lock
+CLAUDE.md
+
+# Temporary and backup files
+*.tmp
+*.bak
+*~
+.DS_Store
 
 *.md
 !index.md
-
 *.jpg

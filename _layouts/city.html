@@ -64,5 +64,5 @@ layout: default
     {% endif %}
   </section>
   {% assign gallery_folder = page.country | append: '/' | append: page.city %}
-  {% include image-gallery.html folder=gallery_folder %}
+  {% include city-image-gallery.html folder=gallery_folder country=page.country city=page.city %}
 </article>

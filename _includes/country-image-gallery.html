@@ -22,7 +22,7 @@ Looks for tag-X/main.jpg structure across all cities
 
 {% if images_found %}
 <section class="country-image-gallery-section">
-    <h2>📸 Alle Bilder aus {{ country_data.name }}</h2>
+    <h2>📸 Bilder aus {{ country_data.name }}</h2>
     <div class="country-image-gallery">
         {% assign sorted_dirs = day_directories | sort: "path" %}
         {% for file in sorted_dirs %}

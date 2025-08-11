@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         galleryLinks.forEach((link, index) => {
             // Collect all images in this gallery
-            const galleryContainer = link.closest('.image-gallery, .country-image-gallery, .gallery-all-images');
+            const galleryContainer = link.closest('.city-image-gallery, .country-image-gallery, .gallery-all-images');
             const allLinks = galleryContainer ? galleryContainer.querySelectorAll('.gallery-link') : [link];
             
             const images = Array.from(allLinks).map((l, i) => ({
