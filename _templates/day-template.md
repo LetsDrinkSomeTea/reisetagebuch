@@ -43,7 +43,7 @@ weather: "Weather, 00°C"
 
 ## 📸 Bild des Tages
 
-![Bild](Link_zum_Bild)
+![Bild]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}.jpg)
 
 ---
 
