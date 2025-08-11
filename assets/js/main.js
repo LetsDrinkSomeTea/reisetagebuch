@@ -75,4 +75,184 @@ document.addEventListener('DOMContentLoaded', function() {
             link.classList.add('active');
         }
     });
+
+    // Image Modal System
+    let currentModal = null;
+    let currentImageIndex = 0;
+    let modalImages = [];
+
+    // Create modal HTML structure
+    function createModal() {
+        const modal = document.createElement('div');
+        modal.id = 'imageModal';
+        modal.className = 'image-modal';
+        modal.setAttribute('aria-hidden', 'true');
+        modal.setAttribute('role', 'dialog');
+        modal.setAttribute('aria-label', 'Bildansicht');
+        
+        modal.innerHTML = `
+            <div class="modal-backdrop" aria-hidden="true"></div>
+            <div class="modal-content" role="document">
+                <button class="modal-close" aria-label="Schließen" type="button">&times;</button>
+                <div class="modal-image-container">
+                    <img class="modal-image" alt="" />
+                    <button class="modal-nav modal-prev" aria-label="Vorheriges Bild" type="button">‹</button>
+                    <button class="modal-nav modal-next" aria-label="Nächstes Bild" type="button">›</button>
+                </div>
+                <div class="modal-info">
+                    <span class="modal-title"></span>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        return modal;
+    }
+
+    // Initialize modal
+    function initModal() {
+        if (!currentModal) {
+            currentModal = createModal();
+            
+            // Event listeners
+            const closeBtn = currentModal.querySelector('.modal-close');
+            const backdrop = currentModal.querySelector('.modal-backdrop');
+            const prevBtn = currentModal.querySelector('.modal-prev');
+            const nextBtn = currentModal.querySelector('.modal-next');
+            const modalImage = currentModal.querySelector('.modal-image');
+            
+            closeBtn.addEventListener('click', closeModal);
+            backdrop.addEventListener('click', closeModal);
+            prevBtn.addEventListener('click', showPrevImage);
+            nextBtn.addEventListener('click', showNextImage);
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', handleKeydown);
+            
+            // Touch navigation for mobile
+            let touchStartX = 0;
+            modalImage.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+            });
+            
+            modalImage.addEventListener('touchend', (e) => {
+                const touchEndX = e.changedTouches[0].clientX;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > 50) { // Minimum swipe distance
+                    if (diff > 0) {
+                        showNextImage();
+                    } else {
+                        showPrevImage();
+                    }
+                }
+            });
+        }
+    }
+
+    // Open modal with image
+    function openModal(imageSrc, title, images, index) {
+        initModal();
+        
+        modalImages = images;
+        currentImageIndex = index;
+        
+        const modalImage = currentModal.querySelector('.modal-image');
+        const modalTitle = currentModal.querySelector('.modal-title');
+        
+        modalImage.src = imageSrc;
+        modalImage.alt = title;
+        modalTitle.textContent = title;
+        
+        // Show/hide navigation buttons
+        const prevBtn = currentModal.querySelector('.modal-prev');
+        const nextBtn = currentModal.querySelector('.modal-next');
+        
+        prevBtn.style.display = images.length > 1 && index > 0 ? 'block' : 'none';
+        nextBtn.style.display = images.length > 1 && index < images.length - 1 ? 'block' : 'none';
+        
+        // Show modal
+        currentModal.setAttribute('aria-hidden', 'false');
+        currentModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+        // Focus management for accessibility
+        setTimeout(() => {
+            currentModal.querySelector('.modal-close').focus();
+        }, 100);
+    }
+
+    // Close modal
+    function closeModal() {
+        if (currentModal) {
+            currentModal.setAttribute('aria-hidden', 'true');
+            currentModal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    }
+
+    // Navigate to previous image
+    function showPrevImage() {
+        if (currentImageIndex > 0) {
+            currentImageIndex--;
+            const prevImage = modalImages[currentImageIndex];
+            openModal(prevImage.src, prevImage.title, modalImages, currentImageIndex);
+        }
+    }
+
+    // Navigate to next image
+    function showNextImage() {
+        if (currentImageIndex < modalImages.length - 1) {
+            currentImageIndex++;
+            const nextImage = modalImages[currentImageIndex];
+            openModal(nextImage.src, nextImage.title, modalImages, currentImageIndex);
+        }
+    }
+
+    // Handle keyboard navigation
+    function handleKeydown(e) {
+        if (currentModal && currentModal.style.display === 'flex') {
+            switch(e.key) {
+                case 'Escape':
+                    closeModal();
+                    break;
+                case 'ArrowLeft':
+                    showPrevImage();
+                    break;
+                case 'ArrowRight':
+                    showNextImage();
+                    break;
+            }
+        }
+    }
+
+    // Initialize gallery links
+    function initGalleryLinks() {
+        const galleryLinks = document.querySelectorAll('.gallery-link');
+        
+        galleryLinks.forEach((link, index) => {
+            // Collect all images in this gallery
+            const galleryContainer = link.closest('.image-gallery, .country-image-gallery, .gallery-all-images');
+            const allLinks = galleryContainer ? galleryContainer.querySelectorAll('.gallery-link') : [link];
+            
+            const images = Array.from(allLinks).map((l, i) => ({
+                src: l.href,
+                title: l.getAttribute('data-modal-title') || l.title || l.querySelector('img').alt || `Bild ${i + 1}`,
+                index: i
+            }));
+            
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const currentIndex = images.findIndex(img => img.src === this.href);
+                const modalTitle = this.getAttribute('data-modal-title') || this.title;
+                openModal(this.href, modalTitle, images, currentIndex);
+            });
+        });
+    }
+
+    // Initialize gallery when DOM is loaded
+    initGalleryLinks();
+    
+    // Re-initialize when new content is loaded (for potential future AJAX content)
+    window.reinitGallery = initGalleryLinks;
 });

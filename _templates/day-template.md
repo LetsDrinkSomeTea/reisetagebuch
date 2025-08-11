@@ -8,24 +8,38 @@ day: 0
 weather: "Weather, 00°C"
 ---
 
-## [Morning Activity Icon] Vormittag
+## 🌅 Vormittag
+
+![Morning Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/morning.jpg)
 
 [Describe morning activities, experiences, and observations]
 
-## [Afternoon Activity Icon] Nachmittag
+## 🍽️ Essen & Trinken
+
+### Frühstück
+![Breakfast]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/breakfast.jpg)
+- **Frühstück:** [Description]
+
+### Mittagessen
+![Lunch]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/lunch.jpg)
+- **Mittagessen:** [Description]
+
+### Abendessen
+![Dinner]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/dinner.jpg)
+- **Abendessen:** [Description]
+- **Besonderheiten:** [Special foods, drinks, or culinary experiences]
+
+## 🌆 Nachmittag
+
+![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon.jpg)
 
 [Describe afternoon activities, meals, and encounters]
 
-## [Evening Activity Icon] Abend
+## 🌙 Abend
+
+![Evening Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/evening.jpg)
 
 [Describe evening activities, dining, and nightlife]
-
-## 🍽️ Essen & Trinken
-
-- **Frühstück:** [Description]
-- **Mittagessen:** [Description]
-- **Abendessen:** [Description]
-- **Besonderheiten:** [Special foods, drinks, or culinary experiences]
 
 ## 🎯 Highlight des Tages
 
@@ -43,7 +57,7 @@ weather: "Weather, 00°C"
 
 ## 📸 Bild des Tages
 
-![Bild]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}.jpg)
+![Picture of the Day]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/main.jpg)
 
 ---
 

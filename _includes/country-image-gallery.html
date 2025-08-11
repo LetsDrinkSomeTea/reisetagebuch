@@ -1,0 +1,61 @@
+{% comment %}
+Country Gallery - Displays main images from all day directories in the current country
+Looks for tag-X/main.jpg structure across all cities
+{% endcomment %}
+{% assign country_data = site.data.countries[include.country] %}
+{% assign images_found = false %}
+{% assign day_directories = "" | split: "" %}
+
+{% comment %} Find all main.jpg files in tag-X directories for this country {% endcomment %}
+{% for file in site.static_files %}
+    {% if file.path contains include.country %}
+        {% if file.name == "main.jpg" or file.name == "main.JPG" or file.name == "main.jpeg" or file.name == "main.JPEG" %}
+            {% assign path_parts = file.path | split: "/" %}
+            {% assign directory_name = path_parts[-2] %}
+            {% if directory_name contains "tag-" %}
+                {% assign images_found = true %}
+                {% assign day_directories = day_directories | push: file %}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+{% if images_found %}
+<section class="country-image-gallery-section">
+    <h2>📸 Alle Bilder aus {{ country_data.name }}</h2>
+    <div class="country-image-gallery">
+        {% assign sorted_dirs = day_directories | sort: "path" %}
+        {% for file in sorted_dirs %}
+            {% assign path_parts = file.path | split: "/" %}
+            {% assign directory_name = path_parts[-2] %}
+            
+            {% comment %} Extract city from file path (e.g., "japan/tokyo/tag-1/main.jpg" -> "tokyo") {% endcomment %}
+            {% assign city_key = path_parts[-3] %}
+            
+            {% comment %} Get city display name from data {% endcomment %}
+            {% assign city_data = country_data.cities[city_key] %}
+            {% assign city_name = city_data.name | default: city_key %}
+            {% assign city_emoji = city_data.emoji | default: "🏙️" %}
+            
+            {% comment %} Extract day number from directory name (e.g., "tag-1" -> "1") {% endcomment %}
+            {% assign day_number = directory_name | remove: "tag-" %}
+            
+            <div class="country-gallery-card">
+                <a href="{{ file.path | relative_url }}" class="gallery-link" 
+                   title="{{ city_name }}, Tag {{ day_number }}"
+                   data-modal-title="Tag {{ day_number }}, {{ city_name }}, {{ country_data.name }}">
+                    <div class="gallery-image-container">
+                        <img src="{{ file.path | relative_url }}" alt="Bild aus {{ city_name }}, Tag {{ day_number }}" />
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <span class="gallery-city-badge">{{ city_emoji }} {{ city_name }}</span>
+                                <span class="gallery-day-badge">Tag {{ day_number }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}

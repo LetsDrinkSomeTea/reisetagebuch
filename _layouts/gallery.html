@@ -1,0 +1,59 @@
+---
+layout: default
+---
+
+<article class="gallery-page">
+  <header class="page-header">
+    <div class="breadcrumb">
+      <a href="{{ '/' | relative_url }}">🏠</a>
+      <span class="separator">›</span>
+      <span class="current">📸 Galerie</span>
+    </div>
+  </header>
+
+  <h1>📸 {{ page.title }}</h1>
+
+  <div class="page-content">
+    {{ content }}
+  </div>
+
+  {% comment %} Gallery Statistics {% endcomment %}
+  {% assign all_images = "" | split: "" %}
+  {% assign countries_with_images = "" | split: "" %}
+  {% assign cities_with_images = "" | split: "" %}
+
+  {% for file in site.static_files %}
+    {% if file.path contains "/tag-" %}
+      {% if file.extname == '.jpg' or file.extname == '.jpeg' or file.extname == '.JPG' or file.extname == '.JPEG' %}
+        {% assign path_parts = file.path | split: "/" %}
+        {% if path_parts.size >= 4 %}
+          {% assign country_key = path_parts[-4] %}
+          {% assign city_key = path_parts[-3] %}
+          {% assign all_images = all_images | push: file %}
+          {% unless countries_with_images contains country_key %}
+            {% assign countries_with_images = countries_with_images | push: country_key %}
+          {% endunless %}
+          {% assign city_identifier = country_key | append: "-" | append: city_key %}
+          {% unless cities_with_images contains city_identifier %}
+            {% assign cities_with_images = cities_with_images | push: city_identifier %}
+          {% endunless %}
+        {% endif %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+  {% if all_images.size > 0 %}
+    <div class="gallery-stats">
+      <span class="stat-item">📸 {{ all_images.size }} {% if all_images.size == 1 %}Bild{% else %}Bilder{% endif %}</span>
+      <span class="stat-item">🌍 {{ countries_with_images.size }} {% if countries_with_images.size == 1 %}Land{% else %}Länder{% endif %}</span>
+      <span class="stat-item">🏙️ {{ cities_with_images.size }} {% if cities_with_images.size == 1 %}Stadt{% else %}Städte{% endif %}</span>
+    </div>
+
+    {% comment %} Include the main gallery {% endcomment %}
+    {% include gallery-all-images.html %}
+  {% else %}
+    <div class="no-entries">
+      <p>🚀 Noch keine Bilder vorhanden. Die ersten Fotos erscheinen hier, sobald die Reise beginnt!</p>
+    </div>
+  {% endif %}
+</article>

@@ -14,12 +14,16 @@ reisetagebuch/
 ├── _data/
 │   └── countries.yml        # Länder-Metadaten (Flaggen, Emojis, Städte)
 ├── _includes/
-│   └── navigation.html      # Dynamische Navigation
+│   ├── navigation.html      # Dynamische Navigation
+│   ├── image-gallery.html   # Stadt-Galerie (nur Hauptbilder)
+│   ├── country-image-gallery.html # Länder-Galerie (nur Hauptbilder)
+│   └── gallery-all-images.html    # Vollständige Galerie (alle Bilder)
 ├── _layouts/
 │   ├── default.html         # Basis-Layout mit Sidebar
 │   ├── country.html         # Länder-Übersichtsseite
-│   ├── city.html           # Stadt-Übersichtsseite  
-│   └── day.html            # Tägliche Tagebucheinträge
+│   ├── city.html           # Stadt-Übersichtsseite
+│   ├── day.html            # Tägliche Tagebucheinträge
+│   └── gallery.html        # Galerie-Seite
 ├── _sass/
 │   └── main.scss           # SCSS-Styles
 ├── _templates/             # Vorlagen für neue Inhalte
@@ -31,8 +35,17 @@ reisetagebuch/
 │   ├── index.md            # Japan-Übersicht
 │   └── tokyo/              # Tokyo-spezifische Inhalte
 │       ├── index.md        # Tokyo-Übersicht
-│       ├── tag-1.md        # Tag 1 in Tokyo
-│       └── tag-2.md        # Tag 2 in Tokyo
+│       ├── tag-1/          # Tag 1 Bilder-Verzeichnis
+│       │   ├── main.jpg    # Hauptbild (Bild des Tages)
+│       │   ├── morning.jpg # Vormittag-Aktivität
+│       │   ├── breakfast.jpg # Frühstück
+│       │   ├── lunch.jpg   # Mittagessen
+│       │   ├── afternoon.jpg # Nachmittag-Aktivität
+│       │   ├── evening.jpg # Abend-Aktivität
+│       │   └── dinner.jpg  # Abendessen
+│       ├── tag-1.md        # Tag 1 Tagebucheintrag
+│       └── tag-2/          # Tag 2 Bilder-Verzeichnis
+│           └── tag-2.md    # Tag 2 Tagebucheintrag
 ├── australien/             # (Struktur wie Japan)
 ├── skandinavien/           # (Struktur wie Japan)
 └── index.md               # Homepage
@@ -45,6 +58,15 @@ reisetagebuch/
 - Hierarchische Struktur: Länder → Städte → Tage
 - Zeigt automatisch die Anzahl der Tagebucheinträge pro Stadt
 - "Neueste Einträge" Sektion mit den letzten 5 Einträgen
+- Dedizierte "Galerie" Link für alle Bilder
+
+### 📸 Erweiterte Galerie-Funktionen
+- **Popup-Modal System**: Bilder öffnen sich in Vollbild-Overlays
+- **Hauptgalerie** (`/galerie/`): Zeigt alle Bilder aus allen Städten und Tagen
+- **Stadt-Galerien**: Zeigen nur die "Bilder des Tages" pro Stadt
+- **Länder-Galerien**: Zeigen alle "Bilder des Tages" eines Landes
+- **Navigation im Modal**: Pfeiltasten und Touch-Gesten zum Durchblättern
+- **Intelligente Bildorganisation**: 7 Bildkategorien pro Tag
 
 ### 📱 Responsive Design  
 - Mobile-first Design mit Touch-freundlicher Navigation
@@ -66,9 +88,17 @@ reisetagebuch/
 
 ### Neuen Tagebucheintrag hinzufügen
 
-1. Kopiere `_templates/day-template.md`
-2. Benenne die Datei um: `[country]/[city]/tag-[number].md`
-3. Fülle die Front-Matter-Daten aus:
+1. **Erstelle Bild-Verzeichnis**: `mkdir [country]/[city]/tag-[number]/`
+2. **Füge Bilder hinzu** (optional, bis zu 7 Bilder):
+   - `main.jpg` - Hauptbild (Bild des Tages)
+   - `morning.jpg` - Vormittag-Aktivität
+   - `breakfast.jpg` - Frühstück
+   - `lunch.jpg` - Mittagessen  
+   - `afternoon.jpg` - Nachmittag-Aktivität
+   - `evening.jpg` - Abend-Aktivität
+   - `dinner.jpg` - Abendessen
+3. **Kopiere Template**: `cp _templates/day-template.md [country]/[city]/tag-[number].md`
+4. **Aktualisiere Front-Matter**:
 
 ```yaml
 ---
@@ -150,12 +180,32 @@ Das Projekt wird automatisch über GitHub Actions bereitgestellt:
 2. GitHub Actions baut die Site automatisch
 3. Die Site wird auf GitHub Pages veröffentlicht
 
+## 📸 Galerie-System
+
+### Bildorganisation
+- **Verzeichnisstruktur**: `[country]/[city]/tag-[number]/[bildtyp].jpg`
+- **7 Bildkategorien**: main, morning, breakfast, lunch, afternoon, evening, dinner
+- **Automatische Erkennung**: System erkennt vorhandene Bilder automatisch
+- **Flexibel**: Nicht alle Bildkategorien müssen verwendet werden
+
+### Galerie-Typen
+1. **Hauptgalerie** (`/galerie/`): Alle Bilder mit Stadt + Tag Information
+2. **Stadt-Galerien**: Nur `main.jpg` Bilder einer Stadt  
+3. **Länder-Galerien**: Nur `main.jpg` Bilder eines Landes
+
+### Modal-Features
+- **Vollbild-Anzeige**: Bilder in originaler Größe
+- **Keyboard Navigation**: ESC (schließen), ←/→ (vor/zurück)
+- **Touch-Gesten**: Wischen für Navigation auf mobilen Geräten
+- **Informationsanzeige**: Tag, Stadt, Land im Modal-Titel
+
 ## 📱 Browser-Support
 
 - Chrome/Edge (modern versions)
 - Firefox (modern versions)  
 - Safari (modern versions)
 - Mobile browsers (iOS Safari, Chrome Mobile)
+- **JavaScript erforderlich**: Für Modal-Galerie-Funktionen
 
 ## 🎯 SEO & Performance
 
