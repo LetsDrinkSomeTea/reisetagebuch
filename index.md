@@ -12,6 +12,31 @@ title: "Unser Reisetagebuch"
 
 {% if all_day_pages.size > 0 %}
 
+  <h2>📖 Neueste Einträge</h2>
+
+  <div class="recent-entries-grid">
+    {% assign recent_entries = all_day_pages | sort: "date" | reverse %}
+    {% for entry in recent_entries limit: 6 %}
+      {% assign country_data = site.data.countries[entry.country] %}
+      {% assign city_data = country_data.cities[entry.city] %}
+      <article class="entry-preview">
+        <header>
+          <div class="entry-location">{{ country_data.flag }} {{ city_data.name }}, {{ country_data.name }}</div>
+          <time datetime="{{ entry.date | date: '%Y-%m-%d' }}">{{ entry.date | date: '%d. %B %Y' }}</time>
+        </header>
+        <h4><a href="{{ entry.url | relative_url }}">{{ entry.title }}</a></h4>
+        {% if entry.excerpt %}
+          <p>{{ entry.excerpt | strip_html | truncate: 150 }}</p>
+        {% endif %}
+        <footer>
+          <span class="badge day-badge">Tag {{ entry.day }}</span>
+          {% if entry.weather %}
+            <span class="badge weather-badge">{{ entry.weather }}</span>
+          {% endif %}
+        </footer>
+      </article>
+    {% endfor %}
+  </div>
   <h2>🗺️ Unsere Reiseroute</h2>
 
   <div class="countries-overview">
@@ -55,33 +80,6 @@ title: "Unser Reisetagebuch"
     {% endfor %}
 
   </div>
-
-  <h3>📖 Neueste Tagebucheinträge</h3>
-
-  <div class="recent-entries-grid">
-    {% assign recent_entries = all_day_pages | sort: "date" | reverse | limit: 6 %}
-    {% for entry in recent_entries %}
-      {% assign country_data = site.data.countries[entry.country] %}
-      {% assign city_data = country_data.cities[entry.city] %}
-      <article class="entry-preview">
-        <header>
-          <div class="entry-location">{{ country_data.flag }} {{ city_data.name }}, {{ country_data.name }}</div>
-          <time datetime="{{ entry.date | date: '%Y-%m-%d' }}">{{ entry.date | date: '%d. %B %Y' }}</time>
-        </header>
-        <h4><a href="{{ entry.url | relative_url }}">{{ entry.title }}</a></h4>
-        {% if entry.excerpt %}
-          <p>{{ entry.excerpt | strip_html | truncate: 150 }}</p>
-        {% endif %}
-        <footer>
-          <span class="badge day-badge">Tag {{ entry.day }}</span>
-          {% if entry.weather %}
-            <span class="badge weather-badge">{{ entry.weather }}</span>
-          {% endif %}
-        </footer>
-      </article>
-    {% endfor %}
-  </div>
-
 {% else %}
 
   <div class="no-entries">
@@ -90,8 +88,11 @@ title: "Unser Reisetagebuch"
 
 {% endif %}
 
-<h3>ℹ️ Über dieses Tagebuch</h3>
-<p><strong>Navigation:</strong> Nutzt die Seitenleiste, um zwischen den Ländern, Städten und einzelnen Tagen zu navigieren. Die Seite wird automatisch aktualisiert, sobald neue Einträge hinzugefügt werden.</p>
+### ℹ️ Über dieses Tagebuch
+
+**Navigation:** Nutze die Seitenleiste, um zwischen den Ländern, Städten und einzelnen Tagen zu navigieren. Die Seite wird automatisch aktualisiert, sobald neue Einträge hinzugefügt werden.
+
+**Bilder:** Jeden Tag gibt es ein "Bild des Tages", das wird auch auf der Seite der jeweiligen Stadt/des jeweiligen Landes angezeigt. Alle anderen Fotos werden nur auf der Seite des Tages oder in der [Galerie]({{ "galerie" | relative_url }}) angezeigt.
 
 ---
 

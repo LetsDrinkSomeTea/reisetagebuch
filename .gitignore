@@ -2,6 +2,7 @@ _site
 .github
 Gemfile.lock
 CLAUDE.md
+GEMINI.md
 
 # Temporary and backup files
 *.tmp
@@ -9,6 +10,3 @@ CLAUDE.md
 *~
 .DS_Store
 
-*.md
-!index.md
-*.jpg

@@ -111,9 +111,7 @@
     {% assign all_day_pages = site.pages | where: "layout", "day" | sort: "date" | reverse %}
     
     {% if all_day_pages.size > 0 %}
-      {% assign recent_entries = all_day_pages | limit: 5 %}
-      
-      {% for entry in recent_entries %}
+      {% for entry in all_day_pages limit: 5 %}
         {% assign country_data = site.data.countries[entry.country] %}
         {% assign city_data = country_data.cities[entry.city] %}
         

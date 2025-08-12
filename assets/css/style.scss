@@ -437,6 +437,34 @@ h2 {
   }
 }
 
+// Day Navigation
+.day-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+
+  a {
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--primary-color);
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      background-color: var(--secondary-color);
+      border-color: var(--secondary-color);
+    }
+  }
+
+  .nav-next {
+    margin-left: auto;
+  }
+}
+
 // Mobile menu toggle
 .mobile-menu-toggle {
   display: none;
