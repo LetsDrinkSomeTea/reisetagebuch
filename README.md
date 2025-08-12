@@ -15,18 +15,18 @@ reisetagebuch/
 │   └── countries.yml        # Länder-Metadaten (Flaggen, Emojis, Städte)
 ├── _includes/
 │   ├── navigation.html      # Dynamische Navigation
-│   ├── image-gallery.html   # Stadt-Galerie (nur Hauptbilder)
+│   ├── city-image-gallery.html    # Stadt-Galerie (nur Hauptbilder)
 │   ├── country-image-gallery.html # Länder-Galerie (nur Hauptbilder)
 │   └── gallery-all-images.html    # Vollständige Galerie (alle Bilder)
 ├── _layouts/
 │   ├── default.html         # Basis-Layout mit Sidebar
 │   ├── country.html         # Länder-Übersichtsseite
-│   ├── city.html           # Stadt-Übersichtsseite
-│   ├── day.html            # Tägliche Tagebucheinträge
-│   └── gallery.html        # Galerie-Seite
+│   ├── city.html            # Stadt-Übersichtsseite
+│   ├── day.html             # Tägliche Tagebucheinträge
+│   └── gallery.html         # Galerie-Seite
 ├── _sass/
-│   └── main.scss           # SCSS-Styles
-├── _templates/             # Vorlagen für neue Inhalte
+│   └── main.scss            # SCSS-Styles
+├── _templates/              # Vorlagen für neue Inhalte
 │   ├── day-template.md
 │   └── city-template.md
 ├── assets/css/
@@ -44,8 +44,8 @@ reisetagebuch/
 │       │   ├── evening.jpg # Abend-Aktivität
 │       │   └── dinner.jpg  # Abendessen
 │       ├── tag-1.md        # Tag 1 Tagebucheintrag
-│       └── tag-2/          # Tag 2 Bilder-Verzeichnis
-│           └── tag-2.md    # Tag 2 Tagebucheintrag
+│       ├── tag-2/          # Tag 2 Bilder-Verzeichnis
+│       └── tag-2.md        # Tag 2 Tagebucheintrag
 ├── australien/             # (Struktur wie Japan)
 ├── skandinavien/           # (Struktur wie Japan)
 └── index.md               # Homepage
@@ -54,6 +54,7 @@ reisetagebuch/
 ## ✨ Features
 
 ### 🧭 Automatische Navigation
+
 - Navigation wird automatisch basierend auf vorhandenen Dateien generiert
 - Hierarchische Struktur: Länder → Städte → Tage
 - Zeigt automatisch die Anzahl der Tagebucheinträge pro Stadt
@@ -61,6 +62,7 @@ reisetagebuch/
 - Dedizierte "Galerie" Link für alle Bilder
 
 ### 📸 Erweiterte Galerie-Funktionen
+
 - **Popup-Modal System**: Bilder öffnen sich in Vollbild-Overlays
 - **Hauptgalerie** (`/galerie/`): Zeigt alle Bilder aus allen Städten und Tagen
 - **Stadt-Galerien**: Zeigen nur die "Bilder des Tages" pro Stadt
@@ -68,18 +70,21 @@ reisetagebuch/
 - **Navigation im Modal**: Pfeiltasten und Touch-Gesten zum Durchblättern
 - **Intelligente Bildorganisation**: 7 Bildkategorien pro Tag
 
-### 📱 Responsive Design  
+### 📱 Responsive Design
+
 - Mobile-first Design mit Touch-freundlicher Navigation
 - Hamburger-Menü für mobile Geräte
 - Optimiert für verschiedene Bildschirmgrößen
 
 ### 🎨 Modernes Layout
+
 - Sauberes, lesbares Design mit Sidebar-Navigation
 - Country-spezifische Emojis und Flaggen
 - Card-basiertes Layout für Übersichten
 - Breadcrumb-Navigation auf allen Seiten
 
 ### 🔄 GitHub Pages Integration
+
 - Automatische Bereitstellung via GitHub Actions
 - Optimiert für GitHub Pages (keine benutzerdefinierten Plugins)
 - Automatische Builds bei Push auf main branch
@@ -93,7 +98,7 @@ reisetagebuch/
    - `main.jpg` - Hauptbild (Bild des Tages)
    - `morning.jpg` - Vormittag-Aktivität
    - `breakfast.jpg` - Frühstück
-   - `lunch.jpg` - Mittagessen  
+   - `lunch.jpg` - Mittagessen
    - `afternoon.jpg` - Nachmittag-Aktivität
    - `evening.jpg` - Abend-Aktivität
    - `dinner.jpg` - Abendessen
@@ -106,7 +111,7 @@ layout: day
 title: "Tag 1 in Tokyo - Ankunft"
 date: 2024-03-15
 country: japan
-city: tokyo  
+city: tokyo
 day: 1
 weather: "Sonnig, 22°C"
 ---
@@ -168,6 +173,7 @@ japan:
 ### Site-Konfiguration (`_config.yml`)
 
 Wichtige Einstellungen:
+
 - `baseurl: "/reisetagebuch"` - für GitHub Pages
 - `url: "https://pages.faigle.dev"` - deine Domain
 - `timezone: Europe/Berlin` - lokale Zeitzone
@@ -183,17 +189,20 @@ Das Projekt wird automatisch über GitHub Actions bereitgestellt:
 ## 📸 Galerie-System
 
 ### Bildorganisation
+
 - **Verzeichnisstruktur**: `[country]/[city]/tag-[number]/[bildtyp].jpg`
 - **7 Bildkategorien**: main, morning, breakfast, lunch, afternoon, evening, dinner
 - **Automatische Erkennung**: System erkennt vorhandene Bilder automatisch
 - **Flexibel**: Nicht alle Bildkategorien müssen verwendet werden
 
 ### Galerie-Typen
+
 1. **Hauptgalerie** (`/galerie/`): Alle Bilder mit Stadt + Tag Information
-2. **Stadt-Galerien**: Nur `main.jpg` Bilder einer Stadt  
+2. **Stadt-Galerien**: Nur `main.jpg` Bilder einer Stadt
 3. **Länder-Galerien**: Nur `main.jpg` Bilder eines Landes
 
 ### Modal-Features
+
 - **Vollbild-Anzeige**: Bilder in originaler Größe
 - **Keyboard Navigation**: ESC (schließen), ←/→ (vor/zurück)
 - **Touch-Gesten**: Wischen für Navigation auf mobilen Geräten
@@ -202,7 +211,7 @@ Das Projekt wird automatisch über GitHub Actions bereitgestellt:
 ## 📱 Browser-Support
 
 - Chrome/Edge (modern versions)
-- Firefox (modern versions)  
+- Firefox (modern versions)
 - Safari (modern versions)
 - Mobile browsers (iOS Safari, Chrome Mobile)
 - **JavaScript erforderlich**: Für Modal-Galerie-Funktionen
@@ -218,3 +227,4 @@ Das Projekt wird automatisch über GitHub Actions bereitgestellt:
 ---
 
 **Happy traveling and happy blogging! 🌟**
+
