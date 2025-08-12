@@ -9,7 +9,11 @@ Perth, eine der isoliertesten Großstädte der Welt, überrascht mit wunderschö
 
 ## 🏨 Unterkunft
 
-_Wird noch ergänzt..._
+[Mullaloo B & B](https://www.booking.com/hotel/au/mullaloo-b-amp-b.de.html?label=brave_brand_organic_trigger_8e04a9f7-c7d3-4b3b-a255-3644144f3921_0&sid=03f3572eadfa0a84123c1e30621c4c11&aid=2405329)
+
+![Unterkunft Bild](https://cf.bstatic.com/xdata/images/hotel/max1024x768/98616542.jpg?k=a1077c453d5de9046ad572abef1d1d7da9782ffb8977fa71cfebd25247af388d&o=)
+
+**Preis: AUD 718,24**
 
 ## 🚗 Transport
 
@@ -17,7 +21,7 @@ Perth ist autoorientiert, aber das öffentliche Verkehrssystem verbindet die Sta
 
 ## 📅 Aufenthaltsdauer
 
-_Wird noch ergänzt..._
+`25. September bis 3. Oktober`
 
 ---
 
