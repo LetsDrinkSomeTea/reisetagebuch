@@ -8,6 +8,7 @@
 // Variables
 :root {
   --primary-color: #1a73e8;
+  --primary-color-darker: #125ab8;
   --secondary-color: #e8f0fe;
   --accent-color: #d93025;
   --text-color: #202124;
@@ -385,14 +386,95 @@ h2 {
   }
 }
 
+img {
+  max-width: 100%;
+  max-height: 50vh;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+
+  &:hover {
+    color: var(--primary-color-darker);
+    text-decoration: underline;
+  }
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin: 3rem 0;
+}
+
+// Code blocks
+pre, code, kbd, samp {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  font-size: 0.9em;
+}
+
+code {
+  background-color: var(--sidebar-bg);
+  padding: 0.2em 0.4em;
+  margin: 0;
+  border-radius: 3px;
+}
+
+pre {
+  background-color: var(--sidebar-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.25rem;
+  overflow-x: auto;
+  line-height: 1.5;
+
+  code {
+    background: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1em;
+  }
+}
+
+// Tables
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.95rem;
+}
+
+th, td {
+  border: 1px solid var(--border-color);
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+th {
+  background-color: var(--sidebar-bg);
+  font-weight: 600;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: var(--background-color);
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--sidebar-bg);
+}
+
+p, ul, ol, blockquote {
+  margin-bottom: 1.5rem;
+}
 // Content styling
 .page-content, .entry-content {
   line-height: 1.8;
   font-size: 1.05rem;
 
-  p, ul, ol, blockquote {
-    margin-bottom: 1.5rem;
-  }
 
   blockquote {
     position: relative;
@@ -428,13 +510,6 @@ h2 {
     }
   }
 
-  img {
-    max-width: 100%;
-    max-height: 50vh;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-  }
 }
 
 // Day Navigation
@@ -1286,6 +1361,5 @@ h2 {
     }
   }
 }
-
 
 
