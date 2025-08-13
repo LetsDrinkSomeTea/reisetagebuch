@@ -43,7 +43,7 @@ layout: default
   {% endfor %}
 
   {% if all_images.size > 0 %}
-    <div class="gallery-stats">
+    <div class="gallery__stats">
       <span class="stat-item">📸 {{ all_images.size }} {% if all_images.size == 1 %}Bild{% else %}Bilder{% endif %}</span>
       <span class="stat-item">🌍 {{ countries_with_images.size }} {% if countries_with_images.size == 1 %}Land{% else %}Länder{% endif %}</span>
       <span class="stat-item">🏙️ {{ cities_with_images.size }} {% if cities_with_images.size == 1 %}Stadt{% else %}Städte{% endif %}</span>

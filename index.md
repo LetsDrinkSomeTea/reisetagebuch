@@ -14,12 +14,12 @@ title: "Unser Reisetagebuch"
 
   <h2>📖 Neueste Einträge</h2>
 
-  <div class="recent-entries-grid">
+  <div class="grid grid--entries">
     {% assign recent_entries = all_day_pages | sort: "date" | reverse %}
     {% for entry in recent_entries limit: 6 %}
       {% assign country_data = site.data.countries[entry.country] %}
       {% assign city_data = country_data.cities[entry.city] %}
-      <article class="entry-preview">
+      <article class="card card--entry">
         <header>
           <div class="entry-location">{{ country_data.flag }} {{ city_data.name }}, {{ country_data.name }}</div>
           <time datetime="{{ entry.date | date: '%Y-%m-%d' }}">{{ entry.date | date: '%d. %B %Y' }}</time>
@@ -29,9 +29,9 @@ title: "Unser Reisetagebuch"
           <p>{{ entry.excerpt | strip_html | truncate: 150 }}</p>
         {% endif %}
         <footer>
-          <span class="badge day-badge">Tag {{ entry.day }}</span>
+          <span class="badge badge--primary">Tag {{ entry.day }}</span>
           {% if entry.weather %}
-            <span class="badge weather-badge">{{ entry.weather }}</span>
+            <span class="badge badge--weather">{{ entry.weather }}</span>
           {% endif %}
         </footer>
       </article>
@@ -39,7 +39,7 @@ title: "Unser Reisetagebuch"
   </div>
   <h2>🗺️ Unsere Reiseroute</h2>
 
-  <div class="countries-overview">
+  <div class="grid grid--countries">
     {% for country in site.data.countries %}
       {% assign country_key = country[0] %}
       {% assign country_data = country[1] %}
@@ -47,7 +47,7 @@ title: "Unser Reisetagebuch"
       {% assign country_day_pages = all_day_pages | where: "country", country_key %}
 
       {% if country_day_pages.size > 0 %}
-        <div class="country-overview">
+        <div class="card card--country">
           <h3>
             <a href="{{ '/' | append: country_key | append: '/' | relative_url }}">
               {{ country_data.flag }} {{ country_data.name }} {{ country_data.emoji }}

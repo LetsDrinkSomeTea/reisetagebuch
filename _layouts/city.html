@@ -31,9 +31,9 @@ layout: default
     {% assign day_pages = country_pages | where: "layout", "day" | sort: "day" %}
     
     {% if day_pages.size > 0 %}
-      <div class="days-grid">
+      <div class="grid grid--days">
         {% for day_page in day_pages %}
-          <article class="day-card">
+          <article class="card">
             <header class="day-card-header">
               <h3><a href="{{ day_page.url | relative_url }}">Tag {{ day_page.day }}</a></h3>
               <time datetime="{{ day_page.date | date: '%Y-%m-%d' }}">
@@ -49,7 +49,7 @@ layout: default
               {% endif %}
               
               {% if day_page.weather %}
-                <span class="badge weather-badge">{{ day_page.weather }}</span>
+                <span class="badge badge--weather">{{ day_page.weather }}</span>
               {% endif %}
             </div>
             

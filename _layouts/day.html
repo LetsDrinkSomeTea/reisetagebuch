@@ -25,11 +25,11 @@ layout: default
     
     <div class="entry-meta">
       <div class="badge-container">
-        <span class="badge date-badge">{{ page.date | date: '%d. %B %Y' }}</span>
-        <span class="badge day-badge">Tag {{ page.day }}</span>
-        <span class="badge city-badge">{{ city_data.name }}</span>
+        <span class="badge badge--secondary">{{ page.date | date: '%d. %B %Y' }}</span>
+        <span class="badge badge--primary">Tag {{ page.day }}</span>
+        <span class="badge badge--primary">{{ city_data.name }}</span>
         {% if page.weather %}
-          <span class="badge weather-badge">{{ page.weather }}</span>
+          <span class="badge badge--weather">{{ page.weather }}</span>
         {% endif %}
       </div>
     </div>

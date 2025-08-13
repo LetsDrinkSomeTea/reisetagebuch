@@ -85,21 +85,21 @@ document.addEventListener('DOMContentLoaded', function() {
     function createModal() {
         const modal = document.createElement('div');
         modal.id = 'imageModal';
-        modal.className = 'image-modal';
+        modal.className = 'modal';
         modal.setAttribute('aria-hidden', 'true');
         modal.setAttribute('role', 'dialog');
         modal.setAttribute('aria-label', 'Bildansicht');
         
         modal.innerHTML = `
-            <div class="modal-backdrop" aria-hidden="true"></div>
-            <div class="modal-content" role="document">
-                <button class="modal-close" aria-label="Schließen" type="button">&times;</button>
-                <div class="modal-image-container">
-                    <img class="modal-image" alt="" />
-                    <button class="modal-nav modal-prev" aria-label="Vorheriges Bild" type="button">‹</button>
-                    <button class="modal-nav modal-next" aria-label="Nächstes Bild" type="button">›</button>
+            <div class="modal__backdrop" aria-hidden="true"></div>
+            <div class="modal__content" role="document">
+                <button class="modal__close" aria-label="Schließen" type="button">&times;</button>
+                <div class="modal__image-container">
+                    <img class="modal__image" alt="" />
+                    <button class="modal__nav modal__nav--prev" aria-label="Vorheriges Bild" type="button">‹</button>
+                    <button class="modal__nav modal__nav--next" aria-label="Nächstes Bild" type="button">›</button>
                 </div>
-                <div class="modal-info">
+                <div class="modal__info">
                     <span class="modal-title"></span>
                 </div>
             </div>
@@ -115,11 +115,11 @@ document.addEventListener('DOMContentLoaded', function() {
             currentModal = createModal();
             
             // Event listeners
-            const closeBtn = currentModal.querySelector('.modal-close');
-            const backdrop = currentModal.querySelector('.modal-backdrop');
-            const prevBtn = currentModal.querySelector('.modal-prev');
-            const nextBtn = currentModal.querySelector('.modal-next');
-            const modalImage = currentModal.querySelector('.modal-image');
+            const closeBtn = currentModal.querySelector('.modal__close');
+            const backdrop = currentModal.querySelector('.modal__backdrop');
+            const prevBtn = currentModal.querySelector('.modal__nav--prev');
+            const nextBtn = currentModal.querySelector('.modal__nav--next');
+            const modalImage = currentModal.querySelector('.modal__image');
             
             closeBtn.addEventListener('click', closeModal);
             backdrop.addEventListener('click', closeModal);
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
         modalImages = images;
         currentImageIndex = index;
         
-        const modalImage = currentModal.querySelector('.modal-image');
+        const modalImage = currentModal.querySelector('.modal__image');
         const modalTitle = currentModal.querySelector('.modal-title');
         
         modalImage.src = imageSrc;
@@ -165,8 +165,8 @@ document.addEventListener('DOMContentLoaded', function() {
         modalTitle.textContent = title;
         
         // Show/hide navigation buttons
-        const prevBtn = currentModal.querySelector('.modal-prev');
-        const nextBtn = currentModal.querySelector('.modal-next');
+        const prevBtn = currentModal.querySelector('.modal__nav--prev');
+        const nextBtn = currentModal.querySelector('.modal__nav--next');
         
         prevBtn.style.display = images.length > 1 && index > 0 ? 'block' : 'none';
         nextBtn.style.display = images.length > 1 && index < images.length - 1 ? 'block' : 'none';
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Focus management for accessibility
         setTimeout(() => {
-            currentModal.querySelector('.modal-close').focus();
+            currentModal.querySelector('.modal__close').focus();
         }, 100);
     }
 
@@ -228,12 +228,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize gallery links
     function initGalleryLinks() {
-        const galleryLinks = document.querySelectorAll('.gallery-link');
+        const galleryLinks = document.querySelectorAll('.gallery__link');
         
         galleryLinks.forEach((link, index) => {
             // Collect all images in this gallery
-            const galleryContainer = link.closest('.city-image-gallery, .country-image-gallery, .gallery-all-images');
-            const allLinks = galleryContainer ? galleryContainer.querySelectorAll('.gallery-link') : [link];
+            const galleryContainer = link.closest('.gallery');
+            const allLinks = galleryContainer ? galleryContainer.querySelectorAll('.gallery__link') : [link];
             
             const images = Array.from(allLinks).map((l, i) => ({
                 src: l.href,

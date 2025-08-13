@@ -21,9 +21,9 @@ Looks for tag-X/main.jpg structure across all cities
 {% endfor %}
 
 {% if images_found %}
-<section class="country-image-gallery-section">
+<section class="gallery__section">
     <h2>📸 Bilder aus {{ country_data.name }}</h2>
-    <div class="country-image-gallery">
+    <div class="gallery">
         {% assign sorted_dirs = day_directories | sort: "path" %}
         {% for file in sorted_dirs %}
             {% assign path_parts = file.path | split: "/" %}
@@ -40,16 +40,16 @@ Looks for tag-X/main.jpg structure across all cities
             {% comment %} Extract day number from directory name (e.g., "tag-1" -> "1") {% endcomment %}
             {% assign day_number = directory_name | remove: "tag-" %}
             
-            <div class="country-gallery-card">
-                <a href="{{ file.path | relative_url }}" class="gallery-link" 
+            <div class="gallery__card">
+                <a href="{{ file.path | relative_url }}" class="gallery__link" 
                    title="{{ city_name }}, Tag {{ day_number }}"
                    data-modal-title="Tag {{ day_number }}, {{ city_name }}, {{ country_data.name }}">
-                    <div class="gallery-image-container">
+                    <div class="gallery__image-container">
                         <img src="{{ file.path | relative_url }}" alt="Bild aus {{ city_name }}, Tag {{ day_number }}" />
-                        <div class="gallery-overlay">
-                            <div class="gallery-info">
-                                <span class="gallery-city-badge">{{ city_emoji }} {{ city_name }}</span>
-                                <span class="gallery-day-badge">Tag {{ day_number }}</span>
+                        <div class="gallery__overlay">
+                            <div class="gallery__info">
+                                <span class="badge badge--light">{{ city_emoji }} {{ city_name }}</span>
+                                <span class="badge badge--primary">Tag {{ day_number }}</span>
                             </div>
                         </div>
                     </div>

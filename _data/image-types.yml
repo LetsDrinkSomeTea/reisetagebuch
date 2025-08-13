@@ -1,0 +1,27 @@
+morning:
+  name: "Aktivität am Vormittag"
+  icon: "🌅"
+
+breakfast:
+  name: "Frühstück"
+  icon: "🥐"
+
+lunch:
+  name: "Mittagessen"
+  icon: "🍜"
+
+afternoon:
+  name: "Aktivität am Mittag"
+  icon: "🌆"
+
+evening:
+  name: "Aktivität am Abend"
+  icon: "🌙"
+
+dinner:
+  name: "Abendessen"
+  icon: "🍽️"
+
+main:
+  name: "Bild des Tages"
+  icon: "📸"

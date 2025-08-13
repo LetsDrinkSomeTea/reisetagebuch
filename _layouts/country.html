@@ -34,7 +34,7 @@ layout: default
     {% endfor %}
     
     {% if cities_with_content > 0 %}
-      <div class="cities-grid">
+      <div class="grid grid--cities">
         {% for city in country_data.cities %}
           {% assign city_key = city[0] %}
           {% assign city_data = city[1] %}
@@ -48,7 +48,7 @@ layout: default
           
           <!-- Only show cities that have day entries -->
           {% if day_pages.size > 0 %}
-            <article class="city-card">
+            <article class="card">
               <header class="city-card-header">
                 <h3>
                   {% if city_page %}
@@ -71,8 +71,8 @@ layout: default
                 <div class="latest-entries">
                   <h4>Neueste Einträge:</h4>
                   <ul>
-                    {% assign recent_days = day_pages | sort: "date" | reverse | limit: 3 %}
-                    {% for day_page in recent_days %}
+                    {% assign recent_days = day_pages | sort: "date" | reverse %}
+                    {% for day_page in recent_days limit: 3 %}
                       <li>
                         <a href="{{ day_page.url | relative_url }}">
                           Tag {{ day_page.day }} - {{ day_page.date | date: '%d.%m.' }}
