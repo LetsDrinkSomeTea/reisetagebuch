@@ -32,6 +32,7 @@
             {{ country_data.flag }} {{ country_data.name }}
           </a>
           <span class="toggle-icon{% if has_active_child %} expanded{% endif %}">▶</span>
+
         </div>
         
         <!-- Cities List -->
@@ -75,10 +76,13 @@
                 <ul class="days-list{% if city_active %} expanded{% endif %}">
                   {% for day_page in day_pages %}
                     <li>
-                      <a href="{{ day_page.url | relative_url }}" 
-                         class="day-link{% if page.url == day_page.url %} active{% endif %}">
-                        Tag {{ day_page.day }}
-                      </a>
+                      <div class="day-header">
+                        <a href="{{ day_page.url | relative_url }}"
+                           class="day-link{% if page.url == day_page.url %} active{% endif %}">
+                          Tag {{ day_page.day }}
+                        </a>
+                        <span class="toggle-icon-placeholder"></span>
+                      </div>
                     </li>
                   {% endfor %}
                 </ul>

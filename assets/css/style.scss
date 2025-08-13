@@ -202,6 +202,12 @@ body {
     transition: transform var(--transition-fast);
     font-size: 0.7rem;
     color: var(--text-light);
+    padding: var(--space-xs);
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
     &.expanded {
       transform: rotate(90deg);
@@ -263,17 +269,30 @@ body {
             max-height: 500px;
           }
 
-          a {
+          .day-header {
             display: flex;
-            flex: 1;
-            font-size: 0.85rem;
-            font-weight: 400;
-            padding-top: 0.4rem;
-            padding-bottom: 0.4rem;
+            align-items: center;
+
+            .day-link {
+              flex: 1;
+              font-size: 0.85rem;
+              font-weight: 400;
+              padding-top: 0.4rem;
+              padding-bottom: 0.4rem;
+            }
           }
         }
       }
     }
+  }
+
+  .toggle-icon-placeholder {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-left: var(--space-sm);
+    padding: var(--space-xs);
+    flex-shrink: 0;
   }
 
   .latest-entries {
@@ -1031,33 +1050,33 @@ p, ul, ol, blockquote {
   z-index: 201;
   background: var(--background-color);
   border: 1px solid var(--border-color);
-  padding: 0.75rem;
+  padding: 1rem;
   border-radius: 50%;
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   cursor: pointer;
   box-shadow: var(--shadow);
   transition: transform var(--transition-slow);
 
   span {
     display: block;
-    width: 20px;
-    height: 2px;
+    width: 24px;
+    height: 3px;
     background: var(--text-color);
-    margin: 4px auto;
+    margin: 5px auto;
     transition: all var(--transition-slow);
     transform-origin: center;
   }
 
   &.menu-open {
     span:nth-child(1) {
-      transform: translateY(6px) rotate(45deg);
+      transform: translateY(8px) rotate(45deg);
     }
     span:nth-child(2) {
       opacity: 0;
     }
     span:nth-child(3) {
-      transform: translateY(-6px) rotate(-45deg);
+      transform: translateY(-8px) rotate(-45deg);
     }
   }
 }
@@ -1079,6 +1098,9 @@ p, ul, ol, blockquote {
     display: block;
   }
 
+  .navigation .toggle-icon {
+    font-size: 1.1rem;
+  }
   .site-wrapper.mobile-menu-open {
     .sidebar {
       transform: translateX(0);
@@ -1234,3 +1256,4 @@ p, ul, ol, blockquote {
     padding: 0;
   }
 }
+
