@@ -1,0 +1,43 @@
+{% comment %}
+Reusable Breadcrumb Component
+Parameters:
+- page: current page object (auto-passed)
+- Automatically detects page type and builds appropriate breadcrumb trail
+
+Usage: {% include breadcrumb.html %}
+{% endcomment %}
+
+<div class="breadcrumb">
+  <a href="{{ '/' | relative_url }}">🏠</a>
+  
+  {% if page.country %}
+    {% assign country_data = site.data.countries[page.country] %}
+    <span class="separator">›</span>
+    
+    {% if page.layout == "day" or page.layout == "city" %}
+      <a href="{{ '/' | append: page.country | append: '/' | relative_url }}">
+        {{ country_data.flag }}
+      </a>
+    {% else %}
+      <span class="current">{{ country_data.flag }} {{ country_data.name }}</span>
+    {% endif %}
+    
+    {% if page.city %}
+      {% assign city_data = country_data.cities[page.city] %}
+      <span class="separator">›</span>
+      
+      {% if page.layout == "day" %}
+        <a href="{{ '/' | append: page.country | append: '/' | append: page.city | append: '/' | relative_url }}">
+          {{ city_data.emoji }} {{ city_data.name }}
+        </a>
+        <span class="separator">›</span>
+        <span class="current">Tag {{ page.day }}</span>
+      {% else %}
+        <span class="current">{{ city_data.emoji }} {{ city_data.name }}</span>
+      {% endif %}
+    {% endif %}
+  {% elsif page.layout == "gallery" %}
+    <span class="separator">›</span>
+    <span class="current">📸 Galerie</span>
+  {% endif %}
+</div>

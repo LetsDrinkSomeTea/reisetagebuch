@@ -1,0 +1,57 @@
+{% comment %}
+Reusable Page Header Component
+Parameters:
+- title: page title (defaults to page.title)
+- subtitle: optional subtitle
+- show_meta: boolean - show entry meta for day pages (default: false)
+
+Usage:
+{% include page-header.html %}
+{% include page-header.html title="Custom Title" subtitle="Subtitle" %}
+{% include page-header.html show_meta=true %}
+{% endcomment %}
+
+<header class="{% if page.layout == 'day' %}entry-header{% else %}page-header{% endif %}">
+  {% include breadcrumb.html %}
+  
+  {% assign header_title = include.title | default: page.title %}
+  
+  {% if page.layout == "day" %}
+    <h1>{{ header_title }}</h1>
+    
+    {% if include.show_meta != false %}
+      {% assign country_data = site.data.countries[page.country] %}
+      {% assign city_data = country_data.cities[page.city] %}
+      
+      <div class="entry-meta">
+        <div class="badge-container">
+          <span class="badge badge--secondary">{{ page.date | date: '%d. %B %Y' }}</span>
+          <span class="badge badge--primary">Tag {{ page.day }}</span>
+          <span class="badge badge--primary">{{ city_data.name }}</span>
+          {% if page.weather %}
+            <span class="badge badge--weather">{{ page.weather }}</span>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+    
+  {% elsif page.layout == "city" %}
+    {% assign country_data = site.data.countries[page.country] %}
+    {% assign city_data = country_data.cities[page.city] %}
+    <h1>{{ city_data.emoji }} {{ city_data.name }}{% if header_title %}<br>{{ header_title }}{% endif %}</h1>
+    
+  {% elsif page.layout == "country" %}
+    {% assign country_data = site.data.countries[page.country] %}
+    <h1>{{ country_data.flag }} {{ country_data.name }}{% if header_title %} - {{ header_title }}{% endif %}</h1>
+    
+  {% elsif page.layout == "gallery" %}
+    <h1>📸 {{ header_title }}</h1>
+    
+  {% else %}
+    <h1>{{ header_title }}</h1>
+  {% endif %}
+  
+  {% if include.subtitle %}
+    <small>{{ include.subtitle }}</small>
+  {% endif %}
+</header>

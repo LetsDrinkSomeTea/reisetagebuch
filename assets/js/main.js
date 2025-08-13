@@ -76,60 +76,63 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Image Modal System
-    let currentModal = null;
-    let currentImageIndex = 0;
-    let modalImages = [];
+    // Modular Image Modal System
+    const ModalSystem = {
+        modal: null,
+        currentImageIndex: 0,
+        modalImages: [],
 
-    // Create modal HTML structure
-    function createModal() {
-        const modal = document.createElement('div');
-        modal.id = 'imageModal';
-        modal.className = 'modal';
-        modal.setAttribute('aria-hidden', 'true');
-        modal.setAttribute('role', 'dialog');
-        modal.setAttribute('aria-label', 'Bildansicht');
-        
-        modal.innerHTML = `
-            <div class="modal__backdrop" aria-hidden="true"></div>
-            <div class="modal__content" role="document">
-                <button class="modal__close" aria-label="Schließen" type="button">&times;</button>
-                <div class="modal__image-container">
-                    <img class="modal__image" alt="" />
-                    <button class="modal__nav modal__nav--prev" aria-label="Vorheriges Bild" type="button">‹</button>
-                    <button class="modal__nav modal__nav--next" aria-label="Nächstes Bild" type="button">›</button>
+        // Create and configure modal HTML structure
+        createModal() {
+            const modal = document.createElement('div');
+            modal.id = 'imageModal';
+            modal.className = 'modal';
+            modal.setAttribute('aria-hidden', 'true');
+            modal.setAttribute('role', 'dialog');
+            modal.setAttribute('aria-label', 'Bildansicht');
+            
+            modal.innerHTML = `
+                <div class="modal__backdrop" aria-hidden="true"></div>
+                <div class="modal__content" role="document">
+                    <button class="modal__close" aria-label="Schließen" type="button">&times;</button>
+                    <div class="modal__image-container">
+                        <img class="modal__image" alt="" />
+                        <button class="modal__nav modal__nav--prev" aria-label="Vorheriges Bild" type="button">‹</button>
+                        <button class="modal__nav modal__nav--next" aria-label="Nächstes Bild" type="button">›</button>
+                    </div>
+                    <div class="modal__info">
+                        <span class="modal-title"></span>
+                    </div>
                 </div>
-                <div class="modal__info">
-                    <span class="modal-title"></span>
-                </div>
-            </div>
-        `;
-        
-        document.body.appendChild(modal);
-        return modal;
-    }
+            `;
+            
+            document.body.appendChild(modal);
+            this.attachEventListeners(modal);
+            return modal;
+        },
 
-    // Initialize modal
-    function initModal() {
-        if (!currentModal) {
-            currentModal = createModal();
+        // Attach all event listeners to modal elements
+        attachEventListeners(modal) {
+            const closeBtn = modal.querySelector('.modal__close');
+            const backdrop = modal.querySelector('.modal__backdrop');
+            const prevBtn = modal.querySelector('.modal__nav--prev');
+            const nextBtn = modal.querySelector('.modal__nav--next');
+            const modalImage = modal.querySelector('.modal__image');
             
-            // Event listeners
-            const closeBtn = currentModal.querySelector('.modal__close');
-            const backdrop = currentModal.querySelector('.modal__backdrop');
-            const prevBtn = currentModal.querySelector('.modal__nav--prev');
-            const nextBtn = currentModal.querySelector('.modal__nav--next');
-            const modalImage = currentModal.querySelector('.modal__image');
-            
-            closeBtn.addEventListener('click', closeModal);
-            backdrop.addEventListener('click', closeModal);
-            prevBtn.addEventListener('click', showPrevImage);
-            nextBtn.addEventListener('click', showNextImage);
+            closeBtn.addEventListener('click', () => this.closeModal());
+            backdrop.addEventListener('click', () => this.closeModal());
+            prevBtn.addEventListener('click', () => this.showPrevImage());
+            nextBtn.addEventListener('click', () => this.showNextImage());
             
             // Keyboard navigation
-            document.addEventListener('keydown', handleKeydown);
+            document.addEventListener('keydown', (e) => this.handleKeydown(e));
             
             // Touch navigation for mobile
+            this.attachTouchHandlers(modalImage);
+        },
+
+        // Attach touch event handlers
+        attachTouchHandlers(modalImage) {
             let touchStartX = 0;
             modalImage.addEventListener('touchstart', (e) => {
                 touchStartX = e.touches[0].clientX;
@@ -141,90 +144,97 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (Math.abs(diff) > 50) { // Minimum swipe distance
                     if (diff > 0) {
-                        showNextImage();
+                        this.showNextImage();
                     } else {
-                        showPrevImage();
+                        this.showPrevImage();
                     }
                 }
             });
-        }
-    }
+        },
 
-    // Open modal with image
-    function openModal(imageSrc, title, images, index) {
-        initModal();
-        
-        modalImages = images;
-        currentImageIndex = index;
-        
-        const modalImage = currentModal.querySelector('.modal__image');
-        const modalTitle = currentModal.querySelector('.modal-title');
-        
-        modalImage.src = imageSrc;
-        modalImage.alt = title;
-        modalTitle.textContent = title;
-        
-        // Show/hide navigation buttons
-        const prevBtn = currentModal.querySelector('.modal__nav--prev');
-        const nextBtn = currentModal.querySelector('.modal__nav--next');
-        
-        prevBtn.style.display = images.length > 1 && index > 0 ? 'block' : 'none';
-        nextBtn.style.display = images.length > 1 && index < images.length - 1 ? 'block' : 'none';
-        
-        // Show modal
-        currentModal.setAttribute('aria-hidden', 'false');
-        currentModal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-        
-        // Focus management for accessibility
-        setTimeout(() => {
-            currentModal.querySelector('.modal__close').focus();
-        }, 100);
-    }
+        // Initialize modal if needed
+        initModal() {
+            if (!this.modal) {
+                this.modal = this.createModal();
+            }
+        },
 
-    // Close modal
-    function closeModal() {
-        if (currentModal) {
-            currentModal.setAttribute('aria-hidden', 'true');
-            currentModal.style.display = 'none';
-            document.body.style.overflow = '';
-        }
-    }
+        // Open modal with image
+        openModal(imageSrc, title, images, index) {
+            this.initModal();
+            
+            this.modalImages = images;
+            this.currentImageIndex = index;
+            
+            const modalImage = this.modal.querySelector('.modal__image');
+            const modalTitle = this.modal.querySelector('.modal-title');
+            
+            modalImage.src = imageSrc;
+            modalImage.alt = title;
+            modalTitle.textContent = title;
+            
+            // Show/hide navigation buttons
+            const prevBtn = this.modal.querySelector('.modal__nav--prev');
+            const nextBtn = this.modal.querySelector('.modal__nav--next');
+            
+            prevBtn.style.display = images.length > 1 && index > 0 ? 'block' : 'none';
+            nextBtn.style.display = images.length > 1 && index < images.length - 1 ? 'block' : 'none';
+            
+            // Show modal
+            this.modal.setAttribute('aria-hidden', 'false');
+            this.modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            // Focus management for accessibility
+            setTimeout(() => {
+                this.modal.querySelector('.modal__close').focus();
+            }, 100);
+        },
 
-    // Navigate to previous image
-    function showPrevImage() {
-        if (currentImageIndex > 0) {
-            currentImageIndex--;
-            const prevImage = modalImages[currentImageIndex];
-            openModal(prevImage.src, prevImage.title, modalImages, currentImageIndex);
-        }
-    }
+        // Close modal
+        closeModal() {
+            if (this.modal) {
+                this.modal.setAttribute('aria-hidden', 'true');
+                this.modal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        },
 
-    // Navigate to next image
-    function showNextImage() {
-        if (currentImageIndex < modalImages.length - 1) {
-            currentImageIndex++;
-            const nextImage = modalImages[currentImageIndex];
-            openModal(nextImage.src, nextImage.title, modalImages, currentImageIndex);
-        }
-    }
+        // Navigate to previous image
+        showPrevImage() {
+            if (this.currentImageIndex > 0) {
+                this.currentImageIndex--;
+                const prevImage = this.modalImages[this.currentImageIndex];
+                this.openModal(prevImage.src, prevImage.title, this.modalImages, this.currentImageIndex);
+            }
+        },
 
-    // Handle keyboard navigation
-    function handleKeydown(e) {
-        if (currentModal && currentModal.style.display === 'flex') {
-            switch(e.key) {
-                case 'Escape':
-                    closeModal();
-                    break;
-                case 'ArrowLeft':
-                    showPrevImage();
-                    break;
-                case 'ArrowRight':
-                    showNextImage();
-                    break;
+        // Navigate to next image
+        showNextImage() {
+            if (this.currentImageIndex < this.modalImages.length - 1) {
+                this.currentImageIndex++;
+                const nextImage = this.modalImages[this.currentImageIndex];
+                this.openModal(nextImage.src, nextImage.title, this.modalImages, this.currentImageIndex);
+            }
+        },
+
+        // Handle keyboard navigation
+        handleKeydown(e) {
+            if (this.modal && this.modal.style.display === 'flex') {
+                switch(e.key) {
+                    case 'Escape':
+                        this.closeModal();
+                        break;
+                    case 'ArrowLeft':
+                        this.showPrevImage();
+                        break;
+                    case 'ArrowRight':
+                        this.showNextImage();
+                        break;
+                }
             }
         }
-    }
+    };
 
     // Initialize gallery links
     function initGalleryLinks() {
@@ -245,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
                 const currentIndex = images.findIndex(img => img.src === this.href);
                 const modalTitle = this.getAttribute('data-modal-title') || this.title;
-                openModal(this.href, modalTitle, images, currentIndex);
+                ModalSystem.openModal(this.href, modalTitle, images, currentIndex);
             });
         });
     }

@@ -3,28 +3,12 @@ layout: default
 ---
 
 <article class="gallery-page">
-  <header class="page-header">
-    <div class="breadcrumb">
-      <a href="{{ '/' | relative_url }}">🏠</a>
-      <span class="separator">›</span>
-      <span class="current">📸 Galerie</span>
-    </div>
-  </header>
-
-  <h1>📸 {{ page.title }}</h1>
+  {% include page-header.html %}
 
   <div class="page-content">
     {{ content }}
   </div>
 
   {% comment %} Use unified gallery system {% endcomment %}
-  {% include image-discovery.html scope="all" %}
-
-  {% if images_found %}
-    {% include gallery.html scope="all" show_stats=true %}
-  {% else %}
-    <div class="no-entries">
-      <p>🚀 Noch keine Bilder vorhanden. Die ersten Fotos erscheinen hier, sobald die Reise beginnt!</p>
-    </div>
-  {% endif %}
+  {% include gallery.html scope="all" show_stats=true %}
 </article>
