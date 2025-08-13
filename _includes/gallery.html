@@ -1,0 +1,134 @@
+{% comment %}
+Unified Gallery Component - Single parameterized gallery system
+Parameters:
+- scope: "all", "country", "city" - determines gallery type
+- country: country key (required for "country" and "city" scope)
+- city: city key (required for "city" scope)
+- title: optional gallery title (auto-generated if not provided)
+- show_stats: boolean - whether to show gallery statistics (default: false)
+
+Usage:
+{% include gallery-unified.html scope="city" country="japan" city="tokyo" %}
+{% include gallery-unified.html scope="country" country="japan" title="Bilder aus Japan" %}
+{% include gallery-unified.html scope="all" show_stats=true %}
+{% endcomment %}
+
+{% comment %} Discover images using centralized system {% endcomment %}
+{% include image-discovery.html scope=include.scope country=include.country city=include.city %}
+
+{% if images_found %}
+  {% comment %} Generate title if not provided {% endcomment %}
+  {% unless include.title %}
+    {% case include.scope %}
+      {% when "city" %}
+        {% assign city_data = site.data.countries[include.country].cities[include.city] %}
+        {% assign gallery_title = "📸 Bilder aus " | append: city_data.name %}
+      {% when "country" %}
+        {% assign country_data = site.data.countries[include.country] %}
+        {% assign gallery_title = "📸 Bilder aus " | append: country_data.name %}
+      {% when "all" %}
+        {% assign gallery_title = "📸 Alle Bilder" %}
+    {% endcase %}
+  {% else %}
+    {% assign gallery_title = include.title %}
+  {% endunless %}
+
+  {% comment %} Optional statistics display {% endcomment %}
+  {% if include.show_stats %}
+    {% assign countries_list = "" | split: "" %}
+    {% assign cities_list = "" | split: "" %}
+    
+    {% for image_data in discovered_images %}
+      {% assign image_country = image_data[1] %}
+      {% assign image_city = image_data[2] %}
+      {% assign city_identifier = image_country | append: "-" | append: image_city %}
+      
+      {% unless countries_list contains image_country %}
+        {% assign countries_list = countries_list | push: image_country %}
+      {% endunless %}
+      {% unless cities_list contains city_identifier %}
+        {% assign cities_list = cities_list | push: city_identifier %}
+      {% endunless %}
+    {% endfor %}
+
+    <div class="gallery__stats">
+      <span class="stat-item">📸 {{ discovered_images.size }} {% if discovered_images.size == 1 %}Bild{% else %}Bilder{% endif %}</span>
+      {% if include.scope == "all" %}
+        <span class="stat-item">🌍 {{ countries_list.size }} {% if countries_list.size == 1 %}Land{% else %}Länder{% endif %}</span>
+        <span class="stat-item">🏙️ {{ cities_list.size }} {% if cities_list.size == 1 %}Stadt{% else %}Städte{% endif %}</span>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <section class="gallery__section">
+    {% if gallery_title %}
+      <h2>{{ gallery_title }}</h2>
+    {% endif %}
+    
+    <div class="gallery">
+      {% for image_data in discovered_images %}
+        {% assign image_path = image_data[0] %}
+        {% assign country_key = image_data[1] %}
+        {% assign city_key = image_data[2] %}
+        {% assign day_number = image_data[3] %}
+        {% assign image_type = image_data[4] %}
+        
+        {% comment %} Get country and city display data {% endcomment %}
+        {% assign country_data = site.data.countries[country_key] %}
+        {% assign city_data = country_data.cities[city_key] %}
+        {% assign city_name = city_data.name | default: city_key %}
+        {% assign city_emoji = city_data.emoji | default: "🏙️" %}
+        
+        {% comment %} Get image type display data {% endcomment %}
+        {% assign image_type_data = site.data.image-types[image_type] %}
+        {% assign image_display_name = image_type_data.name | default: image_type %}
+        {% assign image_icon = image_type_data.icon | default: "🖼️" %}
+        
+        {% comment %} Build modal title and alt text {% endcomment %}
+        {% assign base_title = "Tag " | append: day_number | append: ", " | append: city_name | append: ", " | append: country_data.name %}
+        {% if include.scope == "all" %}
+          {% assign modal_title = base_title | append: " - " | append: image_icon | append: " " | append: image_display_name %}
+        {% else %}
+          {% assign modal_title = base_title %}
+        {% endif %}
+        {% assign alt_text = "Bild aus " | append: city_name | append: ", Tag " | append: day_number %}
+
+        <div class="gallery__card">
+          <a href="{{ image_path | relative_url }}" class="gallery__link" 
+             title="{{ modal_title }}"
+             data-modal-title="{{ modal_title }}">
+            <div class="gallery__image-container">
+              <img src="{{ image_path | relative_url }}" 
+                   alt="{{ alt_text }}" 
+                   loading="lazy" />
+              <div class="gallery__overlay">
+                <div class="gallery__info">
+                  {% case include.scope %}
+                    {% when "city" %}
+                      <span class="badge badge--primary">Tag {{ day_number }}</span>
+                    {% when "country" %}
+                      <span class="badge badge--light">{{ city_emoji }} {{ city_name }}</span>
+                      <span class="badge badge--primary">Tag {{ day_number }}</span>
+                    {% when "all" %}
+                      <span class="badge badge--light">{{ city_emoji }} {{ city_name }}</span>
+                      <span class="badge badge--light">{{ image_icon }}</span>
+                      <span class="badge badge--primary">Tag {{ day_number }}</span>
+                  {% endcase %}
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  {% comment %} Re-initialize gallery links for modal system {% endcomment %}
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.reinitGallery) {
+      window.reinitGallery();
+    }
+  });
+  </script>
+{% endif %}

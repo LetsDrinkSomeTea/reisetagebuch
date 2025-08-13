@@ -1,0 +1,79 @@
+{% comment %}
+Image Discovery System - Centralized image finding and processing
+Parameters:
+- scope: "all", "country", "city" - determines search scope
+- country: country key (required for "country" and "city" scope)
+- city: city key (required for "city" scope)
+
+Returns:
+- images_found: boolean - whether any images were found
+- discovered_images: array - list of image objects with metadata
+{% endcomment %}
+
+{% assign images_found = false %}
+{% assign discovered_images = "" | split: "" %}
+{% assign image_extensions = "jpg,jpeg,JPG,JPEG" | split: "," %}
+
+{% comment %} Define search criteria based on scope {% endcomment %}
+{% case include.scope %}
+  {% when "city" %}
+    {% assign search_path = include.country | append: "/" | append: include.city %}
+  {% when "country" %}
+    {% assign search_path = include.country %}
+  {% when "all" %}
+    {% assign search_path = "" %}
+  {% else %}
+    {% assign search_path = "" %}
+{% endcase %}
+
+{% comment %} Discover images in tag-X directories {% endcomment %}
+{% for file in site.static_files %}
+  {% if file.path contains "/tag-" %}
+    {% assign extension_match = false %}
+    {% for ext in image_extensions %}
+      {% if file.extname contains ext %}
+        {% assign extension_match = true %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+    
+    {% if extension_match %}
+      {% comment %} Check if file matches our search scope {% endcomment %}
+      {% assign include_file = false %}
+      {% if search_path == "" %}
+        {% assign include_file = true %}
+      {% elsif file.path contains search_path %}
+        {% assign include_file = true %}
+      {% endif %}
+      
+      {% if include_file %}
+        {% assign path_parts = file.path | split: "/" %}
+        {% if path_parts.size >= 4 %}
+          {% assign file_country = path_parts[-4] %}
+          {% assign file_city = path_parts[-3] %}
+          {% assign tag_dir = path_parts[-2] %}
+          {% assign image_name = path_parts[-1] | split: "." | first %}
+          
+          {% comment %} Extract day number from tag directory {% endcomment %}
+          {% assign day_number = tag_dir | remove: "tag-" %}
+          
+          {% comment %} Create image object with metadata {% endcomment %}
+          {% assign image_obj = "" | split: "" %}
+          {% assign image_obj = image_obj | push: file.path %}
+          {% assign image_obj = image_obj | push: file_country %}
+          {% assign image_obj = image_obj | push: file_city %}
+          {% assign image_obj = image_obj | push: day_number %}
+          {% assign image_obj = image_obj | push: image_name %}
+          
+          {% assign discovered_images = discovered_images | push: image_obj %}
+          {% assign images_found = true %}
+        {% endif %}
+      {% endif %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% comment %} Sort images by path for consistent ordering {% endcomment %}
+{% if images_found %}
+  {% assign discovered_images = discovered_images | sort %}
+{% endif %}

@@ -15,9 +15,8 @@ reisetagebuch/
 │   └── countries.yml        # Länder-Metadaten (Flaggen, Emojis, Städte)
 ├── _includes/
 │   ├── navigation.html      # Dynamische Navigation
-│   ├── city-image-gallery.html    # Stadt-Galerie (nur Hauptbilder)
-│   ├── country-image-gallery.html # Länder-Galerie (nur Hauptbilder)
-│   └── gallery-all-images.html    # Vollständige Galerie (alle Bilder)
+│   ├── gallery.html         # Einheitliches Galerie-System (alle Bereiche)
+│   └── image-discovery.html # Zentralisierte Bilderkennung
 ├── _layouts/
 │   ├── default.html         # Basis-Layout mit Sidebar
 │   ├── country.html         # Länder-Übersichtsseite

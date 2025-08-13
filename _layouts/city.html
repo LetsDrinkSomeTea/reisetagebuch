@@ -63,6 +63,6 @@ layout: default
       <p class="no-entries">Noch keine Tagebucheinträge für {{ city_data.name }} vorhanden.</p>
     {% endif %}
   </section>
-  {% assign gallery_folder = page.country | append: '/' | append: page.city %}
-  {% include city-image-gallery.html folder=gallery_folder country=page.country city=page.city %}
+  {% comment %} City Image Gallery {% endcomment %}
+  {% include gallery.html scope="city" country=page.country city=page.city %}
 </article>
