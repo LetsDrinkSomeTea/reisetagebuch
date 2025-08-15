@@ -45,7 +45,7 @@ Usage:
       {% assign include_file = false %}
       {% if search_path == "" %}
         {% assign include_file = true %}
-      {% elsif file.path contains search_path %}
+      {% elsif file.path contains search_path and file.path contains "main" %}
         {% assign include_file = true %}
       {% endif %}
       
