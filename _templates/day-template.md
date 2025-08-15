@@ -64,4 +64,6 @@ Beschreibung
 
 ![Picture of the Day]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/main.jpg)
 
+## Zitat des Tages
+
 > Quote of the day
