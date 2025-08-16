@@ -1,6 +1,6 @@
 ---
 layout: day
-title: "Subtitle"
+title: "Shinjuku"
 date: 2025-08-16
 country: japan # japan, australien, skandinavien
 city: tokyo # tokyo, melbourne, oslo, etc.
@@ -73,8 +73,8 @@ Viel zu sehen, viele Eindrücke, viel Verwirrung, viele Schritte
 
 ## 🏃🏽‍♀️ Schritte
 
-- Anna: $31.063$
-- Julian: $28.893$
+- Anna: _31.063_
+- Julian: _28.893_
 
 ## 📸 Bild des Tages
 
