@@ -5,7 +5,7 @@ date: 2025-08-16
 country: japan # japan, australien, skandinavien
 city: tokyo # tokyo, melbourne, oslo, etc.
 day: 2
-weather: "Wechselhaft,32°C"
+weather: "Wechselhaft, 32°C"
 ---
 
 ## 🥐 Frühstück
