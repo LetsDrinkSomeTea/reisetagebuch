@@ -55,7 +55,7 @@ Usage:
           {% assign file_country = path_parts[-4] %}
           {% assign file_city = path_parts[-3] %}
           {% assign tag_dir = path_parts[-2] %}
-          {% assign image_name = path_parts[-1] | split: "." | first %}
+          {% assign image_name = path_parts[-1] | split: "." | first | split: "-" | first %}
           {% assign day_number = tag_dir | remove: "tag-" %}
           
           {% assign image_obj = "" | split: "" %}
