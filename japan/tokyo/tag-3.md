@@ -23,6 +23,7 @@ Dementsprechend fiel das Frühstück auch etwas spärlicher aus, da wir beide no
 Vormittags besuchten wir das `Science and Technology Museum` direkt neben dem Kaiserpalast in `Chiyoda`.
 Direkt am Eingang bekamen wir den Hinweis, dass die Austellung nur auf japanisch ausgeschildert war.
 Trotzdem wagten wir uns ins Museum und bekamen einige interessante Einblicke in Phänomene der Naturwissenschaften, Industire und Mechanik.
+
 Zugegebenermaßen konnten wir trotz Google Übersetzer nicht alles verstehen, aber seit meiner Zeit im explorhino in Aalen, ist es für mich fast schon Tradition geworden in meinen Urlauben die Science Center der anderen Städte zu besuchen.
 Auch wenn ich laut japanischer Gesichtserkennung schon 40 bin, Anna aber erst 25 Jahre alt ist.
 
@@ -77,7 +78,8 @@ Damit endete der dritte Tag auch schon und wir machten uns gegen 20:15 Uhr auf d
 
 - Wilde Schildkröte im Park gesehen
 - Erste Stempel in unserem Reisebuch.
-In Japan gibt es an vielen Orten, vor allem an Bahnhöfen, Tempeln und Sehenswürdigkeiten Stempel zum Sammeln und Erinnern. Nachdem wir heute in Ginza jeweils ein Büchlein gekauft haben, kann unsere Reise nun so richtig losgehen.
+
+_In Japan gibt es an vielen Orten, vor allem an Bahnhöfen, Tempeln und Sehenswürdigkeiten Stempel zum Sammeln und Erinnern. Nachdem wir heute in Ginza jeweils ein Büchlein gekauft haben, kann unsere Reise nun so richtig losgehen._
 - Essen zum unschlagbaren Preis
 
 ## 💭 Stimmung & Gedanken
@@ -94,7 +96,7 @@ Etwas müde von der kurzen Nacht und den vielen Schritten, aber stets motiviert 
 ![Picture of the Day]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/main.jpg)
 
 Ein eher unspektakuläres Bild, das aber, wie ich finde, schön die künstlerische Ader und Liebe zum Detail in Japan zeigt.
-Das Motiv dieses Gullideckels ist nur eines von vielen verschiedenen.
+Das Motiv dieses Gullideckels ist nur eines von vielen verschiedenen die in der ganzen Stadt verteilt sind.
 
 
 ## Zitat des Tages
