@@ -29,7 +29,7 @@ Zusammen mit Max (ein Freund aus Aalen) fuhren wir mit der Tram nach `Shinjuku`.
 ![Lunch]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/lunch.jpg)
 
 Dort waren wir in einem kleinen Lokal im Keller eines Hauses wo wir fritiertes Hänchen mit Reis, Algen-Glasnudel-Salat und Miso-Suppe genossen.
-Alles war sehr lecker und kostete zusammen mit einem Getränk nur umgerechnet 8€. 
+Alles war sehr lecker und kostete zusammen mit einem Getränk nur umgerechnet 8€ pro Person. 
 
 ## 🌆 Nachmittag
 
@@ -59,7 +59,7 @@ Klein bedeutet in diesem Fall 4-24 Personen (das sind zumindest die Zahlen, die 
 ![Evening Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/evening-2.jpg)
 
 Das Bild zeigt ungefähr die Hälfte der Bar, die mit lediglich 11 Plätzen eine gemütliche Atmosphäre bot.
-Nach einem Sake bzw. Cocktail ging unser erlebnisreicher erster Tag zu Ende und wir machten uns auf den Heimweg. 
+Nach einem Sake bzw. Cocktail ging unser erlebnisreicher zweiter Tag zu Ende und wir machten uns wieder auf den Heimweg. 
 
 ## ✨ Highlight des Tages
 

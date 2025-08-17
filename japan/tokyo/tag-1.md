@@ -31,7 +31,7 @@ Mega teures und nicht so gutes Frühstück in Frankfurt am Flughafen.
 
 ![Lunch]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/lunch.jpg)
 
-Überraschend gutes Essen im Flugzeug. (Vor allem weil es laut Buchung nur eine Mahlzeit geben sollte, wir am Ende aber drei Mahlzeiten inklusive Weinchen serviert bekommen.)
+Überraschend gutes Essen im Flugzeug. (Vor allem weil es laut Buchung nur eine Mahlzeit geben sollte, wir am Ende aber drei Mahlzeiten inklusive Weinchen serviert bekommen haben.)
 
 ### Abendessen
 
