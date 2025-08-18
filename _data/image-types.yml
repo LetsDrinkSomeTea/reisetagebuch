@@ -14,6 +14,10 @@ afternoon:
   name: "Aktivität am Mittag"
   icon: "🌆"
 
+snack:
+  name: "Snack"
+  icon: "🍰"
+
 evening:
   name: "Aktivität am Abend"
   icon: "🌙"
