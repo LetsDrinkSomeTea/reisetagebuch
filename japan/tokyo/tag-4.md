@@ -59,7 +59,7 @@ Dieser ist, auf Grund seiner Lage direkt am Meer, vor allem für Restaurants und
 ![Morning Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/snack.jpg)
 
 Es gibt allerdings hin und wieder auch etwas Süßes.
-Die Sandwiches mit Sahne und Obst sowie die Mochies sind in Japan beliebte Spezialitäten.
+Die Sandwiches mit Sahne und Obst sowie die Dango sind in Japan beliebte Spezialitäten.
 
 Anschließend waren wir im `teamLab Planets`, einer interaktiven Austellung moderner Kunst.
 Die Austellung war an sich spannend und bot viele Gelegenheiten für interessante Fotos, allerdings litt sie unter deutlich zu vielen Menschen auf zu engem Raum.
