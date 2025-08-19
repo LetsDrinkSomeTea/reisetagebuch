@@ -10,15 +10,15 @@ weather: "Klar, 34°C"
 
 ## 🥐 Frühstück
 
-![Breakfast]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/breakfast.jpg)
-
 Dieser Tag begann deutlich später als die vorherigen.
 Wir begaben uns erst gegen 12 Uhr zum Frühstück in ein kleines Café direkt um die Ecke.
-Wir sind nunmal immer noch im Urlaub und ausruhen gehört einfach dazu.
+Wir sind nunmal immer noch im Urlaub und ausruhen gehört einfach auch dazu.
+
+![Breakfast]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/breakfast.jpg)
 
 Aufgrund der späten Zeit, war die Frühstückskarte natürlich nicht mehr verfügbar.
 Desshalb entschieden wir uns für einen Kuchen und einen Schwarztee.
-Leider sind wir beide keine Kaffeetrinker, denn das Lokal hätte diverse Sorten Kaffe mit unterschiedlichen Röststufen und Stärken im Sortiment gehabt.
+Leider sind wir beide keine Kaffeetrinker, denn das Lokal hätte diverse Sorten Kaffee mit unterschiedlichen Röststufen und Stärken im Sortiment gehabt.
 Nichts desto trotz war es ein guter Start in den Tag.
 
 ## 🌅 Vormittag
@@ -45,7 +45,7 @@ Hier war aber zusätzlich besonders, dass die bestellten Speisen direkt per Flie
 
 ## 🌆 Nachmittag
 
-Nach dem Mittagessen und noch etwas Bummeln in Shinbuya begaben wir uns nach `Harajuku`, dort ist die ebenfalls nicht weniger bekannte `Takeshita Street`.
+Nach dem Mittagessen und noch etwas Bummeln in Shibuya begaben wir uns nach `Harajuku`, dort ist die ebenfalls nicht weniger bekannte `Takeshita Street`.
 
 ![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon.jpg)
 
@@ -62,13 +62,13 @@ Den Abend ließen wir bei ein paar Gummibärchen die wir in der Takeshita Street
 
 ![Evening Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/evening.jpg)
 
-Ich kann euch nicht sagen ob die Japaner für irgendetwas trainieren oder das einfach eine normale Abendroutine in der Gegend ist, aber Anna und ich sahen um die 25 Gruppen von 3 bis 8 Personen die im Park zum joggen waren.
+Ich kann euch nicht sagen ob die Japaner für irgendetwas trainieren oder das einfach eine normale Abendroutine in der Gegend ist, aber Anna und ich sahen um die 25 Gruppen von 3 bis 8 Personen die im Park zum Joggen waren.
 Ich musste mehrere Minuten abwarten, um einen Moment abzupassen in dem niemand auf meinem Bild zu sehen war.
 
 ## 🍜 Abendessen
 
 Da es bereits ziemlich spät geworden war und Anna immernoch nicht so richtig Hunger hatte,
-beschlossen wir zurück ins Hotel zu gehen.
+beschloss sie zurück ins Hotel zu gehen.
 Nach dem ich sie dort abgesetzt hatte, machte ich mich alleine auf den Weg in ein `Izakaya`, eine japanische Kneipe.
 Diese bieten neben Getränken häufig auch Häppchen oder ganze Speisen an.
 
