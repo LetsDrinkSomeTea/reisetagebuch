@@ -56,7 +56,7 @@ Odaiba ist eine künstliche Insel in der Bucht von Tokio, die für ihre futurist
 Dort angekommen verbrachten wir einige Zeit auf dem `Toyosu Market`.
 Dieser ist, auf Grund seiner Lage direkt am Meer, vor allem für Restaurants und Läden bekannt die Sushi und Fisch verkaufen.
 
-![Morning Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/snack.jpg)
+![Snack]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/snack.jpg)
 
 Es gibt allerdings hin und wieder auch etwas Süßes.
 Die Sandwiches mit Sahne und Obst sowie die Dango sind in Japan beliebte Spezialitäten.
