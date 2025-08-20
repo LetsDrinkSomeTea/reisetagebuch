@@ -26,6 +26,10 @@ dinner:
   name: "Abendessen"
   icon: "🍽️"
 
+selfie:
+  name: "Selfie des Tages"
+  icon: "👩🏻‍🤝‍👨🏽"
+
 main:
   name: "Bild des Tages"
   icon: "📸"

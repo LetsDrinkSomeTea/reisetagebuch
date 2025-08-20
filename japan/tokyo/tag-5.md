@@ -54,7 +54,7 @@ Hier schlenderten wir ebenfalls durch die Straßen voller Versuchung und übten 
 Der Magen war vom Mittagessen einfach noch zu voll und alle Crepés, Waffeln, Süßigkeiten, usw. kann man auch gar nicht probieren.
 Wir genossen vorallem die vielseitigen Eindrücke der zum Teil ziemlich verrückten Geschäfte.
 
-![Morning Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-2.jpg)
+![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-2.jpg)
 
 ## 🌙 Abend
 
