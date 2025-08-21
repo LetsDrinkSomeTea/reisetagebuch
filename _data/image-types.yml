@@ -6,6 +6,10 @@ breakfast:
   name: "Frühstück"
   icon: "🥐"
 
+brunch:
+  name: "Brunch"
+  icon: "🥞"
+
 lunch:
   name: "Mittagessen"
   icon: "🍜"
