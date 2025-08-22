@@ -16,7 +16,7 @@ Als sich die Schmerzen dan gelegt hatten (oder die Ibu angeschlagen hat), war es
 
 ## 🍣 Mittagessen
 
-Wir machten uns auf den Weg nach Shinujuku, den gleichen Stadtteil, den wir auch bereits an [Tag 2]({{ "tag-2" | relative_url }}) besucht hatten und steuerten direkt auf unser Mittagessen zu.
+Wir machten uns auf den Weg nach Shinujuku, den gleichen Stadtteil, den wir auch bereits an [Tag 2]({{ "japan/tokyo/tag-2" | relative_url }}) besucht hatten und steuerten direkt auf unser Mittagessen zu.
 Es war bereits 14 Uhr bis wir dort ankamen und auch wirklich Zeit endlich eine richtige Mahlzeit zu essen.
 
 ![Lunch]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/lunch.jpg)
@@ -37,13 +37,13 @@ Leider war es bei uns nicht klar genug dafür, trotzdem war die Aussicht beeindr
 
 ## 🌆 Nachmittag
 
-Den nächsten Stopp widmeten wir dem `Meiji-Schrein`, dieser war ebenfalls auf unserer Liste für Shinjuku und hatte ebenfalls an [Tag 2]({{ "tag-2" | relative_url }}) bereits geschlossen.
+Den nächsten Stopp widmeten wir dem `Meiji-Schrein`, dieser war ebenfalls auf unserer Liste für Shinjuku und hatte ebenfalls an [Tag 2]({{ "japan/tokyo/tag-2" | relative_url }}) bereits geschlossen.
 
 ![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon.jpg)
 
 Der Schrein und umliegende Park waren auf jedenfall beeindruckend, auch wenn im Verhältnis zu anderen Schreinen an denen wir waren wirklich viel los war.
 
-Direkt neben dem Schrein ist die Takeshita Street, die wir bereits an [Tag 5]({{ "tag-5" | relative_url }}) besucht hatten.
+Direkt neben dem Schrein ist die Takeshita Street, die wir bereits an [Tag 5]({{ "japan/tokyo/tag-5" | relative_url }}) besucht hatten.
 Mit dem Ziel einen Crepé zu essen begaben wir uns erneut durch die Straße voller Läden und wurden letztendlich bei `Marion Crepés` fündig.
 
 ![Snack]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/snack.jpg)
@@ -51,7 +51,7 @@ Mit dem Ziel einen Crepé zu essen begaben wir uns erneut durch die Straße voll
 Bei den über 100 verschiedenen Variationen viel die Wahl wirklich schwer, aber am Ende fanden wir beide etwas und waren mit der Wahl wirklich zufrieden.
 
 Außerdem schlenderten wir nochmals durch die Straße der Stararchitekten, die ebenfalls direkt in der Nähe ist.
-Dieses Mal waren wir aber an einer anderen Stelle innerhalb der Straße und konnten andere, nicht weniger beeindruckende Gebäude wie an [Tag 6]({{ "tag-6" | relative_url }}) sehen.
+Dieses Mal waren wir aber an einer anderen Stelle innerhalb der Straße und konnten andere, nicht weniger beeindruckende Gebäude wie an [Tag 6]({{ "japan/tokyo/tag-6" | relative_url }}) sehen.
 
 ![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-2.jpg)
 
