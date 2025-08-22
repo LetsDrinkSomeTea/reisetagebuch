@@ -103,4 +103,4 @@ Diese Geste symbolisiert tiefen Respekt und die enge Verbindung zwischen Japans 
 
 ## Zitat des Tages
 
-> Wenn der Schrein schon wieder zu ist bleib ich hier auf dem Boden sitzen und warte bis Morgen.
+> Wenn der Schrein schon wieder zu ist, bleib ich hier auf dem Boden sitzen und warte bis Morgen.
