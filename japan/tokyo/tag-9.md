@@ -28,6 +28,27 @@ Alles andere was heute passiert wird im Eintrag von Kyoto stehen, das bedeutet T
 
 - Auf die Minute pünktliche Abfahrt
 
+## 📜 Fazit zu Tokio
+
+Insgesamt haben wir uns in Tokio sehr wohl gefühlt.  
+Manchmal war es zwar etwas viel – die Menschenmengen, die Lichter, die Reize –, doch es gab auch immer wieder ruhige Orte, an denen man durchatmen konnte.  
+Ein Gefühl von Sicherheit war die ganze Zeit präsent, selbst spät abends hatten wir nie Angst, ausgeraubt zu werden oder in eine unangenehme Situation zu geraten.  
+
+Etwas gewöhnungsbedürftig war, dass viele Geschäfte und Restaurants von außen ziemlich unscheinbar oder sogar leicht „sketchy“ wirkten.  
+Oft findet man Lokale nur im Keller oder in einem oberen Stockwerk, der Eingang ist dann nur eine nicht einladende Türe die direkt zu einer Treppe führt. 
+Sobald man aber hineingeht, zeigt sich fast immer ein liebevoll eingerichtetes und gemütliches Inneres.  
+
+Die Tram und Bahnen haben für uns hervorragend funktioniert, die Beschilderung ist gut, die Stationen nicht zu weit verteilt und die Navigation mit "Google Maps" war einfach.
+
+Natürlich wiederholen sich die Stationen irgendwann: Einkaufsstraße, Tempel, Park – trotzdem war es jedes Mal auf seine eigene Weise interessant.  
+Auffällig war, wie höflich und zuvorkommend die Menschen waren.  
+Trotz der schieren Größe der Stadt war es oft erstaunlich ruhig – sowohl auf den Straßen als auch in den zum Teil vollgestopften Bahnen.  
+Wir hatte nie das Gefühl, in der größten Metropole der Welt zu sein.  
+
+Auch die unterschiedlichen Stadtteile haben uns fasziniert.  
+Teilweise trennen sie nur wenige Minuten mit der Bahn, und doch wirken sie wie vollkommen eigene kleine Welten.  
+Gerade diese Vielfalt hat Tokio für uns besonders spannend gemacht.
+
 ## 📸 Bild des Tages
 
 ![Picture of the Day]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/main.jpg)
