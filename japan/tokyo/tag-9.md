@@ -1,6 +1,6 @@
 ---
 layout: day
-title: "Nochmal alles"
+title: "Aufbruch zu neuen Abenteuern"
 date: 2025-08-23
 country: japan # japan, australien, skandinavien
 city: tokyo # tokyo, melbourne, oslo, etc.
