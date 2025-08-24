@@ -9,11 +9,11 @@ Osaka, bekannt als "Tenka no Daidokoro" (die Küche des Landes), ist das kulinar
 
 ## 🏨 Unterkunft
 
-[M's Hotel Kyoto Station Taruya](https://www.booking.com/hotel/jp/ms-inn-kyoto-station-taruya.de.html?label=brave_brand_organic_trigger_8e04a9f7-c7d3-4b3b-a255-3644144f3921_0&sid=03f3572eadfa0a84123c1e30621c4c11&aid=2405329#map_closed)
+[Weekly Green In Namba](https://www.booking.com/hotel/jp/weekly-green-in-namba.de.html?label=brave_brand_organic_trigger_8e04a9f7-c7d3-4b3b-a255-3644144f3921_0&sid=03f3572eadfa0a84123c1e30621c4c11&aid=2405329)
 
-![Unterkunft Bild](https://kyohotel.jp/wp-content/uploads/2019/11/91d7208dca6d17f393d0668bf84009dd-scaled.jpg)
+![Unterkunft Bild](https://images.trvl-media.com/lodging/50000000/49300000/49290700/49290682/c72eced9.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill)
 
-**Preis: ¥41.605**
+**Preis: ¥31.331**
 
 ## 🚗 Transport
 
@@ -21,7 +21,7 @@ Das Osaka Metro-System bringt uns schnell zu allen wichtigen Sehenswürdigkeiten
 
 ## 📅 Aufenthaltsdauer
 
-`23. bis 30. August`
+`30. August bis 4. September`
 
 ---
 

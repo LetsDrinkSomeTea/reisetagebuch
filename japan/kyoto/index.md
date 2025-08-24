@@ -9,11 +9,11 @@ Kyoto, das kulturelle Herz Japans und ehemalige Hauptstadt, erwartet uns mit üb
 
 ## 🏨 Unterkunft
 
-[Weekly Green In Namba](https://www.booking.com/hotel/jp/weekly-green-in-namba.de.html?label=brave_brand_organic_trigger_8e04a9f7-c7d3-4b3b-a255-3644144f3921_0&sid=03f3572eadfa0a84123c1e30621c4c11&aid=2405329)
+[M's Hotel Kyoto Station Taruya](https://www.booking.com/hotel/jp/ms-inn-kyoto-station-taruya.de.html?label=brave_brand_organic_trigger_8e04a9f7-c7d3-4b3b-a255-3644144f3921_0&sid=03f3572eadfa0a84123c1e30621c4c11&aid=2405329#map_closed)
 
-![Unterkunft Bild](https://images.trvl-media.com/lodging/50000000/49300000/49290700/49290682/c72eced9.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill)
+![Unterkunft Bild](https://kyohotel.jp/wp-content/uploads/2019/11/91d7208dca6d17f393d0668bf84009dd-scaled.jpg)
 
-**Preis: ¥31.331**
+**Preis: ¥41.605**
 
 ## 🚗 Transport
 
@@ -21,7 +21,7 @@ Kyoto lässt sich hervorragend zu Fuß, mit dem Fahrrad oder dem effizienten Bus
 
 ## 📅 Aufenthaltsdauer
 
-`30. August bis 4. September`
+`23. bis 30. August`
 
 ---
 
