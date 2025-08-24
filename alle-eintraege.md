@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "Alle Einträge"
+permalink: /alle-eintraege/
 ---
 
 <div class="page-header">
