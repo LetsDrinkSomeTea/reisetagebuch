@@ -15,7 +15,31 @@ title: "Unser Reisetagebuch"
   <h2>📖 Neueste Einträge</h2>
 
   <div class="grid grid--entries">
-    {% assign recent_entries = all_day_pages | sort: "date" | reverse %}
+    {% comment %} Build hierarchically sorted entries {% endcomment %}
+    {% assign recent_entries = "" | split: "" %}
+    
+    {% comment %} Iterate through countries in order {% endcomment %}
+    {% for country in site.data.countries %}
+      {% assign country_key = country[0] %}
+      {% assign country_data = country[1] %}
+      
+      {% comment %} Iterate through cities in order {% endcomment %}
+      {% for city in country_data.cities %}
+        {% assign city_key = city[0] %}
+        
+        {% comment %} Get all entries for this city and sort by day {% endcomment %}
+        {% assign city_entries = all_day_pages | where: "country", country_key | where: "city", city_key | sort: "day" %}
+        
+        {% comment %} Add to recent entries list {% endcomment %}
+        {% for entry in city_entries %}
+          {% assign recent_entries = recent_entries | push: entry %}
+        {% endfor %}
+      {% endfor %}
+    {% endfor %}
+    
+    {% comment %} Reverse for "recent first" display {% endcomment %}
+    {% assign recent_entries = recent_entries | reverse %}
+    
     {% for entry in recent_entries limit: 6 %}
       {% assign country_data = site.data.countries[entry.country] %}
       {% assign city_data = country_data.cities[entry.city] %}

@@ -1,10 +1,10 @@
-morning:
-  name: "Aktivität am Vormittag"
-  icon: "🌅"
-
 breakfast:
   name: "Frühstück"
   icon: "🥐"
+
+morning:
+  name: "Aktivität am Vormittag"
+  icon: "🌅"
 
 brunch:
   name: "Brunch"
@@ -22,14 +22,14 @@ snack:
   name: "Snack"
   icon: "🍰"
 
-evening:
-  name: "Aktivität am Abend"
-  icon: "🌙"
-
 dinner:
   name: "Abendessen"
   icon: "🍽️"
 
+evening:
+  name: "Aktivität am Abend"
+  icon: "🌙"
+  
 selfie:
   name: "Selfie des Tages"
   icon: "👩🏻‍🤝‍👨🏽"
