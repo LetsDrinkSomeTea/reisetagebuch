@@ -59,3 +59,6 @@ timezone: Europe/Berlin
 
 # Language
 lang: de
+
+# Custom features
+enable_next_city_navigation: true
