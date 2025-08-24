@@ -27,6 +27,52 @@ layout: default
         <a href="{{ prev_page.url | relative_url }}" class="nav-prev">
           ← Tag {{ prev_page.day }}
         </a>
+      {% else %}
+        <!-- If no previous day in current city, look for previous city -->
+        {% assign current_country = page.country %}
+        {% assign current_city = page.city %}
+        {% assign prev_city_found = false %}
+        
+        <!-- Look through countries in order (we'll track and reverse logic) -->
+        {% assign all_cities = "" | split: "" %}
+        {% for country in site.data.countries %}
+          {% assign country_key = country[0] %}
+          {% assign country_data = country[1] %}
+          {% for city in country_data.cities %}
+            {% assign city_key = city[0] %}
+            {% assign city_data = city[1] %}
+            {% assign city_info = country_key | append: ":" | append: city_key | append: ":" | append: city_data.name %}
+            {% assign all_cities = all_cities | push: city_info %}
+          {% endfor %}
+        {% endfor %}
+        
+        <!-- Find current city position and get previous -->
+        {% assign current_city_info = current_country | append: ":" | append: current_city %}
+        {% for city_info in all_cities %}
+          {% if city_info contains current_city_info %}
+            {% assign current_position = forloop.index0 %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+        
+        {% if current_position > 0 %}
+          {% assign prev_position = current_position | minus: 1 %}
+          {% assign prev_city_info = all_cities[prev_position] %}
+          {% assign prev_city_parts = prev_city_info | split: ":" %}
+          {% assign prev_country_key = prev_city_parts[0] %}
+          {% assign prev_city_key = prev_city_parts[1] %}
+          {% assign prev_city_name = prev_city_parts[2] %}
+          
+          <!-- Find highest day in previous city -->
+          {% assign prev_city_pages = site.pages | where: "country", prev_country_key | where: "city", prev_city_key | where: "layout", "day" | sort: "day" %}
+          {% if prev_city_pages.size > 0 %}
+            {% assign last_day_page = prev_city_pages | last %}
+            {% assign prev_city_url = prev_country_key | append: "/" | append: prev_city_key | append: "/tag-" | append: last_day_page.day %}
+            <a href="{{ prev_city_url | relative_url }}" class="nav-prev nav-prev-city">
+              ← {{ prev_city_name }}
+            </a>
+          {% endif %}
+        {% endif %}
       {% endif %}
       
       {% assign next_index = current_index | plus: 1 %}
@@ -35,6 +81,77 @@ layout: default
         <a href="{{ next_page.url | relative_url }}" class="nav-next">
           Tag {{ next_page.day }} →
         </a>
+      {% else %}
+        <!-- If no next day in current city, look for next city -->
+        {% assign current_country = page.country %}
+        {% assign current_city = page.city %}
+        {% assign next_city_found = false %}
+        
+        <!-- Look through countries in order -->
+        {% for country in site.data.countries %}
+          {% assign country_key = country[0] %}
+          {% assign country_data = country[1] %}
+          
+          {% if country_key == current_country %}
+            <!-- Found current country, look for next city -->
+            {% assign found_current = false %}
+            {% for city in country_data.cities %}
+              {% assign city_key = city[0] %}
+              {% assign city_data = city[1] %}
+              
+              {% if found_current and next_city_found == false %}
+                <!-- This is the next city, check if tag-1 exists -->
+                {% assign next_city_path = current_country | append: "/" | append: city_key | append: "/tag-1.md" %}
+                {% assign target_page = site.pages | where: "path", next_city_path | first %}
+                {% if target_page %}
+                  {% assign next_city_url = current_country | append: "/" | append: city_key | append: "/tag-1" %}
+                  <a href="{{ next_city_url | relative_url }}" class="nav-next nav-next-city">
+                    {{ city_data.name }} →
+                  </a>
+                {% endif %}
+                {% assign next_city_found = true %}
+                {% break %}
+              {% endif %}
+              
+              {% if city_key == current_city %}
+                {% assign found_current = true %}
+              {% endif %}
+            {% endfor %}
+            
+            {% unless next_city_found %}
+              <!-- No more cities in current country, look for next country -->
+              {% assign found_current_country = false %}
+              {% for next_country in site.data.countries %}
+                {% assign next_country_key = next_country[0] %}
+                {% assign next_country_data = next_country[1] %}
+                
+                {% if found_current_country and next_city_found == false %}
+                  <!-- This is the next country, get first city and check if tag-1 exists -->
+                  {% for first_city in next_country_data.cities limit:1 %}
+                    {% assign first_city_key = first_city[0] %}
+                    {% assign first_city_data = first_city[1] %}
+                    {% assign next_city_path = next_country_key | append: "/" | append: first_city_key | append: "/tag-1.md" %}
+                    {% assign target_page = site.pages | where: "path", next_city_path | first %}
+                    {% if target_page %}
+                      {% assign next_city_url = next_country_key | append: "/" | append: first_city_key | append: "/tag-1" %}
+                      <a href="{{ next_city_url | relative_url }}" class="nav-next nav-next-city">
+                        {{ first_city_data.name }} →
+                      </a>
+                    {% endif %}
+                    {% assign next_city_found = true %}
+                    {% break %}
+                  {% endfor %}
+                  {% break %}
+                {% endif %}
+                
+                {% if next_country_key == current_country %}
+                  {% assign found_current_country = true %}
+                {% endif %}
+              {% endfor %}
+            {% endunless %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
       {% endif %}
     </nav>
   </footer>
