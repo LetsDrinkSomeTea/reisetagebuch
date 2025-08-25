@@ -43,7 +43,7 @@ Wir gingen zum `Kōfuku-ji` Tempel und dem nebenan liegenden `Nara Park`.
 
 Der Nara Park ist vor allem für seine zahmen `Sika-Hirsche` bekannt.
 Nach einer alten Legende sollen die Götter des Kasuga-Schreins einst auf einem weißen Hirsch nach Nara gekommen sein.
-Seitdem gelten die Tiere als heilig und wurden jahrhundertelang beschützt
+Seitdem gelten die Tiere als heilig und wurden jahrhundertelang beschützt.
 Dadurch konnten sie sich ungehindert ausbreiten und verloren mit der Zeit ihre Scheu vor den Menschen und sind im Park, aber auch in den umliegenden Stadtgebieten zuhauf zu finden.  
 Überall in der Nähe des Nara Parks kann man `Shika Senbei`, das bedeutet "Hirsch-Cracker", für wenig Geld kaufen und an die Hirsche verfüttern.
 
