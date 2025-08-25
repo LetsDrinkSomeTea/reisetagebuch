@@ -47,10 +47,12 @@ Seitdem gelten die Tiere als heilig und wurden jahrhundertelang beschützt
 Dadurch konnten sie sich ungehindert ausbreiten und verloren mit der Zeit ihre Scheu vor den Menschen und sind im Park, aber auch in den umliegenden Stadtgebieten zuhauf zu finden.  
 Überall in der Nähe des Nara Parks kann man `Shika Senbei`, das bedeutet "Hirsch-Cracker", für wenig Geld kaufen und an die Hirsche verfüttern.
 
+![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-2.jpg)
+
 Heutzutage verbeugen die Hirsche sich freundlich, um nach Futter zu fragen.
 
 <video controls>
-  <source src="{{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-2.mp4" type="video/mp4">
+  <source src="{{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon.mp4" type="video/mp4">
   Dein Browser unterstützt das Video-Tag nicht.
 </video>
 
