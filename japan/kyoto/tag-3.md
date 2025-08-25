@@ -49,7 +49,10 @@ Dadurch konnten sie sich ungehindert ausbreiten und verloren mit der Zeit ihre S
 
 Heutzutage verbeugen die Hirsche sich freundlich, um nach Futter zu fragen.
 
-![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-2.mp4)
+<video controls>
+  <source src="{{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-2.mp4" type="video/mp4">
+  Dein Browser unterstützt das Video-Tag nicht.
+</video>
 
 Der Ausflug war ein wirkliches Erlebnis.  
 Anders als in Tierparks o.Ä. sind die Hirsche wilde Tiere, die sich freiwillig an die Menschen gewöhnt haben.  

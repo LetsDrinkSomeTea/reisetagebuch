@@ -16,7 +16,7 @@ Usage:
 {% comment %} Integrated Image Discovery System {% endcomment %}
 {% assign images_found = false %}
 {% assign discovered_images = "" | split: "" %}
-{% assign image_extensions = "jpg,jpeg,JPG,JPEG,mp4" | split: "," %}
+{% assign image_extensions = "jpg,jpeg,JPG,JPEG" | split: "," %}
 
 {% comment %} Define search criteria based on scope {% endcomment %}
 {% case include.scope %}
