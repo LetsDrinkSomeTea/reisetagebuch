@@ -87,7 +87,7 @@ Dort haben wir einen `Place 1` besucht, eine Arcade- und Spielehalle.
 Wir verbrachten dort ungefähr eine Stunde und spielten diverse Spiele mit- oder gegeneinander. 
 
 <video controls>
-  <source src="{{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon.mp4" type="video/mp4">
+  <source src="{{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/evening.mp4" type="video/mp4">
   Dein Browser unterstützt das Video-Tag nicht.
 </video>
 
