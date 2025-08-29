@@ -24,7 +24,7 @@ Anschließend entschieden wir uns dazu, noch einmal etwas im Zimmer auf dem Bett
 
 ## 🌇 Mittag
 
-Am frühen Mittag gingen wir dann los nach `Gion`, das vermutlich bekannteste Stadtteil Kyotos.  
+Am frühen Mittag gingen wir dann los nach `Gion`, der vermutlich bekannteste Stadtteil Kyotos.  
 Gion ist bekannt für seine traditionelle Architektur und seine vielen Schreine und Tempel.
 
 ![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-1.jpg)
