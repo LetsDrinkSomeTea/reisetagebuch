@@ -38,7 +38,7 @@ Am Rande der Stadt, auf dem `Rokkō-Berg`, befinden sich die `Nunobiki Herb Gard
 Diese Gärten waren unser nächstes Ziel.  
 Mit einer Seilbahn fuhren wir ein paar Minuten bis auf die Spitze des Berges.  
 
-![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon.jpg)
+![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-1.jpg)
 
 Von dort schlängelt sich ein Weg mit kleinen Pfaden wieder Richtung Tal.  
 Am Gipfel befinden sich verschiedene Häuser und auf halber Strecke ein großes Gewächshaus.  

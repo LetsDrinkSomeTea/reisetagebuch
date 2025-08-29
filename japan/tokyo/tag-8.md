@@ -39,7 +39,7 @@ Leider war es bei uns nicht klar genug dafür, trotzdem war die Aussicht beeindr
 
 Den nächsten Stopp widmeten wir dem `Meiji-Schrein`, dieser war ebenfalls auf unserer Liste für Shinjuku und hatte ebenfalls an [Tag 2]({{ "japan/tokyo/tag-2" | relative_url }}) bereits geschlossen.
 
-![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon.jpg)
+![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-1.jpg)
 
 Der Schrein und umliegende Park waren auf jedenfall beeindruckend, auch wenn im Verhältnis zu anderen Schreinen an denen wir waren wirklich viel los war.
 

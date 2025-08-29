@@ -39,7 +39,7 @@ Beim Belag der Pizza machte sich die Kultur hier, dann doch bemerkbar, meine Piz
 
 ## 🌆 Nachmittag
 
-![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon.jpg)
+![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-1.jpg)
 
 Nachmittags gingen wir dann wie bereits erwähnt, wieder mittig nach Ginza und besuchten einen `Itoya`, `Loft` und `Uniqlo`.
 Das Viertel besteht aus mehreren Straßen und unzähligen Malls, Kaufhäuser und Läden, die die gesamte Preisspanne abdecken.

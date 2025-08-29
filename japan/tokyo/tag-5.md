@@ -23,7 +23,7 @@ Nichts desto trotz war es ein guter Start in den Tag.
 
 ## 🌅 Vormittag
 
-![Morning Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/morning.jpg)
+![Morning Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/morning-1.jpg)
 
 Für uns dann vormittags (für die restliche Welt um 14:15) erreichten wir `Shibuya`, den Stadtteil, den vermutlich die meisten Menschen mit Tokio assoziieren.
 Dort ist die berühmte Kreuzung bei der erst die Autos fahren dürfen und dann alle Fußgänger gleichzeitig in allen Richtungen grün bekommen.
@@ -47,7 +47,7 @@ Hier war aber zusätzlich besonders, dass die bestellten Speisen direkt per Flie
 
 Nach dem Mittagessen und noch etwas Bummeln in Shibuya begaben wir uns nach `Harajuku`, dort ist die ebenfalls nicht weniger bekannte `Takeshita Street`.
 
-![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon.jpg)
+![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-1.jpg)
 
 Diese ist vor allem für ausgefallene und vintage Mode, aber auch für süße Speisen bekannt.
 Hier schlenderten wir ebenfalls durch die Straßen voller Versuchung und übten uns in Selbstbeherrschung.

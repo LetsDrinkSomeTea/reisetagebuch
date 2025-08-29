@@ -39,7 +39,7 @@ Mittags besuchten wir das Highlight von Nara (und fairerweise auch den Grund, wa
 
 Wir gingen zum `Kōfuku-ji` Tempel und dem nebenan liegenden `Nara Park`.
 
-![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon.jpg)
+![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-1.jpg)
 
 Der Nara Park ist vor allem für seine zahmen `Sika-Hirsche` bekannt.
 Nach einer alten Legende sollen die Götter des Kasuga-Schreins einst auf einem weißen Hirsch nach Nara gekommen sein.

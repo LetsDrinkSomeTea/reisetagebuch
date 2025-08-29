@@ -40,7 +40,7 @@ Das Essen ist auf jeden Fall keine Offenbarung, aber trotzdem gut und sein Geld 
 
 ## 🌆 Nachmittag
 
-![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon.jpg)
+![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-1.jpg)
 
 Nach dem Essen schlenderten wir noch einige Zeit durch die Straßen von Asakusa und besuchten unteranderem die `Kappabashi-dori`, eine Straße, ebenfalls gefüllt von Läden, die vor allem auf Messer und Küchenutensilien spezialisiert sind.
 

@@ -43,7 +43,7 @@ Dies ging glücklicherweise ziemlich schnell und wir landeten am Ende vor zwei l
 
 Anschließend spazierten wir noch etwas durch den nebenan liegenden `Umekōji Park`, um die Zeit bis zum Check-in sinnvoll zu nutzen.  
 
-![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon.jpg)
+![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-1.jpg)
 
 Gegen 15 Uhr konnten wir dann im Hotel unser Zimmer beziehen.  
 Bei unserer ersten Erkundungstour fanden wir direkt ein paar kostenlose Snacks, an denen wir uns natürlich bedienten.  

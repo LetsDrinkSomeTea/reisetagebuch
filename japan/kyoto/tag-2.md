@@ -24,7 +24,7 @@ Der Ort ist einer der ikonischsten Orte Japans.
 
 Der Tempel, aber vor allem die tausenden Tore auf dem Bergpfad, sind weltbekannt.
 
-![Morning Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/morning.jpg)
+![Morning Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/morning-1.jpg)
 
 Zugegebenermaßen ist es dort dementsprechend voll gewesen.  
 Auf die Empfehlung einer Freundin von den Pfadis (Anna Wohfarth für die, die sie kennen), die bereits im Frühjahr in Japan war, wanderten wir trotzdem die gesamte Strecke.  
@@ -51,7 +51,7 @@ Nach der Anstrengung war die leckere Stärkung auf jeden Fall bitter nötig.
 
 Mittags besuchten wir den `Sanjūsangen-dō`-Tempel ganz in der Nähe.
 
-![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon.jpg)
+![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-1.jpg)
 
 Der Sanjūsangen-dō ist eine über 700 Jahre alte Tempelanlage, die für ihre 1001 Statuen der buddhistischen Gottheit Kannon bekannt ist.  
 Die hölzerne Haupthalle ist mit 120 Metern Länge die längste Holzkonstruktion Japans.

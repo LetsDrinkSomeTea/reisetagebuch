@@ -39,7 +39,7 @@ Mit vollgeschlagenem Bauch schlenderten wir durch die Straßen und ließen die E
 Direkt am Anfang entdeckten wir ein Gebäude, das neben Kapsel- und Greif-Automaten auch Arcade- und Musik-Spiele anbot.  
 Aus Neugierde begutachteten wir vier der acht Stockwerke und fanden schließlich ein klassisches Tanzspiel.
 
-![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon.jpg)
+![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-1.jpg)
 
 Um die Pancakes wieder abzutrainieren, tanzten wir im Zweispielermodus drei Songs auf der Maschine.  
 Laut Automat haben wir dabei auch etwas über 10 (!) Kalorien verbrannt, vor allem hatten wir aber jede Menge Spaß.

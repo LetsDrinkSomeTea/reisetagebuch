@@ -50,7 +50,7 @@ Das Bild zeigt nur zwei der insgesamt sieben Häppchen, die wir in drei verschie
 
 ## 🌙 Abend
 
-![Evening Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/evening.jpg)
+![Evening Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/evening-1.jpg)
 
 Um den Abend ausklingen zu lassen besuchten wir das Viertel `Golden Gai`.
 Dort gibt es in vielen schmalen Gassen über 200 kleine Bars.

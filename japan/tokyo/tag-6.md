@@ -52,7 +52,7 @@ Trotzdem gab es für 1000 ¥ (ungefähr 5,80 €) eine große Schüssel Ramen, d
 
 ## 🌙 Nachmittag / Abend
 
-![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon.jpg)
+![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-1.jpg)
 
 Am späten Nachmittag/frühen Abend fuhren wir nach `Kōenji`, ein Viertel etwas außerhalb des Stadkerns.
 Dort konnten wir die ruhigeren und weniger von Touristen überlaufenen Seiten Tokios sehen.

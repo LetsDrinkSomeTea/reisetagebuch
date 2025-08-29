@@ -30,7 +30,7 @@ Etwas genervt liefen wir also die letzten 25 Minuten bis zum Tempel.
 Dort angekommen wurden wir von einer friedlichen Stimmung empfangen.  
 Der weite Weg und die schlechte Verbindung hatten wohl die meisten anderen Touristen abgeschreckt.
 
-![Morning Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/morning.jpg)
+![Morning Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/morning-1.jpg)
 
 Die Besonderheit dieses Tempels sind ungefähr 8.000 Statuen, die dicht an dicht auf dem Tempelgelände stehen.  
 Jede einzelne dieser Figuren ist ein Grabmal oder Gedenkstein für die Seelen derer, die ohne Angehörige starben.  

@@ -13,7 +13,7 @@ weather: "Teilweise Sonnig, 34°C"
 Heute hieß es Abschied von Tokio zu nehmen.
 Wir packten unsere Sachen, machten einmal richtig "klar Schiff" und verließen das Hotel.
 
-![Morning Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/morning.jpg)
+![Morning Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/morning-1.jpg)
 
 Viel zu erzählen gibt es also nicht.
 Wir machten uns auf zum Bahnhof nach Tokio und suchten nach dem richtigen Gleis in einem Meer von Möglichkeiten.
