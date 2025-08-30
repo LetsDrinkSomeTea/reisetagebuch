@@ -101,7 +101,7 @@ Wir freuen uns aber, wieder im Stadtgetümmel zu sein und hoffen auf eine gelung
 
 ## 📸 Bild des Tages
 
-Das Bild zeigt ein Schaufenster im Ghibli-Store mit Figuren aus „Mein Nachbar Totoro“.  
+Das Bild zeigt ein Schaufenster im Ghibli-Store mit Figuren aus "Mein Nachbar Totoro".  
 
 ![Picture of the Day]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/main.jpg)
 
