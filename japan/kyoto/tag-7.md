@@ -1,6 +1,6 @@
 ---
 layout: day
-title: "Erholung und Genüsse in Kyoto"
+title: "Erholung im Schlemmerland"
 date: 2025-08-29
 country: japan # japan, australien, skandinavien
 city: kyoto # tokyo, melbourne, oslo, etc.
