@@ -8,7 +8,7 @@ day: 1
 weather: "Vorüberziehende Wolken, 36°C"
 ---
 
-## 🌇 
+## 🌇 Mittag
 
 Nach unserer Ankunft in Ōsaka verbrachten wir als Erstes einige Zeit damit, ein Schließfach zu finden.  
 Bis zu unserem Check-in dauerte es noch eine ganze Weile und wir wollten nicht durch die vollen Straßen und Läden mit unseren großen Koffern laufen.
@@ -39,7 +39,7 @@ Dieses Mal sind wir in einer kleinen Ferienwohnung, die vom Aufbau stark an ein 
 Nachdem wir uns häuslich eingerichtet hatten und – wie mittlerweile beim Hotelwechsel üblich – duschen waren, entspannten wir noch einige Zeit im Bett am Handy.
 
 Danach gingen wir noch etwas nach `Dotonbori`, ein Viertel im Stadtteil Chūō.  
-Dieser ist für seine grellen Neonreklamen, unzähligen Restaurants und die berühmte Glico-Leuchtreklame bekannt.
+Dieses ist für seine grellen Neonreklamen, unzähligen Restaurants und die berühmte Glico-Leuchtreklame bekannt.
 
 ![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-1.jpg)
 
@@ -52,7 +52,11 @@ Wir kauften einen Kuchen für ungefähr 6 € und setzten uns auf einen nahegele
 Der Kuchen löste bei uns gemischte Gefühle aus.  
 Einerseits war die Konsistenz wirklich fluffig und der Kuchen wackelte leicht, wenn man ihn bewegte.
 
-![Snack]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/snack.mp4)
+
+<video controls>
+  <source src="{{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/snack.mp4" type="video/mp4">
+  Dein Browser unterstützt das Video-Tag nicht.
+</video>
 
 Andererseits war er geschmacklich nichts Besonderes.  
 Er schmeckte vor allem nach Eiern, sonst aber nicht wirklich nach viel.  
@@ -73,7 +77,10 @@ So auch heute.
 Für umgerechnet ungefähr 6 € (¥1000) spielten wir verschiedene Spiele mit- und gegeneinander und versuchten unser Glück an einem der vielzähligen Greifautomaten.  
 Einen Preis haben wir zwar leider nicht gewonnen, dafür hatten wir eine Menge Spaß.
 
-![Evening Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/evening.mp4)
+<video controls>
+  <source src="{{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/evening.mp4" type="video/mp4">
+  Dein Browser unterstützt das Video-Tag nicht.
+</video>
 
 ## 🍜 Abendessen
 
