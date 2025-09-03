@@ -79,8 +79,6 @@ Da wir recht spät erst Mittag gegessen haben und zwischendurch noch den Smoothi
 
 Den Abend verbrachten wir noch mit Kartenspielen, Memes schauen und damit, fertig zu packen, bevor wir dann letztendlich ins Bett gingen.  
 
-![Evening Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/evening.jpg)
-
 ## ✨ Highlight des Tages
 
 - Mittagessen & Smoothie  
@@ -106,7 +104,7 @@ In den Regionen, in denen wir in Japan waren, kamen wir mit Englisch zwar weit, 
 
 ![Picture of the Day]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/main.jpg)
 
-Wie immer wenn ich keine bessere Idee habe, gibt es heute den dritten Gullideckel.
+Wie immer, wenn ich keine bessere Idee habe, gibt es heute den dritten Gullideckel.
 Dieses Mal im Expo 2025 Design.
 
 ## Zitat des Tages
