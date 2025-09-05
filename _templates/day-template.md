@@ -8,61 +8,46 @@ day: 0
 weather: "Weather, 00°C"
 ---
 
+
+## 🥐 Frühstück
+
+![Breakfast]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/breakfast.jpg)
+
 ## 🌅 Vormittag
 
 ![Morning Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/morning.jpg)
 
-Beschreibung
+## 🌇 Mittag
+
+## 🍣 Mittagessen
+
+![Lunch]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/lunch.jpg)
 
 ## 🌆 Nachmittag
 
 ![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon.jpg)
 
-Beschreibung
+## 🍜 Abendessen
+
+![Dinner]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/dinner.jpg)
 
 ## 🌙 Abend
 
 ![Evening Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/evening.jpg)
 
-Beschreibung
-
-## 🍽️ Essen & Trinken
-
-### Frühstück
-
-![Breakfast]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/breakfast.jpg)
-
-Beschreibung
-
-### Mittagessen
-
-![Lunch]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/lunch.jpg)
-
-Beschreibung
-
-### Abendessen
-
-![Dinner]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/dinner.jpg)
-
-Beschreibung
-
-## 🎯 Highlight des Tages
-
-- [Highlight 1]
-- [Highlight 2]
-- [Highlight 3]
+## ✨ Highlight des Tages
 
 ## 💭 Stimmung & Gedanken
 
 [Reflect on the day - emotions, thoughts, surprises, challenges, etc.]
 
-## ✨ Besonderheiten
-
-[Any special observations, cultural insights, funny moments, or unexpected discoveries]
-
 ## 📸 Bild des Tages
 
 ![Picture of the Day]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/main.jpg)
+
+## 👩🏻‍🤝‍👨🏽 Selfie des Tages
+
+![Selfie of the Day]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/selfie.jpg)
 
 ## Zitat des Tages
 

@@ -5,7 +5,7 @@ date: 2025-09-04
 country: japan # japan, australien, skandinavien
 city: osaka # tokyo, melbourne, oslo, etc.
 day: 6
-weather: "Bewölkt, 00°C"
+weather: "Klar, 33°C"
 ---
 
 ## 🌅 Morgen
