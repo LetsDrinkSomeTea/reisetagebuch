@@ -27,6 +27,19 @@ Anschließend fuhren wir mit der Tram zum Hauptbahnhof und machten uns von dort 
 
 ![Morning Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/morning.jpg)
 
+## 📜 Fazit zu Kyōto
+
+Grundsätzlich ist Kyōto eine schöne Stadt und einen Besuch wert.
+Wir fanden aber, dass ein paar Tage genügt hätten, um alles wichtige gesehen zu haben.
+
+Durch unseren Ausflug nach Nara und Kobé und unsere zwei Tage, die auf Entspannung ausgelegt waren, waren die insgesamt sieben Nächte angemessen.
+Sonst würden wir sagen, dass drei oder vier Tage ausreichend sind und die Ausflüge lieber von Ōsaka aus gemacht werden sollten.
+
+Man merkt das die Stadt mehr von Tradition und Kultur geprägt ist als Tokio, außerdem ist sie weniger lebendig und pulsierend als Tokio und Ōsaka.
+Das wird zum Beispiel auch durch die geringere Akzeptanz von Kreditkarten und der geringeren Verbreitung von Englisch bei diversen Mitarbeitern deutlich. 
+
+In der Kombination mit Tokio und Ōsaka ist die Stadt aber eine günstig gelegene Abwechslung. 
+
 ## Zitat des Tages
 
 > Irgendwie ist mein Koffer voller als da, wo wir losgeflogen sind.

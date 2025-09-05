@@ -101,10 +101,10 @@ layout: default
               
               {% if found_current and next_city_found == false %}
                 <!-- This is the next city, check if tag-1 exists -->
-                {% assign next_city_path = current_country | append: "/" | append: city_key | append: "/tag-1.md" %}
+                {% assign next_city_path = current_country | append: "/" | append: city_key | append: "/index.md" %}
                 {% assign target_page = site.pages | where: "path", next_city_path | first %}
                 {% if target_page %}
-                  {% assign next_city_url = current_country | append: "/" | append: city_key | append: "/tag-1" %}
+                  {% assign next_city_url = current_country | append: "/" | append: city_key | append: "/" %}
                   <a href="{{ next_city_url | relative_url }}" class="nav-next nav-next-city">
                     {{ city_data.name }} →
                   </a>
@@ -130,10 +130,10 @@ layout: default
                   {% for first_city in next_country_data.cities limit:1 %}
                     {% assign first_city_key = first_city[0] %}
                     {% assign first_city_data = first_city[1] %}
-                    {% assign next_city_path = next_country_key | append: "/" | append: first_city_key | append: "/tag-1.md" %}
+                    {% assign next_city_path = next_country_key | append: "/" | append: first_city_key | append: "/index.md" %}
                     {% assign target_page = site.pages | where: "path", next_city_path | first %}
                     {% if target_page %}
-                      {% assign next_city_url = next_country_key | append: "/" | append: first_city_key | append: "/tag-1" %}
+                      {% assign next_city_url = next_country_key | append: "/" | append: first_city_key | append: "/" %}
                       <a href="{{ next_city_url | relative_url }}" class="nav-next nav-next-city">
                         {{ first_city_data.name }} →
                       </a>

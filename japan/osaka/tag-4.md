@@ -145,6 +145,11 @@ Für viele Besucher – uns eingeschlossen – ist es eine Reise zurück in die 
 Universal gelingt es, diese Erinnerungen zum Leben zu erwecken und mit japanischer Perfektion zu inszenieren.  
 Das leuchtende Logo vor Ort ist damit mehr als nur ein Markenzeichen: Es steht für die Verbindung von Unterhaltung, Nostalgie und moderner Freizeitkultur in Japan.
 
+
+## 👩🏻‍🤝‍👨🏽 Selfie des Tages
+
+![Selfie of the Day]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/selfie.jpg)
+
 ## Zitat des Tages
 
 > Zum Glück macht der Park schon um 19 Uhr zu, nochmal zwei Stunden hätten meine Füße nicht durchgestanden.
