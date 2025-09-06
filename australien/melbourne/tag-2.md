@@ -83,6 +83,11 @@ Morgen haben wir eine Verabredung mit Olli, um uns an den Van und Straßenverkeh
 Sonst ist jetzt bereits auffällig, wie viel teurer Australien im Gegensatz zu Japan ist.  
 Von den Lebensmitteln, über die Getränke bis hin zum Eintritt in Museen oder Freizeitparks.
 
+## 🏃🏽‍♀️ Schritte
+
+- Anna: _22.588_  
+- Julian: _21.158_  
+
 ## 📸 Bild des Tages
 
 ![Picture of the Day]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/main.jpg)

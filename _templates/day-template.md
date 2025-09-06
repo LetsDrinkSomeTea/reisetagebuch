@@ -41,6 +41,11 @@ weather: "Weather, 00°C"
 
 [Reflect on the day - emotions, thoughts, surprises, challenges, etc.]
 
+## 🏃🏽‍♀️ Schritte
+
+- Anna: _23.745_  
+- Julian: _23.036_  
+
 ## 📸 Bild des Tages
 
 ![Picture of the Day]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/main.jpg)

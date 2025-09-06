@@ -80,6 +80,11 @@ Dementsprechend müde sind wir jetzt und freuen uns erst einmal auf unser Bett u
 
 Danach sind wir bereit, Melbourne zu erkunden und ggf. schon etwas mit dem Camper zu fahren, um uns an das Fahren auf der falschen Seite zu gewöhnen.  
 
+## 🏃🏽‍♀️ Schritte
+
+- Anna: _17.385_  
+- Julian: _17.262_  
+
 ## 📸 Bild des Tages
 
 Ein Bild von uns bei der Pause vom Spaziergang.  
