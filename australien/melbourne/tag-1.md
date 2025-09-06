@@ -2,7 +2,7 @@
 layout: day
 title: "XXX" 
 date: 2025-09-05
-country: australia # japan, australien, skandinavien
+country: australien # japan, australien, skandinavien
 city: melbourne # tokyo, melbourne, oslo, etc.
 day: 1
 weather: "Klar, 14°C"
