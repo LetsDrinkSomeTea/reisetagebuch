@@ -10,6 +10,10 @@ brunch:
   name: "Brunch"
   icon: "🥞"
 
+noon:
+  name: "Aktivität am Mittag"
+  icon: "🌇"
+
 lunch:
   name: "Mittagessen"
   icon: "🍜"

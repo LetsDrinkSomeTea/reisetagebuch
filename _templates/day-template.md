@@ -1,7 +1,7 @@
 ---
 layout: day
 title: "Subtitle"
-date: 2025-08-01
+date: 2025-09-01
 country: country_key # japan, australien, skandinavien
 city: city_key # tokyo, melbourne, oslo, etc.
 day: 0
@@ -18,6 +18,8 @@ weather: "Weather, 00°C"
 ![Morning Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/morning.jpg)
 
 ## 🌇 Mittag
+
+![Noon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/noon.jpg)
 
 ## 🍣 Mittagessen
 

@@ -9,15 +9,21 @@ Melbourne, oft als die kulturelle Hauptstadt Australiens bezeichnet, bezaubert m
 
 ## 🏨 Unterkunft
 
-_Wird noch ergänzt..._
+Bei Olli Zuhause in der WG in Black Rock.
+Während unserer paar Tage in Melbourne hatte er uns angeboten bei einem Freund zu übernachten und uns sein Zimmer zur Verfügung zu stellen.
+
+Die Wohnung ist eine Zweier-WG zusammen mit einer 22-Jährigen kolumbianischen Pilot-Auszubildenden.
+Von ihr haben wir aber während unserer Zeit nicht viel gemerkt.
 
 ## 🚗 Transport
 
-Melbournes Tram-System ist ikonisch und bringt uns überall hin. Die kostenlose City Circle Tram ist perfekt für Touristen.
+Melbournes Tram-System ist ikonisch und bringt uns überall hin.
+Die kostenlose City Circle Tram ist perfekt für Touristen.
+Auch die Busse funktionieren zuverlässig in den Gebieten weiter vom Zentrum entfernt.
 
 ## 📅 Aufenthaltsdauer
 
-_Wird noch ergänzt..._
+``5. bis 8. September``
 
 ---
 
