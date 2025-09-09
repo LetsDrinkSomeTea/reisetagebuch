@@ -48,6 +48,10 @@ weather: "Weather, 00°C"
 - Anna: _23.745_  
 - Julian: _23.036_  
 
+## 🏎️ Gefahrene Kilometer
+
+`148 km`
+
 ## 📸 Bild des Tages
 
 ![Picture of the Day]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/main.jpg)
