@@ -72,7 +72,7 @@ Leider war es mittlerweile etwas zugezogen und wir bekamen den Sonnenuntergang n
 ![Evening Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/evening-1.jpg)
 
 Dafür war aber der Blick in die andere Richtung wirklich malerisch.  
-In diese Richtung sind zwar nur zwei der zwölf Felsen zu sehen, dafür war der Himmel klarer und ein Regenbogen am Himmel.  
+In diese Richtung sind zwar nur zwei der sieben Felsen zu sehen, dafür war der Himmel klarer und ein Regenbogen am Himmel.  
 Für die Interessierten: in der hinteren Bucht des Bildes wären die Gibson Steps.  
 
 ![Evening Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/evening-2.jpg)
@@ -103,7 +103,7 @@ Ich denke nicht, dass ihr ein Bild von Brot, Käse und Salami braucht, darum bin
 
 ## 💭 Stimmung & Gedanken
 
-Heute war leider ein bisschen blöder Tag, das Wetter war nicht so gut, zwei der vier geplanten Aktionen waren geschlossen und einmal verfahren haben wir uns auch noch.  
+Der heutige Tag war ein bisschen blöd, das Wetter war nicht so gut, zwei der vier geplanten Aktionen waren geschlossen und einmal verfahren haben wir uns auch noch.  
 
 Trotzdem ist die Stimmung nach wie vor gut.  
 Wir sind wirklich froh über den Camper, in dem wir uns mittlerweile schon ein wenig heimisch fühlen.  
