@@ -1,137 +1,16 @@
 <nav class="navigation">
-  <!-- Countries Navigation -->
-  {% comment %} Pre-compute all day pages by country/city for efficiency {% endcomment %}
-  {% assign all_day_pages = site.pages | where: "layout", "day" %}
-  
-  {% for country in site.data.countries %}
-    {% assign country_key = country[0] %}
-    {% assign country_data = country[1] %}
-    
-    {% comment %} Get all day pages for this country {% endcomment %}
-    {% assign country_day_pages = all_day_pages | where: "country", country_key %}
-    
-    <!-- Only show country if it has content -->
-    {% if country_day_pages.size > 0 %}
-      <!-- Check if this country has any active children -->
-      {% assign has_active_child = false %}
-      {% assign country_active = false %}
-      {% if page.country == country_key %}
-        {% assign country_active = true %}
-        {% assign has_active_child = true %}
-      {% endif %}
-      
-      <div class="country-section{% if country_active %} active{% elsif has_active_child %} has-active-child{% endif %}" 
-           data-country="{{ country_key }}">
-        
-        <!-- Country Header (clickable) -->
-        <div class="country-header" onclick="toggleCountry('{{ country_key }}')">
-          {% assign country_page = site.pages | where: "country", country_key | where: "layout", "country" | first %}
-          <a href="{% if country_page %}{{ country_page.url | relative_url }}{% else %}{{ '/' | append: country_key | append: '/' | relative_url }}{% endif %}" 
-             class="country-link{% if country_active %} active{% endif %}"
-             onclick="event.stopPropagation()">
-            {{ country_data.flag }} {{ country_data.name }}
-          </a>
-          <span class="toggle-icon{% if has_active_child %} expanded{% endif %}">▶</span>
-
-        </div>
-        
-        <!-- Cities List -->
-        <ul class="cities-list{% if has_active_child %} expanded{% endif %}">
-          {% for city in country_data.cities %}
-            {% assign city_key = city[0] %}
-            {% assign city_data = city[1] %}
-            
-            {% comment %} Get day pages for this specific city {% endcomment %}
-            {% assign day_pages = country_day_pages | where: "city", city_key | sort: "day" %}
-            
-            <!-- Only show city if it has day entries -->
-            {% if day_pages.size > 0 %}
-              <!-- Check if this city has any active day entries -->
-              {% assign has_active_day = false %}
-              {% assign city_active = false %}
-              {% if page.country == country_key and page.city == city_key %}
-                {% assign city_active = true %}
-                {% if page.layout == "day" %}
-                  {% assign has_active_day = true %}
-                {% endif %}
-              {% endif %}
-              
-              <li class="city-section{% if has_active_day %} has-active-day{% endif %}" 
-                  data-city="{{ city_key }}">
-                
-                <!-- City Header (clickable) -->
-                <div class="city-header" onclick="toggleCity('{{ country_key }}', '{{ city_key }}')">
-                  {% assign city_page = site.pages | where: "country", country_key | where: "city", city_key | where: "layout", "city" | first %}
-                  <a href="{% if city_page %}{{ city_page.url | relative_url }}{% else %}{{ '/' | append: country_key | append: '/' | append: city_key | append: '/' | relative_url }}{% endif %}" 
-                     class="city-link{% if city_active %} active{% endif %}"
-                     onclick="event.stopPropagation()">
-                    {{ city_data.emoji }} {{ city_data.name }}
-                  </a>
-                  
-                  <!-- Toggle icon only if there are day entries -->
-                  <span class="toggle-icon{% if city_active %} expanded{% endif %}">▶</span>
-                </div>
-                
-                <!-- Days List -->
-                <ul class="days-list{% if city_active %} expanded{% endif %}">
-                  {% for day_page in day_pages %}
-                    <li>
-                      <div class="day-header">
-                        <a href="{{ day_page.url | relative_url }}"
-                           class="day-link{% if page.url == day_page.url %} active{% endif %}">
-                          Tag {{ day_page.day }}
-                        </a>
-                        <span class="toggle-icon-placeholder"></span>
-                      </div>
-                    </li>
-                  {% endfor %}
-                </ul>
-              </li>
-            {% endif %}
-          {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
-  {% endfor %}
-  
-  <!-- Latest Entries Section -->
   <div class="latest-entries">
     <h3>📝 Neueste Einträge</h3>
-    
-    {% comment %} Build hierarchically sorted day pages {% endcomment %}
-    {% assign sorted_day_pages = "" | split: "" %}
-    
-    {% comment %} Iterate through countries in order {% endcomment %}
-    {% for country in site.data.countries %}
-      {% assign country_key = country[0] %}
-      {% assign country_data = country[1] %}
-      
-      {% comment %} Iterate through cities in order {% endcomment %}
-      {% for city in country_data.cities %}
-        {% assign city_key = city[0] %}
-        
-        {% comment %} Get all entries for this city and sort by day {% endcomment %}
-        {% assign city_entries = all_day_pages | where: "country", country_key | where: "city", city_key | sort: "day" %}
-        
-        {% comment %} Add to sorted list {% endcomment %}
-        {% for entry in city_entries %}
-          {% assign sorted_day_pages = sorted_day_pages | push: entry %}
-        {% endfor %}
-      {% endfor %}
-    {% endfor %}
-    
-    {% comment %} Reverse for "recent first" display {% endcomment %}
-    {% assign sorted_day_pages = sorted_day_pages | reverse %}
-    
-    {% if sorted_day_pages.size > 0 %}
-      {% for entry in sorted_day_pages limit: 5 %}
+    {% assign entries = site.pages | where: "layout", "day" | sort: "date" | reverse %}
+    {% if entries.size > 0 %}
+      {% for entry in entries limit:5 %}
         {% assign country_data = site.data.countries[entry.country] %}
-        {% assign city_data = country_data.cities[entry.city] %}
-        
+        {% assign first_city = entry.city | first %}
+        {% assign city_data = country_data.cities[first_city] %}
         <div class="entry-item">
           <span class="entry-date">{{ entry.date | date: '%d.%m' }}</span>
           <a href="{{ entry.url | relative_url }}">
-            {{ country_data.flag }} {{ city_data.name }} - Tag {{ entry.day }}
+            {{ country_data.flag }} {{ city_data.name }} - Tag {{ entry.index }}
           </a>
         </div>
       {% endfor %}
@@ -142,18 +21,21 @@
     {% endif %}
   </div>
 
-  <!-- Gallery Link Section -->
+  <div class="gallery-main-link-section">
+    <a href="{{ '/places/' | relative_url }}" class="gallery-main-link{% if page.url contains '/places/' %} active{% endif %}">
+      🗺️ Orte
+    </a>
+  </div>
+
   <div class="gallery-main-link-section">
     <a href="{{ '/galerie/' | relative_url }}" class="gallery-main-link{% if page.layout == 'gallery' %} active{% endif %}">
       📸 Galerie
     </a>
   </div>
 
-  <!-- All Entries Link Section -->
   <div class="gallery-main-link-section">
     <a href="{{ '/alle-eintraege/' | relative_url }}" class="gallery-main-link{% if page.title == 'Alle Einträge' %} active{% endif %}">
       📚 Alle Einträge
     </a>
   </div>
-
 </nav>

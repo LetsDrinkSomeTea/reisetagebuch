@@ -11,30 +11,30 @@ Usage: {% include breadcrumb.html %}
   <a href="{{ '/' | relative_url }}">🏠</a>
   
   {% if page.country %}
+    <span class="separator">›</span>
+    <a href="{{ '/places/' | relative_url }}">🗺️ Orte</a>
     {% assign country_data = site.data.countries[page.country] %}
     <span class="separator">›</span>
-    
-    {% if page.layout == "day" or page.layout == "city" %}
-      <a href="{{ '/' | append: page.country | append: '/' | relative_url }}">
-        {{ country_data.flag }}
-      </a>
-    {% else %}
+    {% if page.layout == "country" %}
       <span class="current">{{ country_data.flag }} {{ country_data.name }}</span>
+    {% else %}
+      <a href="{{ '/places/' | append: page.country | append: '/' | relative_url }}">{{ country_data.flag }} {{ country_data.name }}</a>
     {% endif %}
-    
+
     {% if page.city %}
-      {% assign city_data = country_data.cities[page.city] %}
-      <span class="separator">›</span>
-      
-      {% if page.layout == "day" %}
-        <a href="{{ '/' | append: page.country | append: '/' | append: page.city | append: '/' | relative_url }}">
-          {{ city_data.emoji }} {{ city_data.name }}
-        </a>
+      {% for c in page.city %}
+        {% assign city_data = country_data.cities[c] %}
         <span class="separator">›</span>
-        <span class="current">Tag {{ page.day }}</span>
-      {% else %}
-        <span class="current">{{ city_data.emoji }} {{ city_data.name }}</span>
-      {% endif %}
+        {% if forloop.last and page.layout == 'day' %}
+          <a href="{{ '/places/' | append: page.country | append: '/' | append: c | append: '/' | relative_url }}">{{ city_data.emoji }} {{ city_data.name }}</a>
+          <span class="separator">›</span>
+          <span class="current">Tag {{ page.index }}</span>
+        {% elsif page.layout == 'city' %}
+          <span class="current">{{ city_data.emoji }} {{ city_data.name }}</span>
+        {% else %}
+          <a href="{{ '/places/' | append: page.country | append: '/' | append: c | append: '/' | relative_url }}">{{ city_data.emoji }} {{ city_data.name }}</a>
+        {% endif %}
+      {% endfor %}
     {% endif %}
   {% elsif page.layout == "gallery" %}
     <span class="separator">›</span>

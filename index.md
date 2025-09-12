@@ -28,7 +28,7 @@ title: "Unser Reisetagebuch"
         {% assign city_key = city[0] %}
         
         {% comment %} Get all entries for this city and sort by day {% endcomment %}
-        {% assign city_entries = all_day_pages | where: "country", country_key | where: "city", city_key | sort: "day" %}
+        {% assign city_entries = all_day_pages | where: "country", country_key | where_exp: "item", "item.city contains city_key" | sort: "index" %}
         
         {% comment %} Add to recent entries list {% endcomment %}
         {% for entry in city_entries %}
@@ -53,7 +53,7 @@ title: "Unser Reisetagebuch"
           <p>{{ entry.excerpt | strip_html | truncate: 150 }}</p>
         {% endif %}
         <footer>
-          <span class="badge badge--primary">Tag {{ entry.day }}</span>
+          <span class="badge badge--primary">Tag {{ entry.index }}</span>
           {% if entry.weather %}
             <span class="badge badge--weather">{{ entry.weather }}</span>
           {% endif %}
@@ -73,17 +73,19 @@ title: "Unser Reisetagebuch"
       {% if country_day_pages.size > 0 %}
         <div class="card card--country">
           <h3>
-            <a href="{{ '/' | append: country_key | append: '/' | relative_url }}">
+            <a href="{{ '/places/' | append: country_key | append: '/' | relative_url }}">
               {{ country_data.flag }} {{ country_data.name }} {{ country_data.emoji }}
             </a>
           </h3>
 
           {% assign cities_with_content = "" | split: "," %}
-          {% for day in country_day_pages %}
-            {% unless cities_with_content contains day.city %}
-              {% assign cities_with_content = cities_with_content | push: day.city %}
+        {% for day in country_day_pages %}
+          {% for c in day.city %}
+            {% unless cities_with_content contains c %}
+              {% assign cities_with_content = cities_with_content | push: c %}
             {% endunless %}
           {% endfor %}
+        {% endfor %}
 
           <div class="country-stats">
             <span>{{ cities_with_content.size }} {% if cities_with_content.size == 1 %}Stadt{% else %}Städte{% endif %}</span>

@@ -101,7 +101,7 @@ reisetagebuch/
    - `afternoon.jpg` - Nachmittag-Aktivität
    - `evening.jpg` - Abend-Aktivität
    - `dinner.jpg` - Abendessen
-3. **Kopiere Template**: `cp _templates/day-template.md [country]/[city]/tag-[number].md`
+3. **Kopiere Template**: `cp _templates/day-template.md [journey]/tag-[number].md`
 4. **Aktualisiere Front-Matter**:
 
 ```yaml
@@ -110,8 +110,10 @@ layout: day
 title: "Tag 1 in Tokyo - Ankunft"
 date: 2024-03-15
 country: japan
-city: tokyo
-day: 1
+city:
+  - tokyo
+journey: japan
+index: 1
 weather: "Sonnig, 22°C"
 ---
 ```
