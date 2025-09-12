@@ -24,15 +24,12 @@ australien:
     great-ocean-road:
       name: "Great Ocean Road"
       emoji: "🚌"
-    melbourne2:
-      name: "Melbourne"
-      emoji: "🎨"
     roadtrip:
       name: "Roadtrip"
       emoji: "🚌"
-    sydney:
-      name: "Sydney"
-      emoji: "🏗️"
+    melbourne2:
+      name: "Melbourne"
+      emoji: "🎨"
     perth:
       name: "Perth"
       emoji: "🏖️"
