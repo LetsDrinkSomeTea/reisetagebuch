@@ -1,7 +1,7 @@
 ---
 layout: day
 title: "Vorbereitungen und Wissenschaft"
-date: 2025-09-02
+date: 2025-09-12
 country: australien # japan, australien, skandinavien
 city: roadtrip # tokyo, melbourne, oslo, etc.
 day: 0
@@ -55,7 +55,7 @@ Beides benötigen wir, um die nächsten Tage auch mal selbst im Van zu kochen.
 ![Evening Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/evening.jpg)
 
 Leider wurden wir nur zur Hälfte fündig.  
-Einen Topf müssen wir morgen noch einmal probieren.  
+Einen geeigneten Topf müssen wir morgen noch einmal suchen.  
 
 Danach war dieser etwas seltsam zwischen den Roadtrips hängende Tag bereits ziemlich vorbei, und wir machten uns wieder auf den Heimweg, um bereits die wichtigsten Dinge für morgen zu packen und noch einmal den Plan und die Route für den nächsten Trip durchzugehen.  
 
