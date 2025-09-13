@@ -42,22 +42,26 @@ title: "Unser Reisetagebuch"
     
     {% for entry in recent_entries limit: 6 %}
       {% assign country_data = site.data.countries[entry.country] %}
-      {% assign city_data = country_data.cities[entry.city] %}
+      {% assign city_names = "" %}
+      {% for c in entry.city %}
+        {% assign c_data = country_data.cities[c] %}
+        {% assign city_names = city_names | append: c_data.name %}
+        {% unless forloop.last %}{% assign city_names = city_names | append: ", " %}{% endunless %}
+      {% endfor %}
       <article class="card card--entry">
         <header>
-          <div class="entry-location">{{ country_data.flag }} {{ city_data.name }}, {{ country_data.name }}</div>
+          <div class="entry-location">{{ country_data.flag }} {{ city_names }}, {{ country_data.name }}</div>
           <time datetime="{{ entry.date | date: '%Y-%m-%d' }}">{{ entry.date | date: '%d. %B %Y' }}</time>
         </header>
         <h4><a href="{{ entry.url | relative_url }}">{{ entry.title }}</a></h4>
         {% if entry.excerpt %}
           <p>{{ entry.excerpt | strip_html | truncate: 150 }}</p>
         {% endif %}
+        {% if entry.weather %}
         <footer>
-          <span class="badge badge--primary">Tag {{ entry.index }}</span>
-          {% if entry.weather %}
             <span class="badge badge--weather">{{ entry.weather }}</span>
-          {% endif %}
         </footer>
+        {% endif %}
       </article>
     {% endfor %}
   </div>

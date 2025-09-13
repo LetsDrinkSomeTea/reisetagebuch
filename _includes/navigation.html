@@ -5,12 +5,16 @@
     {% if entries.size > 0 %}
       {% for entry in entries limit:5 %}
         {% assign country_data = site.data.countries[entry.country] %}
-        {% assign first_city = entry.city | first %}
-        {% assign city_data = country_data.cities[first_city] %}
+        {% assign city_names = "" %}
+        {% for c in entry.city %}
+          {% assign c_data = country_data.cities[c] %}
+          {% assign city_names = city_names | append: c_data.name %}
+          {% unless forloop.last %}{% assign city_names = city_names | append: ", " %}{% endunless %}
+        {% endfor %}
         <div class="entry-item">
           <span class="entry-date">{{ entry.date | date: '%d.%m' }}</span>
           <a href="{{ entry.url | relative_url }}">
-            {{ country_data.flag }} {{ city_data.name }} - Tag {{ entry.index }}
+            {{ country_data.flag }} {{ city_names }} – {{ entry.title }}
           </a>
         </div>
       {% endfor %}

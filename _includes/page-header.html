@@ -27,7 +27,6 @@ Usage:
       <div class="entry-meta">
         <div class="badge-container">
           <span class="badge badge--secondary">{{ page.date | date: '%d. %B %Y' }}</span>
-          <span class="badge badge--primary">Tag {{ page.index }}</span>
           {% for c in page.city %}
             {% assign c_data = country_data.cities[c] %}
             <span class="badge badge--primary">{{ c_data.name }}</span>

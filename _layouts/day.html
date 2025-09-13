@@ -22,13 +22,13 @@ layout: default
       {% if current_index > 0 %}
         {% assign prev_index = current_index | minus: 1 %}
         {% assign prev_page = journey_pages[prev_index] %}
-        <a href="{{ prev_page.url | relative_url }}" class="nav-prev">← Tag {{ prev_page.index }}</a>
+        <a href="{{ prev_page.url | relative_url }}" class="nav-prev">← {{ prev_page.date | date: '%d.%m.%Y' }} – {{ prev_page.title }}</a>
       {% endif %}
       {% assign max_index = journey_pages.size | minus: 1 %}
       {% if current_index < max_index %}
         {% assign next_index = current_index | plus: 1 %}
         {% assign next_page = journey_pages[next_index] %}
-        <a href="{{ next_page.url | relative_url }}" class="nav-next">Tag {{ next_page.index }} →</a>
+        <a href="{{ next_page.url | relative_url }}" class="nav-next">{{ next_page.date | date: '%d.%m.%Y' }} – {{ next_page.title }} →</a>
       {% endif %}
     </nav>
   </footer>

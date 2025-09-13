@@ -18,18 +18,6 @@ Usage:
 {% assign discovered_images = "" | split: "" %}
 {% assign image_extensions = "jpg,jpeg,JPG,JPEG" | split: "," %}
 
-{% comment %} Define search criteria based on scope {% endcomment %}
-{% case include.scope %}
-  {% when "city" %}
-    {% assign search_path = include.country | append: "/" | append: include.city %}
-  {% when "country" %}
-    {% assign search_path = include.country %}
-  {% when "all" %}
-    {% assign search_path = "" %}
-  {% else %}
-    {% assign search_path = "" %}
-{% endcase %}
-
 {% comment %} Discover and process images in one pass {% endcomment %}
 {% for file in site.static_files %}
   {% if file.path contains "/tag-" %}
@@ -40,33 +28,47 @@ Usage:
         {% break %}
       {% endif %}
     {% endfor %}
-    
+
     {% if extension_match %}
-      {% assign include_file = false %}
-      {% if search_path == "" %}
-        {% assign include_file = true %}
-      {% elsif file.path contains search_path and file.path contains "main" %}
-        {% assign include_file = true %}
-      {% endif %}
-      
-      {% if include_file %}
-        {% assign path_parts = file.path | split: "/" %}
-        {% if path_parts.size >= 4 %}
-          {% assign file_country = path_parts[-4] %}
-          {% assign file_city = path_parts[-3] %}
-          {% assign tag_dir = path_parts[-2] %}
-          {% assign image_name = path_parts[-1] | split: "." | first | split: "-" | first %}
-          {% assign day_number = tag_dir | remove: "tag-" %}
-          
-          {% assign image_obj = "" | split: "" %}
-          {% assign image_obj = image_obj | push: file.path %}
-          {% assign image_obj = image_obj | push: file_country %}
-          {% assign image_obj = image_obj | push: file_city %}
-          {% assign image_obj = image_obj | push: day_number %}
-          {% assign image_obj = image_obj | push: image_name %}
-          
-          {% assign discovered_images = discovered_images | push: image_obj %}
-          {% assign images_found = true %}
+      {% assign path_parts = file.path | split: "/" %}
+      {% if path_parts.size >= 4 %}
+        {% assign journey_key = path_parts[1] %}
+        {% assign tag_dir = path_parts[2] %}
+        {% assign image_name = path_parts[-1] | split: "." | first | split: "-" | first %}
+        {% assign day_number = tag_dir | remove: "tag-" %}
+
+        {% assign day_page = site.pages | where: "layout", "day" | where: "journey", journey_key | where: "index", day_number | first %}
+        {% if day_page %}
+          {% assign include_file = false %}
+          {% case include.scope %}
+            {% when "all" %}
+              {% assign include_file = true %}
+            {% when "country" %}
+              {% if day_page.country == include.country and image_name == "main" %}
+                {% assign include_file = true %}
+              {% endif %}
+            {% when "city" %}
+              {% if day_page.country == include.country and day_page.city contains include.city and image_name == "main" %}
+                {% assign include_file = true %}
+              {% endif %}
+            {% else %}
+              {% assign include_file = true %}
+          {% endcase %}
+
+          {% if include_file %}
+            {% assign country_key = day_page.country %}
+            {% assign first_city = day_page.city | first %}
+
+            {% assign image_obj = "" | split: "" %}
+            {% assign image_obj = image_obj | push: file.path %}
+            {% assign image_obj = image_obj | push: country_key %}
+            {% assign image_obj = image_obj | push: first_city %}
+            {% assign image_obj = image_obj | push: day_number %}
+            {% assign image_obj = image_obj | push: image_name %}
+
+            {% assign discovered_images = discovered_images | push: image_obj %}
+            {% assign images_found = true %}
+          {% endif %}
         {% endif %}
       {% endif %}
     {% endif %}
@@ -235,9 +237,19 @@ Usage:
         
         {% comment %} Get country and city display data {% endcomment %}
         {% assign country_data = site.data.countries[country_key] %}
-        {% assign city_data = country_data.cities[city_key] %}
-        {% assign city_name = city_data.name | default: city_key %}
-        {% assign city_emoji = city_data.emoji | default: "🏙️" %}
+        {% assign day_page = site.pages | where: "layout", "day" | where: "journey", country_key | where: "index", day_number | first %}
+        {% assign city_names = "" %}
+        {% assign city_emoji = "🏙️" %}
+        {% if day_page %}
+          {% for c in day_page.city %}
+            {% assign c_data = country_data.cities[c] %}
+            {% if forloop.first %}
+              {% assign city_emoji = c_data.emoji | default: city_emoji %}
+            {% endif %}
+            {% assign city_names = city_names | append: c_data.name %}
+            {% unless forloop.last %}{% assign city_names = city_names | append: ", " %}{% endunless %}
+          {% endfor %}
+        {% endif %}
         
         {% comment %} Get image type display data {% endcomment %}
         {% assign image_type_data = site.data.image-types[image_type] %}
@@ -245,13 +257,14 @@ Usage:
         {% assign image_icon = image_type_data.icon | default: "🖼️" %}
         
         {% comment %} Build modal title and alt text {% endcomment %}
-        {% assign base_title = "Tag " | append: day_number | append: ", " | append: city_name | append: ", " | append: country_data.name %}
-        {% if include.scope == "all" %}
-          {% assign modal_title = base_title | append: " - " | append: image_icon | append: " " | append: image_display_name %}
+        {% assign date_str = day_page.date | date: '%d.%m.%Y' %}
+        {% assign base_title = date_str | append: ' – ' | append: day_page.title | append: ', ' | append: city_names | append: ', ' | append: country_data.name %}
+        {% if include.scope == 'all' %}
+          {% assign modal_title = base_title | append: ' - ' | append: image_icon | append: ' ' | append: image_display_name %}
         {% else %}
           {% assign modal_title = base_title %}
         {% endif %}
-        {% assign alt_text = "Bild aus " | append: city_name | append: ", Tag " | append: day_number %}
+        {% assign alt_text = image_display_name | append: ' aus ' | append: city_names | append: ' am ' | append: date_str %}
 
         <div class="gallery__card">
           <a href="{{ image_path | relative_url }}" class="gallery__link" 
@@ -265,14 +278,17 @@ Usage:
                 <div class="gallery__info">
                   {% case include.scope %}
                     {% when "city" %}
-                      <span class="badge badge--primary">Tag {{ day_number }}</span>
+                      <span class="badge badge--primary">{{ date_str }}</span>
+                      <span class="badge badge--light">{{ day_page.title }}</span>
                     {% when "country" %}
-                      <span class="badge badge--light">{{ city_emoji }} {{ city_name }}</span>
-                      <span class="badge badge--primary">Tag {{ day_number }}</span>
+                      <span class="badge badge--light">{{ city_emoji }} {{ city_names }}</span>
+                      <span class="badge badge--primary">{{ date_str }}</span>
+                      <span class="badge badge--light">{{ day_page.title }}</span>
                     {% when "all" %}
-                      <span class="badge badge--light">{{ city_emoji }} {{ city_name }}</span>
+                      <span class="badge badge--light">{{ city_emoji }} {{ city_names }}</span>
                       <span class="badge badge--light">{{ image_icon }}</span>
-                      <span class="badge badge--primary">Tag {{ day_number }}</span>
+                      <span class="badge badge--primary">{{ date_str }}</span>
+                      <span class="badge badge--light">{{ day_page.title }}</span>
                   {% endcase %}
                 </div>
               </div>

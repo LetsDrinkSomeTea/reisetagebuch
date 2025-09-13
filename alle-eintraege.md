@@ -31,7 +31,7 @@ permalink: /alle-eintraege/
       <option value="">Alle</option>
       {% for country in site.data.countries %}
         {% for city in country[1].cities %}
-          <option value="{{ city[0] }}">{{ city[1].name }}</option>
+          <option value="{{ city[0] }}" data-country="{{ country[0] }}">{{ city[1].name }}</option>
         {% endfor %}
       {% endfor %}
     </select>
@@ -45,42 +45,59 @@ permalink: /alle-eintraege/
   {% assign entries = site.pages | where: "layout", "day" | sort: "date" %}
   {% for entry in entries %}
     {% assign country_data = site.data.countries[entry.country] %}
-    {% assign first_city = entry.city | first %}
-    {% assign city_data = country_data.cities[first_city] %}
-    <article class="card card--entry" data-journey="{{ entry.journey }}" data-country="{{ entry.country }}" data-city="{{ first_city }}" data-date="{{ entry.date | date: '%Y-%m-%d' }}">
+    {% assign city_names = "" %}
+    {% for c in entry.city %}
+      {% assign c_data = country_data.cities[c] %}
+      {% assign city_names = city_names | append: c_data.name %}
+      {% unless forloop.last %}{% assign city_names = city_names | append: ", " %}{% endunless %}
+    {% endfor %}
+    <article class="card card--entry" data-journey="{{ entry.journey }}" data-country="{{ entry.country }}" data-city="{{ entry.city | join: ',' }}" data-date="{{ entry.date | date: '%Y-%m-%d' }}">
       <header>
-        <div class="entry-location">{{ country_data.flag }} {{ city_data.name }}, {{ country_data.name }}</div>
+        <div class="entry-location">{{ country_data.flag }} {{ city_names }}, {{ country_data.name }}</div>
         <time datetime="{{ entry.date | date: '%Y-%m-%d' }}">{{ entry.date | date: '%d. %B %Y' }}</time>
       </header>
       <h4><a href="{{ entry.url | relative_url }}">{{ entry.title }}</a></h4>
-      <footer>
-        <span class="badge badge--primary">Tag {{ entry.index }}</span>
-      </footer>
     </article>
   {% endfor %}
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const journey = document.getElementById('filter-journey');
-  const country = document.getElementById('filter-country');
-  const city = document.getElementById('filter-city');
-  const date = document.getElementById('filter-date');
-  const entries = document.querySelectorAll('#entries .card');
+document.addEventListener('DOMContentLoaded', () => {
+  const filters = {
+    journey: document.getElementById('filter-journey'),
+    country: document.getElementById('filter-country'),
+    city: document.getElementById('filter-city'),
+    date: document.getElementById('filter-date')
+  };
 
-  function applyFilters() {
-    entries.forEach(e => {
-      const matchJourney = !journey.value || e.dataset.journey === journey.value;
-      const matchCountry = !country.value || e.dataset.country === country.value;
-      const matchCity = !city.value || e.dataset.city === city.value;
-      const matchDate = !date.value || e.dataset.date === date.value;
-      if (matchJourney && matchCountry && matchCity && matchDate) {
-        e.style.display = '';
-      } else {
-        e.style.display = 'none';
-      }
+  const entries = Array.from(document.querySelectorAll('#entries .card'));
+  const allCityOptions = Array.from(filters.city.querySelectorAll('option'));
+
+  const updateCityOptions = () => {
+    const c = filters.country.value;
+    filters.city.innerHTML = '<option value="">Alle</option>';
+    allCityOptions
+      .filter(opt => !c || opt.dataset.country === c)
+      .forEach(opt => filters.city.appendChild(opt.cloneNode(true)));
+  };
+
+  const applyFilters = () => {
+    entries.forEach(card => {
+      const visible = Object.entries(filters).every(([key, el]) => {
+        if (!el.value) return true;
+        if (key === 'city') return card.dataset.city.split(',').includes(el.value);
+        return card.dataset[key] === el.value;
+      });
+      card.toggleAttribute('hidden', !visible);
     });
-  }
-  [journey, country, city, date].forEach(el => el.addEventListener('change', applyFilters));
+  };
+
+  Object.values(filters).forEach(el => el.addEventListener('input', () => {
+    if (el === filters.country) updateCityOptions();
+    applyFilters();
+  }));
+
+  updateCityOptions();
+  applyFilters();
 });
 </script>

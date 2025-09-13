@@ -28,7 +28,7 @@ Usage: {% include breadcrumb.html %}
         {% if forloop.last and page.layout == 'day' %}
           <a href="{{ '/places/' | append: page.country | append: '/' | append: c | append: '/' | relative_url }}">{{ city_data.emoji }} {{ city_data.name }}</a>
           <span class="separator">›</span>
-          <span class="current">Tag {{ page.index }}</span>
+          <span class="current">{{ page.date | date: '%d.%m.%Y' }} – {{ page.title }}</span>
         {% elsif page.layout == 'city' %}
           <span class="current">{{ city_data.emoji }} {{ city_data.name }}</span>
         {% else %}
