@@ -1,11 +1,7 @@
-japan-25:
-  name: "Japan"
-  icon: "🗾"
+unsere-grosse-reise:
+  name: "Unsere große Reise"
+  icon: "🇯🇵 🇦🇺"
 
-australien-25:
-  name: "Australien"
-  icon: "🦘"
-
-skandinavien-25:
-  name: "Skandinavien"
-  icon: "❄️"
+skandinavien-interrail:
+  name: "Skandinavien mit dem Interrail"
+  icon: "🚞"
