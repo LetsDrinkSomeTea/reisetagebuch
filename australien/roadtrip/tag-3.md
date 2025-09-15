@@ -111,9 +111,9 @@ Dort werden wir weit entfernt vom Großstadtwahnsinn nur wenige Stunden am Tag f
 
 Das Bild des Tages zeigt eine Statue eines Minenarbeiters mit seinem Pony, aufgenommen in der `Scenic World`.  
 Sie erinnert an die Zeit des Kohleabbaus in den Blue Mountains.  
-Bis in die 1930er Jahre wurde in diesem Tal Kohle gefördert, wofür Ponys eingesetzt wurden, um täglich schwere Lasten zu transportierten.
+Bis in die 1930er Jahre wurde in diesem Tal Kohle gefördert, wofür Ponys eingesetzt wurden, um täglich schwere Lasten zu transportieren.
 Die Arbeiter hatten ein ziemlich gutes Verhältnis zu ihren Tieren und haben sie alle beim Namen gekannt und mehr als Kollegen als als Nutztiere gesehen.
-Heute erinnert die Statue an die oft sehr jungen Minenarbeiter und ihrem treuen Gefolge. 
+Heute erinnert die Statue an die oft sehr jungen Minenarbeiter und ihre treuen Gefährten. 
 
 ## 👩🏻‍🤝‍👨🏽 Selfie des Tages
 
