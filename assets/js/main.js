@@ -34,36 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Toggle country section
-    window.toggleCountry = function(countryKey) {
-        const countrySection = document.querySelector(`[data-country="${countryKey}"]`);
-        const citiesList = countrySection.querySelector('.cities-list');
-        const toggleIcon = countrySection.querySelector('.country-header .toggle-icon');
-        
-        if (citiesList.classList.contains('expanded')) {
-            citiesList.classList.remove('expanded');
-            toggleIcon.classList.remove('expanded');
-        } else {
-            citiesList.classList.add('expanded');
-            toggleIcon.classList.add('expanded');
-        }
-    }
-
-    // Toggle city section
-    window.toggleCity = function(countryKey, cityKey) {
-        const countrySection = document.querySelector(`[data-country="${countryKey}"]`);
-        const citySection = countrySection.querySelector(`[data-city="${cityKey}"]`);
-        const daysList = citySection.querySelector('.days-list');
-        const toggleIcon = citySection.querySelector('.city-header .toggle-icon');
-        
-        if (daysList && daysList.classList.contains('expanded')) {
-            daysList.classList.remove('expanded');
-            if (toggleIcon) toggleIcon.classList.remove('expanded');
-        } else if (daysList) {
-            daysList.classList.add('expanded');
-            if (toggleIcon) toggleIcon.classList.add('expanded');
-        }
-    }
 
     // Initialize navigation state based on current page
     const currentPath = window.location.pathname;
