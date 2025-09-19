@@ -21,6 +21,11 @@ weather: "Weather, 00°C"
 
 ![Noon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/noon.jpg)
 
+<video controls>
+  <source src="{{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/noon.mp4" type="video/mp4">
+  Dein Browser unterstützt das Video-Tag nicht.
+</video>
+
 ## 🍣 Mittagessen
 
 ![Lunch]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/lunch.jpg)
