@@ -1,6 +1,6 @@
 ---
 layout: day
-title: "Ziele abhacken"
+title: "Ziele abhaken"
 date: 2025-09-18
 country: australien # japan, australien, skandinavien
 city: roadtrip # tokyo, melbourne, oslo, etc.
