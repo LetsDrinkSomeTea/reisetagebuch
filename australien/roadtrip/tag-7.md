@@ -88,7 +88,12 @@ Damit endete unser Tag auch schon, bei dem wir viele verschiedene Eindrücke erl
 
 ## 💭 Stimmung & Gedanken
 
-[Reflect on the day - emotions, thoughts, surprises, challenges, etc.]
+Heute gibt es gar nicht so viel zu berichten.
+Es war alles in allem ein sehr gelungener Tag.
+Wir hatten genug Zeit, um alles anzuschauen und auch einfach Mal eine Weile stehen zu bleiben.
+Die Geschichte von Eden ist wirklich spannend und gab auch das erste Mal so richtige Einblicke in die Zusammenhänge zwischen den Aborigines und den Europäern.
+
+Die Seehunde heute morgen waren eine schöne Überraschung, jetzt hoffen wir nur noch darauf, dass das Wale-Schauen morgen klappt.
 
 ## 🏃🏽‍♀️ Schritte
 
