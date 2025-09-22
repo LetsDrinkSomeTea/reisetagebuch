@@ -17,12 +17,12 @@ Das ist ein Felsen, durch den die Gezeiten ein Loch in der ungefähren Form von 
 ![Morning Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/morning-1.jpg)
 
 Das allein ist zwar nicht schlecht, aber nicht der Grund, diesen Ort zu besuchen.  
-Direkt neben dem Felsen lassen sich Seehunde finden, die sich am Pier auf den Steinen sonnen.
+Direkt neben dem Felsen lassen sich australische Seebären finden, die sich am Pier auf den Steinen sonnen.
 
 ![Morning Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/morning-2.jpg)
 
 Wir saßen eine ganze Weile oben auf den Felsen und schauten dem Naturspiel zu.  
-Während dieser Zeit haben wir ungefähr 40 Seehunde gesehen, die planschten, schliefen und herumhüpften.
+Während dieser Zeit haben wir ungefähr 40 Robben gesehen, die planschten, schliefen und herumhüpften.
 
 ## 🥐 Frühstück
 
