@@ -13,7 +13,7 @@ Das zweite Mal sind wir ebenfalls bei Olli untergekommen.
 
 ## 📅 Aufenthaltsdauer
 
-``11. bis 13. September``
+``23. bis 24. September``
 
 ---
 
