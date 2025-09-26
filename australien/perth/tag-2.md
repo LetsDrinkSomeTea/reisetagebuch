@@ -59,7 +59,6 @@ Neben dem üblichen Tagebuchschreiben und Duschen verbrachten wir unseren Abend 
 ## ✨ Highlight des Tages
 
 - Die Wiedervereinigung  
-- Der Frozen Yoghurt  
 - Einfach mal nichts zu tun  
 
 ## 💭 Stimmung & Gedanken
