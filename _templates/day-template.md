@@ -32,6 +32,8 @@ weather: "Weather, 00°C"
 
 ## 🌆 Nachmittag
 
+![Snack]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/snack.jpg)
+
 ![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon.jpg)
 
 ## 🍜 Abendessen
