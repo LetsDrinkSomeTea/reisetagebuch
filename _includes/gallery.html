@@ -81,7 +81,7 @@
               {% assign country_name_attr = country_name | escape | replace: "'", '&#39;' %}
 
               {% assign image_type = image_types[basename] %}
-              {% assign image_label = image_type.name | default: basename | replace: '-', ' ' | capitalize %}
+              {% assign image_label = image_type.name | default: basename | replace: '-', ' ' %}
               {% assign title_text = primary_city_emoji | append: ' ' | append: primary_city_name | append: ' · Tag ' | append: day_page.day | append: ' · ' | append: image_label %}
               {% assign alt_text = image_label | append: ' – Tag ' | append: day_page.day | append: ' in ' | append: primary_city_name | append: ', ' | append: country_name %}
               {% capture location_label %}
@@ -119,6 +119,9 @@
   {% endif %}
 {% endfor %}
 
+{% if scope == "city" or scope == "country" %}
+  <h2>Galerie</h2>
+{% endif %}
 {% if item_count > 0 %}
   <div class="gallery gallery--{{ scope }}" data-gallery="{{ gallery_id }}"{% if include.dom_id %} id="{{ include.dom_id }}"{% endif %}>
     {{ gallery_markup | strip }}

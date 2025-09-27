@@ -11,7 +11,7 @@ Sie ist 243 km lang und verläuft fast komplett direkt an der Küste.
 So schlängelt sie sich am Meer entlang und zieht zahlreiche Touristen und Camper an.
 Entlang der Straße gibt es mehrere kleine Küstenstädte, die sich gut für Zwischenstopps eignen.
 
-![Camper und Great Ocean Road]({{ site.baseurl }}/unsere-grosse-reise/tag-26/noon.jpg)
+![Camper und Great Ocean Road]({{ site.baseurl }}/journeys/unsere-grosse-reise/tag-26/noon.jpg)
 
 ## 🏨 Unterkunft & 🚗 Transport
 
