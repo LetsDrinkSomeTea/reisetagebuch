@@ -1,0 +1,14 @@
+<div class="gallery-modal" data-modal="gallery" hidden>
+  <div class="gallery-modal__backdrop" data-modal-close></div>
+  <div class="gallery-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="gallery-modal-title">
+    <button class="gallery-modal__close" type="button" data-modal-close aria-label="Schließen">×</button>
+    <div class="gallery-modal__image-container">
+      <button class="gallery-modal__nav gallery-modal__nav--prev" type="button" data-modal-prev aria-label="Vorheriges Bild">‹</button>
+      <img class="gallery-modal__image" alt="" loading="lazy" decoding="async">
+      <button class="gallery-modal__nav gallery-modal__nav--next" type="button" data-modal-next aria-label="Nächstes Bild">›</button>
+    </div>
+    <div class="gallery-modal__info">
+      <p id="gallery-modal-title" class="modal-title"></p>
+    </div>
+  </div>
+</div>

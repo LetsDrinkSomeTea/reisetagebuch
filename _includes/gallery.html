@@ -1,0 +1,103 @@
+{% assign scope = include.scope | default: 'all' %}
+{% assign country_filter = include.country %}
+{% assign city_filter = include.city %}
+{% assign image_types = site.data['image-types'] %}
+{% assign allowed_ext = 'jpg,jpeg,png,webp,avif' | split: ',' %}
+{% assign gallery_markup = '' %}
+{% assign item_count = 0 %}
+
+{% assign gallery_id_seed = page.url | append: '-' | append: scope %}
+{% if country_filter %}{% assign gallery_id_seed = gallery_id_seed | append: '-' | append: country_filter %}{% endif %}
+{% if city_filter %}{% assign gallery_id_seed = gallery_id_seed | append: '-' | append: city_filter %}{% endif %}
+{% assign gallery_id = gallery_id_seed | replace: '/', '-' | replace: '.', '-' | replace: ' ', '-' %}
+
+{% assign day_pages = site.pages | where: 'layout', 'day' %}
+
+{% for static in site.static_files %}
+  {% assign file_path = static.path %}
+  {% if file_path contains '/journeys/' and file_path contains '/tag-' %}
+    {% assign ext = static.extname | remove_first: '.' | downcase %}
+    {% if allowed_ext contains ext %}
+      {% assign trimmed_path = file_path | remove_first: '/' %}
+      {% assign segments = trimmed_path | split: '/' %}
+      {% if segments.size >= 4 %}
+        {% assign journey_key = segments[1] %}
+        {% assign tag_folder = segments[2] %}
+        {% assign file_name = segments[3] %}
+        {% assign basename = file_name | split: '.' | first %}
+        {% assign day_number_string = tag_folder | remove: 'tag-' %}
+        {% if day_number_string != tag_folder %}
+          {% assign day_number = day_number_string | plus: 0 %}
+          {% assign journey_day_candidates = day_pages | where: 'journey', journey_key %}
+          {% assign day_page = journey_day_candidates | where: 'day', day_number | first %}
+          {% if day_page %}
+            {% assign includes_image = true %}
+            {% if scope == 'country' %}
+              {% if day_page.country != country_filter or basename != 'main' %}
+                {% assign includes_image = false %}
+              {% endif %}
+            {% elsif scope == 'city' %}
+              {% assign city_list = day_page.city | array %}
+              {% unless day_page.country == country_filter and city_list contains city_filter and basename == 'main' %}
+                {% assign includes_image = false %}
+              {% endunless %}
+            {% endif %}
+            {% if includes_image %}
+              {% assign country_data = site.data.countries[day_page.country] %}
+              {% assign city_key = day_page.city | first %}
+              {% if country_data and city_key %}
+                {% assign city_data = country_data.cities[city_key] %}
+              {% endif %}
+              {% unless city_data %}
+                {% assign city_data = {} %}
+              {% endunless %}
+              {% assign image_type = image_types[basename] %}
+              {% assign image_label = image_type.name | default: basename | replace: '-', ' ' | capitalize %}
+              {% assign country_name = country_data.name | default: day_page.country %}
+              {% assign country_flag = country_data.flag | default: '' %}
+              {% assign city_name = city_data.name | default: city_key %}
+              {% assign city_emoji = city_data.emoji | default: '' %}
+              {% assign title_text = city_emoji | append: ' ' | append: city_name | append: ' · Tag ' | append: day_page.day | append: ' · ' | append: image_label %}
+              {% assign alt_text = image_label | append: ' – Tag ' | append: day_page.day | append: ' in ' | append: city_name | append: ', ' | append: country_name %}
+              {% capture location_label %}
+                {% if city_emoji %}{{ city_emoji }} {% endif %}{{ city_name }}
+                {% if country_flag or country_name %}
+                  · {% if country_flag %}{{ country_flag }} {% endif %}{{ country_name }}
+                {% endif %}
+              {% endcapture %}
+              {% assign location_label = location_label | strip %}
+              {% assign image_url = file_path | relative_url %}
+              {% assign index_value = item_count %}
+              {% capture gallery_markup %}
+                {{ gallery_markup }}
+                <figure class="gallery__card">
+                  <a class="gallery__link" href="{{ image_url }}" data-gallery="{{ gallery_id }}" data-gallery-index="{{ index_value }}" data-gallery-src="{{ image_url }}" data-gallery-alt="{{ alt_text | escape }}" data-gallery-title="{{ title_text | escape }}">
+                    <div class="gallery__media">
+                      <img src="{{ image_url }}" alt="{{ alt_text | escape }}" loading="lazy" decoding="async">
+                    </div>
+                    <div class="gallery__meta">
+                      <div class="gallery__location">{{ location_label }}</div>
+                      <div class="gallery__badges">
+                        <span class="badge badge--primary">Tag {{ day_page.day }}</span>
+                        <span class="badge badge--light">{{ image_label }}</span>
+                      </div>
+                    </div>
+                  </a>
+                </figure>
+              {% endcapture %}
+              {% assign item_count = item_count | plus: 1 %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% if item_count > 0 %}
+  <div class="gallery gallery--{{ scope }}" data-gallery="{{ gallery_id }}">
+    {{ gallery_markup | strip }}
+  </div>
+{% elsif include.show_empty != false %}
+  <p class="gallery-empty">Hier erscheinen Bilder, sobald passende Medien vorhanden sind.</p>
+{% endif %}

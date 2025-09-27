@@ -1,0 +1,6 @@
+{% assign stats_content = include.content | to_s | strip %}
+{% if stats_content != '' %}
+  <ul class="stats-list">
+    {{ stats_content }}
+  </ul>
+{% endif %}

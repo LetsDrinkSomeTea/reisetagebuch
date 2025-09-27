@@ -13,22 +13,37 @@ Usage: {% include breadcrumb.html %}
   {% if page.country %}
     {% assign country_data = site.data.countries[page.country] %}
     <span class="separator">›</span>
-    
-    {% if page.layout == "day" or page.layout == "city" %}
-      <a href="{{ '/' | append: page.country | append: '/' | relative_url }}">
-        {{ country_data.flag }}
+
+    {% assign country_key = page.country %}
+    {% assign country_page = site.pages | where: 'layout', 'country' | where: 'country', country_key | first %}
+    {% if country_page %}
+      {% assign country_url = country_page.url %}
+    {% else %}
+      {% assign country_url = '/places/' | append: country_key | append: '/' %}
+    {% endif %}
+    {% assign is_country_link = page.layout == 'day' or page.layout == 'city' %}
+
+    {% if is_country_link %}
+      <a href="{{ country_url | relative_url }}">
+        {{ country_data.flag }} {{ country_data.name }}
       </a>
     {% else %}
       <span class="current">{{ country_data.flag }} {{ country_data.name }}</span>
     {% endif %}
-    
+
     {% if page.city or include.city %}
       {% assign city_key = include.city | default: page.city %}
       {% assign city_data = country_data.cities[city_key] %}
       <span class="separator">›</span>
-      
+
       {% if page.layout == "day" %}
-        <a href="{{ '/' | append: page.country | append: '/' | append: city_key | append: '/' | relative_url }}">
+        {% assign city_page = site.pages | where: 'layout', 'city' | where: 'country', country_key | where: 'city', city_key | first %}
+        {% if city_page %}
+          {% assign city_url = city_page.url %}
+        {% else %}
+          {% assign city_url = '/places/' | append: country_key | append: '/' | append: city_key | append: '/' %}
+        {% endif %}
+        <a href="{{ city_url | relative_url }}">
           {{ city_data.emoji }} {{ city_data.name }}
         </a>
         <span class="separator">›</span>

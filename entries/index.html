@@ -1,0 +1,21 @@
+---
+layout: default
+title: Alle Einträge
+subtitle: Chronologisch sortierte Tage in Wort und Bild
+permalink: /entries/
+---
+
+<article class="entries-page">
+  {% include page-header.html title=page.title subtitle=page.subtitle %}
+
+  {% assign all_day_pages = site.pages | where: 'layout', 'day' | sort: 'date' | reverse %}
+  {% if all_day_pages.size > 0 %}
+    <div class="grid grid--entries">
+      {% for day_page in all_day_pages %}
+        {% include card.html type='day' item=day_page %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>Noch keine Tagebucheinträge vorhanden. Schau bald wieder vorbei!</p>
+  {% endif %}
+</article>

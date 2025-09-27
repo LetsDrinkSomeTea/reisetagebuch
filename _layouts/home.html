@@ -1,0 +1,49 @@
+---
+layout: default
+---
+
+{% assign all_day_pages = site.pages | where: 'layout', 'day' | sort: 'date' | reverse %}
+{% assign journeys_with_entries = '' | split: '' %}
+{% assign journeys = site.data.journeys %}
+
+<article class="home-page">
+  {% include page-header.html title=page.title subtitle=page.subtitle %}
+
+  <section class="journeys-overview">
+    <h2>Aktive Reisen</h2>
+    {% capture journeys_markup %}
+      <div class="grid grid--journeys">
+        {% for journey in journeys %}
+          {% assign journey_key = journey[0] %}
+          {% assign journey_data = journey[1] %}
+          {% assign journey_days = all_day_pages | where: 'journey', journey_key %}
+          {% if journey_days.size > 0 %}
+            {% assign journey_page = site.pages | where: 'layout', 'journey' | where: 'journey', journey_key | first %}
+            {% if journey_page %}
+              {% assign journeys_with_entries = journeys_with_entries | push: journey_key %}
+              {% include card.html type='journey' item=journey_page journey=journey_key %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endcapture %}
+    {% if journeys_with_entries.size > 0 %}
+      {{ journeys_markup }}
+    {% else %}
+      <p>Noch keine veröffentlichten Reisen. Sobald die ersten Einträge erscheinen, findest du sie hier.</p>
+    {% endif %}
+  </section>
+
+  <section class="latest-entries">
+    <h2>Neueste Tagebucheinträge</h2>
+    {% if all_day_pages.size > 0 %}
+      <div class="grid grid--entries">
+        {% for day_page in all_day_pages limit: 6 %}
+          {% include card.html type='day' item=day_page %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>Die neuesten Erlebnisse erscheinen hier, sobald Tage erfasst sind.</p>
+    {% endif %}
+  </section>
+</article>

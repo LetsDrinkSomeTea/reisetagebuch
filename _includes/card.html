@@ -1,0 +1,159 @@
+{% assign type = include.type | default: 'day' %}
+{% assign item = include.item %}
+
+{% if type == 'journey' and item %}
+  {% assign journey_key = include.journey | default: item.journey %}
+  {% assign journey_data = site.data.journeys[journey_key] %}
+  {% assign journey_days = site.pages | where: 'layout', 'day' | where: 'journey', journey_key %}
+  {% assign journey_days_sorted = journey_days | sort: 'date' %}
+  {% assign first_day = journey_days_sorted | first %}
+  {% assign last_day = journey_days_sorted | last %}
+  {% assign visited_countries = '' | split: '' %}
+  {% assign visited_cities = '' | split: '' %}
+  {% for day_page in journey_days %}
+    {% unless visited_countries contains day_page.country %}
+      {% assign visited_countries = visited_countries | push: day_page.country %}
+    {% endunless %}
+    {% if day_page.city %}
+      {% for city_key in day_page.city %}
+        {% unless visited_cities contains city_key %}
+          {% assign visited_cities = visited_cities | push: city_key %}
+        {% endunless %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+  {% assign journey_url = item.url %}
+  {% unless journey_url %}
+    {% assign journey_url = '/journeys/' | append: journey_key | append: '/' %}
+  {% endunless %}
+  <article class="card card--journey">
+    <header>
+      <h3>
+        <a href="{{ journey_url | relative_url }}">
+          {% if journey_data.icon %}<span aria-hidden="true">{{ journey_data.icon }}</span> {% endif %}{{ journey_data.name | default: item.title }}
+        </a>
+      </h3>
+      {% if first_day and last_day %}
+        <div class="day-count">
+          {{ first_day.date | date: '%d.%m.%Y' }} – {{ last_day.date | date: '%d.%m.%Y' }}
+        </div>
+      {% endif %}
+    </header>
+    {% capture journey_stats %}
+      <li><span class="stats-value">{{ journey_days.size }}</span> Tage</li>
+      <li><span class="stats-value">{{ visited_cities.size }}</span> Städte</li>
+      <li><span class="stats-value">{{ visited_countries.size }}</span> Länder</li>
+    {% endcapture %}
+    {% include stats.html content=journey_stats %}
+    <footer>
+      <a href="{{ journey_url | relative_url }}">Zur Reise</a>
+    </footer>
+  </article>
+{% elsif type == 'country' and item %}
+  {% assign country_key = include.country | default: item.country %}
+  {% assign country_data = site.data.countries[country_key] %}
+  {% assign country_days = site.pages | where: 'layout', 'day' | where: 'country', country_key %}
+  {% assign visited_cities = '' | split: '' %}
+  {% for day_page in country_days %}
+    {% if day_page.city %}
+      {% for city_key in day_page.city %}
+        {% unless visited_cities contains city_key %}
+          {% assign visited_cities = visited_cities | push: city_key %}
+        {% endunless %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+  {% assign country_url = item.url %}
+  {% unless country_url %}
+    {% assign country_url = '/' | append: country_key | append: '/' %}
+  {% endunless %}
+  <article class="card card--country">
+    <header>
+      <h3>
+        <a href="{{ country_url | relative_url }}">
+          {% if country_data.flag %}<span aria-hidden="true">{{ country_data.flag }}</span> {% endif %}{{ country_data.name | default: item.title }}
+        </a>
+      </h3>
+    </header>
+    {% capture country_stats %}
+      <li><span class="stats-value">{{ country_days.size }}</span> Tage</li>
+      <li><span class="stats-value">{{ visited_cities.size }}</span> Städte</li>
+    {% endcapture %}
+    {% include stats.html content=country_stats %}
+    {% if visited_cities.size > 0 %}
+      <div class="cities-preview">
+        {% for city_key in visited_cities %}
+          {% assign city_data = country_data.cities[city_key] %}
+          <span class="city-tag">{{ city_data.emoji }} {{ city_data.name }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+    <footer>
+      <a href="{{ country_url | relative_url }}">Land entdecken</a>
+    </footer>
+  </article>
+{% elsif type == 'city' and item %}
+  {% assign country_key = include.country | default: item.country %}
+  {% assign city_key = include.city | default: item.city %}
+  {% if city_key and city_key.first %}
+    {% assign city_key = city_key | first %}
+  {% endif %}
+  {% assign country_data = include.country_data | default: site.data.countries[country_key] %}
+  {% assign city_data = include.city_data | default: country_data.cities[city_key] %}
+  {% assign city_days = '' | split: '' %}
+  {% assign relevant_days = include.day_pages | default: site.pages | where: 'layout', 'day' | where: 'country', country_key %}
+  {% for day_page in relevant_days %}
+    {% assign city_field = day_page.city | array %}
+    {% if city_field contains city_key %}
+      {% assign city_days = city_days | push: day_page %}
+    {% endif %}
+  {% endfor %}
+  {% assign city_days_sorted = city_days | sort: 'date' | reverse %}
+  {% assign first_day = city_days_sorted | last %}
+  {% assign latest_day = city_days_sorted | first %}
+  {% assign city_url = item.url %}
+  {% unless city_url %}
+    {% assign city_url = '/' | append: country_key | append: '/' | append: city_key | append: '/' %}
+  {% endunless %}
+  <article class="card card--city">
+    <header>
+      <h3>
+        <a href="{{ city_url | relative_url }}">
+          {% if city_data.emoji %}<span aria-hidden="true">{{ city_data.emoji }}</span> {% endif %}{{ city_data.name | default: item.title }}
+        </a>
+      </h3>
+    </header>
+    {% capture city_stats %}
+      <li><span class="stats-value">{{ city_days.size }}</span> Tage</li>
+    {% endcapture %}
+    {% include stats.html content=city_stats %}
+    {% if latest_day %}
+    <p class="card-met">{{first_day.date | date: '%d.%m'}} bis {{ latest_day.date | date: '%d.%m.%Y' }}.</p>
+    {% endif %}
+    <footer>
+      <a href="{{ city_url | relative_url }}">Stadt entdecken</a>
+    </footer>
+  </article>
+{% elsif item %}
+  {% assign day_page = item %}
+  {% assign country_key = day_page.country %}
+  {% assign city_key = day_page.city | array | first %}
+  {% assign country_data = site.data.countries[country_key] %}
+  {% assign city_data = country_data.cities[city_key] %}
+  <article class="card card--entry">
+    <header>
+      <div class="entry-location">{{ city_data.emoji }} {{ city_data.name }}, {{ country_data.flag }} {{ country_data.name }}</div>
+      <h3><a href="{{ day_page.url | relative_url }}">{{ day_page.title }}</a></h3>
+      <time datetime="{{ day_page.date | date_to_xmlschema }}">{{ day_page.date | date: '%d.%m.%Y' }}</time>
+    </header>
+    <div class="badge-container">
+      <span class="badge badge--primary">Tag {{ day_page.day }}</span>
+      {% if day_page.weather %}
+        <span class="badge badge--weather">{{ day_page.weather }}</span>
+      {% endif %}
+    </div>
+    <footer>
+      <a href="{{ day_page.url | relative_url }}" class="day-badge">Zum Eintrag</a>
+    </footer>
+  </article>
+{% endif %}

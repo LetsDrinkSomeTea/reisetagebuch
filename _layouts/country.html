@@ -3,6 +3,7 @@ layout: default
 ---
 
 <article class="country-page">
+  {% assign country_data = site.data.countries[page.country] %}
   {% include page-header.html %}
 
   <div class="page-content">
@@ -12,12 +13,19 @@ layout: default
   <section class="cities-overview">
     <h2>Städte</h2>
     
+    {% assign all_country_days = site.pages | where: 'layout', 'day' | where: 'country', page.country %}
     <!-- Count cities with day entries first -->
     {% assign cities_with_content = 0 %}
     {% for city in country_data.cities %}
       {% assign city_key = city[0] %}
-      {% assign day_pages = site.pages | where_exp: "p", "p.country == page.country and p.layout == 'day' and (p.city contains city_key or p.city == city_key)" %}
-      {% if day_pages.size > 0 %}
+      {% assign collected_days = '' | split: '' %}
+      {% for day_page in all_country_days %}
+        {% assign city_list = day_page.city | array %}
+        {% if city_list contains city_key %}
+          {% assign collected_days = collected_days | push: day_page %}
+        {% endif %}
+      {% endfor %}
+      {% if collected_days.size > 0 %}
         {% assign cities_with_content = cities_with_content | plus: 1 %}
       {% endif %}
     {% endfor %}
@@ -27,16 +35,22 @@ layout: default
         {% for city in country_data.cities %}
           {% assign city_key = city[0] %}
           {% assign city_data = city[1] %}
-          
+
           <!-- Find city index page -->
-          {% assign city_page = site.pages | where: "country", page.country | where: "city", city_key | where: "layout", "city" | first %}
-          
-          <!-- Count day entries for this city -->
-          {% assign day_pages = site.pages | where_exp: "p", "p.country == page.country and p.layout == 'day' and (p.city contains city_key or p.city == city_key)" %}
-          
+          {% assign city_page = site.pages | where: 'layout', 'city' | where: 'country', page.country | where: 'city', city_key | first %}
+
+          <!-- Collect day entries for this city -->
+          {% assign city_day_pages = '' | split: '' %}
+          {% for day_page in all_country_days %}
+            {% assign city_list = day_page.city | array %}
+            {% if city_list contains city_key %}
+              {% assign city_day_pages = city_day_pages | push: day_page %}
+            {% endif %}
+          {% endfor %}
+
           <!-- Only show cities that have day entries -->
-          {% if day_pages.size > 0 %}
-            {% include card.html type="city" item=city_page country_data=country_data city_data=city_data day_pages=day_pages %}
+          {% if city_day_pages.size > 0 %}
+            {% include card.html type='city' item=city_page country_data=country_data city_data=city_data day_pages=city_day_pages %}
           {% endif %}
         {% endfor %}
       </div>

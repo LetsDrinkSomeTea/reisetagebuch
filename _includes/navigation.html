@@ -1,0 +1,152 @@
+{% assign day_pages = site.pages | where: "layout", "day" %}
+{% assign day_pages_by_date = day_pages | sort: "date" %}
+{% assign day_pages_desc = day_pages_by_date | reverse %}
+
+<nav class="navigation" aria-label="Hauptnavigation">
+  <div class="journeys-nav">
+    <h3>Reisen</h3>
+    {% for journey in site.data.journeys %}
+      {% assign journey_key = journey[0] %}
+      {% assign journey_data = journey[1] %}
+      {% assign journey_days = day_pages | where: "journey", journey_key %}
+      {% if journey_days.size > 0 %}
+        {% assign journey_page = site.pages | where: "layout", "journey" | where: "journey", journey_key | first %}
+        {% assign journey_url = journey_page.url %}
+        {% unless journey_url %}
+          {% assign journey_url = '/journeys/' | append: journey_key | append: '/' %}
+        {% endunless %}
+        <div class="journey-section">
+          <div class="journey-header">
+            <a class="journey-link{% if page.url == journey_url %} active{% endif %}" href="{{ journey_url | relative_url }}">
+              {% if journey_data.icon %}{{ journey_data.icon }} {% endif %}{{ journey_data.name }}
+            </a>
+            <span class="badge badge--secondary">{{ journey_days.size }} Tage</span>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="countries-nav">
+    <h3>Länder &amp; Städte</h3>
+    {% for country in site.data.countries %}
+      {% assign country_key = country[0] %}
+      {% assign country_data = country[1] %}
+      {% assign country_days = day_pages | where: "country", country_key %}
+      {% if country_days.size > 0 %}
+        {% assign country_page = site.pages | where: "layout", "country" | where: "country", country_key | first %}
+        {% if country_page %}
+          {% assign country_url = country_page.url %}
+        {% else %}
+          {% assign country_url = '/places/' | append: country_key | append: '/' %}
+        {% endif %}
+        {% assign is_current_country = false %}
+        {% if page.url == country_url or page.country == country_key %}
+          {% assign is_current_country = true %}
+        {% endif %}
+        <div class="country-section" data-country="{{ country_key }}">
+          <div class="country-header">
+            <a class="country-link{% if page.url == country_url %} active{% endif %}" href="{{ country_url | relative_url }}">
+              {{ country_data.flag }} {{ country_data.name }}
+            </a>
+            <button class="nav-toggle" type="button" data-target="country-{{ country_key }}" aria-expanded="{% if is_current_country %}true{% else %}false{% endif %}" aria-controls="country-{{ country_key }}" aria-label="Städte in {{ country_data.name }} anzeigen oder verbergen">
+              <span class="toggle-icon{% if is_current_country %} expanded{% endif %}" aria-hidden="true">▶</span>
+            </button>
+          </div>
+
+          {% assign cities_with_entries = 0 %}
+          {% for city in country_data.cities %}
+            {% assign city_key = city[0] %}
+            {% assign candidate_days = "" | split: "" %}
+            {% for day_page in country_days %}
+              {% assign city_field = day_page.city | jsonify %}
+              {% if city_field contains city_key %}
+                {% assign candidate_days = candidate_days | push: day_page %}
+              {% endif %}
+            {% endfor %}
+            {% if candidate_days.size > 0 %}
+              {% assign cities_with_entries = cities_with_entries | plus: 1 %}
+            {% endif %}
+          {% endfor %}
+
+          {% if cities_with_entries > 0 %}
+            <ul id="country-{{ country_key }}" class="cities-list{% if is_current_country %} expanded{% endif %}">
+              {% for city in country_data.cities %}
+                {% assign city_key = city[0] %}
+                {% assign city_data = city[1] %}
+                {% assign city_days = "" | split: "" %}
+                {% for day_page in country_days %}
+                  {% assign city_field = day_page.city | jsonify %}
+                  {% if city_field contains city_key %}
+                    {% assign city_days = city_days | push: day_page %}
+                  {% endif %}
+                {% endfor %}
+                {% if city_days.size > 0 %}
+                  {% assign city_page = site.pages | where: "layout", "city" | where: "country", country_key | where: "city", city_key | first %}
+                  {% if city_page %}
+                    {% assign city_url = city_page.url %}
+                  {% else %}
+                    {% assign city_url = '/places/' | append: country_key | append: '/' | append: city_key | append: '/' %}
+                  {% endif %}
+                  {% assign is_current_city = false %}
+                  {% if page.url == city_url %}
+                    {% assign is_current_city = true %}
+                  {% elsif page.city %}
+                    {% assign page_city_field = page.city | jsonify %}
+                    {% if page_city_field contains city_key %}
+                      {% assign is_current_city = true %}
+                    {% endif %}
+                  {% endif %}
+                  <li class="city-section" data-city="{{ city_key }}">
+                    <div class="city-header">
+                      <a class="city-link{% if is_current_city %} active{% endif %}" href="{{ city_url | relative_url }}">
+                        {{ city_data.emoji }} {{ city_data.name }}
+                      </a>
+                      <button class="nav-toggle" type="button" data-target="city-{{ country_key }}-{{ city_key }}" aria-expanded="{% if is_current_city %}true{% else %}false{% endif %}" aria-controls="city-{{ country_key }}-{{ city_key }}" aria-label="Tage in {{ city_data.name }} anzeigen oder verbergen">
+                        <span class="toggle-icon{% if is_current_city %} expanded{% endif %}" aria-hidden="true">▶</span>
+                      </button>
+                    </div>
+                    {% assign city_days_sorted = city_days | sort: "day" | reverse %}
+                    <ul id="city-{{ country_key }}-{{ city_key }}" class="days-list{% if is_current_city %} expanded{% endif %}">
+                      {% for day_page in city_days_sorted %}
+                        <li class="day-item">
+                          <a class="day-link{% if page.url == day_page.url %} active{% endif %}" href="{{ day_page.url | relative_url }}">
+                            Tag {{ day_page.day }}{% if day_page.title %}: {{ day_page.title }}{% endif %}
+                          </a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="latest-entries">
+    <h3>Neueste Tage</h3>
+    {% for entry in day_pages_desc limit: 8 %}
+      <div class="entry-item">
+        <span class="entry-date">{{ entry.date | date: '%d.%m' }}</span>
+        <a href="{{ entry.url | relative_url }}"{% if page.url == entry.url %} class="active"{% endif %}>
+          Tag {{ entry.day }}{% if entry.title %}: {{ entry.title }}{% endif %}
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="global-links">
+    {% assign entries_url = '/entries/' %}
+    {% assign places_url = '/places/' %}
+    <a class="global-link{% if page.url == entries_url %} active{% endif %}" href="{{ entries_url | relative_url }}">📖 Alle Einträge</a>
+    <a class="global-link{% if page.url == places_url %} active{% endif %}" href="{{ places_url | relative_url }}">🗺️ Besuchte Orte</a>
+  </div>
+
+  <div class="gallery-main-link-section">
+    {% assign gallery_url = '/gallery/' %}
+    <a class="gallery-main-link{% if page.url == gallery_url %} active{% endif %}" href="{{ gallery_url | relative_url }}">📸 Zur Galerie</a>
+  </div>
+</nav>

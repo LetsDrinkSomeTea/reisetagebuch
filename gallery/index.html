@@ -1,0 +1,48 @@
+---
+layout: default
+title: Galerie
+subtitle: Alle Bilder aus unseren Reisen auf einen Blick
+permalink: /gallery/
+---
+
+<article class="gallery-page">
+  {% include page-header.html title=page.title subtitle=page.subtitle %}
+
+  {% assign allowed_ext = 'jpg,jpeg,png,webp,avif' | split: ',' %}
+  {% assign total_images = 0 %}
+  {% assign day_pages = site.pages | where: 'layout', 'day' %}
+  {% assign journey_keys = '' | split: '' %}
+  {% assign countries_with_entries = '' | split: '' %}
+
+  {% for static in site.static_files %}
+    {% assign file_path = static.path %}
+    {% if file_path contains '/journeys/' and file_path contains '/tag-' %}
+      {% assign ext = static.extname | remove_first: '.' | downcase %}
+      {% if allowed_ext contains ext %}
+        {% assign total_images = total_images | plus: 1 %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+  {% for day_page in day_pages %}
+    {% unless journey_keys contains day_page.journey %}
+      {% assign journey_keys = journey_keys | push: day_page.journey %}
+    {% endunless %}
+    {% unless countries_with_entries contains day_page.country %}
+      {% assign countries_with_entries = countries_with_entries | push: day_page.country %}
+    {% endunless %}
+  {% endfor %}
+
+  {% if total_images > 0 %}
+    <div class="gallery__stats">
+      <div class="stat-item"><span class="stats-value">{{ total_images }}</span> Bilder</div>
+      <div class="stat-item"><span class="stats-value">{{ day_pages.size }}</span> Tage</div>
+      <div class="stat-item"><span class="stats-value">{{ journey_keys.size }}</span> Reisen</div>
+      <div class="stat-item"><span class="stats-value">{{ countries_with_entries.size }}</span> Länder</div>
+    </div>
+
+    {% include gallery.html scope='all' show_empty=false %}
+  {% else %}
+    <p>Noch keine Bilder verfügbar. Lade Medien zu den Tagen hoch, um sie hier zu sehen.</p>
+  {% endif %}
+</article>
