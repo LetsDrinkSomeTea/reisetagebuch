@@ -5,6 +5,8 @@ date: 2025-09-22
 journey: unsere-grosse-reise
 country: australien # japan, australien, skandinavien
 city:
+  - wilsons-promontory
+  - melbourne
   - roadtrip # tokyo, melbourne, oslo, etc.
 day: 39
 weather: Wechselhaft, 12°C

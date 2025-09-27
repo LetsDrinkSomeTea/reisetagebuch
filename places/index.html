@@ -1,12 +1,14 @@
 ---
 layout: default
 title: Besuchte Orte
-subtitle: Länder und Städte mit veröffentlichten Tagen
+subtitle: Alle Länder und Städte, die wir bereisten
 permalink: /places/
 ---
 
 <article class="places-page">
   {% include page-header.html title=page.title subtitle=page.subtitle %}
+
+  {{ content }}
 
   {% assign day_pages = site.pages | where: 'layout', 'day' %}
   {% assign countries_with_entries = '' | split: '' %}
@@ -39,14 +41,22 @@ permalink: /places/
         {% endif %}
       {% endfor %}
       {% if city_count > 0 %}
+        {% assign country_page = site.pages | where: 'layout', 'country' | where: 'country', country_key | first %}
         {% capture country_sections %}
           {{ country_sections }}
-          <section class="places-country">
+          <section class="places-country" data-filter-section>
             <header class="places-country__header">
               <h2>{{ country_data.flag }} {{ country_data.name }}</h2>
               <p>{{ city_count }} Städte · {{ country_day_entries.size }} Tage</p>
             </header>
-            <div class="grid grid--cities">
+            <div class="places-country__summary">
+              {% if country_page %}
+                {% include card.html type='country' item=country_page country=country_key country_data=country_data %}
+              {% else %}
+                <a class="button button--ghost" href="{{ '/places/' | append: country_key | append: '/' | relative_url }}">Land anzeigen</a>
+              {% endif %}
+            </div>
+            <div class="grid grid--cities" data-filter-collection>
               {{ city_markup | strip }}
             </div>
           </section>
@@ -57,7 +67,32 @@ permalink: /places/
   {% endfor %}
 
   {% if countries_with_entries.size > 0 %}
-    {{ country_sections | strip }}
+    <div class="filter-bar" data-filter-target="#places-collection" data-filter-collapse=".places-country">
+      <div class="filter-bar__group" data-filter-group="journey">
+        <label class="filter-bar__label" for="places-filter-journey">Reise</label>
+        <select id="places-filter-journey" class="filter-bar__select" data-filter="journey">
+          <option value="">Alle Reisen</option>
+        </select>
+      </div>
+      <div class="filter-bar__group" data-filter-group="country">
+        <label class="filter-bar__label" for="places-filter-country">Land</label>
+        <select id="places-filter-country" class="filter-bar__select" data-filter="country">
+          <option value="">Alle Länder</option>
+        </select>
+      </div>
+      <div class="filter-bar__group" data-filter-group="city">
+        <label class="filter-bar__label" for="places-filter-city">Stadt</label>
+        <select id="places-filter-city" class="filter-bar__select" data-filter="city">
+          <option value="">Alle Städte</option>
+        </select>
+      </div>
+      <button class="filter-bar__reset" type="button" data-filter-reset hidden>Filter zurücksetzen</button>
+    </div>
+
+    <div id="places-collection">
+      <p class="filter-empty" data-filter-empty hidden aria-live="polite">Keine Orte für die aktuelle Auswahl.</p>
+      {{ country_sections | strip }}
+    </div>
   {% else %}
     <p>Es wurden noch keine Orte besucht. Sobald Tagebucheinträge existieren, erscheinen die Orte an dieser Stelle.</p>
   {% endif %}

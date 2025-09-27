@@ -5,6 +5,9 @@ date: 2025-09-09
 journey: unsere-grosse-reise
 country: australien # japan, australien, skandinavien
 city:
+  - fairhaven
+  - lorne
+  - apollo-bay
   - great-ocean-road # tokyo, melbourne, oslo, etc.
 day: 26
 weather: Klar, 15°C

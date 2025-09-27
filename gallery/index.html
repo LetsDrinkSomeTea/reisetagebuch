@@ -13,6 +13,7 @@ permalink: /gallery/
   {% assign day_pages = site.pages | where: 'layout', 'day' %}
   {% assign journey_keys = '' | split: '' %}
   {% assign countries_with_entries = '' | split: '' %}
+  {% assign cities_with_entries = '' | split: '' %}
 
   {% for static in site.static_files %}
     {% assign file_path = static.path %}
@@ -31,6 +32,9 @@ permalink: /gallery/
     {% unless countries_with_entries contains day_page.country %}
       {% assign countries_with_entries = countries_with_entries | push: day_page.country %}
     {% endunless %}
+    {% unless cities_with_entries contains day_page.city %}
+      {% assign cities_with_entries = cities_with_entries | push: day_page.city %}
+    {% endunless %}
   {% endfor %}
 
   {% if total_images > 0 %}
@@ -39,10 +43,36 @@ permalink: /gallery/
       <div class="stat-item"><span class="stats-value">{{ day_pages.size }}</span> Tage</div>
       <div class="stat-item"><span class="stats-value">{{ journey_keys.size }}</span> Reisen</div>
       <div class="stat-item"><span class="stats-value">{{ countries_with_entries.size }}</span> Länder</div>
+      <div class="stat-item"><span class="stats-value">{{ cities_with_entries.size }}</span> Städte</div>
     </div>
 
-    {% include gallery.html scope='all' show_empty=false %}
+    <div class="filter-bar" data-filter-target="#gallery-collection">
+      <div class="filter-bar__group" data-filter-group="journey">
+        <label class="filter-bar__label" for="gallery-filter-journey">Reise</label>
+        <select id="gallery-filter-journey" class="filter-bar__select" data-filter="journey">
+          <option value="">Alle Reisen</option>
+        </select>
+      </div>
+      <div class="filter-bar__group" data-filter-group="country">
+        <label class="filter-bar__label" for="gallery-filter-country">Land</label>
+        <select id="gallery-filter-country" class="filter-bar__select" data-filter="country">
+          <option value="">Alle Länder</option>
+        </select>
+      </div>
+      <div class="filter-bar__group" data-filter-group="city">
+        <label class="filter-bar__label" for="gallery-filter-city">Stadt</label>
+        <select id="gallery-filter-city" class="filter-bar__select" data-filter="city">
+          <option value="">Alle Städte</option>
+        </select>
+      </div>
+      <button class="filter-bar__reset" type="button" data-filter-reset hidden>Filter zurücksetzen</button>
+    </div>
+
+    <div id="gallery-collection">
+      <p class="filter-empty" data-filter-empty hidden aria-live="polite">Keine Bilder für die aktuelle Auswahl.</p>
+      {% include gallery.html scope='all' show_empty=false dom_id='gallery-grid' %}
+    </div>
   {% else %}
-    <p>Noch keine Bilder verfügbar. Lade Medien zu den Tagen hoch, um sie hier zu sehen.</p>
+    <p>Noch keine Bilder verfügbar.</p>
   {% endif %}
 </article>

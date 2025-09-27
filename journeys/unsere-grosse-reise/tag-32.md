@@ -5,6 +5,8 @@ date: 2025-09-15
 journey: unsere-grosse-reise
 country: australien # japan, australien, skandinavien
 city:
+  - sydney
+  - katoomba
   - roadtrip # tokyo, melbourne, oslo, etc.
 day: 32
 weather: Sonnig, 11°C

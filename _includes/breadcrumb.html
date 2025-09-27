@@ -7,6 +7,15 @@ Parameters:
 Usage: {% include breadcrumb.html %}
 {% endcomment %}
 
+{% assign allowed_layouts = 'country,city,day' | split: ',' %}
+{% assign current_layout = page.layout | default: '' %}
+{% assign show_breadcrumb = false %}
+
+{% if allowed_layouts contains current_layout %}
+  {% assign show_breadcrumb = true %}
+{% endif %}
+
+{% if show_breadcrumb %}
 <div class="breadcrumb">
   <a href="{{ '/' | relative_url }}">🏠</a>
   
@@ -57,3 +66,4 @@ Usage: {% include breadcrumb.html %}
     <span class="current">📸 Galerie</span>
   {% endif %}
 </div>
+{% endif %}

@@ -101,21 +101,43 @@
   {% assign country_data = include.country_data | default: site.data.countries[country_key] %}
   {% assign city_data = include.city_data | default: country_data.cities[city_key] %}
   {% assign city_days = '' | split: '' %}
+  {% assign city_journeys = '' | split: '' %}
   {% assign relevant_days = include.day_pages | default: site.pages | where: 'layout', 'day' | where: 'country', country_key %}
   {% for day_page in relevant_days %}
     {% assign city_field = day_page.city | array %}
     {% if city_field contains city_key %}
       {% assign city_days = city_days | push: day_page %}
+      {% unless city_journeys contains day_page.journey %}
+        {% assign city_journeys = city_journeys | push: day_page.journey %}
+      {% endunless %}
     {% endif %}
   {% endfor %}
-  {% assign city_days_sorted = city_days | sort: 'date' | reverse %}
-  {% assign first_day = city_days_sorted | last %}
-  {% assign latest_day = city_days_sorted | first %}
+  {% assign city_days_sorted = city_days | sort: 'date' %}
+  {% assign first_day = city_days_sorted | first %}
+  {% assign latest_day = city_days_sorted | last %}
+  {% assign unique_city_dates = '' | split: '' %}
+  {% for day_page in city_days_sorted %}
+    {% assign day_key = day_page.date | date: '%Y-%m-%d' %}
+    {% unless unique_city_dates contains day_key %}
+      {% assign unique_city_dates = unique_city_dates | push: day_key %}
+    {% endunless %}
+  {% endfor %}
+  {% assign unique_date_count = unique_city_dates.size %}
+  {% assign journey_labels = '' | split: '' %}
+  {% for journey_key in city_journeys %}
+    {% assign journey_data = site.data.journeys[journey_key] %}
+    {% assign journey_label = journey_data.name | default: journey_key %}
+    {% assign journey_labels = journey_labels | push: journey_label %}
+  {% endfor %}
+  {% assign journey_keys_attr = city_journeys | join: ' ' %}
+  {% assign journey_labels_attr = journey_labels | join: '|' | escape | replace: "'", '&#39;' %}
+  {% assign country_name_attr = country_data.name | default: country_key | escape | replace: "'", '&#39;' %}
+  {% assign city_name_attr = city_data.name | default: city_key | escape | replace: "'", '&#39;' %}
   {% assign city_url = item.url %}
   {% unless city_url %}
     {% assign city_url = '/' | append: country_key | append: '/' | append: city_key | append: '/' %}
   {% endunless %}
-  <article class="card card--city">
+  <article class="card card--city" data-filter-item data-journey="{{ journey_keys_attr }}" data-journey-names="{{ journey_labels_attr }}" data-country="{{ country_key }}" data-country-names="{{ country_name_attr }}" data-city="{{ city_key }}" data-city-names="{{ city_name_attr }}">
     <header>
       <h3>
         <a href="{{ city_url | relative_url }}">
@@ -128,7 +150,19 @@
     {% endcapture %}
     {% include stats.html content=city_stats %}
     {% if latest_day %}
-    <p class="card-met">{{first_day.date | date: '%d.%m'}} bis {{ latest_day.date | date: '%d.%m.%Y' }}.</p>
+      {% capture visit_sentence %}
+        {% if unique_date_count == 0 %}
+        {% elsif unique_date_count == 1 %}
+          {{ latest_day.date | date: '%d.%m.%y' }}
+        {% elsif unique_date_count == 2 %}
+          {{ first_day.date | date: '%d.%m' }} und {{ latest_day.date | date: '%d.%m.%y' }}
+        {% else %}
+          {{ first_day.date | date: '%d.%m' }} bis {{ latest_day.date | date: '%d.%m.%y' }}
+        {% endif %}
+      {% endcapture %}
+      {% unless visit_sentence == '' %}
+        <p class="card-meta">{{ visit_sentence | strip }}</p>
+      {% endunless %}
     {% endif %}
     <footer>
       <a href="{{ city_url | relative_url }}">Stadt entdecken</a>
@@ -140,7 +174,25 @@
   {% assign city_key = day_page.city | array | first %}
   {% assign country_data = site.data.countries[country_key] %}
   {% assign city_data = country_data.cities[city_key] %}
-  <article class="card card--entry">
+  {% assign journey_key = day_page.journey | default: '' %}
+  {% assign journey_data = site.data.journeys[journey_key] %}
+  {% assign journey_name = journey_data.name | default: journey_key %}
+  {% assign country_name = country_data.name | default: country_key %}
+  {% assign city_keys = day_page.city | array %}
+  {% assign city_names = '' | split: '' %}
+  {% for city_key_item in city_keys %}
+    {% if city_key_item %}
+      {% assign city_lookup = country_data.cities[city_key_item] %}
+      {% assign city_name_value = city_lookup.name | default: city_key_item %}
+      {% assign city_names = city_names | push: city_name_value %}
+    {% endif %}
+  {% endfor %}
+  {% assign journey_attr = journey_key | default: '' %}
+  {% assign journey_name_attr = journey_name | escape | replace: "'", '&#39;' %}
+  {% assign country_name_attr = country_name | escape | replace: "'", '&#39;' %}
+  {% assign city_keys_attr = city_keys | join: ' ' %}
+  {% assign city_names_attr = city_names | join: '|' | escape | replace: "'", '&#39;' %}
+  <article class="card card--entry" data-filter-item data-journey="{{ journey_attr }}" data-journey-names="{{ journey_name_attr }}" data-country="{{ country_key }}" data-country-names="{{ country_name_attr }}" data-city="{{ city_keys_attr }}" data-city-names="{{ city_names_attr }}">
     <header>
       <div class="entry-location">{{ city_data.emoji }} {{ city_data.name }}, {{ country_data.flag }} {{ country_data.name }}</div>
       <h3><a href="{{ day_page.url | relative_url }}">{{ day_page.title }}</a></h3>
@@ -153,7 +205,7 @@
       {% endif %}
     </div>
     <footer>
-      <a href="{{ day_page.url | relative_url }}" class="day-badge">Zum Eintrag</a>
+      <a href="{{ day_page.url | relative_url }}">Zum Eintrag</a>
     </footer>
   </article>
 {% endif %}

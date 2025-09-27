@@ -5,6 +5,8 @@ date: 2025-09-19
 journey: unsere-grosse-reise
 country: australien # japan, australien, skandinavien
 city:
+  - narooma
+  - eden
   - roadtrip # tokyo, melbourne, oslo, etc.
 day: 36
 weather: Wechselhaft, 20°C

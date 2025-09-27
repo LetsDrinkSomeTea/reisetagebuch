@@ -5,6 +5,8 @@ date: 2025-09-08
 journey: unsere-grosse-reise
 country: australien # japan, australien, skandinavien
 city:
+  - torquay
+  - anglesea
   - great-ocean-road # tokyo, melbourne, oslo, etc.
 day: 25
 weather: Wechselhaft, 19°C

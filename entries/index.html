@@ -10,10 +10,35 @@ permalink: /entries/
 
   {% assign all_day_pages = site.pages | where: 'layout', 'day' | sort: 'date' | reverse %}
   {% if all_day_pages.size > 0 %}
-    <div class="grid grid--entries">
-      {% for day_page in all_day_pages %}
-        {% include card.html type='day' item=day_page %}
-      {% endfor %}
+    <div class="filter-bar" data-filter-target="#entries-collection">
+      <div class="filter-bar__group" data-filter-group="journey">
+        <label class="filter-bar__label" for="entries-filter-journey">Reise</label>
+        <select id="entries-filter-journey" class="filter-bar__select" data-filter="journey">
+          <option value="">Alle Reisen</option>
+        </select>
+      </div>
+      <div class="filter-bar__group" data-filter-group="country">
+        <label class="filter-bar__label" for="entries-filter-country">Land</label>
+        <select id="entries-filter-country" class="filter-bar__select" data-filter="country">
+          <option value="">Alle Länder</option>
+        </select>
+      </div>
+      <div class="filter-bar__group" data-filter-group="city">
+        <label class="filter-bar__label" for="entries-filter-city">Stadt</label>
+        <select id="entries-filter-city" class="filter-bar__select" data-filter="city">
+          <option value="">Alle Städte</option>
+        </select>
+      </div>
+      <button class="filter-bar__reset" type="button" data-filter-reset hidden>Filter zurücksetzen</button>
+    </div>
+
+    <div id="entries-collection">
+      <p class="filter-empty" data-filter-empty hidden aria-live="polite">Keine Einträge für die aktuelle Auswahl.</p>
+      <div class="grid grid--entries" data-filter-collection>
+        {% for day_page in all_day_pages %}
+          {% include card.html type='day' item=day_page %}
+        {% endfor %}
+      </div>
     </div>
   {% else %}
     <p>Noch keine Tagebucheinträge vorhanden. Schau bald wieder vorbei!</p>

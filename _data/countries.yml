@@ -12,6 +12,12 @@ japan:
     osaka:
       name: "Ōsaka"
       emoji: "🍜"
+    nara:
+      name: "Nara"
+      emoji: "🦌"
+    kobe:
+      name: "Kōbe"
+      emoji: "🥩"
 
 australien:
   name: "Australien"
@@ -24,9 +30,72 @@ australien:
     great-ocean-road:
       name: "Great Ocean Road"
       emoji: "🚌"
+    torquay:
+      name: "Torquay"
+      emoji: "🏄"
+    anglesea:
+      name: "Anglesea"
+      emoji: "⛳"
+    fairhaven:
+      name: "Fairhaven"
+      emoji: "🛟"
+    lorne:
+      name: "Lorne"
+      emoji: "💧"
+    apollo-bay:
+      name: "Apollo Bay"
+      emoji: "🌊"
     roadtrip:
       name: "Roadtrip"
       emoji: "🚌"
+    gundagai:
+      name: "Gundagai"
+      emoji: "🐑"
+    canberra:
+      name: "Canberra"
+      emoji: "🏛️"
+    sydney:
+      name: "Sydney"
+      emoji: "🌉"
+    katoomba:
+      name: "Katoomba"
+      emoji: "⛰️"
+    wollongong:
+      name: "Wollongong"
+      emoji: "🏄"
+    sussex-inlet:
+      name: "Sussex Inlet"
+      emoji: "🚤"
+    pebbly-beach:
+      name: "Pebbly Beach"
+      emoji: "🏖️"
+    narooma:
+      name: "Narooma"
+      emoji: "🦪"
+    eden:
+      name: "Eden"
+      emoji: "🐋"
+    paynesville:
+      name: "Paynesville"
+      emoji: "⛵"
+    lakes-entrance:
+      name: "Lakes Entrance"
+      emoji: "🐟"
+    raymond-island:
+      name: "Raymond Island"
+      emoji: "🐨"
+    sale:
+      name: "Sale"
+      emoji: "🛩️"
+    yarram:
+      name: "Yarram"
+      emoji: "🎨"
+    port-welshpool:
+      name: "Port Welshpool"
+      emoji: "⚓"
+    wilsons-promontory:
+      name: "Wilsons Promontory"
+      emoji: "🌿"
     perth:
       name: "Perth"
       emoji: "🏖️"

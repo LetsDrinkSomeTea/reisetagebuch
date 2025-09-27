@@ -5,6 +5,7 @@ date: 2025-08-30
 journey: unsere-grosse-reise
 country: japan # japan, australien, skandinavien
 city:
+  - osaka
   - kyoto # tokyo, melbourne, oslo, etc.
 day: 16
 weather: Heiter, 36°C

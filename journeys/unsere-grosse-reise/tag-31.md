@@ -5,6 +5,7 @@ date: 2025-09-14
 journey: unsere-grosse-reise
 country: australien # japan, australien, skandinavien
 city:
+  - canberra
   - roadtrip # tokyo, melbourne, oslo, etc.
 day: 31
 weather: Sonnig, 17°C

@@ -5,6 +5,8 @@ date: 2025-09-17
 journey: unsere-grosse-reise
 country: australien # japan, australien, skandinavien
 city:
+  - wollongong
+  - sussex-inlet
   - roadtrip # tokyo, melbourne, oslo, etc.
 day: 34
 weather: Sonnig, 24°C

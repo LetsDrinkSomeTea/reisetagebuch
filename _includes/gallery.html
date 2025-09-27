@@ -43,24 +43,49 @@
               {% endunless %}
             {% endif %}
             {% if includes_image %}
+              {% assign journey_data = site.data.journeys[journey_key] %}
+              {% assign journey_name = journey_data.name | default: journey_key %}
               {% assign country_data = site.data.countries[day_page.country] %}
-              {% assign city_key = day_page.city | first %}
-              {% if country_data and city_key %}
-                {% assign city_data = country_data.cities[city_key] %}
-              {% endif %}
-              {% unless city_data %}
-                {% assign city_data = {} %}
-              {% endunless %}
-              {% assign image_type = image_types[basename] %}
-              {% assign image_label = image_type.name | default: basename | replace: '-', ' ' | capitalize %}
+
+              {% assign city_keys_raw = day_page.city | array %}
+              {% assign city_keys = '' | split: '' %}
+              {% for ck in city_keys_raw %}
+                {% if ck %}
+                  {% assign city_keys = city_keys | push: ck %}
+                {% endif %}
+              {% endfor %}
+              {% assign primary_city_key = city_keys | first %}
+
+              {% assign city_names = '' | split: '' %}
+              {% assign city_emojis = '' | split: '' %}
+              {% for ck in city_keys %}
+                {% assign city_info = nil %}
+                {% if country_data and country_data.cities %}
+                  {% assign city_info = country_data.cities[ck] %}
+                {% endif %}
+                {% assign city_name_value = city_info.name | default: ck %}
+                {% assign city_emoji_value = city_info.emoji | default: '' %}
+                {% assign city_names = city_names | push: city_name_value %}
+                {% assign city_emojis = city_emojis | push: city_emoji_value %}
+              {% endfor %}
+
+              {% assign primary_city_name = city_names | first | default: primary_city_key %}
+              {% assign primary_city_emoji = city_emojis | first | default: '' %}
               {% assign country_name = country_data.name | default: day_page.country %}
               {% assign country_flag = country_data.flag | default: '' %}
-              {% assign city_name = city_data.name | default: city_key %}
-              {% assign city_emoji = city_data.emoji | default: '' %}
-              {% assign title_text = city_emoji | append: ' ' | append: city_name | append: ' · Tag ' | append: day_page.day | append: ' · ' | append: image_label %}
-              {% assign alt_text = image_label | append: ' – Tag ' | append: day_page.day | append: ' in ' | append: city_name | append: ', ' | append: country_name %}
+
+              {% assign city_names_attr = city_names | join: '|' | escape %}
+              {% assign city_names_attr = city_names_attr | replace: "'", '&#39;' %}
+              {% assign city_keys_attr = city_keys | join: ' ' %}
+              {% assign journey_name_attr = journey_name | escape | replace: "'", '&#39;' %}
+              {% assign country_name_attr = country_name | escape | replace: "'", '&#39;' %}
+
+              {% assign image_type = image_types[basename] %}
+              {% assign image_label = image_type.name | default: basename | replace: '-', ' ' | capitalize %}
+              {% assign title_text = primary_city_emoji | append: ' ' | append: primary_city_name | append: ' · Tag ' | append: day_page.day | append: ' · ' | append: image_label %}
+              {% assign alt_text = image_label | append: ' – Tag ' | append: day_page.day | append: ' in ' | append: primary_city_name | append: ', ' | append: country_name %}
               {% capture location_label %}
-                {% if city_emoji %}{{ city_emoji }} {% endif %}{{ city_name }}
+                {% if primary_city_emoji %}{{ primary_city_emoji }} {% endif %}{{ primary_city_name }}
                 {% if country_flag or country_name %}
                   · {% if country_flag %}{{ country_flag }} {% endif %}{{ country_name }}
                 {% endif %}
@@ -70,7 +95,7 @@
               {% assign index_value = item_count %}
               {% capture gallery_markup %}
                 {{ gallery_markup }}
-                <figure class="gallery__card">
+                <figure class="gallery__card" data-filter-item data-journey="{{ journey_key }}" data-journey-names="{{ journey_name_attr }}" data-country="{{ day_page.country }}" data-country-names="{{ country_name_attr }}" data-city="{{ city_keys_attr }}" data-city-names="{{ city_names_attr }}">
                   <a class="gallery__link" href="{{ image_url }}" data-gallery="{{ gallery_id }}" data-gallery-index="{{ index_value }}" data-gallery-src="{{ image_url }}" data-gallery-alt="{{ alt_text | escape }}" data-gallery-title="{{ title_text | escape }}">
                     <div class="gallery__media">
                       <img src="{{ image_url }}" alt="{{ alt_text | escape }}" loading="lazy" decoding="async">
@@ -95,7 +120,7 @@
 {% endfor %}
 
 {% if item_count > 0 %}
-  <div class="gallery gallery--{{ scope }}" data-gallery="{{ gallery_id }}">
+  <div class="gallery gallery--{{ scope }}" data-gallery="{{ gallery_id }}"{% if include.dom_id %} id="{{ include.dom_id }}"{% endif %}>
     {{ gallery_markup | strip }}
   </div>
 {% elsif include.show_empty != false %}

@@ -3,34 +3,58 @@ layout: default
 ---
 
 {% assign all_day_pages = site.pages | where: 'layout', 'day' | sort: 'date' | reverse %}
-{% assign journeys_with_entries = '' | split: '' %}
-{% assign journeys = site.data.journeys %}
 
 <article class="home-page">
-  {% include page-header.html title=page.title subtitle=page.subtitle %}
+  {% include page-header.html title=page.title %}
 
   <section class="journeys-overview">
-    <h2>Aktive Reisen</h2>
-    {% capture journeys_markup %}
-      <div class="grid grid--journeys">
-        {% for journey in journeys %}
-          {% assign journey_key = journey[0] %}
-          {% assign journey_data = journey[1] %}
-          {% assign journey_days = all_day_pages | where: 'journey', journey_key %}
-          {% if journey_days.size > 0 %}
-            {% assign journey_page = site.pages | where: 'layout', 'journey' | where: 'journey', journey_key | first %}
-            {% if journey_page %}
-              {% assign journeys_with_entries = journeys_with_entries | push: journey_key %}
-              {% include card.html type='journey' item=journey_page journey=journey_key %}
-            {% endif %}
+    {% assign latest_day = all_day_pages | first %}
+    {% if latest_day and latest_day.journey %}
+      {% assign current_journey_key = latest_day.journey %}
+      {% assign current_journey_page = site.pages | where: 'layout', 'journey' | where: 'journey', current_journey_key | first %}
+      {% assign current_journey_days = site.pages | where: 'layout', 'day' | where: 'journey', current_journey_key %}
+      {% assign current_journey_days_sorted = current_journey_days | sort: 'date' %}
+      {% assign current_first_day = current_journey_days_sorted | first %}
+      {% assign current_last_day = current_journey_days_sorted | last %}
+      {% assign current_countries = '' | split: '' %}
+      {% for day_item in current_journey_days %}
+        {% unless current_countries contains day_item.country %}
+          {% assign current_countries = current_countries | push: day_item.country %}
+        {% endunless %}
+      {% endfor %}
+      <div class="current-journey">
+        <div class="current-journey__header">
+          <h2 class="current-journey__title">
+            {% assign journey_data = site.data.journeys[current_journey_key] %}
+            {% if journey_data.icon %}<span aria-hidden="true">{{ journey_data.icon }}</span> {% endif %}
+            {{ journey_data.name | default: current_journey_page.title | default: current_journey_key}}
+          </h2>
+        </div>
+        {% assign journey_intro = journey_data.description %}
+        {% if journey_intro == '' %}
+          {% assign journey_intro = 'Begleite uns auf unserer aktuellen Etappe und entdecke die neuesten Eindrücke direkt hier im Tagebuch.' %}
+        {% endif %}
+        <p class="current-journey__description">{{ journey_intro }}</p>
+        <ul class="current-journey__stats">
+          <li><span class="stats-value">{{ current_journey_days.size }}</span> Tage</li>
+          {% if current_countries.size > 0 %}
+            <li><span class="stats-value">{{ current_countries.size }}</span> Länder</li>
           {% endif %}
-        {% endfor %}
+          {% if current_first_day and current_last_day %}
+        <li><span class="stats-value">{{ current_first_day.date | date: '%d.%m' }}</span> bis <span class="stats-value">{{ current_last_day.date | date: '%d.%m.%y' }}</span></li>
+          {% endif %}
+        </ul>
+        <div class="current-journey__actions">
+          {% if latest_day %}
+            <a class="button" href="{{ latest_day.url | relative_url }}">Neuester Tag</a>
+          {% endif %}
+          {% if current_journey_page %}
+            <a class="button button--ghost" href="{{ current_journey_page.url | relative_url }}">Zur Reise</a>
+          {% endif %}
+        </div>
       </div>
-    {% endcapture %}
-    {% if journeys_with_entries.size > 0 %}
-      {{ journeys_markup }}
     {% else %}
-      <p>Noch keine veröffentlichten Reisen. Sobald die ersten Einträge erscheinen, findest du sie hier.</p>
+      <p>Noch keine veröffentlichte Reise. Sobald die ersten Einträge erscheinen, findest du sie hier.</p>
     {% endif %}
   </section>
 
