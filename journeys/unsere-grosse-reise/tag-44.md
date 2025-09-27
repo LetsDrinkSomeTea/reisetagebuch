@@ -10,7 +10,7 @@ day: 44
 weather: Sonnig, 20°C
 ---
 
-## 🌅 Vormittag / ## 🌇 Mittag
+## 🌅 Vormittag / 🌇 Mittag
 
 Heute gibt es einen Gasteintrag von mir, da Julian gerade duscht und bereits genug Zeit vor dem Bildschirm verbracht hat.  
 
@@ -39,10 +39,10 @@ Ich musste meinen Pulli überziehen, weil mir wegen des Windes zu kalt war. Trot
 Julian beschloss nach einiger Zeit, dass er schwimmen gehen möchte. Damit hat er jetzt auch sein Ziel erreicht, im Indischen Ozean zu schwimmen.  
 Ich ging natürlich auch mit den Beinen ins Wasser.  
 
-Olli und einige andere Leute, mit denen wir in Melbourne gesprochen hatten, haben uns gesagt, dass der Indische Ozean viel wärmer ist als der Pazifik.  
-Damit hatten sie recht, auch wenn das Wasser sich am Anfang echt kalt angefühlt hat.  
-
 ![Afternoon Activity]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/afternoon-2.jpg)
+
+Olli und einige andere Leute, mit denen wir in Melbourne gesprochen hatten, haben uns gesagt, dass der Indische Ozean viel wärmer ist als der Pazifik.  
+Damit hatten sie auch recht, auch wenn sich das Wasser am Anfang, durch den aufgeheizten Körper, echt kalt angefühlt hat.  
 
 ## 🍜 Abendessen
 
@@ -62,7 +62,7 @@ Im Anschluss kauften wir noch einige Dinge ein und machten einen Spaziergang zur
 
 ![Evening Activity]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/evening.jpg)
 
-Da Julian heute Vormittag nicht mit seinen Änderungen am Reisetagebuch fertig geworden ist, setzte er sich heute Abend nochmal dran.  
+Da Julian heute Vormittag nicht mit seinen Änderungen am Reisetagebuch fertig geworden ist, setzte er sich heute Abend nochmal an das Tablet.  
 Wie euch vielleicht schon aufgefallen ist, sieht die Webseite jetzt ein bisschen anders aus.  
 Die Struktur und Organisation passen jetzt besser zu den Roadtrips und der geplanten Reise nach Skandinavien.  
 Falls euch auffällt, dass irgendetwas nicht funktioniert oder etwas unverständlich ist, dann schreibt Julian doch gerne, wo das Problem liegt, und er kümmert sich darum.  
