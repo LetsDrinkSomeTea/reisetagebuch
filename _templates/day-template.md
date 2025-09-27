@@ -3,7 +3,8 @@ layout: day
 title: "Subtitle"
 date: 2025-09-01
 country: country_key # japan, australien, skandinavien
-city: city_key # tokyo, melbourne, oslo, etc.
+city:
+  - city_key # tokyo, melbourne, oslo, etc.
 day: 0
 weather: "Weather, 00°C"
 ---

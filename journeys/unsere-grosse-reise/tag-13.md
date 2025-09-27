@@ -4,7 +4,8 @@ title: Ausflug nach Kobe
 date: 2025-08-27
 journey: unsere-grosse-reise
 country: japan # japan, australien, skandinavien
-city: kyoto # tokyo, melbourne, oslo, etc.
+city:
+  - kyoto # tokyo, melbourne, oslo, etc.
 day: 13
 weather: Wolkig, 35°C
 ---

@@ -22,12 +22,13 @@ Usage: {% include breadcrumb.html %}
       <span class="current">{{ country_data.flag }} {{ country_data.name }}</span>
     {% endif %}
     
-    {% if page.city %}
-      {% assign city_data = country_data.cities[page.city] %}
+    {% if page.city or include.city %}
+      {% assign city_key = include.city | default: page.city %}
+      {% assign city_data = country_data.cities[city_key] %}
       <span class="separator">›</span>
       
       {% if page.layout == "day" %}
-        <a href="{{ '/' | append: page.country | append: '/' | append: page.city | append: '/' | relative_url }}">
+        <a href="{{ '/' | append: page.country | append: '/' | append: city_key | append: '/' | relative_url }}">
           {{ city_data.emoji }} {{ city_data.name }}
         </a>
         <span class="separator">›</span>

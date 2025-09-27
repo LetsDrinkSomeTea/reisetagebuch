@@ -4,7 +4,8 @@ title: On the Road again
 date: 2025-09-11
 journey: unsere-grosse-reise
 country: australien # japan, australien, skandinavien
-city: great-ocean-road # tokyo, melbourne, oslo, etc.
+city:
+  - great-ocean-road # tokyo, melbourne, oslo, etc.
 day: 28
 weather: Bewölkt, 14°C
 ---

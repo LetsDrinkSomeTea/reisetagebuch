@@ -4,7 +4,8 @@ title: Tierische Begegnungen
 date: 2025-09-21
 journey: unsere-grosse-reise
 country: australien # japan, australien, skandinavien
-city: roadtrip # tokyo, melbourne, oslo, etc.
+city:
+  - roadtrip # tokyo, melbourne, oslo, etc.
 day: 38
 weather: Regnerisch und Stürmisch, 15°C
 ---

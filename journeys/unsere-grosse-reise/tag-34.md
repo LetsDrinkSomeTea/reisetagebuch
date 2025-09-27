@@ -4,7 +4,8 @@ title: Spirituelle Pfade
 date: 2025-09-17
 journey: unsere-grosse-reise
 country: australien # japan, australien, skandinavien
-city: roadtrip # tokyo, melbourne, oslo, etc.
+city:
+  - roadtrip # tokyo, melbourne, oslo, etc.
 day: 34
 weather: Sonnig, 24°C
 ---

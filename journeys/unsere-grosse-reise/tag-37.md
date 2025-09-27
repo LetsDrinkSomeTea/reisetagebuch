@@ -4,7 +4,8 @@ title: Von Geduld und Glück
 date: 2025-09-20
 journey: unsere-grosse-reise
 country: australien # japan, australien, skandinavien
-city: roadtrip # tokyo, melbourne, oslo, etc.
+city:
+  - roadtrip # tokyo, melbourne, oslo, etc.
 day: 37
 weather: Sonnig & Windig, 16°C
 ---

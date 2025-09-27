@@ -4,7 +4,8 @@ title: Einmal Disney-Prinzessin sein
 date: 2025-08-25
 journey: unsere-grosse-reise
 country: japan # japan, australien, skandinavien
-city: kyoto # tokyo, melbourne, oslo, etc.
+city:
+  - kyoto # tokyo, melbourne, oslo, etc.
 day: 11
 weather: Wechselhaft, 36°C
 ---

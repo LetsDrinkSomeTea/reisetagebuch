@@ -4,7 +4,8 @@ title: Offene Baustellen
 date: 2025-09-03
 journey: unsere-grosse-reise
 country: japan # japan, australien, skandinavien
-city: osaka # tokyo, melbourne, oslo, etc.
+city:
+  - osaka # tokyo, melbourne, oslo, etc.
 day: 20
 weather: Teilweise sonnig, 35°C
 ---

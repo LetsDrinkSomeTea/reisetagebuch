@@ -4,7 +4,8 @@ title: Kultur und Kaffee
 date: 2025-09-07
 journey: unsere-grosse-reise
 country: australien # japan, australien, skandinavien
-city: melbourne # tokyo, melbourne, oslo, etc.
+city:
+  - melbourne # tokyo, melbourne, oslo, etc.
 day: 24
 weather: Vorüberziehende Wolken, 18°C
 ---

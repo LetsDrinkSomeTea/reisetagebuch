@@ -4,7 +4,8 @@ title: Eisenbahnromantik
 date: 2025-08-28
 journey: unsere-grosse-reise
 country: japan # japan, australien, skandinavien
-city: kyoto # tokyo, melbourne, oslo, etc.
+city:
+  - kyoto # tokyo, melbourne, oslo, etc.
 day: 14
 weather: Teilweise bewölkt, 37°C
 ---

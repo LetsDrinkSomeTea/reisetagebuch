@@ -16,8 +16,7 @@ layout: default
     {% assign cities_with_content = 0 %}
     {% for city in country_data.cities %}
       {% assign city_key = city[0] %}
-      {% assign country_pages = site.pages | where: "country", page.country | where: "city", city_key %}
-      {% assign day_pages = country_pages | where: "layout", "day" %}
+      {% assign day_pages = site.pages | where_exp: "p", "p.country == page.country and p.layout == 'day' and (p.city contains city_key or p.city == city_key)" %}
       {% if day_pages.size > 0 %}
         {% assign cities_with_content = cities_with_content | plus: 1 %}
       {% endif %}
@@ -33,8 +32,7 @@ layout: default
           {% assign city_page = site.pages | where: "country", page.country | where: "city", city_key | where: "layout", "city" | first %}
           
           <!-- Count day entries for this city -->
-          {% assign country_pages = site.pages | where: "country", page.country | where: "city", city_key %}
-          {% assign day_pages = country_pages | where: "layout", "day" %}
+          {% assign day_pages = site.pages | where_exp: "p", "p.country == page.country and p.layout == 'day' and (p.city contains city_key or p.city == city_key)" %}
           
           <!-- Only show cities that have day entries -->
           {% if day_pages.size > 0 %}

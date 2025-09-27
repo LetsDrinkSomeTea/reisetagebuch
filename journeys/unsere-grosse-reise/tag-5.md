@@ -4,7 +4,8 @@ title: Versuchung und Selbstbeherrschung
 date: 2025-08-19
 journey: unsere-grosse-reise
 country: japan # japan, australien, skandinavien
-city: tokyo # tokyo, melbourne, oslo, etc.
+city:
+  - tokyo # tokyo, melbourne, oslo, etc.
 day: 5
 weather: Klar, 34°C
 ---

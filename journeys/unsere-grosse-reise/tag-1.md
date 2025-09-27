@@ -4,7 +4,8 @@ title: Anreise
 date: 2025-08-15
 journey: unsere-grosse-reise
 country: japan # japan, australien, skandinavien
-city: tokyo # tokyo, melbourne, oslo, etc.
+city:
+  - tokyo # tokyo, melbourne, oslo, etc.
 day: 1
 weather: Bewölkt, 27°C
 ---

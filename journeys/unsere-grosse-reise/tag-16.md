@@ -4,7 +4,8 @@ title: Ende des Luxus
 date: 2025-08-30
 journey: unsere-grosse-reise
 country: japan # japan, australien, skandinavien
-city: kyoto # tokyo, melbourne, oslo, etc.
+city:
+  - kyoto # tokyo, melbourne, oslo, etc.
 day: 16
 weather: Heiter, 36°C
 ---
@@ -59,7 +60,7 @@ Als es dann ungefähr 14 Uhr war, holten wir unser Gepäck und fuhren das letzte
 Bevor wir eincheckten, wollten wir endlich etwas zu Mittag essen.  
 Heute waren wir in einem koreanischen Lokal und aßen `Bibimbap`, ein Gericht, das einer Schüssel Reis mit verschiedenen Toppings entspricht.
 
-![Lunch]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/lunch.jpg)
+![Lunch]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/lunch.jpg)
 
 Das Essen war wirklich gut, auch wenn es absurd heiß war.  
 Die steinerne Schüssel war komplett erhitzt, sodass der Reis am Boden eine knusprige Bräunung bekam, während man die ebenfalls heißen Teile weiter oben in der Schüssel aß.
@@ -74,12 +75,12 @@ Nachdem wir uns häuslich eingerichtet hatten und – wie mittlerweile beim Hote
 Danach gingen wir noch etwas nach `Dotonbori`, ein Viertel im Stadtteil Chūō.  
 Dieses ist für seine grellen Neonreklamen, unzähligen Restaurants und die berühmte Glico-Leuchtreklame bekannt.
 
-![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-1.jpg)
+![Afternoon Activity]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/afternoon-1.jpg)
 
 In diesem Viertel wollten wir (vor allem ich) noch zu Rikuro's.  
 Das ist eine Kette, die überall in Osaka zu finden ist und durch Social Media für ihre fluffigen Käsekuchen berühmt geworden ist.
 
-![Snack]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/snack.jpg)
+![Snack]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/snack.jpg)
 
 Wir kauften einen Kuchen für ungefähr 6 € und setzten uns auf einen nahegelegenen Open-Space.  
 Der Kuchen löste bei uns gemischte Gefühle aus.  
@@ -87,7 +88,7 @@ Einerseits war die Konsistenz wirklich fluffig und der Kuchen wackelte leicht, w
 
 
 <video controls>
-  <source src="{{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/snack.mp4" type="video/mp4">
+  <source src="{{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/snack.mp4" type="video/mp4">
   Dein Browser unterstützt das Video-Tag nicht.
 </video>
 
@@ -98,20 +99,20 @@ Für die Erfahrung und den fairen Preis ist das etwas, das man mal gemacht haben
 Als Nächstes besuchten wir den Ghibli-Store in der Shinsaibashi-Suji Shopping Arcade.  
 Das ist eine große überdachte Einkaufsstraße, die zwei Bahnstationen miteinander verbindet und über 600 Geschäfte beinhaltet.
 
-![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon-2.jpg)
+![Afternoon Activity]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/afternoon-2.jpg)
 
 ## 🌙 Abend
 
 Schon fast Tradition hat es mittlerweile, dass wir beim Ortswechsel am ersten Abend in die lokale Arcadehalle gehen.
 
-![Evening Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/evening.jpg)
+![Evening Activity]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/evening.jpg)
 
 So auch heute.  
 Für umgerechnet ungefähr 6 € (¥1000) spielten wir verschiedene Spiele mit- und gegeneinander und versuchten unser Glück an einem der vielzähligen Greifautomaten.  
 Einen Preis haben wir zwar leider nicht gewonnen, dafür hatten wir eine Menge Spaß.
 
 <video controls>
-  <source src="{{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/evening.mp4" type="video/mp4">
+  <source src="{{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/evening.mp4" type="video/mp4">
   Dein Browser unterstützt das Video-Tag nicht.
 </video>
 
@@ -143,7 +144,7 @@ Wir freuen uns aber, wieder im Stadtgetümmel zu sein und hoffen auf eine gelung
 
 Das Bild zeigt ein Schaufenster im Ghibli-Store mit Figuren aus "Mein Nachbar Totoro".  
 
-![Picture of the Day]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/main.jpg)
+![Picture of the Day]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/main.jpg)
 
 Studio Ghibli ist das bekannteste Animationsstudio Japans und hat mit Filmen wie *Mein Nachbar Totoro*, *Prinzessin Mononoke* und *Chihiros Reise ins Zauberland* weltweiten Ruhm erlangt.  
 Gegründet 1985 von Hayao Miyazaki und Isao Takahata, stehen die Filme für Fantasie, Naturverbundenheit und starke Charaktere, die sowohl Kinder als auch Erwachsene ansprechen.  

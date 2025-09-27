@@ -12,8 +12,7 @@ layout: default
   <section class="days-overview">
     <h2>Tagebucheinträge</h2>
     
-    {% assign country_pages = site.pages | where: "country", page.country | where: "city", page.city %}
-    {% assign day_pages = country_pages | where: "layout", "day" | sort: "date" | reverse %}
+    {% assign day_pages = site.pages | where_exp: "p", "p.country == page.country and p.layout == 'day' and (p.city contains page.city or p.city == page.city)" | sort: "date" | reverse %}
     
     {% if day_pages.size > 0 %}
       <div class="grid grid--days">

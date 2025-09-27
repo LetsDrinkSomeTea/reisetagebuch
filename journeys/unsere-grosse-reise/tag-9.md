@@ -4,7 +4,8 @@ title: Aufbruch zu neuen Abenteuern
 date: 2025-08-23
 journey: unsere-grosse-reise
 country: japan # japan, australien, skandinavien
-city: tokyo # tokyo, melbourne, oslo, etc.
+city:
+  - tokyo # tokyo, melbourne, oslo, etc.
 day: 9
 weather: Teilweise Sonnig, 34°C
 ---
@@ -33,7 +34,7 @@ In Japan haben sie seit dem 5. Jhd Tradition und dienten früher Kriegern, heute
 
 Im Gegensatz zur deutschen Tupperdose besitzt eine Bentō-Box immer mehrere Fächer, um die Speisen zwar in der gleichen Box, aber doch seperat aufzubewahren.
 
-![Lunch]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/lunch.jpg)
+![Lunch]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/lunch.jpg)
 
 Innerhalb unserer Box war `Kobe Beef & Sukiyaki`.
 Eine Besondereheit an unserer Bentō-Box war, dass sie sich selbst erwärmt.
@@ -45,7 +46,7 @@ Fünf Minuten später hat man dann eine warme Mahlzeit, die insgesamt recht gut 
 Nachmittags erreichten wir dann Kyōto.
 Die Stadt wirkt trotz ihrer 1,4 Millionen Einwohner ruhig und traditionsreich.
 
-![Afternoon Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/afternoon.jpg)
+![Afternoon Activity]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/afternoon.jpg)
 
 Wir gingen zu unserem Hotel, checkten ein und duschten jeweils kurz, um uns für den Abend fertig zu machen.
 
@@ -53,7 +54,7 @@ Wir gingen zu unserem Hotel, checkten ein und duschten jeweils kurz, um uns für
 
 Anschließend liefen wir in die `AEON Mall`, um noch etwas zu shoppen und vorallem etwas zum Abendessen zu finden.
 
-![Dinner]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/dinner.jpg)
+![Dinner]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/dinner.jpg)
 
 Heute entschieden wir uns mal wieder zur Abwechslung für etwas sehr westliches und aßen beim Italiener.
 Das Essen schmeckte eigentlich sehr gut, auch wenn wir beide im Anschluss etwas Bauchweh bekamen.
@@ -62,13 +63,13 @@ Das Essen schmeckte eigentlich sehr gut, auch wenn wir beide im Anschluss etwas 
 
 Danach durchstöberten wir noch den ein oder anderen Laden auf der Suche nach einem Kleid für Anna, einer kurzen Hose für mich und was man sonst noch so brauchen kann.
 
-![Evening Activity]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/evening.jpg)
+![Evening Activity]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/evening.jpg)
 
 Dieser Roboter gehört leider nicht dazu. (_Auch wenn er sich sicher prima in unserem künftigen Wohnzimmer machen würde._)
 
 Zum Abschluss des Tages genehmigten wir uns noch ein Eis und machten uns erneut auf den Weg ins Land der Träume.
 
-![Snack]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/snack.jpg)
+![Snack]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/snack.jpg)
 
 ## ✨ Highlight des Tages
 
@@ -88,7 +89,7 @@ Wir haben auch bereits einige Ziele für die nächsten Tage rausgesucht und scha
 
 ## 📸 Bild des Tages
 
-![Picture of the Day]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/main.jpg)
+![Picture of the Day]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/main.jpg)
 
 Dieses eher unscheinbare Bild zeigt neben Anna eine richtige Rarität in Japan.
 
@@ -103,7 +104,7 @@ Trotzdem gelten die Städte in Japan als einige der saubersten Städte der Welt,
 Ehrlicherweise vergessen wir oft einfach noch ein Bild zu zweit zu machen.
 Dieses Bild ist auch eher zufällig entstanden, aber besser als nichts.
 
-![Selfie of the Day]({{ site.baseurl }}/{{ page.country }}/{{ page.city }}/tag-{{ page.day }}/selfie.jpg)
+![Selfie of the Day]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/selfie.jpg)
 
 ## Zitat des Tages
 
@@ -129,4 +130,3 @@ Wir hatte nie das Gefühl, in der größten Metropole der Welt zu sein.
 Auch die unterschiedlichen Stadtteile haben uns fasziniert.  
 Teilweise trennen sie nur wenige Minuten mit der Bahn, und doch wirken sie wie vollkommen eigene kleine Welten.  
 Gerade diese Vielfalt hat Tokio für uns besonders spannend gemacht.
-

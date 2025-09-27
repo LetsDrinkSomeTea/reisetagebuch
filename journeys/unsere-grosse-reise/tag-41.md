@@ -4,7 +4,8 @@ title: Melbourne von oben
 date: 2025-09-24
 journey: unsere-grosse-reise
 country: australien # japan, australien, skandinavien
-city: melbourne # tokyo, melbourne, oslo, etc.
+city:
+  - melbourne # tokyo, melbourne, oslo, etc.
 day: 41
 weather: Regnerisch, 14°C
 ---
