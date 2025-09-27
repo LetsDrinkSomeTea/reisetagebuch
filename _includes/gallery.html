@@ -24,7 +24,7 @@
         {% assign journey_key = segments[1] %}
         {% assign tag_folder = segments[2] %}
         {% assign file_name = segments[3] %}
-        {% assign basename = file_name | split: '.' | first %}
+        {% assign basename = file_name | split: '.' | first | split: '-' | first %}
         {% assign day_number_string = tag_folder | remove: 'tag-' %}
         {% if day_number_string != tag_folder %}
           {% assign day_number = day_number_string | plus: 0 %}
