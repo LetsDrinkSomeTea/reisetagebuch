@@ -1,6 +1,53 @@
 <nav class="navigation">
   {% assign all_day_pages = site.pages | where: "layout", "day" %}
 
+  <div class="journeys-nav">
+    <h3>🧭 Reisen</h3>
+    {% assign journeys_grouped = all_day_pages | group_by: "journey" %}
+    {% if journeys_grouped.size > 0 %}
+      <ul>
+        {% for j in journeys_grouped %}
+          {% assign j_key = j.name %}
+          {% assign j_data = site.data.journeys[j_key] %}
+          {% assign j_name = j_data.name | default: j_key %}
+          {% assign j_icon = j_data.icon %}
+          {% assign j_items = j.items | sort: "date" %}
+          {% assign j_count = j_items.size %}
+          <li class="journey-section" data-journey="{{ j_key }}">
+            <div class="journey-header">
+              <a class="journey-link" href="{{ '/journeys/' | append: j_key | append: '/' | relative_url }}">{{ j_icon }} {{ j_name }}</a>
+              <span class="badge badge--secondary" title="Anzahl Tage">{{ j_count }}</span>
+            </div>
+            {% assign cities = j.items | group_by: "city" %}
+            {% if cities.size > 0 %}
+              <ul class="cities-list expanded">
+                {% for c in cities %}
+                  {% assign city_key = c.name %}
+                  {% assign first_item = c.items | first %}
+                  {% assign ctry_key = first_item.country %}
+                  {% assign country_data = site.data.countries[ctry_key] %}
+                  {% assign city_data = country_data.cities[city_key] %}
+                  {% assign city_pages = site.pages | where: "layout", "city" | where: "country", ctry_key | where: "city", city_key %}
+                  {% assign city_page = city_pages | first %}
+                  <li class="city-item">
+                    {% if city_page %}
+                      <a class="city-link" href="{{ city_page.url | relative_url }}">{{ city_data.emoji }} {{ city_data.name }}</a>
+                    {% else %}
+                      <span class="city-link">{{ city_data.emoji }} {{ city_data.name }}</span>
+                    {% endif %}
+                    <span class="badge badge--light" title="Tage">{{ c.items.size }}</span>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="no-entries">Noch keine Reisen mit Einträgen.</p>
+    {% endif %}
+  </div>
+
   <div class="latest-entries">
     <h3>📝 Neueste Einträge</h3>
     {% assign latest = all_day_pages | sort: "date" | reverse %}

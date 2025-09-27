@@ -23,11 +23,27 @@
   --border-color: #dadce0;
   --shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
 
+  // Standardized aliases (use these going forward)
+  --color-primary: var(--primary-color);
+  --color-primary-strong: var(--primary-color-darker);
+  --color-accent: var(--accent-color);
+  --color-text: var(--text-color);
+  --color-text-muted: var(--text-light);
+  --color-bg: var(--background-color);
+  --color-surface: var(--background-color);
+  --color-sidebar: var(--sidebar-bg);
+  --color-border: var(--border-color);
+  --elev-1: var(--shadow);
+
   // Layout
   --sidebar-width: 280px;
   --content-max-width: 900px;
   --border-radius: 12px;
   --border-radius-small: 6px;
+
+  // Standardized radius aliases
+  --radius-md: var(--border-radius);
+  --radius-sm: var(--border-radius-small);
 
   // Typography
   --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -35,16 +51,26 @@
 
   // Spacing
   --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
+  --space-sm: 0.4rem;
+  --space-md: 0.8rem;
+  --space-lg: 1.2rem;
   --space-xl: 2rem;
   --space-xxl: 3rem;
+
+  // Standardized spacing aliases
+  --spacing-1: var(--space-xs);
+  --spacing-2: var(--space-sm);
+  --spacing-3: var(--space-md);
+  --spacing-4: var(--space-lg);
+  --spacing-5: var(--space-xl);
+  --spacing-6: var(--space-xxl);
 
   // Transitions
   --transition-fast: 0.2s ease;
   --transition-slow: 0.3s ease;
 }
+
+/* Dark mode removed per request */
 
 // ====================
 // MIXINS
@@ -104,6 +130,38 @@ body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.visually-hidden-focusable {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.visually-hidden-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--secondary-color);
+  border-radius: var(--border-radius-small);
 }
 
 // ====================
@@ -353,6 +411,44 @@ body {
       }
     }
   }
+
+  // Journeys menu
+  .journeys-nav {
+    h3 {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--space-md);
+      color: var(--text-light);
+      font-weight: 600;
+    }
+
+    .journey-section {
+      margin-bottom: var(--space-sm);
+    }
+
+    .journey-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      .journey-link { flex: 1; font-weight: 600; }
+    }
+
+    .cities-list {
+      list-style: none;
+      margin: var(--space-xs) 0 var(--space-md) 0;
+      padding-left: var(--space-md);
+      border-left: 1px solid var(--border-color);
+
+      .city-item {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+        margin: var(--space-xs) 0;
+        .city-link { flex: 1; font-weight: 500; }
+      }
+    }
+  }
 }
 
 // ====================
@@ -462,10 +558,10 @@ a {
 
 // Card System
 .card {
-  background: white;
+  background: var(--background-color);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
-  padding: var(--space-lg);
+  padding: var(--space-md);
   box-shadow: none;
   @include hover-lift;
 
@@ -617,10 +713,12 @@ a {
   &__image-container {
     position: relative;
     overflow: hidden;
+    aspect-ratio: 3 / 2;
+    background: var(--sidebar-bg);
     
     img {
       width: 100%;
-      height: 200px;
+      height: 100%;
       object-fit: cover;
       display: block;
       transition: transform var(--transition-slow);
@@ -1264,4 +1362,3 @@ p, ul, ol, blockquote {
     padding: 0;
   }
 }
-

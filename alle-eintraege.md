@@ -11,6 +11,15 @@ permalink: /alle-eintraege/
     <h2>Tagebucheinträge</h2>
     <div class="filter-controls" id="entries-controls">
       <label>
+        Reise:
+        <select id="entriesFilterJourney">
+          <option value="">Alle</option>
+          {% for j in site.data.journeys %}
+            <option value="{{ j[0] }}">{{ j[1].name }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>
         Land:
         <select id="entriesFilterCountry">
           <option value="">Alle</option>

@@ -154,6 +154,31 @@ bundle exec jekyll serve
 # Site ist verfügbar unter http://localhost:4000/reisetagebuch
 ```
 
+## 🎛️ UI System (Dev Server)
+
+- Design Tokens (CSS Vars): colors, spacing, radius, typography under `:root` in `assets/css/style.scss`.
+- Components: `.card`, `.badge`, `.grid` (responsive), `.gallery__*`, `.modal__*`, `.breadcrumb`.
+- Navigation: data-driven journeys and cities; only shows items with real day entries.
+- Density: compact spacing default. Skip link and focus styles for a11y.
+- Content rules: journeys/cities incrementally appear as new `journeys/<slug>/tag-<n>.md` are added; places are shown but empty cities are hidden.
+
+### Token naming
+- Prefer alias tokens moving forward: `--color-*`, `--spacing-*`, `--radius-*` (mapped internally to legacy variables for now).
+- Examples: `--color-primary`, `--color-text`, `--spacing-3`, `--radius-md`.
+
+## ✅ Lighthouse Checklist
+
+- Build locally: `bundle exec jekyll serve --livereload` and open the local URL.
+- Chrome DevTools → Lighthouse → categories: Performance, Accessibility, Best Practices, SEO.
+- Targets
+  - Performance ≥ 90 on broadband; CPU 4x slowdown may dip slightly.
+  - Accessibility ≥ 95 (focus-visible, contrast, landmarks present).
+  - Best Practices/SEO ≥ 90.
+- Quick wins
+  - Keep images ≤ 2 MB, serve correct dimensions, prefer modern formats if possible.
+  - Ensure alt text for images in content; modal uses titles automatically.
+  - Avoid large layout shifts: use provided gallery aspect-ratio containers.
+
 ## 📊 Konfiguration
 
 ### Länder-Metadaten (`_data/countries.yml`)
@@ -226,4 +251,3 @@ Das Projekt wird automatisch über GitHub Actions bereitgestellt:
 ---
 
 **Happy traveling and happy blogging! 🌟**
-

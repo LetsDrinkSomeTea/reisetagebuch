@@ -18,26 +18,24 @@ title: "Willkommen"
         {% assign j_count = j_pages.size %}
         {% assign first_page = j_pages | first %}
         {% assign last_page = j_pages | last %}
-        <article class="card">
-          <header>
-            <h3>{{ j_data.icon }} {{ j_data.name }}</h3>
-          </header>
-          <div class="card-content">
-            {% if j_count > 0 %}
+        {% if j_count > 0 %}
+          <article class="card">
+            <header>
+              <h3>{{ j_data.icon }} {{ j_data.name }}</h3>
+            </header>
+            <div class="card-content">
               <p>
                 {{ j_count }} {% if j_count == 1 %}Eintrag{% else %}Einträge{% endif %}
                 {% if first_page and last_page %}<br>
                   {{ first_page.date | date: '%d.%m.%Y' }} – {{ last_page.date | date: '%d.%m.%Y' }}
                 {% endif %}
               </p>
-            {% else %}
-              <p>Noch keine Einträge.</p>
-            {% endif %}
-          </div>
-          <footer>
-            <a href="{{ '/journeys/' | append: j_key | append: '/' | relative_url }}">Zur Reise →</a>
-          </footer>
-        </article>
+            </div>
+            <footer>
+              <a href="{{ '/journeys/' | append: j_key | append: '/' | relative_url }}">Zur Reise →</a>
+            </footer>
+          </article>
+        {% endif %}
       {% endfor %}
     </div>
   </section>

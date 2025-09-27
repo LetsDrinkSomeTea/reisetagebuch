@@ -239,11 +239,33 @@ Usage:
     {% if scope_mode == 'all' %}
       <div class="gallery__controls" aria-label="Filter">
         <label>
+          Reise:
+          <select id="galleryFilterJourney">
+            <option value="">Alle</option>
+            {% assign journeys_set = "" | split: "" %}
+            {% for img in discovered_images %}
+              {% assign jkey = img[5] %}
+              {% unless journeys_set contains jkey %}
+                {% assign journeys_set = journeys_set | push: jkey %}
+              {% endunless %}
+            {% endfor %}
+            {% for jk in journeys_set %}
+              <option value="{{ jk }}">{{ site.data.journeys[jk].name | default: jk }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label>
           Land:
           <select id="galleryFilterCountry">
             <option value="">Alle</option>
-            {% assign countries_list = discovered_images | map: 1 | uniq %}
-            {% for c in countries_list %}
+            {% assign countries_set = "" | split: "" %}
+            {% for img in discovered_images %}
+              {% assign ctry = img[1] %}
+              {% unless countries_set contains ctry %}
+                {% assign countries_set = countries_set | push: ctry %}
+              {% endunless %}
+            {% endfor %}
+            {% for c in countries_set %}
               <option value="{{ c }}">{{ site.data.countries[c].name | default: c }}</option>
             {% endfor %}
           </select>
@@ -313,7 +335,7 @@ Usage:
             <div class="gallery__image-container">
               <img src="{{ image_path | relative_url }}" 
                    alt="{{ alt_text }}" 
-                   loading="lazy" />
+                   loading="lazy" decoding="async" />
               <div class="gallery__overlay">
                 <div class="gallery__info">
                   {% case include.scope %}

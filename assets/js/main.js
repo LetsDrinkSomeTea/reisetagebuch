@@ -34,37 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Toggle country section
-    window.toggleCountry = function(countryKey) {
-        const countrySection = document.querySelector(`[data-country="${countryKey}"]`);
-        const citiesList = countrySection.querySelector('.cities-list');
-        const toggleIcon = countrySection.querySelector('.country-header .toggle-icon');
-        
-        if (citiesList.classList.contains('expanded')) {
-            citiesList.classList.remove('expanded');
-            toggleIcon.classList.remove('expanded');
-        } else {
-            citiesList.classList.add('expanded');
-            toggleIcon.classList.add('expanded');
-        }
-    }
-
-    // Toggle city section
-    window.toggleCity = function(countryKey, cityKey) {
-        const countrySection = document.querySelector(`[data-country="${countryKey}"]`);
-        const citySection = countrySection.querySelector(`[data-city="${cityKey}"]`);
-        const daysList = citySection.querySelector('.days-list');
-        const toggleIcon = citySection.querySelector('.city-header .toggle-icon');
-        
-        if (daysList && daysList.classList.contains('expanded')) {
-            daysList.classList.remove('expanded');
-            if (toggleIcon) toggleIcon.classList.remove('expanded');
-        } else if (daysList) {
-            daysList.classList.add('expanded');
-            if (toggleIcon) toggleIcon.classList.add('expanded');
-        }
-    }
-
     // Initialize navigation state based on current page
     const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll('.navigation a');
@@ -273,6 +242,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const galleryContainer = document.querySelector('.gallery');
         if (galleryControls && galleryContainer) {
             const cards = Array.from(galleryContainer.querySelectorAll('.gallery__card'));
+            const selJourney = galleryControls.querySelector('#galleryFilterJourney');
             const selCountry = galleryControls.querySelector('#galleryFilterCountry');
             const selCity = galleryControls.querySelector('#galleryFilterCity');
             const selSort = galleryControls.querySelector('#gallerySort');
@@ -291,13 +261,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             function applyGallery() {
+                const journey = selJourney ? selJourney.value : '';
                 const ctry = selCountry.value;
                 const city = selCity.value;
                 // filter
                 cards.forEach(card => {
+                    const okJourney = !journey || card.dataset.journey === journey;
                     const okCountry = !ctry || card.dataset.country === ctry;
                     const okCity = !city || card.dataset.city === city;
-                    card.style.display = (okCountry && okCity) ? '' : 'none';
+                    card.style.display = (okJourney && okCountry && okCity) ? '' : 'none';
                 });
                 // sort
                 const sort = selSort.value;
@@ -312,6 +284,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 visible.forEach(card => galleryContainer.appendChild(card));
             }
 
+            if (selJourney) selJourney.addEventListener('change', () => { applyGallery(); });
             selCountry.addEventListener('change', () => { applyCityOptions(); applyGallery(); });
             selCity.addEventListener('change', applyGallery);
             selSort.addEventListener('change', applyGallery);
@@ -324,6 +297,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const entriesGrid = document.querySelector('.entries-page .grid--days');
         if (entriesControls && entriesGrid) {
             const cards = Array.from(entriesGrid.querySelectorAll('.card.card--day'));
+            const selJourney = entriesControls.querySelector('#entriesFilterJourney');
             const selCountry = entriesControls.querySelector('#entriesFilterCountry');
             const selCity = entriesControls.querySelector('#entriesFilterCity');
             const selSort = entriesControls.querySelector('#entriesSort');
@@ -341,13 +315,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             function applyEntries() {
+                const journey = selJourney ? selJourney.value : '';
                 const ctry = selCountry.value;
                 const city = selCity.value;
                 // filter
                 cards.forEach(card => {
+                    const okJourney = !journey || card.dataset.journey === journey;
                     const okCountry = !ctry || card.dataset.country === ctry;
                     const okCity = !city || card.dataset.city === city;
-                    card.style.display = (okCountry && okCity) ? '' : 'none';
+                    card.style.display = (okJourney && okCountry && okCity) ? '' : 'none';
                 });
                 // sort visible
                 const sort = selSort.value;
@@ -361,6 +337,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 visible.forEach(card => entriesGrid.appendChild(card));
             }
 
+            if (selJourney) selJourney.addEventListener('change', applyEntries);
             selCountry.addEventListener('change', () => { applyCityOptions(); applyEntries(); });
             selCity.addEventListener('change', applyEntries);
             selSort.addEventListener('change', applyEntries);

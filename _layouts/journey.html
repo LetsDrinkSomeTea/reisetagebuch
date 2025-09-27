@@ -20,7 +20,28 @@ layout: default
       <p>
         {{ entries_count }} {% if entries_count == 1 %}Eintrag{% else %}Einträge{% endif %}
         {% if first_page and last_page %} · {{ first_page.date | date: '%d.%m.%Y' }} – {{ last_page.date | date: '%d.%m.%Y' }}{% endif %}
+        <span class="badge badge--secondary" style="margin-left: .5rem;">Letztes Update: {{ last_page.date | date: '%d.%m.%Y' }}</span>
       </p>
+      {% comment %} Preview the most recently updated cities (max 3) {% endcomment %}
+      {% assign by_city = entries | reverse | group_by: 'city' %}
+      {% if by_city and by_city.size > 0 %}
+        <div class="cities-preview">
+          {% assign shown = 0 %}
+          {% for grp in by_city %}
+            {% if shown < 3 %}
+              {% assign example = grp.items | first %}
+              {% assign country_data = site.data.countries[example.country] %}
+              {% assign city_data = country_data.cities[grp.name] %}
+              {% assign city_pages = site.pages | where: "layout", "city" | where: "country", example.country | where: "city", grp.name %}
+              {% assign city_page = city_pages | first %}
+              {% if city_page %}
+                <a class="city-tag" href="{{ city_page.url | relative_url }}">{{ city_data.emoji }} {{ city_data.name }}</a>
+                {% assign shown = shown | plus: 1 %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
     {% else %}
       <p>Noch keine Einträge in dieser Reise.</p>
     {% endif %}
@@ -77,4 +98,3 @@ layout: default
     </div>
   </section>
 </article>
-
