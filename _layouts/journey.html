@@ -43,9 +43,9 @@ layout: default
     <h2>Reisestatistiken</h2>
     {% if day_count > 0 %}
       {% capture journey_stats %}
-        <li><span class="stats-value">{{ day_count }}</span> Tage</li>
-        <li><span class="stats-value">{{ visited_city_keys.size }}</span> Städte</li>
-        <li><span class="stats-value">{{ visited_countries.size }}</span> Länder</li>
+        <li><span class="stats-value">{{ day_count }}</span> {% include pluralize.html count=day_count one="Tag" other="Tage" %}</li>
+        <li><span class="stats-value">{{ visited_city_keys.size }}</span> {% include pluralize.html count=visited_city_keys.size one="Stadt" other="Städte" %}</li>
+        <li><span class="stats-value">{{ visited_countries.size }}</span> {% include pluralize.html count=visited_countries.size one="Land" other="Länder" %}</li>
         {% if first_day and last_day %}
           <li>{{ first_day.date | date: '%d.%m' }} bis {{ last_day.date | date: '%d.%m.%y' }}</li>
         {% endif %}

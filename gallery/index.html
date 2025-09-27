@@ -39,11 +39,11 @@ permalink: /gallery/
 
   {% if total_images > 0 %}
     <div class="gallery__stats">
-      <div class="stat-item"><span class="stats-value">{{ total_images }}</span> Bilder</div>
-      <div class="stat-item"><span class="stats-value">{{ day_pages.size }}</span> Tage</div>
-      <div class="stat-item"><span class="stats-value">{{ journey_keys.size }}</span> Reisen</div>
-      <div class="stat-item"><span class="stats-value">{{ countries_with_entries.size }}</span> Länder</div>
-      <div class="stat-item"><span class="stats-value">{{ cities_with_entries.size }}</span> Städte</div>
+      <div class="stat-item"><span class="stats-value">{{ total_images }}</span> {% include pluralize.html count=total_images one="Bild" other="Bilder" %}</div>
+      <div class="stat-item"><span class="stats-value">{{ day_pages.size }}</span> {% include pluralize.html count=day_pages.size one="Tag" other="Tage" %}</div>
+      <div class="stat-item"><span class="stats-value">{{ journey_keys.size }}</span> {% include pluralize.html count=journey_keys.size one="Reise" other="Reisen" %}</div>
+      <div class="stat-item"><span class="stats-value">{{ countries_with_entries.size }}</span> {% include pluralize.html count=countries_with_entries.size one="Land" other="Länder" %}</div>
+      <div class="stat-item"><span class="stats-value">{{ cities_with_entries.size }}</span> {% include pluralize.html count=cities_with_entries.size one="Stadt" other="Städte" %}</div>
     </div>
 
     <div class="filter-bar" data-filter-target="#gallery-collection">

@@ -44,12 +44,9 @@ permalink: /places/
           {{ country_sections }}
           <section class="places-country" data-filter-section>
             <header class="places-country__header">
-              <h2>{{ country_data.flag }} {{ country_data.name }}</h2>
+              <h2>{{ country_data.flag }} <a href="{{ '/places/' | append: country_key | append: '/' | relative_url }}">{{ country_data.name }}</a></h2>
               <p>{{ city_count }} Städte · {{ country_day_entries.size }} Tage</p>
             </header>
-            <div class="places-country__summary">
-                <a class="button button--ghost" href="{{ '/places/' | append: country_key | append: '/' | relative_url }}">Land anzeigen</a>
-            </div>
             <div class="grid grid--cities" data-filter-collection>
               {{ city_markup | strip }}
             </div>

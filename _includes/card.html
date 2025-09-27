@@ -40,9 +40,9 @@
       {% endif %}
     </header>
     {% capture journey_stats %}
-      <li><span class="stats-value">{{ journey_days.size }}</span> Tage</li>
-      <li><span class="stats-value">{{ visited_cities.size }}</span> Städte</li>
-      <li><span class="stats-value">{{ visited_countries.size }}</span> Länder</li>
+      <li><span class="stats-value">{{ journey_days.size }}</span> {% include pluralize.html count=journey_days.size one="Tag" other="Tage" %}</li>
+      <li><span class="stats-value">{{ visited_cities.size }}</span> {% include pluralize.html count=visited_cities.size one="Stadt" other="Städte" %}</li>
+      <li><span class="stats-value">{{ visited_countries.size }}</span> {% include pluralize.html count=visited_countries.size one="Land" other="Länder" %}</li>
     {% endcapture %}
     {% include stats.html content=journey_stats %}
     <footer>
@@ -76,8 +76,8 @@
       </h3>
     </header>
     {% capture country_stats %}
-      <li><span class="stats-value">{{ country_days.size }}</span> Tage</li>
-      <li><span class="stats-value">{{ visited_cities.size }}</span> Städte</li>
+    <li><span class="stats-value">{{ country_days.size }}</span> {% include pluralize.html count=country_days.size one="Tag" other="Tage" %}</li>
+      <li><span class="stats-value">{{ visited_cities.size }}</span> {% include pluralize.html count=visited_cities.size one="Stadt" other="Städte" %}</li>
     {% endcapture %}
     {% include stats.html content=country_stats %}
     {% if visited_cities.size > 0 %}
@@ -146,7 +146,7 @@
       </h3>
     </header>
     {% capture city_stats %}
-      <li><span class="stats-value">{{ city_days.size }}</span> Tage</li>
+      <li><span class="stats-value">{{ city_days.size }}</span> {% include pluralize.html count=city_days.size one="Tag" other="Tage" %}</li>
     {% endcapture %}
     {% include stats.html content=city_stats %}
     {% if latest_day %}
