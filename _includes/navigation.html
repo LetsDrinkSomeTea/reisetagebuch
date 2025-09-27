@@ -3,23 +3,6 @@
 {% assign day_pages_desc = day_pages_by_date | reverse %}
 
 <nav class="navigation" aria-label="Hauptnavigation">
-  <section class="nav-section nav-section--latest">
-    <h3>Neueste Einträge</h3>
-    {% if day_pages_desc.size > 0 %}
-      <ul class="nav-list nav-list--entries">
-        {% for entry in day_pages_desc limit: 3 %}
-          <li class="nav-list__item">
-            <a class="nav-link nav-link--entry{% if page.url == entry.url %} active{% endif %}" href="{{ entry.url | relative_url }}">
-              <span class="nav-link__meta">{{ entry.date | date: '%d.%m' }}</span>
-              <span class="nav-link__label">Tag {{ entry.day }}{% if entry.title %}: {{ entry.title }}{% endif %}</span>
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p class="nav-empty">Noch keine Einträge.</p>
-    {% endif %}
-  </section>
 
   <section class="nav-section nav-section--actions">
     <ul class="nav-list nav-list--actions">
@@ -42,6 +25,24 @@
         </a>
       </li>
     </ul>
+  </section>
+
+  <section class="nav-section nav-section--latest">
+    <h3>Neueste Einträge</h3>
+    {% if day_pages_desc.size > 0 %}
+      <ul class="nav-list nav-list--entries">
+        {% for entry in day_pages_desc limit: 3 %}
+          <li class="nav-list__item">
+            <a class="nav-link nav-link--entry{% if page.url == entry.url %} active{% endif %}" href="{{ entry.url | relative_url }}">
+              <span class="nav-link__meta">{{ entry.date | date: '%d.%m' }}</span>
+              <span class="nav-link__label">Tag {{ entry.day }}{% if entry.title %}: {{ entry.title }}{% endif %}</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="nav-empty">Noch keine Einträge.</p>
+    {% endif %}
   </section>
 
   <section class="nav-section nav-section--journeys">

@@ -6,9 +6,6 @@ journey: unsere-grosse-reise
 country: australien # japan, australien, skandinavien
 city:
   - raymond-island
-  - sale
-  - yarram
-  - port-welshpool
   - wilsons-promontory
   - roadtrip # tokyo, melbourne, oslo, etc.
 day: 38

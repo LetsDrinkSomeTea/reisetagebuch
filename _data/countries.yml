@@ -60,6 +60,9 @@ australien:
     katoomba:
       name: "Katoomba"
       emoji: "⛰️"
+    blue-mountains:
+      name: "Blue Mountains"
+      emoji: "🌄"
     wollongong:
       name: "Wollongong"
       emoji: "🏄"

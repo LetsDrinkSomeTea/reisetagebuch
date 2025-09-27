@@ -460,11 +460,11 @@ body {
   }
 
   .nav-sublist.expanded {
-    max-height: 1000px;
+    max-height: none;
   }
 
   .nav-sublist--days.expanded {
-    max-height: 500px;
+    max-height: none;
   }
 }
 

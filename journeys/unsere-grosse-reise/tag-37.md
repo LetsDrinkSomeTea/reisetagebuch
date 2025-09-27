@@ -7,7 +7,6 @@ country: australien # japan, australien, skandinavien
 city:
   - eden
   - paynesville
-  - lakes-entrance
   - roadtrip # tokyo, melbourne, oslo, etc.
 day: 37
 weather: Sonnig & Windig, 16°C

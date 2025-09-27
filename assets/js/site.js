@@ -1,23 +1,68 @@
 (function () {
+  var navResizeHandlerRegistered = false;
+
   function initNavToggles() {
     var toggles = document.querySelectorAll('.nav-toggle');
-    toggles.forEach(function (toggle) {
-      toggle.addEventListener('click', function () {
-        var targetId = toggle.getAttribute('data-target');
-        if (!targetId) return;
-        var target = document.getElementById(targetId);
-        if (!target) return;
 
-        var expanded = toggle.getAttribute('aria-expanded') === 'true';
-        toggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        target.classList.toggle('expanded', !expanded);
-
-        var icon = toggle.querySelector('.toggle-icon');
-        if (icon) {
-          icon.classList.toggle('expanded', !expanded);
+    function refreshAncestorHeights(element) {
+      var parent = element && element.parentElement;
+      while (parent) {
+        if (parent.classList && parent.classList.contains('nav-sublist') && parent.classList.contains('expanded')) {
+          parent.style.maxHeight = parent.scrollHeight + 'px';
         }
+        parent = parent.parentElement;
+      }
+    }
+
+    function setExpandedState(toggle, target, expanded) {
+      toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      target.classList.toggle('expanded', expanded);
+
+      if (expanded) {
+        target.style.maxHeight = target.scrollHeight + 'px';
+      } else {
+        target.style.maxHeight = '0px';
+      }
+
+      var icon = toggle.querySelector('.toggle-icon');
+      if (icon) {
+        icon.classList.toggle('expanded', expanded);
+      }
+
+      refreshAncestorHeights(target);
+    }
+
+    toggles.forEach(function (toggle) {
+      var targetId = toggle.getAttribute('data-target');
+      if (!targetId) return;
+      var target = document.getElementById(targetId);
+      if (!target) return;
+
+      var isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+      setExpandedState(toggle, target, isExpanded);
+
+      toggle.addEventListener('click', function () {
+        var expanded = toggle.getAttribute('aria-expanded') === 'true';
+        setExpandedState(toggle, target, !expanded);
       });
     });
+
+    if (!navResizeHandlerRegistered) {
+      window.addEventListener('resize', function () {
+        document.querySelectorAll('.nav-sublist.expanded').forEach(function (list) {
+          list.style.maxHeight = list.scrollHeight + 'px';
+          // Ensure enclosing lists stay in sync when viewport height changes
+          var parent = list.parentElement;
+          while (parent) {
+            if (parent.classList && parent.classList.contains('nav-sublist') && parent.classList.contains('expanded')) {
+              parent.style.maxHeight = parent.scrollHeight + 'px';
+            }
+            parent = parent.parentElement;
+          }
+        });
+      });
+      navResizeHandlerRegistered = true;
+    }
   }
 
   function initGalleries() {

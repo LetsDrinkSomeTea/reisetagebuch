@@ -5,7 +5,6 @@ date: 2025-09-18
 journey: unsere-grosse-reise
 country: australien # japan, australien, skandinavien
 city:
-  - pebbly-beach
   - narooma
   - roadtrip # tokyo, melbourne, oslo, etc.
 day: 35

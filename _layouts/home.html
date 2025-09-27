@@ -8,6 +8,7 @@ layout: default
   {% include page-header.html title=page.title %}
 
   <section class="journeys-overview">
+    <h2>Aktuelle Reise</h2>
     {% assign latest_day = all_day_pages | first %}
     {% if latest_day and latest_day.journey %}
       {% assign current_journey_key = latest_day.journey %}
@@ -41,12 +42,12 @@ layout: default
             <li><span class="stats-value">{{ current_countries.size }}</span> Länder</li>
           {% endif %}
           {% if current_first_day and current_last_day %}
-        <li><span class="stats-value">{{ current_first_day.date | date: '%d.%m' }}</span> bis <span class="stats-value">{{ current_last_day.date | date: '%d.%m.%y' }}</span></li>
+        <li>Start am <span class="stats-value">{{ current_first_day.date | date: '%d.%m' }}</span>></li>
           {% endif %}
         </ul>
         <div class="current-journey__actions">
           {% if latest_day %}
-            <a class="button" href="{{ latest_day.url | relative_url }}">Neuester Tag</a>
+        <a class="button" href="{{ latest_day.url | relative_url }}">Neuester Tag ({{ latest_day.date | date: '%d.%m' }})</a>
           {% endif %}
           {% if current_journey_page %}
             <a class="button button--ghost" href="{{ current_journey_page.url | relative_url }}">Zur Reise</a>

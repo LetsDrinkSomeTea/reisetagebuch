@@ -5,7 +5,6 @@ date: 2025-09-13
 journey: unsere-grosse-reise
 country: australien # japan, australien, skandinavien
 city:
-  - gundagai
   - roadtrip # tokyo, melbourne, oslo, etc.
 day: 30
 weather: Sonnig, 18°C
