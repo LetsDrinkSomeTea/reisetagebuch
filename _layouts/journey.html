@@ -1,0 +1,99 @@
+---
+layout: default
+---
+
+{% assign journey_key = page.journey %}
+{% assign journey_data = site.data.journeys[journey_key] %}
+{% assign journey_days = site.pages | where: 'layout', 'day' | where: 'journey', journey_key | sort: 'date' | reverse %}
+{% assign day_count = journey_days.size %}
+{% assign date_range_sorted = journey_days | sort: 'date' %}
+{% assign first_day = date_range_sorted | first %}
+{% assign last_day = date_range_sorted | last %}
+{% assign visited_countries = '' | split: '' %}
+{% assign visited_city_keys = '' | split: '' %}
+{% assign visited_places = '' | split: '' %}
+
+{% for day_page in journey_days %}
+  {% unless visited_countries contains day_page.country %}
+    {% assign visited_countries = visited_countries | push: day_page.country %}
+  {% endunless %}
+  {% if day_page.city %}
+    {% assign city_list = day_page.city | array %}
+    {% for city_key in city_list %}
+      {% unless visited_city_keys contains city_key %}
+        {% assign visited_city_keys = visited_city_keys | push: city_key %}
+      {% endunless %}
+      {% assign place_id = day_page.country | append: '::' | append: city_key %}
+      {% unless visited_places contains place_id %}
+        {% assign visited_places = visited_places | push: place_id %}
+      {% endunless %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
+<article class="journey-page">
+  {% assign journey_title = journey_data.name | default: page.title %}
+  {% include page-header.html title=journey_title subtitle=page.subtitle %}
+
+  <div class="page-content">
+    {{ content }}
+  </div>
+
+  <section class="journey-stats">
+    <h2>Reisestatistiken</h2>
+    {% if day_count > 0 %}
+      {% capture journey_stats %}
+        <li><span class="stats-value">{{ day_count }}</span> {% include pluralize.html count=day_count one="Tag" other="Tage" %}</li>
+        <li><span class="stats-value">{{ visited_city_keys.size }}</span> {% include pluralize.html count=visited_city_keys.size one="Stadt" other="Städte" %}</li>
+        <li><span class="stats-value">{{ visited_countries.size }}</span> {% include pluralize.html count=visited_countries.size one="Land" other="Länder" %}</li>
+        {% if first_day and last_day %}
+          <li>{{ first_day.date | date: '%d.%m' }} bis {{ last_day.date | date: '%d.%m.%y' }}</li>
+        {% endif %}
+      {% endcapture %}
+      {% include stats.html content=journey_stats %}
+    {% else %}
+      <p>Für diese Reise liegen noch keine Tagebucheinträge vor. Schau bald wieder vorbei!</p>
+    {% endif %}
+  </section>
+
+  <section class="journey-latest">
+    <h2>Neueste Einträge der Reise</h2>
+    {% if journey_days.size > 0 %}
+      <div class="grid grid--entries">
+        {% for day_page in journey_days limit: 6 %}
+          {% include card.html type='day' item=day_page %}
+        {% endfor %}
+      </div>
+      <p><a href="{{ '/entries/' | relative_url }}">Alle Einträge ansehen →</a></p>
+    {% else %}
+      <p>Noch keine Tageseinträge für diese Reise.</p>
+    {% endif %}
+  </section>
+
+  {% if visited_places.size > 0 %}
+    <section class="journey-cities">
+      <h2>Besuchte Orte</h2>
+      <div class="grid grid--cities">
+        {% for place in visited_places %}
+          {% assign tokens = place | split: '::' %}
+          {% assign country_key = tokens[0] %}
+          {% assign city_key = tokens[1] %}
+          {% assign city_page = site.pages | where: 'layout', 'city' | where: 'country', country_key | where: 'city', city_key | first %}
+          {% assign city_days_subset = '' | split: '' %}
+          {% for day_page in journey_days %}
+            {% if day_page.country == country_key %}
+              {% assign day_cities = day_page.city | array %}
+              {% if day_cities contains city_key %}
+                {% assign city_days_subset = city_days_subset | push: day_page %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+          {% if city_page %}
+            {% include card.html type='city' item=city_page country=country_key city=city_key day_pages=city_days_subset %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+</article>

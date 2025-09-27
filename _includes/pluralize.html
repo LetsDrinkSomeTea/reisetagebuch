@@ -1,0 +1,7 @@
+{% assign count = include.count | default: 0 %}
+{% if count == 1 %}
+  {{ include.one }}
+{% else %}
+  {{ include.other }}
+{% endif %}
+

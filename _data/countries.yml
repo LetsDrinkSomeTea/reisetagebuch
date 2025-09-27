@@ -12,6 +12,12 @@ japan:
     osaka:
       name: "Ōsaka"
       emoji: "🍜"
+    nara:
+      name: "Nara"
+      emoji: "🦌"
+    kobe:
+      name: "Kōbe"
+      emoji: "🥩"
 
 australien:
   name: "Australien"
@@ -24,42 +30,123 @@ australien:
     great-ocean-road:
       name: "Great Ocean Road"
       emoji: "🚌"
+    torquay:
+      name: "Torquay"
+      emoji: "🏄"
+    anglesea:
+      name: "Anglesea"
+      emoji: "⛳"
+    fairhaven:
+      name: "Fairhaven"
+      emoji: "🛟"
+    lorne:
+      name: "Lorne"
+      emoji: "💧"
+    apollo-bay:
+      name: "Apollo Bay"
+      emoji: "🌊"
     roadtrip:
       name: "Roadtrip"
       emoji: "🚌"
-    melbourne2:
-      name: "Melbourne"
+    gundagai:
+      name: "Gundagai"
+      emoji: "🐑"
+    canberra:
+      name: "Canberra"
+      emoji: "🏛️"
+    sydney:
+      name: "Sydney"
+      emoji: "🌉"
+    katoomba:
+      name: "Katoomba"
+      emoji: "⛰️"
+    blue-mountains:
+      name: "Blue Mountains"
+      emoji: "🌄"
+    wollongong:
+      name: "Wollongong"
+      emoji: "🏄"
+    sussex-inlet:
+      name: "Sussex Inlet"
+      emoji: "🚤"
+    pebbly-beach:
+      name: "Pebbly Beach"
+      emoji: "🏖️"
+    narooma:
+      name: "Narooma"
+      emoji: "🦪"
+    eden:
+      name: "Eden"
+      emoji: "🐋"
+    paynesville:
+      name: "Paynesville"
+      emoji: "⛵"
+    lakes-entrance:
+      name: "Lakes Entrance"
+      emoji: "🐟"
+    raymond-island:
+      name: "Raymond Island"
+      emoji: "🐨"
+    sale:
+      name: "Sale"
+      emoji: "🛩️"
+    yarram:
+      name: "Yarram"
       emoji: "🎨"
+    port-welshpool:
+      name: "Port Welshpool"
+      emoji: "⚓"
+    wilsons-promontory:
+      name: "Wilsons Promontory"
+      emoji: "🌿"
     perth:
       name: "Perth"
       emoji: "🏖️"
 
-skandinavien:
-  name: "Skandinavien"
-  flag: "𓊝"
-  emoji: "🏔️"
+daenemark:
+  name: "Dänemark"
+  flag: "🇩🇰"
+  emoji: "🚴"
   cities:
     copenhagen:
       name: "Copenhagen"
-      emoji: "🇩🇰"
+      emoji: "🏰"
+
+schweden:
+  name: "Schweden"
+  flag: "🇸🇪"
+  emoji: "🌲"
+  cities:
     goeteborg:
       name: "Göteborg"
       emoji: "⚓"
+    oestersund:
+      name: "Östersund"
+      emoji: "🏔️"
+    stockholm:
+      name: "Stockholm"
+      emoji: "🏙️"
+
+norwegen:
+  name: "Norwegen"
+  flag: "🇳🇴"
+  emoji: "🏔️"
+  cities:
     oslo:
       name: "Oslo"
-      emoji: "🇳🇴"
+      emoji: "🗺️"
     bergen:
       name: "Bergen"
       emoji: "🐟"
     trondheim:
       name: "Trondheim"
       emoji: "⛪"
-    oestersund:
-      name: "Östersund"
-      emoji: "🏔️"
-    stockholm:
-      name: "Stockholm"
-      emoji: "🇸🇪"
+
+deutschland:
+  name: "Deutschland"
+  flag: "🇩🇪"
+  emoji: "🏰"
+  cities:
     hannover:
       name: "Hannover"
-      emoji: "🇩🇪"
+      emoji: "🌆"

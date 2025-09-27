@@ -1,301 +1,128 @@
-{% comment %}
-Unified Gallery Component - Complete gallery system with integrated image discovery
-Parameters:
-- scope: "all", "country", "city" - determines gallery type
-- country: country key (required for "country" and "city" scope)  
-- city: city key (required for "city" scope)
-- title: optional gallery title (auto-generated if not provided)
-- show_stats: boolean - whether to show gallery statistics (default: false)
+{% assign scope = include.scope | default: 'all' %}
+{% assign country_filter = include.country %}
+{% assign city_filter = include.city %}
+{% assign image_types = site.data['image-types'] %}
+{% assign allowed_ext = 'jpg,jpeg,png,webp,avif' | split: ',' %}
+{% assign gallery_markup = '' %}
+{% assign item_count = 0 %}
 
-Usage:
-{% include gallery.html scope="city" country="japan" city="tokyo" %}
-{% include gallery.html scope="country" country="japan" title="Bilder aus Japan" %}
-{% include gallery.html scope="all" show_stats=true %}
-{% endcomment %}
+{% assign gallery_id_seed = page.url | append: '-' | append: scope %}
+{% if country_filter %}{% assign gallery_id_seed = gallery_id_seed | append: '-' | append: country_filter %}{% endif %}
+{% if city_filter %}{% assign gallery_id_seed = gallery_id_seed | append: '-' | append: city_filter %}{% endif %}
+{% assign gallery_id = gallery_id_seed | replace: '/', '-' | replace: '.', '-' | replace: ' ', '-' %}
 
-{% comment %} Integrated Image Discovery System {% endcomment %}
-{% assign images_found = false %}
-{% assign discovered_images = "" | split: "" %}
-{% assign image_extensions = "jpg,jpeg,JPG,JPEG" | split: "," %}
+{% assign day_pages = site.pages | where: 'layout', 'day' %}
 
-{% comment %} Define search criteria based on scope {% endcomment %}
-{% case include.scope %}
-  {% when "city" %}
-    {% assign search_path = include.country | append: "/" | append: include.city %}
-  {% when "country" %}
-    {% assign search_path = include.country %}
-  {% when "all" %}
-    {% assign search_path = "" %}
-  {% else %}
-    {% assign search_path = "" %}
-{% endcase %}
+{% for static in site.static_files %}
+  {% assign file_path = static.path %}
+  {% if file_path contains '/journeys/' and file_path contains '/tag-' %}
+    {% assign ext = static.extname | remove_first: '.' | downcase %}
+    {% if allowed_ext contains ext %}
+      {% assign trimmed_path = file_path | remove_first: '/' %}
+      {% assign segments = trimmed_path | split: '/' %}
+      {% if segments.size >= 4 %}
+        {% assign journey_key = segments[1] %}
+        {% assign tag_folder = segments[2] %}
+        {% assign file_name = segments[3] %}
+        {% assign basename = file_name | split: '.' | first %}
+        {% assign day_number_string = tag_folder | remove: 'tag-' %}
+        {% if day_number_string != tag_folder %}
+          {% assign day_number = day_number_string | plus: 0 %}
+          {% assign journey_day_candidates = day_pages | where: 'journey', journey_key %}
+          {% assign day_page = journey_day_candidates | where: 'day', day_number | first %}
+          {% if day_page %}
+            {% assign includes_image = true %}
+            {% if scope == 'country' %}
+              {% if day_page.country != country_filter or basename != 'main' %}
+                {% assign includes_image = false %}
+              {% endif %}
+            {% elsif scope == 'city' %}
+              {% assign city_list = day_page.city | array %}
+              {% unless day_page.country == country_filter and city_list contains city_filter and basename == 'main' %}
+                {% assign includes_image = false %}
+              {% endunless %}
+            {% endif %}
+            {% if includes_image %}
+              {% assign journey_data = site.data.journeys[journey_key] %}
+              {% assign journey_name = journey_data.name | default: journey_key %}
+              {% assign country_data = site.data.countries[day_page.country] %}
 
-{% comment %} Discover and process images in one pass {% endcomment %}
-{% for file in site.static_files %}
-  {% if file.path contains "/tag-" %}
-    {% assign extension_match = false %}
-    {% for ext in image_extensions %}
-      {% if file.extname contains ext %}
-        {% assign extension_match = true %}
-        {% break %}
-      {% endif %}
-    {% endfor %}
-    
-    {% if extension_match %}
-      {% assign include_file = false %}
-      {% if search_path == "" %}
-        {% assign include_file = true %}
-      {% elsif file.path contains search_path and file.path contains "main" %}
-        {% assign include_file = true %}
-      {% endif %}
-      
-      {% if include_file %}
-        {% assign path_parts = file.path | split: "/" %}
-        {% if path_parts.size >= 4 %}
-          {% assign file_country = path_parts[-4] %}
-          {% assign file_city = path_parts[-3] %}
-          {% assign tag_dir = path_parts[-2] %}
-          {% assign image_name = path_parts[-1] | split: "." | first | split: "-" | first %}
-          {% assign day_number = tag_dir | remove: "tag-" %}
-          
-          {% assign image_obj = "" | split: "" %}
-          {% assign image_obj = image_obj | push: file.path %}
-          {% assign image_obj = image_obj | push: file_country %}
-          {% assign image_obj = image_obj | push: file_city %}
-          {% assign image_obj = image_obj | push: day_number %}
-          {% assign image_obj = image_obj | push: image_name %}
-          
-          {% assign discovered_images = discovered_images | push: image_obj %}
-          {% assign images_found = true %}
+              {% assign city_keys_raw = day_page.city | array %}
+              {% assign city_keys = '' | split: '' %}
+              {% for ck in city_keys_raw %}
+                {% if ck %}
+                  {% assign city_keys = city_keys | push: ck %}
+                {% endif %}
+              {% endfor %}
+              {% assign primary_city_key = city_keys | first %}
+
+              {% assign city_names = '' | split: '' %}
+              {% assign city_emojis = '' | split: '' %}
+              {% for ck in city_keys %}
+                {% assign city_info = nil %}
+                {% if country_data and country_data.cities %}
+                  {% assign city_info = country_data.cities[ck] %}
+                {% endif %}
+                {% assign city_name_value = city_info.name | default: ck %}
+                {% assign city_emoji_value = city_info.emoji | default: '' %}
+                {% assign city_names = city_names | push: city_name_value %}
+                {% assign city_emojis = city_emojis | push: city_emoji_value %}
+              {% endfor %}
+
+              {% assign primary_city_name = city_names | first | default: primary_city_key %}
+              {% assign primary_city_emoji = city_emojis | first | default: '' %}
+              {% assign country_name = country_data.name | default: day_page.country %}
+              {% assign country_flag = country_data.flag | default: '' %}
+
+              {% assign city_names_attr = city_names | join: '|' | escape %}
+              {% assign city_names_attr = city_names_attr | replace: "'", '&#39;' %}
+              {% assign city_keys_attr = city_keys | join: ' ' %}
+              {% assign journey_name_attr = journey_name | escape | replace: "'", '&#39;' %}
+              {% assign country_name_attr = country_name | escape | replace: "'", '&#39;' %}
+
+              {% assign image_type = image_types[basename] %}
+              {% assign image_label = image_type.name | default: basename | replace: '-', ' ' | capitalize %}
+              {% assign title_text = primary_city_emoji | append: ' ' | append: primary_city_name | append: ' · Tag ' | append: day_page.day | append: ' · ' | append: image_label %}
+              {% assign alt_text = image_label | append: ' – Tag ' | append: day_page.day | append: ' in ' | append: primary_city_name | append: ', ' | append: country_name %}
+              {% capture location_label %}
+                {% if primary_city_emoji %}{{ primary_city_emoji }} {% endif %}{{ primary_city_name }}
+                {% if country_flag or country_name %}
+                  · {% if country_flag %}{{ country_flag }} {% endif %}{{ country_name }}
+                {% endif %}
+              {% endcapture %}
+              {% assign location_label = location_label | strip %}
+              {% assign image_url = file_path | relative_url %}
+              {% assign index_value = item_count %}
+              {% capture gallery_markup %}
+                {{ gallery_markup }}
+                <figure class="gallery__card" data-filter-item data-journey="{{ journey_key }}" data-journey-names="{{ journey_name_attr }}" data-country="{{ day_page.country }}" data-country-names="{{ country_name_attr }}" data-city="{{ city_keys_attr }}" data-city-names="{{ city_names_attr }}">
+                  <a class="gallery__link" href="{{ image_url }}" data-gallery="{{ gallery_id }}" data-gallery-index="{{ index_value }}" data-gallery-src="{{ image_url }}" data-gallery-alt="{{ alt_text | escape }}" data-gallery-title="{{ title_text | escape }}">
+                    <div class="gallery__media">
+                      <img src="{{ image_url }}" alt="{{ alt_text | escape }}" loading="lazy" decoding="async">
+                    </div>
+                    <div class="gallery__meta">
+                      <div class="gallery__location">{{ location_label }}</div>
+                      <div class="gallery__badges">
+                        <span class="badge badge--primary">Tag {{ day_page.day }}</span>
+                        <span class="badge badge--light">{{ image_label }}</span>
+                      </div>
+                    </div>
+                  </a>
+                </figure>
+              {% endcapture %}
+              {% assign item_count = item_count | plus: 1 %}
+            {% endif %}
+          {% endif %}
         {% endif %}
       {% endif %}
     {% endif %}
   {% endif %}
 {% endfor %}
 
-{% comment %} Sort images hierarchically: country -> city -> day -> image type {% endcomment %}
-{% if images_found %}
-  {% assign images_with_sort_keys = "" | split: "" %}
-  
-  {% comment %} Build country position lookup {% endcomment %}
-  {% assign country_index = 0 %}
-  {% for country in site.data.countries %}
-    {% assign country_key = country[0] %}
-    
-    {% comment %} Build city position lookup for this country {% endcomment %}
-    {% assign country_data = country[1] %}
-    {% assign city_index = 0 %}
-    {% for city in country_data.cities %}
-      {% assign city_key = city[0] %}
-      {% assign city_index = city_index | plus: 1 %}
-    {% endfor %}
-    {% assign country_index = country_index | plus: 1 %}
-  {% endfor %}
-  
-  {% comment %} Build image type position lookup {% endcomment %}
-  {% assign type_index = 0 %}
-  {% for image_type in site.data.image-types %}
-    {% assign type_key = image_type[0] %}
-    {% assign type_index = type_index | plus: 1 %}
-  {% endfor %}
-  
-  {% comment %} Process each image and create sort keys {% endcomment %}
-  {% for image_data in discovered_images %}
-    {% assign image_country = image_data[1] %}
-    {% assign image_city = image_data[2] %}
-    {% assign day_number = image_data[3] | plus: 0 %}
-    {% assign image_type = image_data[4] %}
-    
-    {% comment %} Find country position {% endcomment %}
-    {% assign country_pos = 999 %}
-    {% assign country_index = 0 %}
-    {% for country in site.data.countries %}
-      {% assign country_key = country[0] %}
-      {% if country_key == image_country %}
-        {% assign country_pos = country_index %}
-        {% break %}
-      {% endif %}
-      {% assign country_index = country_index | plus: 1 %}
-    {% endfor %}
-    
-    {% comment %} Find city position within country {% endcomment %}
-    {% assign city_pos = 999 %}
-    {% if country_pos != 999 %}
-      {% assign country_data = site.data.countries[image_country] %}
-      {% assign city_index = 0 %}
-      {% for city in country_data.cities %}
-        {% assign city_key = city[0] %}
-        {% if city_key == image_city %}
-          {% assign city_pos = city_index %}
-          {% break %}
-        {% endif %}
-        {% assign city_index = city_index | plus: 1 %}
-      {% endfor %}
-    {% endif %}
-    
-    {% comment %} Find image type position {% endcomment %}
-    {% assign type_pos = 999 %}
-    {% assign type_index = 0 %}
-    {% for image_type_entry in site.data.image-types %}
-      {% assign type_key = image_type_entry[0] %}
-      {% if type_key == image_type %}
-        {% assign type_pos = type_index %}
-        {% break %}
-      {% endif %}
-      {% assign type_index = type_index | plus: 1 %}
-    {% endfor %}
-    
-    {% comment %} Create sort key: country_pos-city_pos-day_number-type_pos {% endcomment %}
-    {% assign sort_key = country_pos | append: "-" | append: city_pos | append: "-" %}
-    {% if day_number < 10 %}{% assign sort_key = sort_key | append: "0" %}{% endif %}
-    {% assign sort_key = sort_key | append: day_number | append: "-" %}
-    {% if type_pos < 10 %}{% assign sort_key = sort_key | append: "0" %}{% endif %}
-    {% assign sort_key = sort_key | append: type_pos %}
-    
-    {% comment %} Combine sort key with image data {% endcomment %}
-    {% assign image_with_key = "" | split: "" %}
-    {% assign image_with_key = image_with_key | push: sort_key %}
-    {% for item in image_data %}
-      {% assign image_with_key = image_with_key | push: item %}
-    {% endfor %}
-    {% assign images_with_sort_keys = images_with_sort_keys | push: image_with_key %}
-  {% endfor %}
-  
-  {% comment %} Sort by the sort key {% endcomment %}
-  {% assign sorted_images_with_keys = images_with_sort_keys | sort %}
-  
-  {% comment %} Extract sorted images (remove sort keys) {% endcomment %}
-  {% assign discovered_images = "" | split: "" %}
-  {% for image_with_key in sorted_images_with_keys %}
-    {% assign clean_image = "" | split: "" %}
-    {% for i in (1..5) %}
-      {% assign clean_image = clean_image | push: image_with_key[i] %}
-    {% endfor %}
-    {% assign discovered_images = discovered_images | push: clean_image %}
-  {% endfor %}
-{% endif %}
-
-{% comment %} Render gallery if images found {% endcomment %}
-{% if images_found %}
-  {% comment %} Generate title if not provided {% endcomment %}
-  {% unless include.title %}
-    {% case include.scope %}
-      {% when "city" %}
-        {% assign city_data = site.data.countries[include.country].cities[include.city] %}
-        {% assign gallery_title = "📸 Bilder aus " | append: city_data.name %}
-      {% when "country" %}
-        {% assign country_data = site.data.countries[include.country] %}
-        {% assign gallery_title = "📸 Bilder aus " | append: country_data.name %}
-      {% when "all" %}
-        {% assign gallery_title = "📸 Alle Bilder" %}
-    {% endcase %}
-  {% else %}
-    {% assign gallery_title = include.title %}
-  {% endunless %}
-
-  {% comment %} Optional statistics display {% endcomment %}
-  {% if include.show_stats %}
-    {% assign countries_list = "" | split: "" %}
-    {% assign cities_list = "" | split: "" %}
-    
-    {% for image_data in discovered_images %}
-      {% assign image_country = image_data[1] %}
-      {% assign image_city = image_data[2] %}
-      {% assign city_identifier = image_country | append: "-" | append: image_city %}
-      
-      {% unless countries_list contains image_country %}
-        {% assign countries_list = countries_list | push: image_country %}
-      {% endunless %}
-      {% unless cities_list contains city_identifier %}
-        {% assign cities_list = cities_list | push: city_identifier %}
-      {% endunless %}
-    {% endfor %}
-
-    <div class="gallery__stats">
-      <span class="stat-item">📸 {{ discovered_images.size }} {% if discovered_images.size == 1 %}Bild{% else %}Bilder{% endif %}</span>
-      {% if include.scope == "all" %}
-        <span class="stat-item">🌍 {{ countries_list.size }} {% if countries_list.size == 1 %}Land{% else %}Länder{% endif %}</span>
-        <span class="stat-item">🏙️ {{ cities_list.size }} {% if cities_list.size == 1 %}Stadt{% else %}Städte{% endif %}</span>
-      {% endif %}
-    </div>
-  {% endif %}
-
-  <section class="gallery__section">
-    {% if gallery_title %}
-      <h2>{{ gallery_title }}</h2>
-    {% endif %}
-    
-    <div class="gallery">
-      {% for image_data in discovered_images %}
-        {% assign image_path = image_data[0] %}
-        {% assign country_key = image_data[1] %}
-        {% assign city_key = image_data[2] %}
-        {% assign day_number = image_data[3] %}
-        {% assign image_type = image_data[4] %}
-        
-        {% comment %} Get country and city display data {% endcomment %}
-        {% assign country_data = site.data.countries[country_key] %}
-        {% assign city_data = country_data.cities[city_key] %}
-        {% assign city_name = city_data.name | default: city_key %}
-        {% assign city_emoji = city_data.emoji | default: "🏙️" %}
-        
-        {% comment %} Get image type display data {% endcomment %}
-        {% assign image_type_data = site.data.image-types[image_type] %}
-        {% assign image_display_name = image_type_data.name | default: image_type %}
-        {% assign image_icon = image_type_data.icon | default: "🖼️" %}
-        
-        {% comment %} Build modal title and alt text {% endcomment %}
-        {% assign base_title = "Tag " | append: day_number | append: ", " | append: city_name | append: ", " | append: country_data.name %}
-        {% if include.scope == "all" %}
-          {% assign modal_title = base_title | append: " - " | append: image_icon | append: " " | append: image_display_name %}
-        {% else %}
-          {% assign modal_title = base_title %}
-        {% endif %}
-        {% assign alt_text = "Bild aus " | append: city_name | append: ", Tag " | append: day_number %}
-
-        <div class="gallery__card">
-          <a href="{{ image_path | relative_url }}" class="gallery__link" 
-             title="{{ modal_title }}"
-             data-modal-title="{{ modal_title }}">
-            <div class="gallery__image-container">
-              <img src="{{ image_path | relative_url }}" 
-                   alt="{{ alt_text }}" 
-                   loading="lazy" />
-              <div class="gallery__overlay">
-                <div class="gallery__info">
-                  {% case include.scope %}
-                    {% when "city" %}
-                      <span class="badge badge--primary">Tag {{ day_number }}</span>
-                    {% when "country" %}
-                      <span class="badge badge--light">{{ city_emoji }} {{ city_name }}</span>
-                      <span class="badge badge--primary">Tag {{ day_number }}</span>
-                    {% when "all" %}
-                      <span class="badge badge--light">{{ city_emoji }} {{ city_name }}</span>
-                      <span class="badge badge--light">{{ image_icon }}</span>
-                      <span class="badge badge--primary">Tag {{ day_number }}</span>
-                  {% endcase %}
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-      {% endfor %}
-    </div>
-  </section>
-
-  {% comment %} Re-initialize gallery links for modal system {% endcomment %}
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    if (window.reinitGallery) {
-      window.reinitGallery();
-    }
-  });
-  </script>
-{% else %}
-  {% comment %} Show no images message for "all" scope only {% endcomment %}
-  {% if include.scope == "all" %}
-    <div class="no-entries">
-      <p>🚀 Noch keine Bilder vorhanden. Die ersten Fotos erscheinen hier, sobald die Reise beginnt!</p>
-    </div>
-  {% endif %}
+{% if item_count > 0 %}
+  <div class="gallery gallery--{{ scope }}" data-gallery="{{ gallery_id }}"{% if include.dom_id %} id="{{ include.dom_id }}"{% endif %}>
+    {{ gallery_markup | strip }}
+  </div>
+{% elsif include.show_empty != false %}
+  <p class="gallery-empty">Hier erscheinen Bilder, sobald passende Medien vorhanden sind.</p>
 {% endif %}

@@ -1,159 +1,199 @@
-<nav class="navigation">
-  <!-- Countries Navigation -->
-  {% comment %} Pre-compute all day pages by country/city for efficiency {% endcomment %}
-  {% assign all_day_pages = site.pages | where: "layout", "day" %}
-  
-  {% for country in site.data.countries %}
-    {% assign country_key = country[0] %}
-    {% assign country_data = country[1] %}
-    
-    {% comment %} Get all day pages for this country {% endcomment %}
-    {% assign country_day_pages = all_day_pages | where: "country", country_key %}
-    
-    <!-- Only show country if it has content -->
-    {% if country_day_pages.size > 0 %}
-      <!-- Check if this country has any active children -->
-      {% assign has_active_child = false %}
-      {% assign country_active = false %}
-      {% if page.country == country_key %}
-        {% assign country_active = true %}
-        {% assign has_active_child = true %}
-      {% endif %}
-      
-      <div class="country-section{% if country_active %} active{% elsif has_active_child %} has-active-child{% endif %}" 
-           data-country="{{ country_key }}">
-        
-        <!-- Country Header (clickable) -->
-        <div class="country-header" onclick="toggleCountry('{{ country_key }}')">
-          {% assign country_page = site.pages | where: "country", country_key | where: "layout", "country" | first %}
-          <a href="{% if country_page %}{{ country_page.url | relative_url }}{% else %}{{ '/' | append: country_key | append: '/' | relative_url }}{% endif %}" 
-             class="country-link{% if country_active %} active{% endif %}"
-             onclick="event.stopPropagation()">
-            {{ country_data.flag }} {{ country_data.name }}
-          </a>
-          <span class="toggle-icon{% if has_active_child %} expanded{% endif %}">▶</span>
+{% assign day_pages = site.pages | where: 'layout', 'day' %}
+{% assign day_pages_by_date = day_pages | sort: 'date' %}
+{% assign day_pages_desc = day_pages_by_date | reverse %}
 
-        </div>
-        
-        <!-- Cities List -->
-        <ul class="cities-list{% if has_active_child %} expanded{% endif %}">
-          {% for city in country_data.cities %}
-            {% assign city_key = city[0] %}
-            {% assign city_data = city[1] %}
-            
-            {% comment %} Get day pages for this specific city {% endcomment %}
-            {% assign day_pages = country_day_pages | where: "city", city_key | sort: "day" %}
-            
-            <!-- Only show city if it has day entries -->
-            {% if day_pages.size > 0 %}
-              <!-- Check if this city has any active day entries -->
-              {% assign has_active_day = false %}
-              {% assign city_active = false %}
-              {% if page.country == country_key and page.city == city_key %}
-                {% assign city_active = true %}
-                {% if page.layout == "day" %}
-                  {% assign has_active_day = true %}
-                {% endif %}
-              {% endif %}
-              
-              <li class="city-section{% if has_active_day %} has-active-day{% endif %}" 
-                  data-city="{{ city_key }}">
-                
-                <!-- City Header (clickable) -->
-                <div class="city-header" onclick="toggleCity('{{ country_key }}', '{{ city_key }}')">
-                  {% assign city_page = site.pages | where: "country", country_key | where: "city", city_key | where: "layout", "city" | first %}
-                  <a href="{% if city_page %}{{ city_page.url | relative_url }}{% else %}{{ '/' | append: country_key | append: '/' | append: city_key | append: '/' | relative_url }}{% endif %}" 
-                     class="city-link{% if city_active %} active{% endif %}"
-                     onclick="event.stopPropagation()">
-                    {{ city_data.emoji }} {{ city_data.name }}
-                  </a>
-                  
-                  <!-- Toggle icon only if there are day entries -->
-                  <span class="toggle-icon{% if city_active %} expanded{% endif %}">▶</span>
-                </div>
-                
-                <!-- Days List -->
-                <ul class="days-list{% if city_active %} expanded{% endif %}">
-                  {% for day_page in day_pages %}
-                    <li>
-                      <div class="day-header">
-                        <a href="{{ day_page.url | relative_url }}"
-                           class="day-link{% if page.url == day_page.url %} active{% endif %}">
-                          Tag {{ day_page.day }}
-                        </a>
-                        <span class="toggle-icon-placeholder"></span>
-                      </div>
-                    </li>
-                  {% endfor %}
-                </ul>
-              </li>
-            {% endif %}
-          {% endfor %}
-        </ul>
-      </div>
+<nav class="navigation" aria-label="Hauptnavigation">
+
+  <section class="nav-section nav-section--actions">
+    <ul class="nav-list nav-list--actions">
+      {% assign entries_url = '/entries/' %}
+      {% assign places_url = '/places/' %}
+      {% assign gallery_url = '/gallery/' %}
+      <li class="nav-list__item">
+        <a class="nav-link nav-link--action{% if page.url == entries_url %} active{% endif %}" href="{{ entries_url | relative_url }}">
+          <span class="nav-link__label">📖 Alle Einträge</span>
+        </a>
+      </li>
+      <li class="nav-list__item">
+        <a class="nav-link nav-link--action{% if page.url == places_url %} active{% endif %}" href="{{ places_url | relative_url }}">
+          <span class="nav-link__label">🗺️ Besuchte Orte</span>
+        </a>
+      </li>
+      <li class="nav-list__item">
+        <a class="nav-link nav-link--action{% if page.url == gallery_url %} active{% endif %}" href="{{ gallery_url | relative_url }}">
+          <span class="nav-link__label">📸 Galerie</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section class="nav-section nav-section--latest">
+    <h3>Neueste Einträge</h3>
+    {% if day_pages_desc.size > 0 %}
+      <ul class="nav-list nav-list--entries">
+        {% for entry in day_pages_desc limit: 3 %}
+          <li class="nav-list__item">
+            <a class="nav-link nav-link--entry{% if page.url == entry.url %} active{% endif %}" href="{{ entry.url | relative_url }}">
+              <span class="nav-link__meta">{{ entry.date | date: '%d.%m' }}</span>
+              <span class="nav-link__label">Tag {{ entry.day }}{% if entry.title %}: {{ entry.title }}{% endif %}</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="nav-empty">Noch keine Einträge.</p>
     {% endif %}
-  {% endfor %}
-  
-  <!-- Latest Entries Section -->
-  <div class="latest-entries">
-    <h3>📝 Neueste Einträge</h3>
-    
-    {% comment %} Build hierarchically sorted day pages {% endcomment %}
-    {% assign sorted_day_pages = "" | split: "" %}
-    
-    {% comment %} Iterate through countries in order {% endcomment %}
+  </section>
+
+  <section class="nav-section nav-section--journeys">
+    <h3>Reisen</h3>
+    {% assign journeys_with_entries = 0 %}
+    <ul class="nav-list nav-list--journeys">
+      {% for journey in site.data.journeys %}
+        {% assign journey_key = journey[0] %}
+        {% assign journey_data = journey[1] %}
+        {% assign journey_days = day_pages | where: 'journey', journey_key %}
+        {% if journey_days.size > 0 %}
+          {% assign journey_page = site.pages | where: 'layout', 'journey' | where: 'journey', journey_key | first %}
+          {% if journey_page %}
+            {% assign journey_url = journey_page.url %}
+          {% else %}
+            {% assign journey_url = '/journeys/' | append: journey_key | append: '/' %}
+          {% endif %}
+          {% assign journeys_with_entries = journeys_with_entries | plus: 1 %}
+          <li class="nav-list__item nav-list__item--journey">
+            <div class="nav-list__row">
+              <a class="nav-link nav-link--journey{% if page.url == journey_url %} active{% endif %}" href="{{ journey_url | relative_url }}">
+                {% if journey_data.icon %}<span aria-hidden="true">{{ journey_data.icon }}</span>{% endif %}
+                <span class="nav-link__label">{{ journey_data.name }}</span>
+              </a>
+              <span class="badge badge--light nav-badge">{{ journey_days.size }} Tage</span>
+            </div>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    {% if journeys_with_entries == 0 %}
+      <p class="nav-empty">Noch keine Reisen verfügbar.</p>
+    {% endif %}
+  </section>
+
+  <section class="nav-section nav-section--places">
+    <h3>Länder &amp; Städte</h3>
+    {% assign countries_with_entries = 0 %}
+    {% assign country_pairs = '' | split: '' %}
     {% for country in site.data.countries %}
       {% assign country_key = country[0] %}
       {% assign country_data = country[1] %}
-      
-      {% comment %} Iterate through cities in order {% endcomment %}
-      {% for city in country_data.cities %}
-        {% assign city_key = city[0] %}
-        
-        {% comment %} Get all entries for this city and sort by day {% endcomment %}
-        {% assign city_entries = all_day_pages | where: "country", country_key | where: "city", city_key | sort: "day" %}
-        
-        {% comment %} Add to sorted list {% endcomment %}
-        {% for entry in city_entries %}
-          {% assign sorted_day_pages = sorted_day_pages | push: entry %}
-        {% endfor %}
-      {% endfor %}
+      {% capture country_pair %}{{ country_data.name | default: country_key | downcase }}|||{{ country_key }}{% endcapture %}
+      {% assign country_pairs = country_pairs | push: country_pair %}
     {% endfor %}
-    
-    {% comment %} Reverse for "recent first" display {% endcomment %}
-    {% assign sorted_day_pages = sorted_day_pages | reverse %}
-    
-    {% if sorted_day_pages.size > 0 %}
-      {% for entry in sorted_day_pages limit: 5 %}
-        {% assign country_data = site.data.countries[entry.country] %}
-        {% assign city_data = country_data.cities[entry.city] %}
-        
-        <div class="entry-item">
-          <span class="entry-date">{{ entry.date | date: '%d.%m' }}</span>
-          <a href="{{ entry.url | relative_url }}">
-            {{ country_data.flag }} {{ city_data.name }} - Tag {{ entry.day }}
-          </a>
-        </div>
+    {% assign sorted_country_pairs = country_pairs | sort %}
+    <ul class="nav-list nav-list--accordion">
+      {% for country_entry in sorted_country_pairs %}
+        {% assign country_parts = country_entry | split: '|||' %}
+        {% assign country_key = country_parts[1] %}
+        {% assign country_data = site.data.countries[country_key] %}
+        {% assign country_days = day_pages | where: 'country', country_key %}
+        {% if country_days.size > 0 %}
+          {% assign countries_with_entries = countries_with_entries | plus: 1 %}
+          {% assign country_page = site.pages | where: 'layout', 'country' | where: 'country', country_key | first %}
+          {% if country_page %}
+            {% assign country_url = country_page.url %}
+          {% else %}
+            {% assign country_url = '/places/' | append: country_key | append: '/' %}
+          {% endif %}
+          {% assign is_current_country = false %}
+          {% if page.url == country_url or page.country == country_key %}
+            {% assign is_current_country = true %}
+          {% endif %}
+
+          {% assign city_markup = '' %}
+          {% assign city_count = 0 %}
+          {% assign city_pairs = '' | split: '' %}
+          {% for city in country_data.cities %}
+            {% assign city_key = city[0] %}
+            {% assign city_data = city[1] %}
+            {% capture city_pair %}{{ city_data.name | default: city_key | downcase }}|||{{ city_key }}{% endcapture %}
+            {% assign city_pairs = city_pairs | push: city_pair %}
+          {% endfor %}
+          {% assign sorted_city_pairs = city_pairs | sort %}
+          {% for city_entry in sorted_city_pairs %}
+            {% assign city_parts = city_entry | split: '|||' %}
+            {% assign city_key = city_parts[1] %}
+            {% assign city_data = country_data.cities[city_key] %}
+            {% assign city_days = '' | split: '' %}
+            {% for day_page in country_days %}
+              {% assign city_field = day_page.city | array %}
+              {% if city_field contains city_key %}
+                {% assign city_days = city_days | push: day_page %}
+              {% endif %}
+            {% endfor %}
+            {% if city_days.size > 0 %}
+              {% assign city_count = city_count | plus: 1 %}
+              {% assign city_page = site.pages | where: 'layout', 'city' | where: 'country', country_key | where: 'city', city_key | first %}
+              {% if city_page %}
+                {% assign city_url = city_page.url %}
+              {% else %}
+                {% assign city_url = '/places/' | append: country_key | append: '/' | append: city_key | append: '/' %}
+              {% endif %}
+              {% assign city_days_sorted = city_days | sort: 'day' | reverse %}
+              {% assign is_current_city = false %}
+              {% if page.url == city_url %}
+                {% assign is_current_city = true %}
+              {% elsif page.city %}
+                {% assign page_city_field = page.city | array %}
+                {% if page_city_field contains city_key %}
+                  {% assign is_current_city = true %}
+                {% endif %}
+              {% endif %}
+              {% capture city_markup %}
+                {{ city_markup }}
+                <li class="nav-sublist__item nav-sublist__item--city" data-city="{{ city_key }}">
+                  <div class="nav-list__row">
+                    <a class="nav-link nav-link--city{% if is_current_city %} active{% endif %}" href="{{ city_url | relative_url }}">
+                      <span class="nav-link__label">{{ city_data.emoji }} {{ city_data.name }}</span>
+                    </a>
+                    <button class="nav-toggle" type="button" data-target="city-{{ country_key }}-{{ city_key }}" aria-expanded="{% if is_current_city %}true{% else %}false{% endif %}" aria-controls="city-{{ country_key }}-{{ city_key }}" aria-label="Tage in {{ city_data.name }} anzeigen oder verbergen">
+                      <span class="toggle-icon{% if is_current_city %} expanded{% endif %}" aria-hidden="true">▶</span>
+                    </button>
+                  </div>
+                  <ul id="city-{{ country_key }}-{{ city_key }}" class="nav-sublist nav-sublist--days{% if is_current_city %} expanded{% endif %}">
+                    {% for day_page in city_days_sorted %}
+                      <li class="nav-sublist__item nav-sublist__item--day">
+                        <a class="nav-link nav-link--day{% if page.url == day_page.url %} active{% endif %}" href="{{ day_page.url | relative_url }}">
+                          <span class="nav-link__label">Tag {{ day_page.day }}{% if day_page.title %}: {{ day_page.title }}{% endif %}</span>
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </li>
+              {% endcapture %}
+            {% endif %}
+          {% endfor %}
+
+          <li class="nav-list__item nav-list__item--country" data-country="{{ country_key }}">
+            <div class="nav-list__row">
+              <a class="nav-link nav-link--country{% if is_current_country %} active{% endif %}" href="{{ country_url | relative_url }}">
+                <span class="nav-link__label">{{ country_data.flag }} {{ country_data.name }}</span>
+              </a>
+              {% if city_count > 0 %}
+                <button class="nav-toggle" type="button" data-target="country-{{ country_key }}" aria-expanded="{% if is_current_country %}true{% else %}false{% endif %}" aria-controls="country-{{ country_key }}" aria-label="Städte in {{ country_data.name }} anzeigen oder verbergen">
+                  <span class="toggle-icon{% if is_current_country %} expanded{% endif %}" aria-hidden="true">▶</span>
+                </button>
+              {% endif %}
+            </div>
+            {% if city_count > 0 %}
+              <ul id="country-{{ country_key }}" class="nav-sublist nav-sublist--cities{% if is_current_country %} expanded{% endif %}">
+                {{ city_markup | strip }}
+              </ul>
+            {% endif %}
+          </li>
+        {% endif %}
       {% endfor %}
-    {% else %}
-      <p style="font-size: 0.85rem; color: var(--text-light); font-style: italic;">
-        Noch keine Einträge vorhanden
-      </p>
+    </ul>
+    {% if countries_with_entries == 0 %}
+      <p class="nav-empty">Noch keine Orte verfügbar.</p>
     {% endif %}
-  </div>
-
-  <!-- Gallery Link Section -->
-  <div class="gallery-main-link-section">
-    <a href="{{ '/galerie/' | relative_url }}" class="gallery-main-link{% if page.layout == 'gallery' %} active{% endif %}">
-      📸 Galerie
-    </a>
-  </div>
-
-  <!-- All Entries Link Section -->
-  <div class="gallery-main-link-section">
-    <a href="{{ '/alle-eintraege/' | relative_url }}" class="gallery-main-link{% if page.title == 'Alle Einträge' %} active{% endif %}">
-      📚 Alle Einträge
-    </a>
-  </div>
-
+  </section>
 </nav>

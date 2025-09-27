@@ -1,0 +1,74 @@
+---
+layout: default
+---
+
+{% assign all_day_pages = site.pages | where: 'layout', 'day' | sort: 'date' | reverse %}
+
+<article class="home-page">
+  {% include page-header.html title=page.title %}
+
+  <section class="journeys-overview">
+    <h2>Aktuelle Reise</h2>
+    {% assign latest_day = all_day_pages | first %}
+    {% if latest_day and latest_day.journey %}
+      {% assign current_journey_key = latest_day.journey %}
+      {% assign current_journey_page = site.pages | where: 'layout', 'journey' | where: 'journey', current_journey_key | first %}
+      {% assign current_journey_days = site.pages | where: 'layout', 'day' | where: 'journey', current_journey_key %}
+      {% assign current_journey_days_sorted = current_journey_days | sort: 'date' %}
+      {% assign current_first_day = current_journey_days_sorted | first %}
+      {% assign current_last_day = current_journey_days_sorted | last %}
+      {% assign current_countries = '' | split: '' %}
+      {% for day_item in current_journey_days %}
+        {% unless current_countries contains day_item.country %}
+          {% assign current_countries = current_countries | push: day_item.country %}
+        {% endunless %}
+      {% endfor %}
+      <div class="current-journey">
+        <div class="current-journey__header">
+          <h2 class="current-journey__title">
+            {% assign journey_data = site.data.journeys[current_journey_key] %}
+            {% if journey_data.icon %}<span aria-hidden="true">{{ journey_data.icon }}</span> {% endif %}
+            {{ journey_data.name | default: current_journey_page.title | default: current_journey_key}}
+          </h2>
+        </div>
+        {% assign journey_intro = journey_data.description %}
+        {% if journey_intro == '' %}
+          {% assign journey_intro = 'Begleite uns auf unserer aktuellen Etappe und entdecke die neuesten Eindrücke direkt hier im Tagebuch.' %}
+        {% endif %}
+        <p class="current-journey__description">{{ journey_intro }}</p>
+        <ul class="current-journey__stats">
+          <li><span class="stats-value">{{ current_journey_days.size }}</span> {% include pluralize.html count=current_journey_days.size one="Tag" other="Tage" %}</li>
+          {% if current_countries.size > 0 %}
+            <li><span class="stats-value">{{ current_countries.size }}</span> {% include pluralize.html count=current_countries.size one="Land" other="Länder" %}</li>
+          {% endif %}
+          {% if current_first_day and current_last_day %}
+        <li>Start am <span class="stats-value">{{ current_first_day.date | date: '%d.%m' }}</span></li>
+          {% endif %}
+        </ul>
+        <div class="current-journey__actions">
+          {% if latest_day %}
+        <a class="button" href="{{ latest_day.url | relative_url }}">Neuester Tag ({{ latest_day.date | date: '%d.%m' }})</a>
+          {% endif %}
+          {% if current_journey_page %}
+            <a class="button button--ghost" href="{{ current_journey_page.url | relative_url }}">Zur Reise</a>
+          {% endif %}
+        </div>
+      </div>
+    {% else %}
+      <p>Noch keine veröffentlichte Reise. Sobald die ersten Einträge erscheinen, findest du sie hier.</p>
+    {% endif %}
+  </section>
+
+  <section class="latest-entries">
+    <h2>Neueste Tagebucheinträge</h2>
+    {% if all_day_pages.size > 0 %}
+      <div class="grid grid--entries">
+        {% for day_page in all_day_pages limit: 6 %}
+          {% include card.html type='day' item=day_page %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>Die neuesten Erlebnisse erscheinen hier, sobald Tage erfasst sind.</p>
+    {% endif %}
+  </section>
+</article>

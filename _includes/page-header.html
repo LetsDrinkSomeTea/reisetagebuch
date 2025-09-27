@@ -12,7 +12,7 @@ Usage:
 {% endcomment %}
 
 <header class="{% if page.layout == 'day' %}entry-header{% else %}page-header{% endif %}">
-  {% include breadcrumb.html %}
+  {% include breadcrumb.html city=include.city %}
   
   {% assign header_title = include.title | default: page.title %}
   
@@ -21,13 +21,25 @@ Usage:
     
     {% if include.show_meta != false %}
       {% assign country_data = site.data.countries[page.country] %}
-      {% assign city_data = country_data.cities[page.city] %}
+      {% assign city_badges = '' | split: '' %}
+      {% if page.city %}
+        {% for city_key in page.city %}
+          {% unless city_badges contains city_key %}
+            {% assign city_badges = city_badges | push: city_key %}
+          {% endunless %}
+        {% endfor %}
+      {% elsif include.city %}
+        {% assign city_badges = city_badges | push: include.city %}
+      {% endif %}
       
       <div class="entry-meta">
         <div class="badge-container">
           <span class="badge badge--secondary">{{ page.date | date: '%d. %B %Y' }}</span>
           <span class="badge badge--primary">Tag {{ page.day }}</span>
-          <span class="badge badge--primary">{{ city_data.name }}</span>
+          {% for city_key in city_badges %}
+            {% assign city_data = country_data.cities[city_key] %}
+            <span class="badge badge--primary">{% if city_data and city_data.emoji %}{{ city_data.emoji }} {% endif %}{{ city_data.name | default: city_key }}</span>
+          {% endfor %}
           {% if page.weather %}
             <span class="badge badge--weather">{{ page.weather }}</span>
           {% endif %}
