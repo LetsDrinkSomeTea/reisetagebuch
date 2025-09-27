@@ -265,4 +265,109 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Re-initialize when new content is loaded (for potential future AJAX content)
     window.reinitGallery = initGalleryLinks;
+
+    // Filtering and sorting for gallery and entries
+    function initFilters() {
+        // Gallery controls
+        const galleryControls = document.querySelector('.gallery__controls');
+        const galleryContainer = document.querySelector('.gallery');
+        if (galleryControls && galleryContainer) {
+            const cards = Array.from(galleryContainer.querySelectorAll('.gallery__card'));
+            const selCountry = galleryControls.querySelector('#galleryFilterCountry');
+            const selCity = galleryControls.querySelector('#galleryFilterCity');
+            const selSort = galleryControls.querySelector('#gallerySort');
+
+            function applyCityOptions() {
+                const selectedCountry = selCountry.value;
+                Array.from(selCity.options).forEach(opt => {
+                    if (!opt.value) return; // 'Alle'
+                    const oCountry = opt.getAttribute('data-country');
+                    opt.hidden = selectedCountry && oCountry !== selectedCountry;
+                });
+                // Reset city if hidden
+                if (selCity.selectedOptions[0] && selCity.selectedOptions[0].hidden) {
+                    selCity.value = '';
+                }
+            }
+
+            function applyGallery() {
+                const ctry = selCountry.value;
+                const city = selCity.value;
+                // filter
+                cards.forEach(card => {
+                    const okCountry = !ctry || card.dataset.country === ctry;
+                    const okCity = !city || card.dataset.city === city;
+                    card.style.display = (okCountry && okCity) ? '' : 'none';
+                });
+                // sort
+                const sort = selSort.value;
+                const visible = cards.filter(c => c.style.display !== 'none');
+                visible.sort((a, b) => {
+                    const da = a.dataset.date || '';
+                    const db = b.dataset.date || '';
+                    if (sort === 'date-asc') return da.localeCompare(db);
+                    return db.localeCompare(da);
+                });
+                // re-append in new order, keep hidden as is
+                visible.forEach(card => galleryContainer.appendChild(card));
+            }
+
+            selCountry.addEventListener('change', () => { applyCityOptions(); applyGallery(); });
+            selCity.addEventListener('change', applyGallery);
+            selSort.addEventListener('change', applyGallery);
+            applyCityOptions();
+            applyGallery();
+        }
+
+        // Entries controls (Alle Einträge)
+        const entriesControls = document.querySelector('#entries-controls');
+        const entriesGrid = document.querySelector('.entries-page .grid--days');
+        if (entriesControls && entriesGrid) {
+            const cards = Array.from(entriesGrid.querySelectorAll('.card.card--day'));
+            const selCountry = entriesControls.querySelector('#entriesFilterCountry');
+            const selCity = entriesControls.querySelector('#entriesFilterCity');
+            const selSort = entriesControls.querySelector('#entriesSort');
+
+            function applyCityOptions() {
+                const selectedCountry = selCountry.value;
+                Array.from(selCity.options).forEach(opt => {
+                    if (!opt.value) return; // 'Alle'
+                    const oCountry = opt.getAttribute('data-country');
+                    opt.hidden = selectedCountry && oCountry !== selectedCountry;
+                });
+                if (selCity.selectedOptions[0] && selCity.selectedOptions[0].hidden) {
+                    selCity.value = '';
+                }
+            }
+
+            function applyEntries() {
+                const ctry = selCountry.value;
+                const city = selCity.value;
+                // filter
+                cards.forEach(card => {
+                    const okCountry = !ctry || card.dataset.country === ctry;
+                    const okCity = !city || card.dataset.city === city;
+                    card.style.display = (okCountry && okCity) ? '' : 'none';
+                });
+                // sort visible
+                const sort = selSort.value;
+                const visible = cards.filter(c => c.style.display !== 'none');
+                visible.sort((a, b) => {
+                    const da = a.dataset.date || '';
+                    const db = b.dataset.date || '';
+                    if (sort === 'date-asc') return da.localeCompare(db);
+                    return db.localeCompare(da);
+                });
+                visible.forEach(card => entriesGrid.appendChild(card));
+            }
+
+            selCountry.addEventListener('change', () => { applyCityOptions(); applyEntries(); });
+            selCity.addEventListener('change', applyEntries);
+            selSort.addEventListener('change', applyEntries);
+            applyCityOptions();
+            applyEntries();
+        }
+    }
+
+    initFilters();
 });

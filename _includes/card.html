@@ -12,7 +12,14 @@ Usage:
 {% include card.html type="day" item=day_page country_data=country_data city_data=city_data %}
 {% endcomment %}
 
-<article class="card{% if include.type %} card--{{ include.type }}{% endif %}">
+<article class="card{% if include.type %} card--{{ include.type }}{% endif %}"
+  {% if include.type == 'day' %}
+    data-country="{{ include.item.country }}"
+    data-city="{{ include.item.city }}"
+    data-journey="{{ include.item.journey }}"
+    data-date="{{ include.item.date | date: '%Y-%m-%d' }}"
+    data-day="{{ include.item.day }}"
+  {% endif %}>
   <header>
     {% case include.type %}
       {% when "city" %}

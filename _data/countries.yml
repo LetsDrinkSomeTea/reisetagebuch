@@ -27,39 +27,54 @@ australien:
     roadtrip:
       name: "Roadtrip"
       emoji: "🚌"
-    melbourne2:
-      name: "Melbourne"
-      emoji: "🎨"
     perth:
       name: "Perth"
       emoji: "🏖️"
 
-skandinavien:
-  name: "Skandinavien"
-  flag: "𓊝"
-  emoji: "🏔️"
+daenemark:
+  name: "Dänemark"
+  flag: "🇩🇰"
+  emoji: "🚴"
   cities:
     copenhagen:
       name: "Copenhagen"
-      emoji: "🇩🇰"
+      emoji: "🏰"
+
+schweden:
+  name: "Schweden"
+  flag: "🇸🇪"
+  emoji: "🌲"
+  cities:
     goeteborg:
       name: "Göteborg"
       emoji: "⚓"
+    oestersund:
+      name: "Östersund"
+      emoji: "🏔️"
+    stockholm:
+      name: "Stockholm"
+      emoji: "🏙️"
+
+norwegen:
+  name: "Norwegen"
+  flag: "🇳🇴"
+  emoji: "🏔️"
+  cities:
     oslo:
       name: "Oslo"
-      emoji: "🇳🇴"
+      emoji: "🗺️"
     bergen:
       name: "Bergen"
       emoji: "🐟"
     trondheim:
       name: "Trondheim"
       emoji: "⛪"
-    oestersund:
-      name: "Östersund"
-      emoji: "🏔️"
-    stockholm:
-      name: "Stockholm"
-      emoji: "🇸🇪"
+
+deutschland:
+  name: "Deutschland"
+  flag: "🇩🇪"
+  emoji: "🏰"
+  cities:
     hannover:
       name: "Hannover"
-      emoji: "🇩🇪"
+      emoji: "🌆"

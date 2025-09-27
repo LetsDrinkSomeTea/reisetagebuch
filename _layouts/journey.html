@@ -1,51 +1,34 @@
 ---
 layout: default
-title: "Willkommen"
 ---
 
-<article class="home-page">
+<article class="journey-page">
   {% include page-header.html %}
 
-  <!-- Journeys Overview -->
-  <section class="journeys-overview">
-    <h2>Reisen</h2>
-    {% assign journeys = site.data.journeys %}
-    <div class="grid grid--cities">
-      {% for j in journeys %}
-        {% assign j_key = j[0] %}
-        {% assign j_data = j[1] %}
-        {% assign j_pages = site.pages | where: "layout", "day" | where: "journey", j_key | sort: "date" %}
-        {% assign j_count = j_pages.size %}
-        {% assign first_page = j_pages | first %}
-        {% assign last_page = j_pages | last %}
-        <article class="card">
-          <header>
-            <h3>{{ j_data.icon }} {{ j_data.name }}</h3>
-          </header>
-          <div class="card-content">
-            {% if j_count > 0 %}
-              <p>
-                {{ j_count }} {% if j_count == 1 %}Eintrag{% else %}Einträge{% endif %}
-                {% if first_page and last_page %}<br>
-                  {{ first_page.date | date: '%d.%m.%Y' }} – {{ last_page.date | date: '%d.%m.%Y' }}
-                {% endif %}
-              </p>
-            {% else %}
-              <p>Noch keine Einträge.</p>
-            {% endif %}
-          </div>
-          <footer>
-            <a href="{{ '/journeys/' | append: j_key | append: '/' | relative_url }}">Zur Reise →</a>
-          </footer>
-        </article>
-      {% endfor %}
-    </div>
+  <div class="page-content">
+    {{ content }}
+  </div>
+
+  {% assign entries = site.pages | where: "layout", "day" | where: "journey", page.journey | sort: "date" %}
+  {% assign entries_count = entries.size %}
+
+  <section class="journey-stats">
+    <h2>Übersicht</h2>
+    {% assign first_page = entries | first %}
+    {% assign last_page = entries | last %}
+    {% if entries_count > 0 %}
+      <p>
+        {{ entries_count }} {% if entries_count == 1 %}Eintrag{% else %}Einträge{% endif %}
+        {% if first_page and last_page %} · {{ first_page.date | date: '%d.%m.%Y' }} – {{ last_page.date | date: '%d.%m.%Y' }}{% endif %}
+      </p>
+    {% else %}
+      <p>Noch keine Einträge in dieser Reise.</p>
+    {% endif %}
   </section>
 
-  <!-- Places Overview -->
-  <section class="places-overview">
+  <section class="journey-places">
     <h2>Besuchte Orte</h2>
-    {% assign all_days = site.pages | where: "layout", "day" | where: "journey", "unsere-grosse-reise" %}
+    {% assign all_days = entries %}
     {% for country in site.data.countries %}
       {% assign country_key = country[0] %}
       {% assign country_data = country[1] %}
@@ -84,14 +67,14 @@ title: "Willkommen"
     {% endfor %}
   </section>
 
-  <!-- Latest Entries -->
-  <section class="latest-entries-overview">
+  <section class="journey-latest">
     <h2>Neueste Einträge</h2>
-    {% assign latest = site.pages | where: "layout", "day" | sort: "date" | reverse %}
+    {% assign latest = entries | sort: "date" | reverse %}
     <div class="grid grid--days">
-      {% for day_page in latest limit: 6 %}
+      {% for day_page in latest limit: 9 %}
         {% include card.html type="day" item=day_page %}
       {% endfor %}
     </div>
   </section>
 </article>
+

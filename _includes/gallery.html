@@ -18,21 +18,12 @@ Usage:
 {% assign discovered_images = "" | split: "" %}
 {% assign image_extensions = "jpg,jpeg,JPG,JPEG" | split: "," %}
 
-{% comment %} Define search criteria based on scope {% endcomment %}
-{% case include.scope %}
-  {% when "city" %}
-    {% assign search_path = include.country | append: "/" | append: include.city %}
-  {% when "country" %}
-    {% assign search_path = include.country %}
-  {% when "all" %}
-    {% assign search_path = "" %}
-  {% else %}
-    {% assign search_path = "" %}
-{% endcase %}
+{% comment %} Define scope flags (journey-centric: unsere-grosse-reise) {% endcomment %}
+{% assign scope_mode = include.scope | default: 'all' %}
 
 {% comment %} Discover and process images in one pass {% endcomment %}
 {% for file in site.static_files %}
-  {% if file.path contains "/tag-" %}
+  {% if file.path contains "/journeys/" and file.path contains "/tag-" %}
     {% assign extension_match = false %}
     {% for ext in image_extensions %}
       {% if file.extname contains ext %}
@@ -42,31 +33,45 @@ Usage:
     {% endfor %}
     
     {% if extension_match %}
-      {% assign include_file = false %}
-      {% if search_path == "" %}
-        {% assign include_file = true %}
-      {% elsif file.path contains search_path and file.path contains "main" %}
-        {% assign include_file = true %}
-      {% endif %}
-      
-      {% if include_file %}
-        {% assign path_parts = file.path | split: "/" %}
-        {% if path_parts.size >= 4 %}
-          {% assign file_country = path_parts[-4] %}
-          {% assign file_city = path_parts[-3] %}
-          {% assign tag_dir = path_parts[-2] %}
-          {% assign image_name = path_parts[-1] | split: "." | first | split: "-" | first %}
-          {% assign day_number = tag_dir | remove: "tag-" %}
-          
-          {% assign image_obj = "" | split: "" %}
-          {% assign image_obj = image_obj | push: file.path %}
-          {% assign image_obj = image_obj | push: file_country %}
-          {% assign image_obj = image_obj | push: file_city %}
-          {% assign image_obj = image_obj | push: day_number %}
-          {% assign image_obj = image_obj | push: image_name %}
-          
-          {% assign discovered_images = discovered_images | push: image_obj %}
-          {% assign images_found = true %}
+      {% assign path_parts = file.path | split: "/" %}
+      {% if path_parts.size >= 3 %}
+        {% assign tag_dir = path_parts[-2] %}
+        {% assign image_name = path_parts[-1] | split: "." | first | split: "-" | first %}
+        {% assign day_label = tag_dir | remove: "tag-" %}
+
+        {% comment %} Find the matching day page to derive country/city {% endcomment %}
+        {% assign candidate_pages = site.pages | where: "layout", "day" %}
+        {% assign candidate_pages = candidate_pages | where: "journey", "unsere-grosse-reise" %}
+        {% assign matched_page = candidate_pages | where: "day", day_label | first %}
+
+        {% if matched_page %}
+          {% assign file_country = matched_page.country %}
+          {% assign file_city = matched_page.city %}
+          {% assign file_journey = matched_page.journey %}
+          {% assign file_date = matched_page.date | date: '%Y-%m-%d' %}
+
+          {% comment %} Scope filter: for city/country views only include main images {% endcomment %}
+          {% assign include_file = false %}
+          {% if scope_mode == "all" %}
+            {% assign include_file = true %}
+          {% elsif scope_mode == "country" and include.country == file_country and file.path contains "main" %}
+            {% assign include_file = true %}
+          {% elsif scope_mode == "city" and include.country == file_country and include.city == file_city and file.path contains "main" %}
+            {% assign include_file = true %}
+          {% endif %}
+
+          {% if include_file %}
+            {% assign image_obj = "" | split: "" %}
+            {% assign image_obj = image_obj | push: file.path %}
+            {% assign image_obj = image_obj | push: file_country %}
+            {% assign image_obj = image_obj | push: file_city %}
+            {% assign image_obj = image_obj | push: day_label %}
+            {% assign image_obj = image_obj | push: image_name %}
+            {% assign image_obj = image_obj | push: file_journey %}
+            {% assign image_obj = image_obj | push: file_date %}
+            {% assign discovered_images = discovered_images | push: image_obj %}
+            {% assign images_found = true %}
+          {% endif %}
         {% endif %}
       {% endif %}
     {% endif %}
@@ -103,8 +108,15 @@ Usage:
   {% for image_data in discovered_images %}
     {% assign image_country = image_data[1] %}
     {% assign image_city = image_data[2] %}
-    {% assign day_number = image_data[3] | plus: 0 %}
+    {% assign day_label = image_data[3] %}
+    {% assign day_base = day_label | remove: 'b' | plus: 0 %}
+    {% assign is_b = 0 %}
+    {% if day_label contains 'b' %}
+      {% assign is_b = 1 %}
+    {% endif %}
     {% assign image_type = image_data[4] %}
+    {% assign image_journey = image_data[5] %}
+    {% assign image_date = image_data[6] %}
     
     {% comment %} Find country position {% endcomment %}
     {% assign country_pos = 999 %}
@@ -145,10 +157,10 @@ Usage:
       {% assign type_index = type_index | plus: 1 %}
     {% endfor %}
     
-    {% comment %} Create sort key: country_pos-city_pos-day_number-type_pos {% endcomment %}
+    {% comment %} Create sort key: country_pos-city_pos-day_base-is_b-type_pos {% endcomment %}
     {% assign sort_key = country_pos | append: "-" | append: city_pos | append: "-" %}
-    {% if day_number < 10 %}{% assign sort_key = sort_key | append: "0" %}{% endif %}
-    {% assign sort_key = sort_key | append: day_number | append: "-" %}
+    {% if day_base < 10 %}{% assign sort_key = sort_key | append: "0" %}{% endif %}
+    {% assign sort_key = sort_key | append: day_base | append: "-" | append: is_b | append: "-" %}
     {% if type_pos < 10 %}{% assign sort_key = sort_key | append: "0" %}{% endif %}
     {% assign sort_key = sort_key | append: type_pos %}
     
@@ -168,7 +180,7 @@ Usage:
   {% assign discovered_images = "" | split: "" %}
   {% for image_with_key in sorted_images_with_keys %}
     {% assign clean_image = "" | split: "" %}
-    {% for i in (1..5) %}
+    {% for i in (1..7) %}
       {% assign clean_image = clean_image | push: image_with_key[i] %}
     {% endfor %}
     {% assign discovered_images = discovered_images | push: clean_image %}
@@ -224,7 +236,46 @@ Usage:
     {% if gallery_title %}
       <h2>{{ gallery_title }}</h2>
     {% endif %}
-    
+    {% if scope_mode == 'all' %}
+      <div class="gallery__controls" aria-label="Filter">
+        <label>
+          Land:
+          <select id="galleryFilterCountry">
+            <option value="">Alle</option>
+            {% assign countries_list = discovered_images | map: 1 | uniq %}
+            {% for c in countries_list %}
+              <option value="{{ c }}">{{ site.data.countries[c].name | default: c }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label>
+          Stadt:
+          <select id="galleryFilterCity">
+            <option value="">Alle</option>
+            {% assign city_idents = "" | split: "" %}
+            {% for img in discovered_images %}
+              {% assign ident = img[1] | append: ":" | append: img[2] %}
+              {% unless city_idents contains ident %}
+                {% assign city_idents = city_idents | push: ident %}
+              {% endunless %}
+            {% endfor %}
+            {% for ident in city_idents %}
+              {% assign parts = ident | split: ":" %}
+              {% assign ctry = parts[0] %}
+              {% assign cty = parts[1] %}
+              <option value="{{ cty }}" data-country="{{ ctry }}">{{ site.data.countries[ctry].cities[cty].name | default: cty }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label>
+          Sortierung:
+          <select id="gallerySort">
+            <option value="date-desc">Neueste zuerst</option>
+            <option value="date-asc">Älteste zuerst</option>
+          </select>
+        </label>
+      </div>
+    {% endif %}
     <div class="gallery">
       {% for image_data in discovered_images %}
         {% assign image_path = image_data[0] %}
@@ -232,6 +283,8 @@ Usage:
         {% assign city_key = image_data[2] %}
         {% assign day_number = image_data[3] %}
         {% assign image_type = image_data[4] %}
+        {% assign journey_key = image_data[5] %}
+        {% assign image_date = image_data[6] %}
         
         {% comment %} Get country and city display data {% endcomment %}
         {% assign country_data = site.data.countries[country_key] %}
@@ -253,7 +306,7 @@ Usage:
         {% endif %}
         {% assign alt_text = "Bild aus " | append: city_name | append: ", Tag " | append: day_number %}
 
-        <div class="gallery__card">
+        <div class="gallery__card" data-country="{{ country_key }}" data-city="{{ city_key }}" data-journey="{{ journey_key }}" data-date="{{ image_date }}" data-day="{{ day_number }}" data-type="{{ image_type }}">
           <a href="{{ image_path | relative_url }}" class="gallery__link" 
              title="{{ modal_title }}"
              data-modal-title="{{ modal_title }}">
