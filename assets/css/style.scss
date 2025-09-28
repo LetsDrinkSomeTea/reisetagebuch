@@ -70,7 +70,6 @@
   --transition-slow: 0.3s ease;
 }
 
-/* Dark mode removed per request */
 
 // ====================
 // MIXINS
@@ -359,6 +358,7 @@ body {
   .nav-list__row {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: var(--space-xs);
   }
 
@@ -372,6 +372,7 @@ body {
     border-radius: var(--radius-sm);
     font-size: 0.9rem;
     font-weight: 500;
+    width: -webkit-fill-available;
     transition: background-color var(--transition-fast), color var(--transition-fast);
   }
 
@@ -670,6 +671,11 @@ a {
   &--secondary {
     background-color: var(--text-light);
     color: white;
+  }
+
+  &--accent {
+    background-color: var(--accent-color);
+    color: var(--text-color);
   }
 
   &--light {
