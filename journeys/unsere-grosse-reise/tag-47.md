@@ -62,8 +62,6 @@ Für verhältnismäßig wenig Geld bekamen wir hier gutes Sushi und wurden satt.
 Das war’s auch schon wieder von unserem Tag.  
 Nach dem Essen sind wir ziemlich direkt wieder nach Hause gefahren und haben den restlichen Abend mit Faulenzen verbracht.  
 
-![Evening Activity]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/evening.jpg)
-
 ## ✨ Highlight des Tages
 
 - The Nostalgia Box  
