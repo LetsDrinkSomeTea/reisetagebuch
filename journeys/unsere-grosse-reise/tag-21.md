@@ -6,6 +6,7 @@ journey: unsere-grosse-reise
 country: japan # japan, australien, skandinavien
 city:
   - osaka # tokyo, melbourne, oslo, etc.
+  - melbourne
 day: 21
 weather: Klar, 33°C
 ---
