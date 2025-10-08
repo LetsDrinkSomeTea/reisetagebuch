@@ -3,6 +3,7 @@ _site
 Gemfile.lock
 CLAUDE.md
 GEMINI.md
+.claude
 
 # Temporary and backup files
 *.tmp
