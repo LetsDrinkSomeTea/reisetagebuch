@@ -150,3 +150,9 @@ deutschland:
     hannover:
       name: "Hannover"
       emoji: "🌆"
+    hamburg:
+      name: "Hamburg"
+      emoji: "🏭"
+    berlin:
+      name: "Berlin"
+      emoji: "🏙"

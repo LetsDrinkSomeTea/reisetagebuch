@@ -35,7 +35,7 @@
           <li class="nav-list__item">
             <a class="nav-link nav-link--entry{% if page.url == entry.url %} active{% endif %}" href="{{ entry.url | relative_url }}">
               <span class="nav-link__meta">{{ entry.date | date: '%d.%m' }}</span>
-              <span class="nav-link__label">Tag {{ entry.day }}{% if entry.title %}: {{ entry.title }}{% endif %}</span>
+              <span class="nav-link__label">{{ entry.title }}</span>
             </a>
           </li>
         {% endfor %}
@@ -162,7 +162,7 @@
                     {% for day_page in city_days_sorted %}
                       <li class="nav-sublist__item nav-sublist__item--day">
                         <a class="nav-link nav-link--day{% if page.url == day_page.url %} active{% endif %}" href="{{ day_page.url | relative_url }}">
-                          <span class="nav-link__label">Tag {{ day_page.day }}{% if day_page.title %}: {{ day_page.title }}{% endif %}</span>
+                          <span class="nav-link__label">{{ day_page.date | date: '%d.%m' }}{% if day_page.title %}: {{ day_page.title }}{% endif %}</span>
                         </a>
                       </li>
                     {% endfor %}

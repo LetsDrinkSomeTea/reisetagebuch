@@ -1,15 +1,14 @@
 ---
 layout: day
 title: "Subtitle"
-date: 2025-09-01
-journey: journey_key
+date: 2025-10-20
+journey: skandinavien-interrail
 country: country_key # japan, australien, skandinavien
 city:
   - city_key # tokyo, melbourne, oslo, etc.
-day: 0
+day: 1
 weather: "Weather, 00°C"
 ---
-
 
 ## 🥐 Frühstück
 
@@ -54,8 +53,8 @@ weather: "Weather, 00°C"
 
 ## 🏃🏽‍♀️ Schritte
 
-- Anna: _23.745_  
-- Julian: _23.036_  
+- Anna: _23.745_
+- Julian: _23.036_
 
 ## 📸 Bild des Tages
 
