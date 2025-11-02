@@ -1,13 +1,13 @@
 ---
 layout: day
 title: "Subtitle"
-date: 2025-10-20
+date: 2025-11-02
 journey: skandinavien-interrail
-country: country_key # japan, australien, skandinavien
+country: deutschland # japan, australien, skandinavien
 city:
-  - city_key # tokyo, melbourne, oslo, etc.
+  - hamburg # tokyo, melbourne, oslo, etc.
 day: 1
-weather: "Weather, 00°C"
+weather: "Bewölkt, 14°C"
 ---
 
 ## 🥐 Frühstück
