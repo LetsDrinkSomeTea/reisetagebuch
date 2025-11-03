@@ -53,8 +53,8 @@ weather: "Bewölkt, 14°C"
 
 ## 🏃🏽‍♀️ Schritte
 
-- Anna: _23.745_
 - Julian: _23.036_
+- Marc: _23.745_
 
 ## 📸 Bild des Tages
 
