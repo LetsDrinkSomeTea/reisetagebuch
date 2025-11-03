@@ -5,7 +5,7 @@ baseurl: "/reisetagebuch"
 url: "https://pages.faigle.dev"
 
 # Author
-author: Anna & Julian
+author: Julian & Marc
 
 # Build settings
 markdown: kramdown
