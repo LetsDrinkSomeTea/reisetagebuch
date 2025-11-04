@@ -56,6 +56,18 @@ weather: "Bewölkt, 14°C"
 - Julian: _23.036_
 - Marc: _23.745_
 
+## 🛤️ Gefahrene Kilometer
+
+`424km in 4:57 Stunden`
+
+## 🎮 Mario Party Siege
+
+Marc 1 : 0 Julian
+
+## 🍸 Besuchte Bars
+
+`4`
+
 ## 📸 Bild des Tages
 
 ![Picture of the Day]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/main.jpg)
