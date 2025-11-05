@@ -62,7 +62,7 @@ weather: "Bewölkt, 14°C"
 
 ## 🎮 Mario Party Siege
 
-Marc 1 : 0 Julian
+Marc `1 : 0` Julian
 
 ## 🍸 Besuchte Bars
 

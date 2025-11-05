@@ -1,7 +1,7 @@
 ---
 layout: day
 title: "Erste Fahrt, erste Verspätung"
-date: 2025-11-03
+date: 2025-11-04
 journey: skandinavien-interrail
 country: daenemark
 city:
@@ -84,7 +84,7 @@ Die restliche Zeit in Kopenhagen war aber bereits ziemlich schön und macht Vorf
 
 ## 🎮 Mario Party Siege
 
-Marc 1 : 0 Julian
+Marc `1 : 0` Julian
 
 ## 📸 Bild des Tages
 
