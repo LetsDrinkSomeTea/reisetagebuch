@@ -5,7 +5,7 @@ date: 2025-11-05
 journey: skandinavien-interrail
 country: daenemark
 city:
-  - københavn
+  - copenhagen
 day: 4
 weather: "Bewölkt, 10°C"
 ---
