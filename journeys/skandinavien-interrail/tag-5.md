@@ -87,9 +87,9 @@ Damit ging unser erster Tag in Schweden dann auch zu Ende.
 
 ## 🛤️ Gefahrene Kilometer
 
-`308 km in 3:50 Stunden`
+Heute: `308 km in 3:50 Stunden`
 
-`732 km in 8:47 Stunden`
+Insgesamt: `732 km in 8:47 Stunden`
 
 ## 🎮 Mario Party Siege
 
