@@ -1,6 +1,6 @@
 ---
 layout: day
-title: "Geschichtsträchtig"
+title: "Weltenbummler"
 date: 2025-11-10
 journey: skandinavien-interrail
 country: norwegen
