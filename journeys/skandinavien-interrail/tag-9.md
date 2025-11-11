@@ -1,6 +1,6 @@
 ---
 layout: day
-title: "Weltenbummler"
+title: "Meer von Bergen"
 date: 2025-11-10
 journey: skandinavien-interrail
 country: norwegen
