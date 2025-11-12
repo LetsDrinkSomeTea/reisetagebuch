@@ -1,6 +1,6 @@
 ---
 layout: day
-title: "Wolken, Wärme & Wikinger"
+title: "Sommer, Sonne, Sauna"
 date: 2025-11-12
 journey: skandinavien-interrail
 country: norwegen
