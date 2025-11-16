@@ -84,7 +84,7 @@ Marc `3 : 1` Julian
 
 ## 🍸 Besuchte Bars
 
-`6`
+`5`
 
 ## 📸 Bild des Tages
 

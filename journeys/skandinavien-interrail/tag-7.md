@@ -90,10 +90,6 @@ Insgesamt: `1.034 km in 12:16 Stunden`
 
 Marc `2 : 1` Julian
 
-## 🍸 Besuchte Bars
-
-`5`
-
 ## 📸 Bild des Tages
 
 ![Picture of the Day]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/main.jpg)

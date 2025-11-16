@@ -1,6 +1,6 @@
 ---
 layout: day
-title: ""
+title: "Bunte Häuser"
 date: 2025-11-15
 journey: skandinavien-interrail
 country: norwegen
