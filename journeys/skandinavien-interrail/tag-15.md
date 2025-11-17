@@ -26,7 +26,7 @@ Unser erster Stopp war der `Nidarosdom`, die nördlichste gotische Kathedrale de
 
 ![Morning Activity]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/morning-1.jpg)
 
-Sie wurde **im 11. Jahrhundert** erbaut und ist vor allem für **ihre kunstvollen Fassaden und ihre Bedeutung als Krönungskirche norwegischer Könige** bekannt.
+Sie wurde im 11. Jahrhundert erbaut und ist vor allem für ihre kunstvollen Fassaden und ihre Bedeutung als Krönungskirche norwegischer Könige bekannt.
 
 ![Morning Activity]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/morning-2.jpg)
 
