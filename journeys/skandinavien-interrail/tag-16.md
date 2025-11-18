@@ -6,7 +6,7 @@ journey: skandinavien-interrail
 country: schweden
 city:
   - oestersund
-  - transviken
+  - trangsviken
 day: 16
 weather: "Schnee, -2°C"
 ---
