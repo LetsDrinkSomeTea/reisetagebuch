@@ -94,9 +94,8 @@ Zuhause verbrachten wir die restliche Zeit mit Packen, Quatschen und damit, ins 
 
 ![Picture of the Day]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/main.jpg)
 
-Das Bild gibt einen Eindruck von Östersunds Stadtmitte.  
-Wie schon manchmal erwähnt, bieten viele skandinavische Städte viel Raum für Gemeinschaft.  
-Ich finde, dieser fest installierte Tischkicker drückt das mal wieder ziemlich gut aus.
+Natürlich darf ein Bild unserer neu erworbenen Trangias hier nicht fehlen.
+Wir haben beide sogar noch eine Gravur eines Phoenix auf dem Windschild bekommen.
 
 ## 👩🏻‍🤝‍👨🏽 Selfie des Tages
 
