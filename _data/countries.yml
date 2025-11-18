@@ -126,6 +126,15 @@ schweden:
     stockholm:
       name: "Stockholm"
       emoji: "🏙️"
+    ornskoldsvik:
+      name: "Örnsköldsvik"
+      emoji: "🧥"
+    trangsviken:
+      name: "Trångsviken"
+      emoji: "🔥"
+    graensfors:
+      name: "Gränsfors"
+      emoji: "🪓"
 
 norwegen:
   name: "Norwegen"
