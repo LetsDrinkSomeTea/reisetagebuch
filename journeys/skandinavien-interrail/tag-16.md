@@ -5,8 +5,8 @@ date: 2025-11-17
 journey: skandinavien-interrail
 country: schweden
 city:
-  - oestersund
   - trangsviken
+  - oestersund
 day: 16
 weather: "Schnee, -2°C"
 ---
