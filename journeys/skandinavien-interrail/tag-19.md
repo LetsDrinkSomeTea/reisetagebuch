@@ -103,6 +103,10 @@ Schon bald kam unser Zug und wir fielen dann gegen 1:30 Uhr nachts im Schlafwage
 - Julian: _10.761_  
 - Marc: _11.103_
 
+## 🏎️ Gefahrene Kilometer
+
+`528 km`
+
 ## 📸 Bild des Tages
 
 ![Picture of the Day]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/main.jpg)
