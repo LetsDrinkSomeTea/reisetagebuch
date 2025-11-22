@@ -35,6 +35,10 @@ Nachdem sich die Band 1982 aus dem Rampenlicht zurückgezogen hat, wurde 2013 da
 Unter anderem waren viele der Showoutfits sowie das originale Mischpult und Mikrofone ausgestellt.
 In der Karaoke-Box hatten wir unseren ganz persönlichen Dancing-Queen-Moment.
 
+Da sich unsere Reise langsam dem Ende nähert, wollten wir einmal überprüfen, wer denn noch fleißig unser Tagebuch liest.
+Deshalb möchte ich dich dazu auffordern, Marc oder mir deinen Lieblings-ABBA-Song zu schicken.
+Falls es keinen gibt, darfst du dich auch einfach so melden.
+
 ## 🌙 Abend
 
 Nachdem wir alles in Ruhe begutachtet hatten, gingen wir weiter nach `Gamla Stan`, die Altstadt von Stockholm.
