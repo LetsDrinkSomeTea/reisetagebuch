@@ -3,7 +3,6 @@ layout: day
 title: Komplett am Chillen
 date: 2025-09-26
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - perth # tokyo, melbourne, oslo, etc.
 day: 43

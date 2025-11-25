@@ -3,7 +3,6 @@ layout: day
 title: Kindheitshelden
 date: 2025-09-02
 journey: unsere-grosse-reise
-country: japan # japan, australien, skandinavien
 city:
   - osaka # tokyo, melbourne, oslo, etc.
 day: 19

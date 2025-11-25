@@ -19,11 +19,23 @@ Usage: {% include breadcrumb.html %}
 <div class="breadcrumb">
   <a href="{{ '/' | relative_url }}">🏠</a>
   
-  {% if page.country %}
-    {% assign country_data = site.data.countries[page.country] %}
+  {% comment %} Auto-detect country from first city if not set {% endcomment %}
+  {% assign page_country = page.country %}
+  {% unless page_country %}
+    {% assign first_city = page.city | array | first %}
+    {% if first_city %}
+      {% assign first_city_data = site.data.cities[first_city] %}
+      {% if first_city_data %}
+        {% assign page_country = first_city_data.country %}
+      {% endif %}
+    {% endif %}
+  {% endunless %}
+  
+  {% if page_country %}
+    {% assign country_data = site.data.countries[page_country] %}
     <span class="separator">›</span>
 
-    {% assign country_key = page.country %}
+    {% assign country_key = page_country %}
     {% assign country_page = site.pages | where: 'layout', 'country' | where: 'country', country_key | first %}
     {% if country_page %}
       {% assign country_url = country_page.url %}
@@ -42,7 +54,10 @@ Usage: {% include breadcrumb.html %}
 
     {% if page.city or include.city %}
       {% assign city_key = include.city | default: page.city %}
-      {% assign city_data = country_data.cities[city_key] %}
+      {% if city_key.first %}
+        {% assign city_key = city_key | first %}
+      {% endif %}
+      {% assign city_data = site.data.cities[city_key] %}
       <span class="separator">›</span>
 
       {% if page.layout == "day" %}

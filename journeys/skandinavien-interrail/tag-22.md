@@ -3,7 +3,6 @@ layout: day
 title: "Ein würdiger Abschluss"
 date: 2025-11-23
 journey: skandinavien-interrail
-country: schweden
 city:
   - stockholm
 day: 22

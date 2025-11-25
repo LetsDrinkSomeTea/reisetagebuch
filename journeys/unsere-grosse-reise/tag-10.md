@@ -3,7 +3,6 @@ layout: day
 title: Workout und Handwerkskunst
 date: 2025-08-24
 journey: unsere-grosse-reise
-country: japan # japan, australien, skandinavien
 city:
   - kyoto # tokyo, melbourne, oslo, etc.
 day: 10

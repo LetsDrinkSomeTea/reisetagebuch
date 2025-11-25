@@ -3,7 +3,6 @@ layout: day
 title: Im politischen Zentrum
 date: 2025-09-14
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - canberra
   - roadtrip # tokyo, melbourne, oslo, etc.

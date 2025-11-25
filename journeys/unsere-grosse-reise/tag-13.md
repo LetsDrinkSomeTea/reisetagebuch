@@ -3,7 +3,6 @@ layout: day
 title: Ausflug nach Kobe
 date: 2025-08-27
 journey: unsere-grosse-reise
-country: japan # japan, australien, skandinavien
 city:
   - kobe
   - kyoto # tokyo, melbourne, oslo, etc.

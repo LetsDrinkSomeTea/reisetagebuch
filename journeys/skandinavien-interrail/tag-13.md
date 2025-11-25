@@ -3,7 +3,6 @@ layout: day
 title: "Zügig durchs Land"
 date: 2025-11-14
 journey: skandinavien-interrail
-country: norwegen
 city:
   - bergen
   - oslo

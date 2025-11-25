@@ -3,7 +3,6 @@ layout: day
 title: "Geschichtsträchtig"
 date: 2025-11-09
 journey: skandinavien-interrail
-country: norwegen
 city:
   - oslo
 day: 8

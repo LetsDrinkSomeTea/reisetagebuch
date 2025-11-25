@@ -3,7 +3,6 @@ layout: day
 title: "Sommer, Sonne, Sauna"
 date: 2025-11-12
 journey: skandinavien-interrail
-country: norwegen
 city:
   - bergen
 day: 11

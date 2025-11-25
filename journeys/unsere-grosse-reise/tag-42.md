@@ -3,7 +3,6 @@ layout: day
 title: Ende der Glückssträhne
 date: 2025-09-25
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - perth # tokyo, melbourne, oslo, etc.
 day: 42

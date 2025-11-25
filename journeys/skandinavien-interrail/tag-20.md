@@ -3,7 +3,6 @@ layout: day
 title: "Der frühe Vogel verschläft Stockholm"
 date: 2025-11-21
 journey: skandinavien-interrail
-country: schweden
 city:
   - stockholm
 day: 20

@@ -3,7 +3,6 @@ layout: day
 title: "Vom Axtmann zum Stinkefisch"
 date: 2025-11-20
 journey: skandinavien-interrail
-country: schweden
 city:
   - graensfors
   - ornskoldsvik

@@ -1,11 +1,11 @@
 # Site settings
 title: Reisetagebuch
-description: von Julian & Marc
+description: von Julian und Friends
 baseurl: "/reisetagebuch"
 url: "https://pages.faigle.dev"
 
 # Author
-author: Julian & Marc
+author: Julian und Friends
 
 # Build settings
 markdown: kramdown

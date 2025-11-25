@@ -3,7 +3,6 @@ layout: day
 title: Spirituelle Pfade
 date: 2025-09-17
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - wollongong
   - roadtrip # tokyo, melbourne, oslo, etc.

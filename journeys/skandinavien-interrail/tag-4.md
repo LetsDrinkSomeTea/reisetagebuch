@@ -3,7 +3,6 @@ layout: day
 title: "Smørrebrød"
 date: 2025-11-05
 journey: skandinavien-interrail
-country: daenemark
 city:
   - copenhagen
 day: 4

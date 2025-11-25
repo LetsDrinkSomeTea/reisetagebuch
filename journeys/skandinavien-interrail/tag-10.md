@@ -3,7 +3,6 @@ layout: day
 title: "Meer von Bergen"
 date: 2025-11-11
 journey: skandinavien-interrail
-country: norwegen
 city:
   - bergen
   - oslo

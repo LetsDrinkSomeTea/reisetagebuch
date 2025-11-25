@@ -3,7 +3,6 @@ layout: day
 title: "Kleine Welt"
 date: 2025-11-03
 journey: skandinavien-interrail
-country: deutschland
 city:
   - hamburg
 day: 2

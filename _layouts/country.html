@@ -13,13 +13,22 @@ layout: default
   <section class="cities-overview">
     <h2>Städte</h2>
     
-    {% assign all_country_days = site.pages | where: 'layout', 'day' | where: 'country', page.country %}
+    {% comment %} Collect all cities from cities.yml that belong to this country {% endcomment %}
+    {% assign country_cities = '' | split: '' %}
+    {% for city in site.data.cities %}
+      {% assign city_key = city[0] %}
+      {% assign city_data = city[1] %}
+      {% if city_data.country == page.country %}
+        {% assign country_cities = country_cities | push: city_key %}
+      {% endif %}
+    {% endfor %}
+    
+    {% assign all_pages = site.pages | where: 'layout', 'day' %}
     <!-- Count cities with day entries first -->
     {% assign cities_with_content = 0 %}
-    {% for city in country_data.cities %}
-      {% assign city_key = city[0] %}
+    {% for city_key in country_cities %}
       {% assign collected_days = '' | split: '' %}
-      {% for day_page in all_country_days %}
+      {% for day_page in all_pages %}
         {% assign city_list = day_page.city | array %}
         {% if city_list contains city_key %}
           {% assign collected_days = collected_days | push: day_page %}
@@ -32,16 +41,15 @@ layout: default
     
     {% if cities_with_content > 0 %}
       <div class="grid grid--cities">
-        {% for city in country_data.cities %}
-          {% assign city_key = city[0] %}
-          {% assign city_data = city[1] %}
+        {% for city_key in country_cities %}
+          {% assign city_data = site.data.cities[city_key] %}
 
           <!-- Find city index page -->
-          {% assign city_page = site.pages | where: 'layout', 'city' | where: 'country', page.country | where: 'city', city_key | first %}
+          {% assign city_page = site.pages | where: 'layout', 'city' | where: 'city', city_key | first %}
 
           <!-- Collect day entries for this city -->
           {% assign city_day_pages = '' | split: '' %}
-          {% for day_page in all_country_days %}
+          {% for day_page in all_pages %}
             {% assign city_list = day_page.city | array %}
             {% if city_list contains city_key %}
               {% assign city_day_pages = city_day_pages | push: day_page %}
@@ -50,7 +58,7 @@ layout: default
 
           <!-- Only show cities that have day entries -->
           {% if city_day_pages.size > 0 %}
-            {% include card.html type='city' item=city_page country_data=country_data city_data=city_data day_pages=city_day_pages %}
+            {% include card.html type='city' item=city_page city=city_key day_pages=city_day_pages %}
           {% endif %}
         {% endfor %}
       </div>

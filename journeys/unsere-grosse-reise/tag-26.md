@@ -3,7 +3,6 @@ layout: day
 title: Apollo Bay
 date: 2025-09-09
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - apollo-bay
   - great-ocean-road # tokyo, melbourne, oslo, etc.

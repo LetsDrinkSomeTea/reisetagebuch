@@ -3,7 +3,6 @@ layout: day
 title: "Von Gärten und Häfen"
 date: 2025-11-07
 journey: skandinavien-interrail
-country: schweden
 city:
   - goeteborg
 day: 6

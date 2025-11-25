@@ -3,7 +3,6 @@ layout: day
 title: Pizza and Stories
 date: 2025-09-22
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - wilsons-promontory
   - melbourne

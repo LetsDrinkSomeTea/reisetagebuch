@@ -3,7 +3,6 @@ layout: day
 title: Tierische Begegnungen
 date: 2025-09-21
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - raymond-island
   - wilsons-promontory

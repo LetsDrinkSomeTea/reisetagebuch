@@ -3,7 +3,6 @@ layout: day
 title: "-10°C und keine Hose"
 date: 2025-11-18
 journey: skandinavien-interrail
-country: schweden
 city:
   - ornskoldsvik
 day: 17

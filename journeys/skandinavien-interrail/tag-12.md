@@ -3,7 +3,6 @@ layout: day
 title: "Stock und Stein"
 date: 2025-11-13
 journey: skandinavien-interrail
-country: norwegen
 city:
   - bergen
 day: 12

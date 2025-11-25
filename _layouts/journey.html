@@ -14,8 +14,19 @@ layout: default
 {% assign visited_places = '' | split: '' %}
 
 {% for day_page in journey_days %}
-  {% unless visited_countries contains day_page.country %}
-    {% assign visited_countries = visited_countries | push: day_page.country %}
+  {% comment %} Auto-detect country from first city {% endcomment %}
+  {% assign day_country = day_page.country %}
+  {% unless day_country %}
+    {% assign first_city = day_page.city | array | first %}
+    {% if first_city %}
+      {% assign first_city_data = site.data.cities[first_city] %}
+      {% if first_city_data %}
+        {% assign day_country = first_city_data.country %}
+      {% endif %}
+    {% endif %}
+  {% endunless %}
+  {% unless visited_countries contains day_country %}
+    {% assign visited_countries = visited_countries | push: day_country %}
   {% endunless %}
   {% if day_page.city %}
     {% assign city_list = day_page.city | array %}
@@ -23,7 +34,7 @@ layout: default
       {% unless visited_city_keys contains city_key %}
         {% assign visited_city_keys = visited_city_keys | push: city_key %}
       {% endunless %}
-      {% assign place_id = day_page.country | append: '::' | append: city_key %}
+      {% assign place_id = day_country | append: '::' | append: city_key %}
       {% unless visited_places contains place_id %}
         {% assign visited_places = visited_places | push: place_id %}
       {% endunless %}
@@ -78,18 +89,16 @@ layout: default
           {% assign tokens = place | split: '::' %}
           {% assign country_key = tokens[0] %}
           {% assign city_key = tokens[1] %}
-          {% assign city_page = site.pages | where: 'layout', 'city' | where: 'country', country_key | where: 'city', city_key | first %}
+          {% assign city_page = site.pages | where: 'layout', 'city' | where: 'city', city_key | first %}
           {% assign city_days_subset = '' | split: '' %}
           {% for day_page in journey_days %}
-            {% if day_page.country == country_key %}
-              {% assign day_cities = day_page.city | array %}
-              {% if day_cities contains city_key %}
-                {% assign city_days_subset = city_days_subset | push: day_page %}
-              {% endif %}
+            {% assign day_cities = day_page.city | array %}
+            {% if day_cities contains city_key %}
+              {% assign city_days_subset = city_days_subset | push: day_page %}
             {% endif %}
           {% endfor %}
           {% if city_page %}
-            {% include card.html type='city' item=city_page country=country_key city=city_key day_pages=city_days_subset %}
+            {% include card.html type='city' item=city_page city=city_key day_pages=city_days_subset %}
           {% endif %}
         {% endfor %}
       </div>

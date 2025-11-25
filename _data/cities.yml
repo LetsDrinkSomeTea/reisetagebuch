@@ -1,0 +1,228 @@
+# Cities with country references
+# Structure: city_key: {name: "Display Name", emoji: "🏙", country: country_key}
+
+# Japan
+tokyo:
+  name: "Tokyo"
+  emoji: "🗼"
+  country: japan
+
+kyoto:
+  name: "Kyōto"
+  emoji: "⛩️"
+  country: japan
+
+osaka:
+  name: "Ōsaka"
+  emoji: "🍜"
+  country: japan
+
+nara:
+  name: "Nara"
+  emoji: "🦌"
+  country: japan
+
+kobe:
+  name: "Kōbe"
+  emoji: "🥩"
+  country: japan
+
+# Australien
+melbourne:
+  name: "Melbourne"
+  emoji: "☕"
+  country: australien
+
+great-ocean-road:
+  name: "Great Ocean Road"
+  emoji: "🚌"
+  country: australien
+
+torquay:
+  name: "Torquay"
+  emoji: "🏄"
+  country: australien
+
+anglesea:
+  name: "Anglesea"
+  emoji: "⛳"
+  country: australien
+
+fairhaven:
+  name: "Fairhaven"
+  emoji: "🛟"
+  country: australien
+
+lorne:
+  name: "Lorne"
+  emoji: "💧"
+  country: australien
+
+apollo-bay:
+  name: "Apollo Bay"
+  emoji: "🌊"
+  country: australien
+
+roadtrip:
+  name: "Roadtrip"
+  emoji: "🚌"
+  country: australien
+
+gundagai:
+  name: "Gundagai"
+  emoji: "🐑"
+  country: australien
+
+canberra:
+  name: "Canberra"
+  emoji: "🏛️"
+  country: australien
+
+sydney:
+  name: "Sydney"
+  emoji: "🌉"
+  country: australien
+
+katoomba:
+  name: "Katoomba"
+  emoji: "⛰️"
+  country: australien
+
+blue-mountains:
+  name: "Blue Mountains"
+  emoji: "🌄"
+  country: australien
+
+wollongong:
+  name: "Wollongong"
+  emoji: "🏄"
+  country: australien
+
+sussex-inlet:
+  name: "Sussex Inlet"
+  emoji: "🚤"
+  country: australien
+
+pebbly-beach:
+  name: "Pebbly Beach"
+  emoji: "🏖️"
+  country: australien
+
+narooma:
+  name: "Narooma"
+  emoji: "🦪"
+  country: australien
+
+eden:
+  name: "Eden"
+  emoji: "🐋"
+  country: australien
+
+paynesville:
+  name: "Paynesville"
+  emoji: "⛵"
+  country: australien
+
+lakes-entrance:
+  name: "Lakes Entrance"
+  emoji: "🐟"
+  country: australien
+
+raymond-island:
+  name: "Raymond Island"
+  emoji: "🐨"
+  country: australien
+
+sale:
+  name: "Sale"
+  emoji: "🛩️"
+  country: australien
+
+yarram:
+  name: "Yarram"
+  emoji: "🎨"
+  country: australien
+
+port-welshpool:
+  name: "Port Welshpool"
+  emoji: "⚓"
+  country: australien
+
+wilsons-promontory:
+  name: "Wilsons Promontory"
+  emoji: "🌿"
+  country: australien
+
+perth:
+  name: "Perth"
+  emoji: "🏖️"
+  country: australien
+
+# Dänemark
+copenhagen:
+  name: "Copenhagen"
+  emoji: "🏰"
+  country: daenemark
+
+# Schweden
+goeteborg:
+  name: "Göteborg"
+  emoji: "⚓"
+  country: schweden
+
+oestersund:
+  name: "Östersund"
+  emoji: "🏔️"
+  country: schweden
+
+stockholm:
+  name: "Stockholm"
+  emoji: "🏙️"
+  country: schweden
+
+ornskoldsvik:
+  name: "Örnsköldsvik"
+  emoji: "🧥"
+  country: schweden
+
+trangsviken:
+  name: "Trångsviken"
+  emoji: "🔥"
+  country: schweden
+
+graensfors:
+  name: "Gränsfors"
+  emoji: "🪓"
+  country: schweden
+
+# Norwegen
+oslo:
+  name: "Oslo"
+  emoji: "🗺️"
+  country: norwegen
+
+bergen:
+  name: "Bergen"
+  emoji: "🚠"
+  country: norwegen
+
+trondheim:
+  name: "Trondheim"
+  emoji: "⛪"
+  country: norwegen
+
+# Deutschland
+hannover:
+  name: "Hannover"
+  emoji: "🌆"
+  country: deutschland
+
+hamburg:
+  name: "Hamburg"
+  emoji: "🏭"
+  country: deutschland
+
+berlin:
+  name: "Berlin"
+  emoji: "🏙"
+  country: deutschland

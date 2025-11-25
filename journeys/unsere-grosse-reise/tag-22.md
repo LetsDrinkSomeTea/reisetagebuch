@@ -3,7 +3,6 @@ layout: day
 title: Down Under
 date: 2025-09-05
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - melbourne # tokyo, melbourne, oslo, etc.
 day: 22

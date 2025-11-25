@@ -3,7 +3,6 @@ layout: day
 title: "Zauberhafte Reise"
 date: 2025-11-16
 journey: skandinavien-interrail
-country: norwegen
 city:
   - trondheim
   - oestersund

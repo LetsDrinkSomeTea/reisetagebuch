@@ -3,7 +3,6 @@ layout: day
 title: "Erste Fahrt, erste Verspätung"
 date: 2025-11-04
 journey: skandinavien-interrail
-country: daenemark
 city:
   - copenhagen
 day: 3
