@@ -3,7 +3,6 @@ layout: day
 title: Tradition und Vintage
 date: 2025-08-20
 journey: unsere-grosse-reise
-country: japan # japan, australien, skandinavien
 city:
   - tokyo # tokyo, melbourne, oslo, etc.
 day: 6

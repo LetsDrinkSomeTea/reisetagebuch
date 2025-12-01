@@ -3,7 +3,6 @@ layout: day
 title: Home Sweet Home
 date: 2025-10-03
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - perth # tokyo, melbourne, oslo, etc.
 day: 50

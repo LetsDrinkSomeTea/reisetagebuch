@@ -3,7 +3,6 @@ layout: day
 title: "Traum von Trangsviken"
 date: 2025-11-17
 journey: skandinavien-interrail
-country: schweden
 city:
   - trangsviken
   - oestersund

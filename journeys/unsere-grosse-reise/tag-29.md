@@ -3,7 +3,6 @@ layout: day
 title: Vorbereitungen und Wissenschaft
 date: 2025-09-12
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - melbourne # tokyo, melbourne, oslo, etc.
 day: 29

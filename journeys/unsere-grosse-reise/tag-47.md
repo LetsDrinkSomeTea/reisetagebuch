@@ -3,7 +3,6 @@ layout: day
 title: Retro Queen
 date: 2025-09-30
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - perth # tokyo, melbourne, oslo, etc.
 day: 47

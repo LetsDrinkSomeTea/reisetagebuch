@@ -3,7 +3,6 @@ layout: day
 title: Zur nächsten Insel
 date: 2025-09-04
 journey: unsere-grosse-reise
-country: japan # japan, australien, skandinavien
 city:
   - osaka # tokyo, melbourne, oslo, etc.
   - melbourne

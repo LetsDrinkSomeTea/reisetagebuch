@@ -3,7 +3,6 @@ layout: day
 title: Traditon und Moderne
 date: 2025-08-18
 journey: unsere-grosse-reise
-country: japan # japan, australien, skandinavien
 city:
   - tokyo # tokyo, melbourne, oslo, etc.
 day: 4

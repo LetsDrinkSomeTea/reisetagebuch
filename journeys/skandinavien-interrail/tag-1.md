@@ -3,7 +3,6 @@ layout: day
 title: "Tor zum Norden"
 date: 2025-11-02
 journey: skandinavien-interrail
-country: deutschland
 city:
   - hamburg
 day: 1

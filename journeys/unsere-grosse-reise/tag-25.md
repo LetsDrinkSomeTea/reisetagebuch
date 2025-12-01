@@ -3,7 +3,6 @@ layout: day
 title: Van-Life
 date: 2025-09-08
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - anglesea
   - great-ocean-road # tokyo, melbourne, oslo, etc.

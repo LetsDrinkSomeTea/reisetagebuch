@@ -3,7 +3,6 @@ layout: day
 title: Von Tempeln und Schreinen
 date: 2025-08-26
 journey: unsere-grosse-reise
-country: japan # japan, australien, skandinavien
 city:
   - kyoto # tokyo, melbourne, oslo, etc.
 day: 12

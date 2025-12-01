@@ -1736,6 +1736,292 @@ p, ul, ol, blockquote {
 }
 
 // ====================
+// STATS PAGE
+// ====================
+
+.stats-page {
+  .stats-section {
+    margin-bottom: var(--space-xxl);
+
+    &__title {
+      font-size: 1.75rem;
+      margin-bottom: var(--space-lg);
+      color: var(--color-text);
+    }
+  }
+
+  .stats-daterange {
+    margin-top: var(--space-lg);
+    padding: var(--space-md);
+    background: var(--color-sidebar);
+    border-radius: var(--radius-sm);
+    text-align: center;
+
+    p {
+      margin: 0;
+      color: var(--color-text-muted);
+    }
+  }
+}
+
+// Global Stats Grid
+.stats-grid {
+  display: grid;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+
+  &--global {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  &--image-types {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+}
+
+.stat-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  text-align: center;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--elev-1);
+  }
+
+  &__icon {
+    font-size: 2rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  &__value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1.2;
+  }
+
+  &__label {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-top: var(--space-sm);
+  }
+
+  &--image-type {
+    .stat-card__value {
+      font-size: 1.75rem;
+    }
+  }
+}
+
+// Journey/Country Breakdown
+.stats-breakdown {
+  &__item {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-md);
+    color: var(--color-text);
+  }
+}
+
+// Stats Table
+.stats-table {
+  overflow-x: auto;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead {
+    background: var(--color-sidebar);
+    
+    th {
+      padding: var(--space-md);
+      text-align: left;
+      font-weight: 600;
+      color: var(--color-text);
+      border-bottom: 2px solid var(--color-border);
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid var(--color-border);
+      transition: background-color var(--transition-fast);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background-color: var(--color-sidebar);
+      }
+    }
+
+    td {
+      padding: var(--space-md);
+    }
+  }
+
+  &__label {
+    font-weight: 500;
+  }
+
+  &__number {
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+// Top Cities Ranking
+.stats-list-ranking {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+}
+
+.ranking-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: ranking-counter;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+    counter-increment: ranking-counter;
+    position: relative;
+    padding-left: 3rem;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &::before {
+      content: counter(ranking-counter);
+      position: absolute;
+      left: var(--space-md);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      width: 1.5rem;
+      text-align: center;
+    }
+
+    &:nth-child(1)::before {
+      color: #ffd700;
+    }
+
+    &:nth-child(2)::before {
+      color: #c0c0c0;
+    }
+
+    &:nth-child(3)::before {
+      color: #cd7f32;
+    }
+  }
+
+  &__name {
+    font-weight: 600;
+    flex: 1;
+  }
+
+  &__meta {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+  }
+
+  &__value {
+    font-weight: 700;
+    color: var(--color-primary);
+    flex-shrink: 0;
+    min-width: 80px;
+    text-align: right;
+  }
+}
+
+// Responsive Stats
+@media (max-width: 960px) {
+  .stats-grid {
+    &--global {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+
+    &--image-types {
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+  }
+
+  .stat-card {
+    padding: var(--space-md);
+
+    &__value {
+      font-size: 2rem;
+    }
+  }
+
+  .ranking-list {
+    &__item {
+      flex-wrap: wrap;
+      padding-left: 2.5rem;
+
+      &::before {
+        left: var(--space-sm);
+        font-size: 1rem;
+        width: 1.25rem;
+      }
+    }
+
+    &__meta {
+      flex-basis: 100%;
+      margin-top: var(--space-xs);
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .stats-table {
+    font-size: 0.85rem;
+
+    thead th,
+    tbody td {
+      padding: var(--space-sm);
+    }
+  }
+
+  .ranking-list {
+    &__value {
+      min-width: 60px;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// ====================
 // PRINT STYLES
 // ====================
 

@@ -3,7 +3,6 @@ layout: day
 title: Bewegte Welt
 date: 2025-09-23
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - melbourne # tokyo, melbourne, oslo, etc.
 day: 40

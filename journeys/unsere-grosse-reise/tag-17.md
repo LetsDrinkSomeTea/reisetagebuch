@@ -3,7 +3,6 @@ layout: day
 title: Hochhinaus
 date: 2025-08-31
 journey: unsere-grosse-reise
-country: japan # japan, australien, skandinavien
 city:
   - osaka # tokyo, melbourne, oslo, etc.
 day: 17

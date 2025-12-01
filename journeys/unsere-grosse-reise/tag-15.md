@@ -3,7 +3,6 @@ layout: day
 title: Erholung im Schlemmerland
 date: 2025-08-29
 journey: unsere-grosse-reise
-country: japan # japan, australien, skandinavien
 city:
   - kyoto # tokyo, melbourne, oslo, etc.
 day: 15

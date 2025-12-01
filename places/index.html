@@ -15,29 +15,52 @@ permalink: /places/
   {% for country in site.data.countries %}
     {% assign country_key = country[0] %}
     {% assign country_data = country[1] %}
-    {% assign country_day_entries = day_pages | where: 'country', country_key %}
+    
+    {% comment %} Sammle alle Tage für dieses Land {% endcomment %}
+    {% assign country_day_entries = '' | split: '' %}
+    {% for day_page in day_pages %}
+      {% for page_city in day_page.city %}
+        {% assign clean_city = page_city | split: '#' | first | strip %}
+        {% assign city_data = site.data.cities[clean_city] %}
+        {% if city_data.country == country_key %}
+          {% assign country_day_entries = country_day_entries | push: day_page %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+    
     {% if country_day_entries.size > 0 %}
       {% assign city_markup = '' %}
       {% assign city_count = 0 %}
-      {% for city in country_data.cities %}
+      
+      {% comment %} Iteriere über alle Städte und finde die für dieses Land {% endcomment %}
+      {% for city in site.data.cities %}
         {% assign city_key = city[0] %}
         {% assign city_data = city[1] %}
-        {% assign city_day_pages = '' | split: '' %}
-        {% for day_page in country_day_entries %}
-          {% assign city_list = day_page.city | array %}
-          {% if city_list contains city_key %}
-            {% assign city_day_pages = city_day_pages | push: day_page %}
+        
+        {% if city_data.country == country_key %}
+          {% assign city_day_pages = '' | split: '' %}
+          {% for day_page in country_day_entries %}
+            {% for page_city in day_page.city %}
+              {% assign clean_city = page_city | split: '#' | first | strip %}
+              {% if clean_city == city_key %}
+                {% assign city_day_pages = city_day_pages | push: day_page %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+          
+          {% if city_day_pages.size > 0 %}
+            {% assign city_page = site.pages | where: 'layout', 'city' | where: 'city', city_key | first %}
+            {% capture city_markup %}
+              {{ city_markup }}
+              {% include card.html type='city' item=city_page country=country_key city=city_key day_pages=city_day_pages %}
+            {% endcapture %}
+            {% assign city_count = city_count | plus: 1 %}
           {% endif %}
-        {% endfor %}
-        {% if city_day_pages.size > 0 %}
-          {% assign city_page = site.pages | where: 'layout', 'city' | where: 'country', country_key | where: 'city', city_key | first %}
-          {% capture city_markup %}
-            {{ city_markup }}
-            {% include card.html type='city' item=city_page country=country_key city=city_key day_pages=city_day_pages %}
-          {% endcapture %}
-          {% assign city_count = city_count | plus: 1 %}
         {% endif %}
       {% endfor %}
+      
       {% if city_count > 0 %}
         {% assign country_page = site.pages | where: 'layout', 'country' | where: 'country', country_key | first %}
         {% capture country_sections %}

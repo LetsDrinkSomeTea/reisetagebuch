@@ -3,7 +3,6 @@ layout: day
 title: Von Geduld und Glück
 date: 2025-09-20
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - eden
   - paynesville

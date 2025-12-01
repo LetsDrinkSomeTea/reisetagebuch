@@ -3,7 +3,6 @@ layout: day
 title: "Dancing Queen"
 date: 2025-11-22
 journey: skandinavien-interrail
-country: schweden
 city:
   - stockholm
 day: 21

@@ -11,10 +11,11 @@ layout: default
 
   <section class="days-overview">
     <h2>Tagebucheinträge</h2>
-    {% assign city_data = site.data.countries[page.country].cities[page.city] %}
+    {% assign city_data = site.data.cities[page.city] %}
+    {% assign page_country = page.country | default: city_data.country %}
     {% assign collected_days = '' | split: '' %}
-    {% assign all_country_days = site.pages | where: "layout", "day" | where: "country", page.country %}
-    {% for day_page in all_country_days %}
+    {% assign all_pages = site.pages | where: "layout", "day" %}
+    {% for day_page in all_pages %}
       {% assign day_cities = day_page.city | array %}
       {% if day_cities contains page.city %}
         {% assign collected_days = collected_days | push: day_page %}

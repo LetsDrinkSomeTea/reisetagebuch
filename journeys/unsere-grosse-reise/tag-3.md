@@ -3,7 +3,6 @@ layout: day
 title: Wissenschaft und Kunst
 date: 2025-08-17
 journey: unsere-grosse-reise
-country: japan # japan, australien, skandinavien
 city:
   - tokyo # tokyo, melbourne, oslo, etc.
 day: 3

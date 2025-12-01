@@ -3,7 +3,6 @@ layout: day
 title: Ende des Luxus
 date: 2025-08-30
 journey: unsere-grosse-reise
-country: japan # japan, australien, skandinavien
 city:
   - osaka
   - kyoto # tokyo, melbourne, oslo, etc.

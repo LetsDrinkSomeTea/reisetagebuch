@@ -3,7 +3,6 @@ layout: day
 title: On the Road again
 date: 2025-09-11
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - melbourne
   - great-ocean-road # tokyo, melbourne, oslo, etc.

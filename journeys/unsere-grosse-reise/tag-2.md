@@ -3,7 +3,6 @@ layout: day
 title: Shinjuku
 date: 2025-08-16
 journey: unsere-grosse-reise
-country: japan # japan, australien, skandinavien
 city:
   - tokyo # tokyo, melbourne, oslo, etc.
 day: 2

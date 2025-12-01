@@ -3,7 +3,6 @@ layout: day
 title: Ungewöhnliche Allianz
 date: 2025-09-19
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - narooma
   - eden

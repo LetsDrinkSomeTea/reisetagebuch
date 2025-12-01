@@ -3,8 +3,8 @@ layout: day
 title: "Reinschaufeln"
 date: 2025-11-08
 journey: skandinavien-interrail
-country: norwegen
 city:
+  - goeteborg
   - oslo
 day: 7
 weather: "Bedeckt, 10°C"

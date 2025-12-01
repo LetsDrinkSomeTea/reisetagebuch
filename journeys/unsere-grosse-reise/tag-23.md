@@ -3,7 +3,6 @@ layout: day
 title: Die Umgebung erkunden
 date: 2025-09-06
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - melbourne # tokyo, melbourne, oslo, etc.
 day: 23

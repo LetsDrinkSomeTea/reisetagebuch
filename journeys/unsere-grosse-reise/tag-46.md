@@ -3,7 +3,6 @@ layout: day
 title: Lächelnd auf zwei Rädern
 date: 2025-09-29
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - perth # tokyo, melbourne, oslo, etc.
 day: 46

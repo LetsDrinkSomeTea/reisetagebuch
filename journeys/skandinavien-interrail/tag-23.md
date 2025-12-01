@@ -3,7 +3,6 @@ layout: day
 title: "Ein letztes Mal"
 date: 2025-11-24
 journey: skandinavien-interrail
-country: schweden
 city:
   - stockholm
 day: 23
@@ -61,6 +60,18 @@ Da wir es bisher nicht geschafft hatten, nutzten wir unsere letzte Chance, um `K
 Im Anschluss holten wir unser Gepäck aus dem Hostel und machten uns auf den Weg zum Hauptbahnhof, wo wir um 17:34 Uhr in den Nachtzug nach Hamburg stiegen.
 
 ![Evening Activity]({{ site.baseurl }}/journeys/{{ page.journey }}/tag-{{ page.day }}/evening.jpg)
+
+Dort erwartete uns eine kleine Überraschung.
+Wir dachten eigentlich, wir hätten – wie die letzten beiden Male – ein privates Schlafabteil.
+Dem war aber nicht so, und wir mussten unser Zimmer mit vier anderen Personen teilen.
+Zwei der vier waren zufälligerweise Reiseblogger (@gruenumdiewelt) mit ungefähr 200k Followern auf Instagram.
+
+Aufgrund der verschiedenen Schlafrhythmen in unserem Abteil bauten wir bereits um 22 Uhr die Bänke zu den Betten um.
+Da Marc und ich noch nicht wirklich müde waren, fanden wir uns daraufhin im Bord-Bistro wieder.
+Dieses machte aber gegen 23:30 Uhr ebenfalls zu.
+Dafür haben wir von der Schaffnerin aber drei Muffins geschenkt bekommen, die sie sonst hätte wegwerfen müssen.
+
+Alles in allem war unsere Zugfahrt also überhaupt nicht wie geplant, dafür aber deutlich ereignisreicher.
 
 Und damit endet unsere Skandinavien-Reise offiziell.  
 Morgen früh werden wir in Hamburg ankommen, wo unser Interrail-Ticket abläuft und sich unsere Wege trennen werden.  

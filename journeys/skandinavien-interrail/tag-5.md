@@ -3,7 +3,6 @@ layout: day
 title: "Schiff ahoi"
 date: 2025-11-06
 journey: skandinavien-interrail
-country: schweden
 city:
   - goeteborg
 day: 5

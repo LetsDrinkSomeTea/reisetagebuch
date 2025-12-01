@@ -3,7 +3,6 @@ layout: day
 title: Einmal Disney-Prinzessin sein
 date: 2025-08-25
 journey: unsere-grosse-reise
-country: japan # japan, australien, skandinavien
 city:
   - nara
   - kyoto # tokyo, melbourne, oslo, etc.

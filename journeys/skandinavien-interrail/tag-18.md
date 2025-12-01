@@ -3,7 +3,6 @@ layout: day
 title: "Winterruhe"
 date: 2025-11-19
 journey: skandinavien-interrail
-country: schweden
 city:
   - ornskoldsvik
 day: 18

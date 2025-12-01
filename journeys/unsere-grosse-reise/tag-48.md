@@ -3,7 +3,6 @@ layout: day
 title: Schokolade & Grillplatte
 date: 2025-10-01
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - perth # tokyo, melbourne, oslo, etc.
 day: 48

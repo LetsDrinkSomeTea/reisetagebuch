@@ -3,7 +3,6 @@ layout: day
 title: Rekordverdächtige Weiten
 date: 2025-09-15
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - blue-mountains
   - sydney

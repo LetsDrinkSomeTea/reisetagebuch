@@ -3,7 +3,6 @@ layout: day
 title: "Ruhe, Rock & Regen"
 date: 2025-11-15
 journey: skandinavien-interrail
-country: norwegen
 city:
   - trondheim
 day: 14

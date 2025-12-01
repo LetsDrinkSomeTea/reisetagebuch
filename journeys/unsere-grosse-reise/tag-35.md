@@ -3,7 +3,6 @@ layout: day
 title: Ziele abhaken
 date: 2025-09-18
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - narooma
   - roadtrip # tokyo, melbourne, oslo, etc.

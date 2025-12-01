@@ -3,7 +3,6 @@ layout: day
 title: Vor verschlossenen Türen
 date: 2025-09-10
 journey: unsere-grosse-reise
-country: australien # japan, australien, skandinavien
 city:
   - great-ocean-road # tokyo, melbourne, oslo, etc.
 day: 27
