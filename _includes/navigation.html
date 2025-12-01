@@ -9,6 +9,7 @@
       {% assign entries_url = '/entries/' %}
       {% assign places_url = '/places/' %}
       {% assign gallery_url = '/gallery/' %}
+      {% assign stats_url = '/stats/' %}
       <li class="nav-list__item">
         <a class="nav-link nav-link--action{% if page.url == entries_url %} active{% endif %}" href="{{ entries_url | relative_url }}">
           <span class="nav-link__label">📖 Alle Einträge</span>
@@ -22,6 +23,11 @@
       <li class="nav-list__item">
         <a class="nav-link nav-link--action{% if page.url == gallery_url %} active{% endif %}" href="{{ gallery_url | relative_url }}">
           <span class="nav-link__label">📸 Galerie</span>
+        </a>
+      </li>
+      <li class="nav-list__item">
+        <a class="nav-link nav-link--action{% if page.url == stats_url %} active{% endif %}" href="{{ stats_url | relative_url }}">
+          <span class="nav-link__label">📊 Statistiken</span>
         </a>
       </li>
     </ul>

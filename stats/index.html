@@ -1,0 +1,426 @@
+---
+layout: default
+title: Statistiken
+subtitle: Alle Zahlen und Fakten zu unseren Reisen
+permalink: /stats/
+---
+
+<article class="stats-page">
+  {% include page-header.html title=page.title subtitle=page.subtitle %}
+
+  {% comment %}
+  ========================================
+  DATENSAMMLUNG
+  ========================================
+  {% endcomment %}
+  
+  {% assign day_pages = site.pages | where: 'layout', 'day' %}
+  {% assign day_pages_by_date = day_pages | sort: 'date' %}
+  {% assign allowed_ext = 'jpg,jpeg,png,webp,avif' | split: ',' %}
+  {% assign total_images = 0 %}
+  
+  {% comment %} Bilder zählen {% endcomment %}
+  {% for static in site.static_files %}
+    {% assign file_path = static.path %}
+    {% if file_path contains '/journeys/' and file_path contains '/tag-' %}
+      {% assign ext = static.extname | remove_first: '.' | downcase %}
+      {% if allowed_ext contains ext %}
+        {% assign total_images = total_images | plus: 1 %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+  {% comment %} Eindeutige Länder und Städte sammeln {% endcomment %}
+  {% assign visited_countries = '' | split: '' %}
+  {% assign visited_cities = '' | split: '' %}
+  {% for day_page in day_pages %}
+    {% assign day_country = day_page.country %}
+    {% unless day_country %}
+      {% assign first_city = day_page.city | array | first %}
+      {% if first_city %}
+        {% assign first_city_data = site.data.cities[first_city] %}
+        {% if first_city_data.country %}
+          {% assign day_country = first_city_data.country %}
+        {% endif %}
+      {% endif %}
+    {% endunless %}
+    {% if day_country %}
+      {% unless visited_countries contains day_country %}
+        {% assign visited_countries = visited_countries | push: day_country %}
+      {% endunless %}
+    {% endif %}
+    {% assign city_list = day_page.city | array %}
+    {% for city_key in city_list %}
+      {% unless visited_cities contains city_key %}
+        {% assign visited_cities = visited_cities | push: city_key %}
+      {% endunless %}
+    {% endfor %}
+  {% endfor %}
+
+  {% comment %} Datumsbereich ermitteln {% endcomment %}
+  {% if day_pages_by_date.size > 0 %}
+    {% assign first_day = day_pages_by_date.first %}
+    {% assign last_day = day_pages_by_date.last %}
+    {% assign start_date = first_day.date | date: '%d.%m.%Y' %}
+    {% assign end_date = last_day.date | date: '%d.%m.%Y' %}
+  {% endif %}
+
+  {% comment %}
+  ========================================
+  GLOBALE STATISTIKEN
+  ========================================
+  {% endcomment %}
+
+  <section class="stats-section stats-section--global">
+    <h2 class="stats-section__title">📊 Globale Statistiken</h2>
+    
+    <div class="stats-grid stats-grid--global">
+      <div class="stat-card">
+        <div class="stat-card__value">{{ site.data.journeys.size }}</div>
+        <div class="stat-card__label">{% include pluralize.html count=site.data.journeys.size one="Reise" other="Reisen" %}</div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-card__value">{{ visited_countries.size }}</div>
+        <div class="stat-card__label">{% include pluralize.html count=visited_countries.size one="Land" other="Länder" %}</div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-card__value">{{ visited_cities.size }}</div>
+        <div class="stat-card__label">{% include pluralize.html count=visited_cities.size one="Stadt" other="Städte" %}</div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-card__value">{{ day_pages.size }}</div>
+        <div class="stat-card__label">{% include pluralize.html count=day_pages.size one="Reisetag" other="Reisetage" %}</div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-card__value">{{ total_images }}</div>
+        <div class="stat-card__label">{% include pluralize.html count=total_images one="Bild" other="Bilder" %}</div>
+      </div>
+      
+      {% if day_pages.size > 0 %}
+        {% assign avg_images = total_images | times: 1.0 | divided_by: day_pages.size | round: 1 %}
+        <div class="stat-card">
+          <div class="stat-card__value">{{ avg_images }}</div>
+          <div class="stat-card__label">⌀ Bilder pro Tag</div>
+        </div>
+      {% endif %}
+    </div>
+
+    {% if day_pages_by_date.size > 0 %}
+      <div class="stats-daterange">
+        <p><strong>Zeitraum:</strong> {{ start_date }} bis {{ end_date }}</p>
+      </div>
+    {% endif %}
+  </section>
+
+  {% comment %}
+  ========================================
+  REISEN-BREAKDOWN
+  ========================================
+  {% endcomment %}
+
+  <section class="stats-section stats-section--journeys">
+    <h2 class="stats-section__title">🧳 Reisen im Detail</h2>
+    
+    <div class="stats-breakdown">
+      {% for journey in site.data.journeys %}
+        {% assign journey_key = journey[0] %}
+        {% assign journey_data = journey[1] %}
+        {% assign journey_days = day_pages | where: 'journey', journey_key %}
+        {% assign journey_days_sorted = journey_days | sort: 'date' %}
+        
+        {% if journey_days.size > 0 %}
+          {% comment %} Länder und Städte für diese Reise sammeln {% endcomment %}
+          {% assign journey_countries = '' | split: '' %}
+          {% assign journey_cities = '' | split: '' %}
+          {% for day_page in journey_days %}
+            {% assign day_country = day_page.country %}
+            {% unless day_country %}
+              {% assign first_city = day_page.city | array | first %}
+              {% if first_city %}
+                {% assign first_city_data = site.data.cities[first_city] %}
+                {% if first_city_data.country %}
+                  {% assign day_country = first_city_data.country %}
+                {% endif %}
+              {% endif %}
+            {% endunless %}
+            {% if day_country %}
+              {% unless journey_countries contains day_country %}
+                {% assign journey_countries = journey_countries | push: day_country %}
+              {% endunless %}
+            {% endif %}
+            {% assign city_list = day_page.city | array %}
+            {% for city_key in city_list %}
+              {% unless journey_cities contains city_key %}
+                {% assign journey_cities = journey_cities | push: city_key %}
+              {% endunless %}
+            {% endfor %}
+          {% endfor %}
+
+          {% comment %} Bilder für diese Reise zählen {% endcomment %}
+          {% assign journey_images = 0 %}
+          {% for static in site.static_files %}
+            {% assign file_path = static.path %}
+            {% if file_path contains '/journeys/' and file_path contains journey_key and file_path contains '/tag-' %}
+              {% assign ext = static.extname | remove_first: '.' | downcase %}
+              {% if allowed_ext contains ext %}
+                {% assign journey_images = journey_images | plus: 1 %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+
+          {% assign first_day = journey_days_sorted.first %}
+          {% assign last_day = journey_days_sorted.last %}
+          {% assign journey_start = first_day.date | date: '%d.%m.%Y' %}
+          {% assign journey_end = last_day.date | date: '%d.%m.%Y' %}
+
+          <div class="stats-breakdown__item">
+            <h3 class="stats-breakdown__title">
+              {% if journey_data.icon %}{{ journey_data.icon }} {% endif %}{{ journey_data.name }}
+            </h3>
+            
+            {% capture journey_stats %}
+              <li><span class="stats-value">{{ journey_days.size }}</span> {% include pluralize.html count=journey_days.size one="Tag" other="Tage" %}</li>
+              <li><span class="stats-value">{{ journey_countries.size }}</span> {% include pluralize.html count=journey_countries.size one="Land" other="Länder" %}</li>
+              <li><span class="stats-value">{{ journey_cities.size }}</span> {% include pluralize.html count=journey_cities.size one="Stadt" other="Städte" %}</li>
+              <li><span class="stats-value">{{ journey_images }}</span> {% include pluralize.html count=journey_images one="Bild" other="Bilder" %}</li>
+              <li><strong>Zeitraum:</strong> {{ journey_start }} – {{ journey_end }}</li>
+            {% endcapture %}
+            {% include stats.html content=journey_stats %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+
+  {% comment %}
+  ========================================
+  LÄNDER-BREAKDOWN
+  ========================================
+  {% endcomment %}
+
+  <section class="stats-section stats-section--countries">
+    <h2 class="stats-section__title">🌍 Länder im Detail</h2>
+    
+    {% comment %} Länder-Statistiken sammeln und sortieren {% endcomment %}
+    {% assign country_stats = '' | split: '' %}
+    {% for country in site.data.countries %}
+      {% assign country_key = country[0] %}
+      {% assign country_data = country[1] %}
+      
+      {% comment %} Tage für dieses Land finden {% endcomment %}
+      {% assign country_days = '' | split: '' %}
+      {% for day_page in day_pages %}
+        {% assign day_country = day_page.country %}
+        {% unless day_country %}
+          {% assign first_city = day_page.city | array | first %}
+          {% if first_city %}
+            {% assign first_city_data = site.data.cities[first_city] %}
+            {% if first_city_data.country %}
+              {% assign day_country = first_city_data.country %}
+            {% endif %}
+          {% endif %}
+        {% endunless %}
+        {% if day_country == country_key %}
+          {% assign country_days = country_days | push: day_page %}
+        {% endif %}
+      {% endfor %}
+
+      {% if country_days.size > 0 %}
+        {% comment %} Städte für dieses Land sammeln {% endcomment %}
+        {% assign country_cities = '' | split: '' %}
+        {% for day_page in country_days %}
+          {% assign city_list = day_page.city | array %}
+          {% for city_key in city_list %}
+            {% unless country_cities contains city_key %}
+              {% assign country_cities = country_cities | push: city_key %}
+            {% endunless %}
+          {% endfor %}
+        {% endfor %}
+
+        {% comment %} Reisen für dieses Land sammeln {% endcomment %}
+        {% assign country_journeys = '' | split: '' %}
+        {% for day_page in country_days %}
+          {% unless country_journeys contains day_page.journey %}
+            {% assign country_journeys = country_journeys | push: day_page.journey %}
+          {% endunless %}
+        {% endfor %}
+
+        {% comment %} Bilder für dieses Land zählen {% endcomment %}
+        {% assign country_images = 0 %}
+        {% for day_page in country_days %}
+          {% assign day_num = day_page.day %}
+          {% assign journey_key = day_page.journey %}
+          {% assign day_path = '/journeys/' | append: journey_key | append: '/tag-' | append: day_num | append: '/' %}
+          {% for static in site.static_files %}
+            {% assign file_path = static.path %}
+            {% if file_path contains day_path %}
+              {% assign ext = static.extname | remove_first: '.' | downcase %}
+              {% if allowed_ext contains ext %}
+                {% assign country_images = country_images | plus: 1 %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+
+        {% comment %} Formatierte Sortierung: 1000 * Tage für absteigendes Sortieren {% endcomment %}
+        {% assign sort_key = country_days.size | times: 1000000 | minus: country_key.size %}
+        {% capture country_stat_entry %}{{ sort_key }}|||{{ country_key }}|||{{ country_days.size }}|||{{ country_cities.size }}|||{{ country_journeys.size }}|||{{ country_images }}{% endcapture %}
+        {% assign country_stats = country_stats | push: country_stat_entry %}
+      {% endif %}
+    {% endfor %}
+
+    {% assign sorted_country_stats = country_stats | sort | reverse %}
+
+    <div class="stats-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Land</th>
+            <th class="stats-table__number">Tage</th>
+            <th class="stats-table__number">Städte</th>
+            <th class="stats-table__number">Reisen</th>
+            <th class="stats-table__number">Bilder</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for country_stat in sorted_country_stats %}
+            {% assign parts = country_stat | split: '|||' %}
+            {% assign country_key = parts[1] %}
+            {% assign country_data = site.data.countries[country_key] %}
+            {% assign days_count = parts[2] | plus: 0 %}
+            {% assign cities_count = parts[3] | plus: 0 %}
+            {% assign journeys_count = parts[4] | plus: 0 %}
+            {% assign images_count = parts[5] | plus: 0 %}
+            <tr>
+              <td class="stats-table__label">{{ country_data.flag }} {{ country_data.name }}</td>
+              <td class="stats-table__number">{{ days_count }}</td>
+              <td class="stats-table__number">{{ cities_count }}</td>
+              <td class="stats-table__number">{{ journeys_count }}</td>
+              <td class="stats-table__number">{{ images_count }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  {% comment %}
+  ========================================
+  TOP STÄDTE
+  ========================================
+  {% endcomment %}
+
+  <section class="stats-section stats-section--cities">
+    <h2 class="stats-section__title">🏙️ Top 10 Städte</h2>
+    
+    {% comment %} Städte-Statistiken sammeln {% endcomment %}
+    {% assign city_stats = '' | split: '' %}
+    {% for city in site.data.cities %}
+      {% assign city_key = city[0] %}
+      {% assign city_data = city[1] %}
+      
+      {% comment %} Tage für diese Stadt finden - mit push wie in navigation.html {% endcomment %}
+      {% assign city_days_list = '' | split: '' %}
+      {% for day_page in day_pages %}
+        {% assign city_field = day_page.city | array %}
+        {% if city_field contains city_key %}
+          {% assign city_days_list = city_days_list | push: day_page %}
+        {% endif %}
+      {% endfor %}
+
+      {% if city_days_list.size > 0 %}
+        {% assign city_day_count = city_days_list.size %}
+        {% assign sort_key = city_day_count | times: 1000000 %}
+        {% assign sort_key = sort_key | minus: city_key.size %}
+        {% capture city_stat_entry %}{{ sort_key }}|||{{ city_key }}|||{{ city_day_count }}{% endcapture %}
+        {% assign city_stats = city_stats | push: city_stat_entry %}
+      {% endif %}
+    {% endfor %}
+
+    {% assign sorted_city_stats = city_stats | sort | reverse %}
+
+    <div class="stats-list-ranking">
+      <ol class="ranking-list">
+        {% for city_stat in sorted_city_stats limit: 10 %}
+          {% assign parts = city_stat | split: '|||' %}
+          {% assign city_key = parts[1] %}
+          {% assign city_data = site.data.cities[city_key] %}
+          {% assign days_count = parts[2] | plus: 0 %}
+          {% assign country_data = site.data.countries[city_data.country] %}
+          <li class="ranking-list__item">
+            <span class="ranking-list__name">{{ city_data.emoji }} {{ city_data.name }}</span>
+            {% if country_data %}
+              <span class="ranking-list__meta">{{ country_data.flag }} {{ country_data.name }}</span>
+            {% endif %}
+            <span class="ranking-list__value">{{ days_count }} {% include pluralize.html count=days_count one="Tag" other="Tage" %}</span>
+          </li>
+        {% endfor %}
+      </ol>
+    </div>
+  </section>
+
+  {% comment %}
+  ========================================
+  BILDER-STATISTIKEN
+  ========================================
+  {% endcomment %}
+
+  <section class="stats-section stats-section--images">
+    <h2 class="stats-section__title">📸 Bilder nach Typ</h2>
+    
+    {% comment %} Bilder nach Typ zählen {% endcomment %}
+    {% assign image_type_counts = '' | split: '' %}
+    {% for image_type in site.data.image-types %}
+      {% assign type_key = image_type[0] %}
+      {% assign type_data = image_type[1] %}
+      {% assign type_count = 0 %}
+      
+      {% for static in site.static_files %}
+        {% assign file_path = static.path %}
+        {% if file_path contains '/journeys/' and file_path contains '/tag-' %}
+          {% assign ext = static.extname | remove_first: '.' | downcase %}
+          {% if allowed_ext contains ext %}
+            {% assign filename = static.name | split: '.' | first %}
+            {% assign filename_parts = filename | split: '-' %}
+            {% assign base_type = filename_parts[0] %}
+            {% if base_type == type_key %}
+              {% assign type_count = type_count | plus: 1 %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+
+      {% if type_count > 0 %}
+        {% assign sort_key = type_count | times: 1000000 | minus: type_key.size %}
+        {% capture type_stat_entry %}{{ sort_key }}|||{{ type_key }}|||{{ type_count }}{% endcapture %}
+        {% assign image_type_counts = image_type_counts | push: type_stat_entry %}
+      {% endif %}
+    {% endfor %}
+
+    {% assign sorted_image_types = image_type_counts | sort | reverse %}
+
+    {% if sorted_image_types.size > 0 %}
+      <div class="stats-grid stats-grid--image-types">
+        {% for type_stat in sorted_image_types %}
+          {% assign parts = type_stat | split: '|||' %}
+          {% assign type_key = parts[1] %}
+          {% assign type_data = site.data.image-types[type_key] %}
+          {% assign type_count = parts[2] | plus: 0 %}
+          
+          <div class="stat-card stat-card--image-type">
+            <div class="stat-card__icon">{{ type_data.icon }}</div>
+            <div class="stat-card__value">{{ type_count }}</div>
+            <div class="stat-card__label">{{ type_data.name }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>Noch keine Bilder klassifiziert.</p>
+    {% endif %}
+  </section>
+
+</article>
