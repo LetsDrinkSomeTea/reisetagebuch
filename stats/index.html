@@ -323,25 +323,30 @@ permalink: /stats/
       {% assign city_key = city[0] %}
       {% assign city_data = city[1] %}
       
-      {% comment %} Tage für diese Stadt finden - mit push wie in navigation.html {% endcomment %}
+      {% comment %} Tage für diese Stadt finden {% endcomment %}
       {% assign city_days_list = '' | split: '' %}
       {% for day_page in day_pages %}
-        {% assign city_field = day_page.city | array %}
-        {% if city_field contains city_key %}
-          {% assign city_days_list = city_days_list | push: day_page %}
-        {% endif %}
+        {% for page_city in day_page.city %}
+          {% comment %} Entferne YAML-Kommentare und trim {% endcomment %}
+          {% assign clean_city = page_city | split: '#' | first | strip %}
+          {% if clean_city == city_key %}
+            {% assign city_days_list = city_days_list | push: day_page %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
       {% endfor %}
 
       {% if city_days_list.size > 0 %}
         {% assign city_day_count = city_days_list.size %}
-        {% assign sort_key = city_day_count | times: 1000000 %}
-        {% assign sort_key = sort_key | minus: city_key.size %}
-        {% capture city_stat_entry %}{{ sort_key }}|||{{ city_key }}|||{{ city_day_count }}{% endcapture %}
+        {% comment %} Format mit führenden Nullen für korrekte String-Sortierung {% endcomment %}
+        {% assign sort_key = 100000 | minus: city_day_count %}
+        {% capture sort_key_padded %}{{ sort_key | prepend: '00000' | slice: -6, 6 }}{% endcapture %}
+        {% capture city_stat_entry %}{{ sort_key_padded }}|||{{ city_key }}|||{{ city_day_count }}{% endcapture %}
         {% assign city_stats = city_stats | push: city_stat_entry %}
       {% endif %}
     {% endfor %}
 
-    {% assign sorted_city_stats = city_stats | sort | reverse %}
+    {% assign sorted_city_stats = city_stats | sort %}
 
     <div class="stats-list-ranking">
       <ol class="ranking-list">
