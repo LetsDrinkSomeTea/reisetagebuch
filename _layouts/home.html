@@ -12,9 +12,12 @@ layout: default
     {% assign today = 'now' | date: '%Y%m%d' %}
     {% assign latest_day_formatted = latest_day.date | date: '%Y%m%d' %}
     {% assign day_diff = today | minus: latest_day_formatted %}
-    {% if day_diff <= 3 %}
   <section class="journeys-overview">
+    {% if day_diff <= 3 %}
     <h2>Aktuelle Reise</h2>
+    {% else %}
+    <h2>Letzte Reise</h2>
+    {% endif %}
       {% assign current_journey_key = latest_day.journey %}
       {% assign current_journey_page = site.pages | where: 'layout', 'journey' | where: 'journey', current_journey_key | first %}
       {% assign current_journey_days = site.pages | where: 'layout', 'day' | where: 'journey', current_journey_key %}
@@ -59,7 +62,6 @@ layout: default
         </div>
       </div>
   </section>
-    {% endif %}
   {% endif %}
 
   <section class="latest-entries">
