@@ -348,6 +348,69 @@
     }
   }
 
+  function getQueryParams() {
+    var result = {};
+    if (typeof URLSearchParams === 'undefined') return result;
+    var params = new URLSearchParams(window.location.search);
+    params.forEach(function (value, key) {
+      result[key] = value;
+    });
+    return result;
+  }
+
+  function updateQueryParams(updates) {
+    if (typeof URLSearchParams === 'undefined' || !window.history || !window.history.replaceState) return;
+    var params = new URLSearchParams(window.location.search);
+    Object.keys(updates).forEach(function (key) {
+      var value = updates[key];
+      if (value === null || value === undefined || value === '') {
+        params.delete(key);
+      } else {
+        params.set(key, value);
+      }
+    });
+    var queryString = params.toString();
+    var newUrl = window.location.pathname + (queryString ? '?' + queryString : '') + window.location.hash;
+    window.history.replaceState({}, '', newUrl);
+  }
+
+  function initSortButton(bar, target) {
+    var sortButton = bar.querySelector('[data-filter-sort]');
+    if (!sortButton) return null;
+
+    var collection = target.querySelector('[data-filter-collection]') || target;
+    var initialOrder = Array.prototype.slice.call(collection.querySelectorAll('[data-filter-item]'));
+    if (!initialOrder.length) {
+      sortButton.hidden = true;
+      return null;
+    }
+
+    var params = getQueryParams();
+    var currentSort = params.sort === 'asc' ? 'asc' : 'desc';
+    var labelEl = sortButton.querySelector('[data-filter-sort-label]');
+    var iconEl = sortButton.querySelector('[data-filter-sort-icon]');
+
+    function render() {
+      var ordered = currentSort === 'asc' ? initialOrder.slice().reverse() : initialOrder.slice();
+      ordered.forEach(function (item) {
+        collection.appendChild(item);
+      });
+      sortButton.setAttribute('aria-pressed', currentSort === 'asc' ? 'true' : 'false');
+      if (labelEl) labelEl.textContent = currentSort === 'asc' ? 'Älteste zuerst' : 'Neueste zuerst';
+      if (iconEl) iconEl.textContent = currentSort === 'asc' ? '↑' : '↓';
+    }
+
+    render();
+
+    sortButton.addEventListener('click', function () {
+      currentSort = currentSort === 'asc' ? 'desc' : 'asc';
+      render();
+      updateQueryParams({ sort: currentSort === 'desc' ? null : 'asc' });
+    });
+
+    return sortButton;
+  }
+
   function initFilters() {
     var bars = document.querySelectorAll('[data-filter-target]');
     if (!bars.length) return;
@@ -369,7 +432,7 @@
 
       var selects = Array.prototype.slice.call(bar.querySelectorAll('select[data-filter]'));
       if (!selects.length) {
-        bar.hidden = true;
+        initSortButton(bar, target);
         return;
       }
 
@@ -383,11 +446,36 @@
 
       var visibleGroups = hideMinimalGroups(selects, metadata.labels, bar);
       if (!visibleGroups) {
+        initSortButton(bar, target);
         return;
       }
 
+      var initialParams = getQueryParams();
+      selects.forEach(function (select) {
+        var key = select.getAttribute('data-filter');
+        if (!key) return;
+        var desired = initialParams[key];
+        if (!desired) return;
+        var match = Array.prototype.slice.call(select.options).some(function (opt) {
+          return opt.value === desired;
+        });
+        if (match) {
+          select.value = desired;
+        }
+      });
+
       var collapseSelector = bar.getAttribute('data-filter-collapse');
       var resetButton = bar.querySelector('[data-filter-reset]');
+
+      function syncUrl() {
+        var updates = {};
+        selects.forEach(function (s) {
+          var key = s.getAttribute('data-filter');
+          if (!key) return;
+          updates[key] = s.value || null;
+        });
+        updateQueryParams(updates);
+      }
 
       function applyFilters() {
         var activeFilters = getActiveFilters(selects);
@@ -400,7 +488,10 @@
       }
 
       selects.forEach(function (select) {
-        select.addEventListener('change', applyFilters);
+        select.addEventListener('change', function () {
+          applyFilters();
+          syncUrl();
+        });
       });
 
       if (resetButton) {
@@ -409,10 +500,12 @@
             select.value = '';
           });
           applyFilters();
+          syncUrl();
         });
       }
 
       applyFilters();
+      initSortButton(bar, target);
     });
   }
 

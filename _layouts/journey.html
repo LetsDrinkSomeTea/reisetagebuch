@@ -62,6 +62,14 @@ layout: default
         {% endif %}
       {% endcapture %}
       {% include stats.html content=journey_stats %}
+      <div class="journey-actions">
+        {% if first_day %}
+          <a class="button" href="{{ first_day.url | relative_url }}">Von Anfang an lesen (Tag {{ first_day.day | default: 1 }})</a>
+        {% endif %}
+        {% if last_day and last_day.url != first_day.url %}
+          <a class="button button--ghost" href="{{ last_day.url | relative_url }}">Zum neuesten Tag ({{ last_day.date | date: '%d.%m.' }})</a>
+        {% endif %}
+      </div>
     {% else %}
       <p>Für diese Reise liegen noch keine Tagebucheinträge vor. Schau bald wieder vorbei!</p>
     {% endif %}
@@ -75,7 +83,7 @@ layout: default
           {% include card.html type='day' item=day_page %}
         {% endfor %}
       </div>
-      <p><a href="{{ '/entries/' | relative_url }}">Alle Einträge ansehen →</a></p>
+      <p><a href="{{ '/entries/' | relative_url }}?journey={{ journey_key | uri_escape }}">Alle Einträge dieser Reise →</a></p>
     {% else %}
       <p>Noch keine Tageseinträge für diese Reise.</p>
     {% endif %}

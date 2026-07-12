@@ -223,11 +223,20 @@
       {% assign thumb_url = candidate_path | relative_url %}
     {% endif %}
   {% endif %}
-  <article class="card card--entry{% if thumb_url != '' %} card--has-media{% endif %}" data-filter-item data-journey="{{ journey_attr }}" data-journey-names="{{ journey_name_attr }}" data-country="{{ country_key }}" data-country-names="{{ country_name_attr }}" data-city="{{ city_keys_attr }}" data-city-names="{{ city_names_attr }}">
+  <article class="card card--entry {% if thumb_url != '' %}card--has-media{% else %}card--no-media{% endif %}" data-filter-item data-journey="{{ journey_attr }}" data-journey-names="{{ journey_name_attr }}" data-country="{{ country_key }}" data-country-names="{{ country_name_attr }}" data-city="{{ city_keys_attr }}" data-city-names="{{ city_names_attr }}">
     {% if thumb_url != '' %}
       <a class="card__media" href="{{ day_page.url | relative_url }}" tabindex="-1" aria-hidden="true">
         <img src="{{ thumb_url }}" alt="" loading="lazy" decoding="async">
         <span class="card__media-badge badge badge--primary">Tag {{ day_page.day }}</span>
+      </a>
+    {% else %}
+      <a class="card__placeholder" href="{{ day_page.url | relative_url }}" tabindex="-1" aria-hidden="true">
+        <span class="card__placeholder-day">Tag {{ day_page.day }}</span>
+        {% if city_data.emoji %}
+          <span class="card__placeholder-icon">{{ city_data.emoji }}</span>
+        {% elsif country_data.flag %}
+          <span class="card__placeholder-icon">{{ country_data.flag }}</span>
+        {% endif %}
       </a>
     {% endif %}
     <div class="card__body">
@@ -237,9 +246,6 @@
         <time datetime="{{ day_page.date | date_to_xmlschema }}">{{ day_page.date | date: '%d.%m.%Y' }}</time>
       </header>
       <div class="badge-container">
-        {% unless thumb_url != '' %}
-          <span class="badge badge--primary">Tag {{ day_page.day }}</span>
-        {% endunless %}
         {% if day_page.weather %}
           <span class="badge badge--weather">{{ day_page.weather }}</span>
         {% endif %}

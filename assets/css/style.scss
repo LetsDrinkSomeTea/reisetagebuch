@@ -504,7 +504,9 @@ body {
   box-shadow: none;
 
   &:hover {
-    background-color: rgba(26, 115, 232, 0.1);
+    background-color: rgba(26, 115, 232, 0.12);
+    color: var(--primary-color-darker);
+    border-color: var(--primary-color);
   }
 }
 
@@ -563,6 +565,22 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm);
+  }
+}
+
+.journey-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+
+    .button {
+      width: 100%;
+      justify-content: center;
+    }
   }
 }
 
@@ -775,6 +793,37 @@ a {
       outline-offset: 2px;
     }
   }
+
+  &__sort {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.55rem 1.1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    background: #fff;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+
+    &:hover {
+      border-color: var(--primary-color);
+      background-color: rgba(26, 115, 232, 0.06);
+    }
+
+    &:focus-visible {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.18);
+    }
+  }
+
+  &__sort-icon {
+    font-weight: 700;
+    color: var(--primary-color);
+  }
 }
 
 .filter-empty {
@@ -790,9 +839,14 @@ a {
   }
 }
 
+// Ensure the HTML `hidden` attribute always wins, even for elements with
+// explicit `display` rules (e.g. `.card--has-media { display: flex }`).
+[hidden] {
+  display: none !important;
+}
+
 .is-filtered-out {
-  opacity: 0;
-  pointer-events: none;
+  display: none;
 }
 
 @media (max-width: 640px) {
@@ -1916,7 +1970,8 @@ a.badge--link {
 }
 
 // Day cards with a preview image (Bild des Tages)
-.card--has-media {
+.card--has-media,
+.card--no-media {
   padding: 0;
   overflow: hidden;
   display: flex;
@@ -1954,7 +2009,8 @@ a.badge--link {
   box-shadow: var(--elev-1);
 }
 
-.card--has-media .card__body {
+.card--has-media .card__body,
+.card--no-media .card__body {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -1964,6 +2020,61 @@ a.badge--link {
     margin-top: auto;
     padding-top: var(--space-sm);
   }
+}
+
+.card__placeholder {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  aspect-ratio: 16 / 10;
+  padding: var(--space-lg) var(--space-xl);
+  background:
+    radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.25) 0%, transparent 55%),
+    linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color-darker) 100%);
+  color: #fff;
+  text-decoration: none;
+  overflow: hidden;
+  transition: filter var(--transition-fast);
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: auto -20% -60% auto;
+    width: 220px;
+    height: 220px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  // Override the global `a:hover` color change so text stays readable on
+  // the gradient background.
+  &:hover,
+  &:focus-visible {
+    color: #fff;
+    text-decoration: none;
+    filter: brightness(1.08);
+  }
+}
+
+.card__placeholder-day {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-family-heading);
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.card__placeholder-icon {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  line-height: 1;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
 }
 
 // "Zum Tagebucheintrag" link on gallery cards
