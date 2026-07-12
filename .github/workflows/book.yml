@@ -1,0 +1,62 @@
+name: Reisebuch (PDF)
+
+# Baut aus den Reise-Einträgen druckfertige PDF-Bücher.
+# Läuft bei einem Release oder manuell über "Run workflow".
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      journey:
+        description: "Reise-Schlüssel (leer lassen = alle Reisen bauen)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write # nötig, um das PDF an ein Release anzuhängen
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Python-Abhängigkeiten (inkl. Typst-Compiler)
+        run: python -m pip install --upgrade pyyaml Pillow typst
+
+      - name: Emoji-Schriftart installieren
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends fonts-noto-color-emoji
+          fc-cache -f
+
+      - name: Buch(er) bauen
+        run: |
+          if [ -n "${{ github.event.inputs.journey }}" ]; then
+            python book/build.py "${{ github.event.inputs.journey }}"
+          else
+            python book/build.py --all
+          fi
+
+      - name: Übersicht
+        run: ls -lah book/out/*.pdf
+
+      - name: PDF als Artefakt hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: reisebuch-pdf
+          path: book/out/*.pdf
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: PDF an das Release anhängen
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ github.event.release.tag_name }}" book/out/*.pdf --clobber

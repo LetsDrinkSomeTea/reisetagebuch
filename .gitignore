@@ -1,9 +1,14 @@
 _site
-.github
+# .github lokal ignorieren, aber die CI-Workflows versionieren
+.github/*
+!.github/workflows/
 Gemfile.lock
 CLAUDE.md
 GEMINI.md
 .claude
+
+# Generierte Buch-Ausgaben (PDF, Typst-Zwischendateien, Bild-Cache, Vorschau)
+book/out/
 
 # Temporary and backup files
 *.tmp
