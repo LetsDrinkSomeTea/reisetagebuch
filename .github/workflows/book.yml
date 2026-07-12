@@ -11,6 +11,15 @@ on:
         description: "Reise-Schlüssel (leer lassen = alle Reisen bauen)"
         required: false
         default: ""
+      template:
+        description: "Layout-Variante"
+        required: false
+        type: choice
+        default: "magazin-umfluss"
+        options:
+          - magazin-umfluss
+          - magazin-spalten
+          - album
 
 permissions:
   contents: write # nötig, um das PDF an ein Release anzuhängen
@@ -37,11 +46,14 @@ jobs:
           fc-cache -f
 
       - name: Buch(er) bauen
+        env:
+          TEMPLATE: ${{ github.event.inputs.template || 'magazin-umfluss' }}
+          JOURNEY: ${{ github.event.inputs.journey }}
         run: |
-          if [ -n "${{ github.event.inputs.journey }}" ]; then
-            python book/build.py "${{ github.event.inputs.journey }}"
+          if [ -n "$JOURNEY" ]; then
+            python book/build.py "$JOURNEY" --template "$TEMPLATE"
           else
-            python book/build.py --all
+            python book/build.py --all --template "$TEMPLATE"
           fi
 
       - name: Übersicht

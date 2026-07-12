@@ -1,7 +1,8 @@
 # Reisetagebuch als Buch (PDF)
 
 Erzeugt aus den Reise-Einträgen (`journeys/<key>/tag-*.md` + `_data/*.yml`) ein
-druckfertiges PDF – ein Band pro Reise, im A5-Format.
+druckfertiges, dicht gesetztes A5-Buch – ein Band pro Reise, in wählbaren
+Layout-Varianten.
 
 Die Website wird davon **nicht** berührt: `build.py` schreibt ausschließlich
 nach `book/out/` (per `.gitignore` ignoriert), und `book/` ist in
@@ -14,42 +15,63 @@ nach `book/out/` (per `.gitignore` ignoriert), und `book/` ist in
 pip install pyyaml Pillow            # Pillow skaliert die Bilder für den Druck
 #   sowie Typst: https://github.com/typst/typst  – oder  pip install typst
 
-# Eine Reise bauen
+# Eine Reise bauen (Standard-Layout: magazin-umfluss)
 python book/build.py skandinavien-interrail
 
-# Alle Reisen
+# Layout wählen
+python book/build.py skandinavien-interrail --template magazin-spalten
+python book/build.py skandinavien-interrail --template album
+
+# Alle Reisen / alle Layouts (zum Vergleich)
 python book/build.py --all
+python book/build.py skandinavien-interrail --all-templates
 
 # Nur die Typst-Quelle erzeugen (ohne PDF)
 python book/build.py skandinavien-interrail --no-pdf
 ```
 
-Ergebnis: `book/out/<reise>.pdf` (und die Zwischendatei `<reise>.typ`).
+Ergebnis: `book/out/<reise>.<layout>.pdf` (plus Zwischendatei `.typ`).
+
+## Layout-Varianten
+
+Alle Varianten sind bewusst dicht gesetzt (schmale Ränder, kleinere Schrift,
+**fortlaufender** Textfluss – Tage beginnen nicht auf neuer Seite):
+
+| Variante          | Charakter                                                        |
+| ----------------- | ---------------------------------------------------------------- |
+| `magazin-umfluss` | **Standard.** Text fließt eng um abwechselnd platzierte Bilder – neben und unter dem Bild. Wenig Weißraum, redaktioneller Look. |
+| `magazin-spalten` | Bild in schmaler Spalte, zugehöriger Text strikt daneben. Ruhiger, klar gerastert. |
+| `album`           | Verspielt: leicht gedrehte, überlappende Polaroid-Collagen; Text dicht dazwischen. |
 
 ## Wie es funktioniert
 
-| Datei          | Aufgabe                                                              |
-| -------------- | ------------------------------------------------------------------- |
-| `build.py`     | Liest Markdown + YAML, skaliert Bilder, erzeugt Typst und ruft es auf |
-| `template.typ` | Das Layout (Titelseite, Inhaltsverzeichnis, Kapitel, Tagesseiten)   |
+| Datei                       | Aufgabe                                                     |
+| --------------------------- | ---------------------------------------------------------- |
+| `build.py`                  | Liest Markdown + YAML, skaliert Bilder, ordnet Text/Bild leicht um und erzeugt/kompiliert Typst |
+| `templates/base.typ`        | Gemeinsames Setup: Titelei, Inhalt, Kapitel-Bänder, Fonts  |
+| `templates/<variante>.typ`  | Das jeweilige Tages-Layout (Text/Bild-Verzahnung)          |
 
-- **Kapitel** werden automatisch pro Land gebildet (Reihenfolge der Tage).
+- **Kapitel** entstehen automatisch pro Land (Reihenfolge der Tage).
 - **Bilder** werden für den Druck auf max. 1600 px herunterskaliert und in
   `book/out/.imgcache/` zwischengespeichert (Originale bleiben unangetastet).
   Ohne Pillow werden die Originale eingebettet – das PDF wird dann sehr groß.
-- Aufeinanderfolgende Bilder werden zu einer Bildreihe zusammengefasst; das
-  „Bild des Tages" (`main.jpg`) erscheint über die volle Textbreite.
+- Einzelbilder werden – wo möglich – mit dem angrenzenden Absatz gepaart
+  (der Generator ordnet Text/Bild dafür leicht um), damit wenig Weißraum bleibt.
+  Aufeinanderfolgende Bilder werden zu Reihen bzw. Collagen zusammengefasst;
+  das „Bild des Tages" (`main.jpg`) erscheint groß.
+- Der echte Text­umfluss (`magazin-umfluss`) ist paketfrei per `measure`
+  umgesetzt – kein Download aus der Typst-Paketregistrierung nötig.
 
 ## Anpassen
 
-Schrift, Farben, Seitenformat und Ränder stehen oben in `template.typ`
-(z. B. `accent`, `paper: "a5"`, `MAX_IMAGE_PX` in `build.py`).
+Schrift, Farben, Ränder: oben in `templates/base.typ` (`accent`, `margin`,
+`set text(...)`). Bildauflösung: `MAX_IMAGE_PX` / `JPEG_QUALITY` in `build.py`.
 
 ## Automatischer Bau
 
 `.github/workflows/book.yml` baut die PDFs bei jedem **Release** sowie manuell
-(**Actions → Reisebuch (PDF) → Run workflow**, optional mit einem
-Reise-Schlüssel). Das Ergebnis liegt als Workflow-**Artefakt** `reisebuch-pdf`
+(**Actions → Reisebuch (PDF) → Run workflow**, optional mit Reise-Schlüssel und
+Layout-Variante). Das Ergebnis liegt als Workflow-**Artefakt** `reisebuch-pdf`
 bereit und wird bei einem Release zusätzlich an die Release-Assets angehängt.
 
 ## Druck

@@ -107,6 +107,32 @@ def inline_parts(text: str) -> list[str]:
     return parts or [tstr("")]
 
 
+def inline_words(text: str) -> list[str]:
+    """Wie `inline_parts`, aber wortweise – jedes Wort ein eigener Typst-
+    Ausdruck (Formatierung bleibt pro Wort erhalten). Nötig, damit Layouts den
+    Text um ein Bild herum an Wortgrenzen umbrechen können."""
+    words: list[str] = []
+
+    def emit(segment: str, wrap):
+        for w in segment.split():
+            words.append(wrap(w))
+
+    pos = 0
+    for m in _INLINE.finditer(text):
+        if m.start() > pos:
+            emit(text[pos:m.start()], lambda w: tstr(w))
+        if m.group("b") is not None:
+            emit(m.group("b"), lambda w: f"strong({tstr(w)})")
+        elif m.group("i") is not None:
+            emit(m.group("i"), lambda w: f"emph({tstr(w)})")
+        elif m.group("c") is not None:
+            emit(m.group("c"), lambda w: f"raw({tstr(w)})")
+        pos = m.end()
+    if pos < len(text):
+        emit(text[pos:], lambda w: tstr(w))
+    return words or [tstr("")]
+
+
 # ---------------------------------------------------------------------------
 # Markdown-Rumpf → Blockliste
 # ---------------------------------------------------------------------------
@@ -159,15 +185,6 @@ def blocks_from_body(body: str, journey: str, day: int):
     lines = body.replace("\r\n", "\n").split("\n")
     blocks = []
     i, n = 0, len(lines)
-
-    def para_from(buf):
-        # buf: Liste von (rohzeile, hardbreak)
-        out = []
-        for idx, (raw, hard) in enumerate(buf):
-            if idx > 0:
-                out.append("linebreak()" if buf[idx - 1][1] else tstr(" "))
-            out.extend(inline_parts(raw))
-        return ("para", out)
 
     while i < n:
         line = lines[i]
@@ -224,40 +241,72 @@ def blocks_from_body(body: str, journey: str, day: int):
             blocks.append(("list", items))
             continue
 
-        # Absatz (bis Leerzeile oder Sonderblock)
+        # Absatz (bis Leerzeile oder Sonderblock). Weiche Zeilenumbrüche im
+        # Quelltext werden zu Leerzeichen zusammengefasst (Fließsatz), damit
+        # der Satz dicht läuft und um Bilder umbrochen werden kann.
         buf = []
         while i < n:
-            cur = lines[i]
-            cs = cur.strip()
+            cs = lines[i].strip()
             if cs == "" or cs.startswith(("## ", ">", "- ")) or IMG_RE.match(cs):
                 break
-            hard = cur.endswith("  ")
-            buf.append((cs, hard))
+            buf.append(cs)
             i += 1
         if buf:
-            blocks.append(para_from(buf))
+            blocks.append(("para", inline_words(" ".join(buf))))
 
     return blocks
 
 
+def reorder_blocks(blocks):
+    """Ordnet Text/Bild leicht um, damit möglichst jedes Einzelbild direkt von
+    einem Absatz gefolgt wird – so kann der Text im Magazin-Layout um das Bild
+    fließen statt daneben Weißraum zu lassen. Steht ein Einzelbild sonst vor
+    einer Überschrift, tauscht es mit dem vorangehenden Absatz den Platz."""
+    out = []
+    i, n = 0, len(blocks)
+    while i < n:
+        cur = blocks[i]
+        nxt = blocks[i + 1] if i + 1 < n else None
+        after = blocks[i + 2] if i + 2 < n else None
+        is_single_img = nxt and nxt[0] == "img" and len(nxt[1]) == 1
+        if (cur[0] == "para" and is_single_img
+                and (after is None or after[0] != "para")):
+            out.append(nxt)   # Bild zuerst …
+            out.append(cur)   # … dann der Absatz (fließt nun ums Bild)
+            i += 2
+        else:
+            out.append(cur)
+            i += 1
+    return out
+
+
+def _join(parts) -> str:
+    """Content-Ausdruck aus einer Teileliste (immer als Tuple → .join())."""
+    return "(" + ", ".join(parts) + ",).join()"
+
+
 def render_blocks(blocks) -> str:
-    """Blockliste → Typst-Content (Aufrufe von Vorlagen-Funktionen)."""
-    lines = []
+    """Blockliste → Typst-Tuple, das die Vorlage (`day(blocks: ..)`) layoutet.
+
+    Jeder Block ist ein Dictionary mit `kind` und den passenden Feldern. Die
+    Struktur ist layout-unabhängig; erst die gewählte Vorlage entscheidet über
+    die Anordnung von Text und Bildern."""
+    entries = []
     for kind, payload in blocks:
         if kind == "h2":
-            lines.append(f"#h2({', '.join(payload)})")
+            entries.append(f'(kind: "h2", body: {_join(payload)})')
         elif kind == "para":
-            lines.append(f"#para({', '.join(payload)})")
+            entries.append(f'(kind: "para", words: ({", ".join(payload)},))')
         elif kind == "img":
-            full = ", full: true" if (len(payload) == 1 and payload[0].endswith("/main.jpg")) else ""
-            args = ", ".join(tstr(p) for p in payload)
-            lines.append(f"#imrow({args}{full})")
+            main = "true" if (len(payload) == 1 and payload[0].endswith("/main.jpg")) else "false"
+            paths = ", ".join(tstr(p) for p in payload)
+            entries.append(f'(kind: "img", paths: ({paths},), main: {main})')
         elif kind == "quote":
-            lines.append(f"#quote-block({', '.join(payload)})")
+            entries.append(f'(kind: "quote", body: {_join(payload)})')
         elif kind == "list":
-            items = ", ".join("(" + ", ".join(it) + ",).join()" for it in payload)
-            lines.append(f"#ulist(({items},))")
-    return "\n".join(lines)
+            items = ", ".join(_join(it) for it in payload)
+            entries.append(f'(kind: "list", items: ({items},))')
+    return ",\n    ".join(entries)
 
 
 # ---------------------------------------------------------------------------
@@ -281,7 +330,7 @@ def collect_days(journey_key: str):
     return days
 
 
-def build_journey(journey_key: str, journeys, cities, countries) -> str | None:
+def build_journey(journey_key: str, journeys, cities, countries, template: str) -> str | None:
     meta = journeys.get(journey_key, {})
     days = collect_days(journey_key)
     if not days:
@@ -314,7 +363,7 @@ def build_journey(journey_key: str, journeys, cities, countries) -> str | None:
     cover_cities = " · ".join(city_name(ck) for ck in city_order)
 
     out = []
-    out.append('#import "/book/template.typ": *\n')
+    out.append(f'#import "/book/templates/{template}.typ": *\n')
     out.append("#show: book.with(")
     out.append(f"  journey-name: {tstr(meta.get('name', journey_key))},")
     out.append(f"  description: {tstr(meta.get('description', ''))},")
@@ -344,15 +393,16 @@ def build_journey(journey_key: str, journeys, cities, countries) -> str | None:
 
         blocks = blocks_from_body(d["body"], journey_key, day_no)
         photo_count += sum(len(p) for k, p in blocks if k == "img")
+        blocks = reorder_blocks(blocks)
 
         day_cities = " · ".join(city_name(ck) for ck in city_keys)
         out.append(
             f"#day(number: {day_no}, title: {tstr(fm.get('title', ''))}, "
             f"date: {tstr(fmt_date(fm['date']))}, weather: {tstr(fm.get('weather', ''))}, "
-            f"cities: {tstr(day_cities)})["
+            f"cities: {tstr(day_cities)}, blocks: (\n    "
         )
         out.append(render_blocks(blocks))
-        out.append("]\n")
+        out.append("\n))\n")
 
     stats = (
         f"  stats: (days: {len(days)}, countries: {len(seen_country)}, "
@@ -389,11 +439,24 @@ def compile_pdf(typ_path: Path, pdf_path: Path) -> bool:
 
 # ---------------------------------------------------------------------------
 
+def available_templates() -> list[str]:
+    tdir = REPO / "book" / "templates"
+    return sorted(p.stem for p in tdir.glob("*.typ") if not p.stem.startswith(("base", "_")))
+
+
+DEFAULT_TEMPLATE = "magazin-umfluss"
+
+
 def main():
+    templates = available_templates()
     ap = argparse.ArgumentParser(description="Reisetagebuch als PDF-Buch bauen.")
     ap.add_argument("journeys", nargs="*", help="Reise-Schlüssel (z. B. skandinavien-interrail)")
     ap.add_argument("--all", action="store_true", help="Alle Reisen bauen")
     ap.add_argument("--no-pdf", action="store_true", help="Nur .typ erzeugen, nicht kompilieren")
+    ap.add_argument("--template", "-t", default=DEFAULT_TEMPLATE, choices=templates,
+                    help=f"Layout-Variante (Standard: {DEFAULT_TEMPLATE})")
+    ap.add_argument("--all-templates", action="store_true",
+                    help="Jede Reise in allen Layout-Varianten bauen (zum Vergleich)")
     args = ap.parse_args()
 
     journeys, cities, countries = load_data()
@@ -403,6 +466,8 @@ def main():
         ap.error("Bitte mindestens einen Reise-Schlüssel angeben oder --all nutzen.\n"
                  f"Verfügbar: {', '.join(journeys)}")
 
+    templ_keys = templates if args.all_templates else [args.template]
+
     OUT.mkdir(parents=True, exist_ok=True)
     rc = 0
     for key in keys:
@@ -410,17 +475,19 @@ def main():
             print(f"Unbekannte Reise: {key} (verfügbar: {', '.join(journeys)})", file=sys.stderr)
             rc = 1
             continue
-        print(f"● {key}")
-        typ = build_journey(key, journeys, cities, countries)
-        if typ is None:
-            continue
-        typ_path = OUT / f"{key}.typ"
-        typ_path.write_text(typ, encoding="utf-8")
-        print(f"  ✓ {typ_path.relative_to(REPO)}")
-        if not args.no_pdf:
-            pdf_path = OUT / f"{key}.pdf"
-            if compile_pdf(typ_path, pdf_path):
-                print(f"  ✓ {pdf_path.relative_to(REPO)}")
+        for template in templ_keys:
+            print(f"● {key}  [{template}]")
+            typ = build_journey(key, journeys, cities, countries, template)
+            if typ is None:
+                break
+            stem = f"{key}.{template}"
+            typ_path = OUT / f"{stem}.typ"
+            typ_path.write_text(typ, encoding="utf-8")
+            print(f"  ✓ {typ_path.relative_to(REPO)}")
+            if not args.no_pdf:
+                pdf_path = OUT / f"{stem}.pdf"
+                if compile_pdf(typ_path, pdf_path):
+                    print(f"  ✓ {pdf_path.relative_to(REPO)}")
     sys.exit(rc)
 
 
