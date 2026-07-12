@@ -12,6 +12,67 @@ layout: default
   </div>
 
   <footer class="entry-footer">
+    {% comment %} Kontext-Verlinkungen: Reise, Land, Städte, Galerie {% endcomment %}
+    {% assign ctx_country = page.country %}
+    {% unless ctx_country %}
+      {% assign ctx_first_city = page.city | array | first %}
+      {% if ctx_first_city %}
+        {% assign ctx_first_city_data = site.data.cities[ctx_first_city] %}
+        {% if ctx_first_city_data %}
+          {% assign ctx_country = ctx_first_city_data.country %}
+        {% endif %}
+      {% endif %}
+    {% endunless %}
+    {% assign ctx_country_data = site.data.countries[ctx_country] %}
+    {% assign ctx_journey_data = site.data.journeys[page.journey] %}
+    {% assign ctx_journey_page = site.pages | where: 'layout', 'journey' | where: 'journey', page.journey | first %}
+    {% assign ctx_country_page = site.pages | where: 'layout', 'country' | where: 'country', ctx_country | first %}
+
+    <section class="day-context" aria-label="Weiter entdecken">
+      <h2 class="day-context__title">Weiter entdecken</h2>
+      <div class="day-context__links">
+        {% if ctx_journey_page %}
+          <a class="context-chip" href="{{ ctx_journey_page.url | relative_url }}">
+            <span class="context-chip__icon" aria-hidden="true">{{ ctx_journey_data.icon | default: '🧳' }}</span>
+            <span class="context-chip__body">
+              <span class="context-chip__label">Reise</span>
+              <span class="context-chip__value">{{ ctx_journey_data.name | default: page.journey }}</span>
+            </span>
+          </a>
+        {% endif %}
+        {% if ctx_country_data and ctx_country_page %}
+          <a class="context-chip" href="{{ ctx_country_page.url | relative_url }}">
+            <span class="context-chip__icon" aria-hidden="true">{{ ctx_country_data.flag }}</span>
+            <span class="context-chip__body">
+              <span class="context-chip__label">Land</span>
+              <span class="context-chip__value">{{ ctx_country_data.name }}</span>
+            </span>
+          </a>
+        {% endif %}
+        {% assign ctx_cities = page.city | array %}
+        {% for ctx_city_key in ctx_cities %}
+          {% assign ctx_city_data = site.data.cities[ctx_city_key] %}
+          {% assign ctx_city_page = site.pages | where: 'layout', 'city' | where: 'city', ctx_city_key | first %}
+          {% if ctx_city_data and ctx_city_page %}
+            <a class="context-chip" href="{{ ctx_city_page.url | relative_url }}">
+              <span class="context-chip__icon" aria-hidden="true">{{ ctx_city_data.emoji | default: '📍' }}</span>
+              <span class="context-chip__body">
+                <span class="context-chip__label">Stadt</span>
+                <span class="context-chip__value">{{ ctx_city_data.name }}</span>
+              </span>
+            </a>
+          {% endif %}
+        {% endfor %}
+        <a class="context-chip" href="{{ '/gallery/' | relative_url }}">
+          <span class="context-chip__icon" aria-hidden="true">📸</span>
+          <span class="context-chip__body">
+            <span class="context-chip__label">Alle Bilder</span>
+            <span class="context-chip__value">Zur Galerie</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
     <nav class="day-navigation">
       {% assign journey_days = site.pages | where: 'layout', 'day' | where: 'journey', page.journey | sort: 'day' %}
       {% assign current_index = 0 %}

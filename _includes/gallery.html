@@ -179,11 +179,14 @@
             {% endcapture %}
             {% assign location_label = location_label | strip %}
             {% assign image_url = file_path | relative_url %}
+            {% assign day_url = day_page.url | relative_url %}
+            {% capture day_link_label %}Tag {{ day_page.day }}{% if day_page.title %} · {{ day_page.title }}{% endif %}{% endcapture %}
+            {% assign day_link_label = day_link_label | strip %}
             {% assign index_value = item_count %}
             {% capture gallery_markup %}
               {{ gallery_markup }}
               <figure class="gallery__card" data-filter-item data-journey="{{ journey_key }}" data-journey-names="{{ journey_name_attr }}" data-country="{{ day_page.country }}" data-country-names="{{ country_name_attr }}" data-city="{{ city_keys_attr }}" data-city-names="{{ city_names_attr }}">
-                <a class="gallery__link" href="{{ image_url }}" data-gallery="{{ gallery_id }}" data-gallery-index="{{ index_value }}" data-gallery-src="{{ image_url }}" data-gallery-alt="{{ alt_text | escape }}" data-gallery-title="{{ title_text | escape }}">
+                <a class="gallery__link" href="{{ image_url }}" data-gallery="{{ gallery_id }}" data-gallery-index="{{ index_value }}" data-gallery-src="{{ image_url }}" data-gallery-alt="{{ alt_text | escape }}" data-gallery-title="{{ title_text | escape }}" data-gallery-day-url="{{ day_url }}" data-gallery-day-label="{{ day_link_label | escape }}">
                   <div class="gallery__media">
                     <img src="{{ image_url }}" alt="{{ alt_text | escape }}" loading="lazy" decoding="async">
                   </div>
@@ -194,6 +197,10 @@
                       <span class="badge badge--light">{{ image_label }}</span>
                     </div>
                   </div>
+                </a>
+                <a class="gallery__day-link" href="{{ day_url }}">
+                  <span aria-hidden="true">📖</span>
+                  <span class="gallery__day-link-text">Zum Tagebucheintrag</span>
                 </a>
               </figure>
             {% endcapture %}

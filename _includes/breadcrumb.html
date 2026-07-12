@@ -15,10 +15,25 @@ Usage: {% include breadcrumb.html %}
   {% assign show_breadcrumb = true %}
 {% endif %}
 
-{% if show_breadcrumb %}
+{% comment %} Übersichtsseiten (Einträge, Galerie, Orte, Statistik) {% endcomment %}
+{% assign overview_label = '' %}
+{% case page.url %}
+  {% when '/entries/' %}{% assign overview_label = '📖 Alle Einträge' %}
+  {% when '/gallery/' %}{% assign overview_label = '📸 Galerie' %}
+  {% when '/places/' %}{% assign overview_label = '🗺️ Besuchte Orte' %}
+  {% when '/stats/' %}{% assign overview_label = '📊 Statistiken' %}
+{% endcase %}
+
+{% if overview_label != '' %}
 <div class="breadcrumb">
   <a href="{{ '/' | relative_url }}">🏠</a>
-  
+  <span class="separator">›</span>
+  <span class="current">{{ overview_label }}</span>
+</div>
+{% elsif show_breadcrumb %}
+<div class="breadcrumb">
+  <a href="{{ '/' | relative_url }}">🏠</a>
+
   {% comment %} Auto-detect country from first city if not set {% endcomment %}
   {% assign page_country = page.country %}
   {% unless page_country %}

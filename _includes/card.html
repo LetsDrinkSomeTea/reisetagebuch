@@ -214,20 +214,39 @@
   {% assign country_name_attr = country_name | escape | replace: "'", '&#39;' %}
   {% assign city_keys_attr = city_keys | join: ' ' %}
   {% assign city_names_attr = city_names | join: '|' | escape | replace: "'", '&#39;' %}
-  <article class="card card--entry" data-filter-item data-journey="{{ journey_attr }}" data-journey-names="{{ journey_name_attr }}" data-country="{{ country_key }}" data-country-names="{{ country_name_attr }}" data-city="{{ city_keys_attr }}" data-city-names="{{ city_names_attr }}">
-    <header>
-      <div class="entry-location">{{ city_data.emoji }} {{ city_data.name }}, {{ country_data.flag }} {{ country_data.name }}</div>
-      <h3><a href="{{ day_page.url | relative_url }}">{{ day_page.title }}</a></h3>
-      <time datetime="{{ day_page.date | date_to_xmlschema }}">{{ day_page.date | date: '%d.%m.%Y' }}</time>
-    </header>
-    <div class="badge-container">
-      <span class="badge badge--primary">Tag {{ day_page.day }}</span>
-      {% if day_page.weather %}
-        <span class="badge badge--weather">{{ day_page.weather }}</span>
-      {% endif %}
+  {% comment %} Vorschaubild (Bild des Tages) ermitteln – Konvention: main.jpg {% endcomment %}
+  {% assign thumb_url = '' %}
+  {% if journey_key and day_page.day %}
+    {% assign candidate_path = '/journeys/' | append: journey_key | append: '/tag-' | append: day_page.day | append: '/main.jpg' %}
+    {% assign match = site.static_files | where: 'path', candidate_path | first %}
+    {% if match %}
+      {% assign thumb_url = candidate_path | relative_url %}
+    {% endif %}
+  {% endif %}
+  <article class="card card--entry{% if thumb_url != '' %} card--has-media{% endif %}" data-filter-item data-journey="{{ journey_attr }}" data-journey-names="{{ journey_name_attr }}" data-country="{{ country_key }}" data-country-names="{{ country_name_attr }}" data-city="{{ city_keys_attr }}" data-city-names="{{ city_names_attr }}">
+    {% if thumb_url != '' %}
+      <a class="card__media" href="{{ day_page.url | relative_url }}" tabindex="-1" aria-hidden="true">
+        <img src="{{ thumb_url }}" alt="" loading="lazy" decoding="async">
+        <span class="card__media-badge badge badge--primary">Tag {{ day_page.day }}</span>
+      </a>
+    {% endif %}
+    <div class="card__body">
+      <header>
+        <div class="entry-location">{{ city_data.emoji }} {{ city_data.name }}, {{ country_data.flag }} {{ country_data.name }}</div>
+        <h3><a href="{{ day_page.url | relative_url }}">{{ day_page.title }}</a></h3>
+        <time datetime="{{ day_page.date | date_to_xmlschema }}">{{ day_page.date | date: '%d.%m.%Y' }}</time>
+      </header>
+      <div class="badge-container">
+        {% unless thumb_url != '' %}
+          <span class="badge badge--primary">Tag {{ day_page.day }}</span>
+        {% endunless %}
+        {% if day_page.weather %}
+          <span class="badge badge--weather">{{ day_page.weather }}</span>
+        {% endif %}
+      </div>
+      <footer>
+        <a href="{{ day_page.url | relative_url }}">Zum Eintrag</a>
+      </footer>
     </div>
-    <footer>
-      <a href="{{ day_page.url | relative_url }}">Zum Eintrag</a>
-    </footer>
   </article>
 {% endif %}

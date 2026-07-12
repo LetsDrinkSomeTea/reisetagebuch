@@ -428,4 +428,31 @@ permalink: /stats/
     {% endif %}
   </section>
 
+  <section class="day-context" aria-label="Weiter stöbern">
+    <h2 class="day-context__title">Weiter stöbern</h2>
+    <div class="day-context__links">
+      <a class="context-chip" href="{{ '/entries/' | relative_url }}">
+        <span class="context-chip__icon" aria-hidden="true">📖</span>
+        <span class="context-chip__body">
+          <span class="context-chip__label">Chronologisch</span>
+          <span class="context-chip__value">Alle Einträge</span>
+        </span>
+      </a>
+      <a class="context-chip" href="{{ '/places/' | relative_url }}">
+        <span class="context-chip__icon" aria-hidden="true">🗺️</span>
+        <span class="context-chip__body">
+          <span class="context-chip__label">Nach Ort</span>
+          <span class="context-chip__value">Besuchte Orte</span>
+        </span>
+      </a>
+      <a class="context-chip" href="{{ '/gallery/' | relative_url }}">
+        <span class="context-chip__icon" aria-hidden="true">📸</span>
+        <span class="context-chip__body">
+          <span class="context-chip__label">In Bildern</span>
+          <span class="context-chip__value">Galerie</span>
+        </span>
+      </a>
+    </div>
+  </section>
+
 </article>
