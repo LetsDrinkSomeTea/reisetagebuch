@@ -49,7 +49,19 @@ Usage:
           <span class="badge badge--primary">Tag {{ page.day }}</span>
           {% for city_key in city_badges %}
             {% assign city_data = site.data.cities[city_key] %}
-            <span class="badge badge--primary">{% if city_data and city_data.emoji %}{{ city_data.emoji }} {% endif %}{{ city_data.name | default: city_key }}</span>
+            {% assign city_page = site.pages | where: 'layout', 'city' | where: 'city', city_key | first %}
+            {% if city_page or page_country %}
+              {% if city_page %}
+                {% assign city_url = city_page.url %}
+              {% else %}
+                {% assign city_url = '/places/' | append: page_country | append: '/' | append: city_key | append: '/' %}
+              {% endif %}
+            {% endif %}
+            {% if city_data and city_page %}
+              <a class="badge badge--primary badge--link" href="{{ city_url | relative_url }}">{% if city_data.emoji %}{{ city_data.emoji }} {% endif %}{{ city_data.name | default: city_key }}</a>
+            {% else %}
+              <span class="badge badge--primary">{% if city_data and city_data.emoji %}{{ city_data.emoji }} {% endif %}{{ city_data.name | default: city_key }}</span>
+            {% endif %}
           {% endfor %}
           {% if page.weather %}
             <span class="badge badge--weather">{{ page.weather }}</span>

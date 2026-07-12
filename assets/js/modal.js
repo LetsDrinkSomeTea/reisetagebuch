@@ -2,6 +2,8 @@
   var modal;
   var imageElement;
   var titleElement;
+  var dayLinkElement;
+  var dayLabelElement;
   var closeButtons;
   var prevButton;
   var nextButton;
@@ -13,6 +15,16 @@
   var items = [];
   var activeTrigger = null;
 
+  function refreshFocusable() {
+    focusableElements = Array.prototype.slice
+      .call(modal.querySelectorAll(focusableSelectors))
+      .filter(function (element) {
+        return !element.hidden && element.getAttribute('aria-hidden') !== 'true';
+      });
+    firstFocusable = focusableElements[0];
+    lastFocusable = focusableElements[focusableElements.length - 1];
+  }
+
   function openModal(index) {
     if (!modal || !items.length) return;
     currentIndex = index;
@@ -20,8 +32,7 @@
     modal.hidden = false;
     modal.classList.add('is-visible');
     modal.setAttribute('aria-hidden', 'false');
-    firstFocusable = focusableElements[0];
-    lastFocusable = focusableElements[focusableElements.length - 1];
+    refreshFocusable();
     if (firstFocusable) {
       firstFocusable.focus();
     }
@@ -47,8 +58,23 @@
     imageElement.alt = item.alt;
     imageElement.title = item.title || '';
     titleElement.textContent = item.title || '';
+    if (dayLinkElement) {
+      if (item.dayUrl) {
+        dayLinkElement.href = item.dayUrl;
+        if (dayLabelElement && item.dayLabel) {
+          dayLabelElement.textContent = item.dayLabel;
+        }
+        dayLinkElement.hidden = false;
+      } else {
+        dayLinkElement.hidden = true;
+        dayLinkElement.removeAttribute('href');
+      }
+    }
     prevButton.disabled = currentIndex === 0;
     nextButton.disabled = currentIndex === items.length - 1;
+    if (!modal.hidden) {
+      refreshFocusable();
+    }
   }
 
   function showPrev() {
@@ -119,6 +145,8 @@
     if (!modal) return;
     imageElement = modal.querySelector('.gallery-modal__image');
     titleElement = modal.querySelector('#gallery-modal-title');
+    dayLinkElement = modal.querySelector('[data-modal-day-link]');
+    dayLabelElement = modal.querySelector('[data-modal-day-label]');
     closeButtons = modal.querySelectorAll('[data-modal-close]');
     prevButton = modal.querySelector('[data-modal-prev]');
     nextButton = modal.querySelector('[data-modal-next]');

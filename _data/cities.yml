@@ -226,3 +226,9 @@ berlin:
   name: "Berlin"
   emoji: "🏙"
   country: deutschland
+
+# Tschechien
+prag:
+  name: "Prag"
+  emoji: "🕰️"
+  country: tschechien

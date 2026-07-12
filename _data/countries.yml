@@ -27,3 +27,8 @@ deutschland:
   name: "Deutschland"
   flag: "🇩🇪"
   emoji: "🏰"
+
+tschechien:
+  name: "Tschechien"
+  flag: "🇨🇿"
+  emoji: "🍺"

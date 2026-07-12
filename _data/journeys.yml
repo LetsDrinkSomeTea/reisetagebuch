@@ -7,3 +7,8 @@ unsere-grosse-reise:
   name: "Unsere große Reise"
   description: "Unser langer Traum einmal weit weg zu sein."
   icon: "🇯🇵 🇦🇺"
+
+prag-staedtereise:
+  name: "Städtereise Prag"
+  description: "Eine Woche in der goldenen Stadt an der Moldau."
+  icon: "🏰"

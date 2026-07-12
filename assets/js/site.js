@@ -40,7 +40,9 @@
         return {
           src: link.getAttribute('data-gallery-src') || link.getAttribute('href'),
           alt: link.getAttribute('data-gallery-alt') || '',
-          title: link.getAttribute('data-gallery-title') || ''
+          title: link.getAttribute('data-gallery-title') || '',
+          dayUrl: link.getAttribute('data-gallery-day-url') || '',
+          dayLabel: link.getAttribute('data-gallery-day-label') || ''
         };
       });
 
