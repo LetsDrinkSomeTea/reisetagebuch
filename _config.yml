@@ -33,6 +33,7 @@ exclude:
   - vendor/ruby/
   - README.md
   - PLAN.md
+  - book/
 
 # Default values
 defaults:
