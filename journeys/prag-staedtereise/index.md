@@ -4,4 +4,4 @@ title: "Städtereise Prag"
 journey: prag-staedtereise
 ---
 
-Eine Woche in Prag – die Einträge zu unseren Tagen an der Moldau erscheinen hier, sobald die Reise beginnt.
+Eine Woche in Prag – von der Anreise über Karlsbrücke, Astronomische Uhr und Vyšehrad bis zu den verrücktesten Bars der Stadt. Hier findest du alle Einträge, Orte und Highlights unserer Tage an der Moldau übersichtlich zusammengefasst.
