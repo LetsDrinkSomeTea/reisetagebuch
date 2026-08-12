@@ -24,7 +24,7 @@ Ausgerechnet die freien Plätze, auf denen wir uns zwischenzeitlich niederließe
 Nach anderthalb Stunden ergatterten wir dann aber doch einen Sitzplatz und behielten ihn bis zum Ende.
 
 In `München` hatten wir etwas Verspätung, wodurch praktischerweise die Zugbindung aufgehoben wurde.  
-So ging es mit dem `ICE` weiter nach `Stuttgart`, wo uns Mauck und Ansi abholten.  
+So ging es mit dem `ICE` weiter nach `Stuttgart`, wo uns Marc und Ansi abholten.  
 Gemeinsam fuhren wir noch nach `Reutlingen` und ließen den Urlaub dort bei einer Runde Sushi ausklingen, bevor es endgültig nach Hause ging.
 
 ## 🎯 Highlight des Tages
